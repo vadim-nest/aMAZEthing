@@ -1,8 +1,8 @@
-import Koa from 'koa';
-const app = new Koa();
+import Express from 'express';
+const app = Express();
 
-app.use(async ctx => {
-  ctx.body = 'Hello World';
+app.use((req, res) => {
+  res.send('Hello World!')
 });
 
 app.listen(3000);
