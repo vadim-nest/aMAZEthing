@@ -1,5 +1,4 @@
 .welcome-page {
-  font-family: 'Staatliches', cursive;
   background-color: #1B432E;
   width: 100vw;
   height: 100vh;
@@ -13,20 +12,16 @@
 }
 
 .title {
-  font-size: 60px;
+  font-size: 40px;
   margin: 25px 60px;
 }
 
 .smaller{
   display: flex;
   justify-content: space-between;
-  font-size: 40px;
+  font-size: 20px;
   width: 200px;
-  margin: 40px 60px;
-}
-
-p{
-  margin: 0;
+  margin: 20px 40px;
 }
 
 p:hover {
@@ -35,8 +30,8 @@ p:hover {
 
 .body {
   height: 90vh;
-  font-size: 300px;
-  margin: 20px 60px;
+  font-size: 115px;
+  margin: 20px 40px;
 }
 
 .welcome {

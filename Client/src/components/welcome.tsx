@@ -6,16 +6,16 @@ function Welcome() {
   return (
     <div className='welcome-page'>
       <div className='top'>
-        <p className='title' onClick={() => navigate('/')}>aMAZEthing</p>
+        <h3 className='title' onClick={() => navigate('/')}>aMAZEthing</h3>
         <div className='smaller'>
-          <p onClick={() => navigate('/about')}>ABOUT</p>
-          <p onClick={() => navigate('/login')}>LOGIN</p>
+          <h3 onClick={() => navigate('/about')}>ABOUT</h3>
+          <h3 onClick={() => navigate('/login')}>LOGIN</h3>
         </div>
       </div>
       <div className='body'>
-        <h4 className='welcome'>WELCOME.</h4>
-        <p className='options' onClick={() => navigate('/game')}>PLAY</p>
-        <p className='options' onClick={() => navigate('/learning')}>LEARN</p>
+        <h1 className='welcome'>WELCOME.</h1>
+        <h2 className='options' onClick={() => navigate('/game')}>PLAY</h2>
+        <h2 className='options' onClick={() => navigate('/learning')}>LEARN</h2>
       </div>
     </div>
   )
