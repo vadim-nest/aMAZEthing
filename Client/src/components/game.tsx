@@ -1,10 +1,16 @@
 import '../css/game.css';
+import Navbar from './navbar';
+
 
 function Game() {
+
   return (
-    <div>
-      <h1>Game page</h1>
-    </div>
+    <>
+      <Navbar />
+      <div>
+        <h1>game</h1>
+      </div>
+    </>
   );
 }
 

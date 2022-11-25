@@ -1,0 +1,36 @@
+.navbar {
+    font-family: 'Staatliches', cursive;
+    background-color: #1B432E;
+    width: 100vw;
+    height: 10vh;
+    font-size: 60px;
+    color: #B4C6BC;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .navbar-start {
+    display: flex;
+    justify-content: flex-start;
+    width: 60vw;
+  }
+  
+  .maze {
+    margin: 25px 60px;
+  }
+  
+  .learn {
+    font-size: 40px;
+    margin: 40px 20px;
+  }
+  
+  .navbar-end {
+    display: flex;
+    justify-content: flex-end;
+    width: 40vw;
+    font-size: 40px;
+  }
+  
+  .login {
+    margin: 40px 60px;
+  }

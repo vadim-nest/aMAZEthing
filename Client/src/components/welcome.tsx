@@ -13,7 +13,7 @@ function Welcome() {
         </div>
       </div>
       <div className='body'>
-        <p className='welcome'>WELCOME.</p>
+        <h4 className='welcome'>WELCOME.</h4>
         <p className='options' onClick={() => navigate('/game')}>PLAY</p>
         <p className='options' onClick={() => navigate('/learning')}>LEARN</p>
       </div>
