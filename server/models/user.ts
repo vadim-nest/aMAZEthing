@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 import { mongoose } from './index'
 
 const Schema = mongoose.Schema;
