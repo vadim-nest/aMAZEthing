@@ -9,12 +9,13 @@ function Navbar() {
   return (
     <div className='navbar'>
       <div className='navbar-start'>
-        <p className='maze' onClick={() => navigate('/')}>aMAZEthing</p>
-        {location.pathname ==='/game' && <p className='do' onClick={() => navigate('/learning')}>LEARN</p>}
-        {location.pathname ==='/learning' && <p className='do' onClick={() => navigate('/game')}>PLAY</p>}
+        <h3 className='maze' onClick={() => navigate('/')}>aMAZEthing</h3>
+        {location.pathname ==='/game' && <h3 className='do' onClick={() => navigate('/learning')}>LEARN</h3>}
+        {location.pathname ==='/learning' && <h3 className='do' onClick={() => navigate('/game')}>PLAY</h3>}
       </div>
       <div className='navbar-end'>
-        <p className='login' onClick={() => navigate('/login')}>LOGIN</p>
+      {location.pathname ==='/' && <h3 className='do' onClick={() => navigate('/about')}>ABOUT</h3>}
+        <h3 className='login' onClick={() => navigate('/login')}>LOGIN</h3>
       </div>
     </div>
   );

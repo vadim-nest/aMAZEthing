@@ -1,36 +1,38 @@
 .navbar {
-    font-family: 'Staatliches', cursive;
     background-color: #1B432E;
     width: 100vw;
     height: 10vh;
-    font-size: 60px;
-    color: #B4C6BC;
+    font-size: 40px;
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    z-index: 1;
   }
-  
+
   .navbar-start {
     display: flex;
     justify-content: flex-start;
-    width: 60vw;
+    width: 40vw;
   }
   
   .maze {
-    margin: 25px 60px;
+      margin: 12px 40px;
   }
   
   .do {
-    font-size: 40px;
-    margin: 40px 20px;
+    display: flex;
+    justify-content: space-end;
+    margin: 12px;
   }
   
   .navbar-end {
     display: flex;
     justify-content: flex-end;
     width: 40vw;
-    font-size: 40px;
   }
   
   .login {
-    margin: 40px 60px;
+    display: flex;
+    justify-content: space-end;
+    margin: 12px 40px;
   }
