@@ -1,11 +1,22 @@
-import './App.css'
+import './App.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Welcome from './components/welcome';
+
+const router = createBrowserRouter([
+  {
+    children: [
+      {
+        path: '/',
+        element: <Welcome />,
+      },
+    ],
+  },
+]);
 
 function App() {
 
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <RouterProvider router={router} />
   )
 }
 
