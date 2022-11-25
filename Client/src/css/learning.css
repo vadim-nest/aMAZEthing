@@ -1,16 +1,11 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
   color: #fff;
   font-family: 'Roboto', sans-serif;
-}
+} */
 
-h1 {
-  font-family: 'Staatliches', cursive;
-  margin-top: 0px
-}
-
-p {
+.initial-view-text p {
   text-align: center;
   font-size: 20px;
 }
