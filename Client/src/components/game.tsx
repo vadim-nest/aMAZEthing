@@ -6,8 +6,10 @@ function Game() {
   return (
     <>
       <div>
+      <div className='gameContainer'>
         <h1>game</h1>
         <Maze/>
+      </div>
       </div>
     </>
   );
