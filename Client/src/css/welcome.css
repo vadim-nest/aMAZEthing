@@ -1,0 +1,28 @@
+.welcome {
+  background-color: #1B432E;
+}
+
+.top {
+  font-family: 'Staatliches', cursive;
+  color: white;
+  opacity: 0.8;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 60px;
+  margin: 30px;
+}
+
+.smaller{
+  display: flex;
+  justify-content: space-between;
+  font-size: 40px;
+  width: 200px;
+  margin: 40px;
+}
+
+p{
+  margin: 0;
+}
