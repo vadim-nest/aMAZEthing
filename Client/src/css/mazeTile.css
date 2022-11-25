@@ -1,0 +1,84 @@
+.mazeTile {
+  border: 1px solid black;
+}
+
+.b {
+  background-image: url(../assets/tiles/b.png);
+  background-size: contain;
+}
+
+.t {
+  background-image: url(../assets/tiles/t.png);
+  background-size: contain;
+}
+
+.l {
+  background-image: url(../assets/tiles/l.png);
+  background-size: contain;
+}
+
+
+.r {
+  background-image: url(../assets/tiles/r.png);
+  background-size: contain;
+}
+
+.l.t {
+  background-image: url(../assets/tiles/lt.png);
+  background-size: contain;
+}
+
+
+.r.t {
+  background-image: url(../assets/tiles/rt.png);
+  background-size: contain;
+}
+
+
+.b.t {
+  background-image: url(../assets/tiles/bt.png);
+  background-size: contain;
+}
+
+
+.b.l {
+  background-image: url(../assets/tiles/bl.png);
+  background-size: contain;
+}
+
+
+.b.r {
+  background-image: url(../assets/tiles/br.png);
+  background-size: contain;
+}
+
+.l.r {
+  background-image: url(../assets/tiles/lr.png);
+  background-size: contain;
+}
+
+.b.r.t {
+  background-image: url(../assets/tiles/brt.png);
+  background-size: contain;
+}
+
+
+.b.l.t {
+  background-image: url(../assets/tiles/blt.png);
+  background-size: contain;
+}
+
+.l.r.t {
+  background-image: url(../assets/tiles/lrt.png);
+  background-size: contain;
+}
+
+.b.l.r {
+  background-image: url(../assets/tiles/blr.png);
+  background-size: contain;
+}
+
+.b.l.r.t {
+  background-image: url(../assets/tiles/blrt.png);
+  background-size: contain;
+}
