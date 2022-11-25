@@ -7,10 +7,10 @@ function Game() {
   return (
     <>
       <div>
-      <div className='gameContainer'>
         <GameStats/>
-        <Maze/>
-      </div>
+        <div className='gameContainer'>
+          <Maze/>
+        </div>
       </div>
     </>
   );
