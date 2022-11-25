@@ -1,6 +1,5 @@
 import '../css/game.css';
 import Maze from './maze';
-import Navbar from './navbar';
 
 function Game() {
 
