@@ -1,42 +1,78 @@
 import express from 'express'
-import {User} from '../models/user'
+import { User } from '../models/user'
 
 
-
-async function getUserData(req:express.Request, res:express.Response){
+async function getUserData(req: express.Request, res: express.Response) {
     try {
-        const {email} = req.oidc.user;
-        const user = await User.findOne({email:email})
-        console.log(user);
-        if(user){
-            res.status(201).json({ "statusCode": 200, "message": "Retrieving information of the user" ,user:req.oidc.user}); 
-        }else{
+        const { email } = req.oidc.user;
+        const user = await User.findOne({ email: email })
+        if (user) {
+            res.status(201).json({ "statusCode": 200, "message": "Retrieving information of the user", user: req.oidc.user });
+        } else {
             const newUser = new User({
-                ...req.oidc.user,
-              });
-        res.status(201).json({ "statusCode": 200, "message": "User created" ,user:req.oidc.user}); 
+                email: req.oidc.user.email,       
+            });
+            console.log(newUser)
+            const user = await newUser.save();
+
+            res.status(201).json({ "statusCode": 200, "message": "User created", user });
         }
-      } catch (error) {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ "statusCode": 200, "message": error });
-      }
+    }
 }
 
-async function UpdateUserData(req:express.Request, res:express.Response){
+async function updateUsername(req: express.Request, res: express.Response) {
     try {
-        const {email} = req.oidc.user;
-        const user = await User.findOne({email:email})
+        const username = req.body.username;
+        const { email } = req.oidc.user;
+        const user = await User.findOne({ email: email })
+        user.username = username;
+        await user.save();
         console.log(user);
-        if(user){
-            res.status(201).json({ "statusCode": 200, "message": "Retrieving information of the user" ,user:req.oidc.user}); 
-        }else{
-
-        }
-        //mongose check if user cread
-        
-      } catch (error) {
+        res.status(201).json({ "statusCode": 200, "message": "New username has been stored", user});
+    } catch (error) {
         console.log(error);
         res.status(500).json({ "statusCode": 200, "message": error });
-      }
+    }
 }
-export { getUserData, UpdateUserData };
+
+
+async function updateLearning(req: express.Request, res: express.Response) {
+    try {
+        const {sortingPath, pathFindPath} = req.body
+        const { email } = req.oidc.user;
+        const user = await User.findOne({ email: email })
+        user.sortingPath = sortingPath;
+        user.pathFindPath = pathFindPath;
+        await user.save();
+        console.log(user);
+        res.status(201).json({ "statusCode": 200, "message": "Learning path updated!", user});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ "statusCode": 200, "message": error });
+    }
+}
+
+
+async function updateGameStats(req: express.Request, res: express.Response) {
+    try {
+        const {game} = req.body
+        const { email } = req.oidc.user;
+        const user = await User.findOne({ email: email })
+        
+        await user.save();
+        console.log(user);
+        res.status(201).json({ "statusCode": 200, "message": "Learning path updated!", user});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ "statusCode": 200, "message": error });
+    }
+}
+
+
+
+
+
+export { getUserData, updateLearning, updateUsername,updateGameStats };

@@ -2,9 +2,8 @@ import Express from 'express';
 const { router } = require('./router');
 const cors = require('cors');
 import {auth} from 'express-openid-connect'
+require("dotenv").config();
 
-import * as dotenv from "dotenv";
-dotenv.config({ path: __dirname + '/../.env' });
 
 const config = {
   authRequired: false,
