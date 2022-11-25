@@ -21,6 +21,8 @@
     "express-jwt": "^7.7.7",
     "express-openid-connect": "^2.10.0",
     "jwks-rsa": "^3.0.0",
+    "mongo": "^0.1.0",
+    "mongoose": "^6.7.3",
     "nodemon": "^2.0.20"
   }
 }
