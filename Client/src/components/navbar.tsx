@@ -9,26 +9,24 @@ function Navbar() {
   return (
     <div className='navbar'>
       <div className='navbar-start'>
-        <h3 className='maze' onClick={() => navigate('/')}>aMAZEthing</h3>
-        {location.pathname ==='/game' && <h3 className='do' onClick={() => navigate('/learning')}>LEARN</h3>}
-        {location.pathname ==='/learning' && <h3 className='do' onClick={() => navigate('/game')}>PLAY</h3>}
+        <button onClick={() => navigate('/')}>aMAZEthing</button>
+        {location.pathname ==='/game' && <button onClick={() => navigate('/learning')}>LEARN</button>}
+        {location.pathname ==='/learning' && <button onClick={() => navigate('/game')}>PLAY</button>}
       </div>
       <div className='navbar-end'>
-      {location.pathname ==='/' && <h3 className='do' onClick={() => navigate('/about')}>ABOUT</h3>}
+      {location.pathname ==='/' && <button onClick={() => navigate('/about')}>ABOUT</button>}
       {!isLoading && !user && (
           <button   
-            className = "btn btn-primary btn-block"
             onClick={()=>loginWithRedirect()}
             >
-              Log In
+              LOGIN
             </button>
       )}
       {!isLoading && user && (
           <button   
-            className = "btn btn-primary btn-block"
             onClick={()=>logout()}
             >
-              Log Out
+              LOGOUT
             </button>
       )}
       </div>

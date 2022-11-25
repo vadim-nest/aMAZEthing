@@ -6,7 +6,6 @@
     display: flex;
     justify-content: space-between;
     position: fixed;
-    z-index: 1;
   }
 
   .navbar-start {
@@ -16,24 +15,16 @@
     width: 40vw;
   }
   
-  .maze {
-      margin: 0px 40px;
-  }
-  
-  .do {
-    display: flex;
-    justify-content: space-end;
-  }
-  
   .navbar-end {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 40vw;
   }
-  
-  .login {
-    display: flex;
-    justify-content: space-end;
-    margin: 12px 40px;
+
+  button {
+    background-color: transparent;
+    border: 0;
+    font-size: 40px;
+    margin: 40px;
   }

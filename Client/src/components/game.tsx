@@ -1,5 +1,6 @@
 import '../css/game.css';
 import Maze from './maze';
+import GameStats from './gameStats';
 
 function Game() {
 
@@ -7,7 +8,7 @@ function Game() {
     <>
       <div>
       <div className='gameContainer'>
-        <h1>game</h1>
+        <GameStats/>
         <Maze/>
       </div>
       </div>

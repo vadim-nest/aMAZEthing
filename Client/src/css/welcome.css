@@ -1,13 +1,15 @@
 .welcome-page {
   background-color: #1B432E;
+  width: 100vw;
   height: 90vh;
   position: relative;
   font-size: 115px;
+  position: fixed;
 }
 
 .welcome {
   color: #043A25;
-  padding: 60px 40px 0px 40px;
+  padding: 40px 40px 0px 40px;
 }
 
 .options {
