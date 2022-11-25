@@ -4,20 +4,20 @@ import { useNavigate } from 'react-router-dom';
 function Welcome() {
   const navigate = useNavigate();
   return (
-    <div className='welcome'>
+    <div className='welcome-page'>
       <div className='top'>
-        <p className='title'>aMAZEthing</p>
+        <p className='title' onClick={() => navigate('/')}>aMAZEthing</p>
         <div className='smaller'>
-          <p>ABOUT</p>
-          <p>LOGIN</p>
+          <p onClick={() => navigate('/about')}>ABOUT</p>
+          <p onClick={() => navigate('/login')}>LOGIN</p>
         </div>
-        
       </div>
-      <div>
-
+      <div className='body'>
+        <p className='welcome'>WELCOME.</p>
+        <p className='options' onClick={() => navigate('/game')}>PLAY</p>
+        <p className='options' onClick={() => navigate('/learning')}>LEARN</p>
       </div>
     </div>
-    
   )
 }
 

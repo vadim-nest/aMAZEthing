@@ -1,18 +1,20 @@
-.welcome {
+.welcome-page {
+  font-family: 'Staatliches', cursive;
   background-color: #1B432E;
+  width: 100vw;
+  height: 100vh;
 }
 
 .top {
-  font-family: 'Staatliches', cursive;
-  color: white;
-  opacity: 0.8;
+  height: 10vh;
+  color: #B4C6BC;
   display: flex;
   justify-content: space-between;
 }
 
 .title {
   font-size: 60px;
-  margin: 30px;
+  margin: 30px 60px;
 }
 
 .smaller{
@@ -20,9 +22,27 @@
   justify-content: space-between;
   font-size: 40px;
   width: 200px;
-  margin: 40px;
+  margin: 40px 60px;
 }
 
 p{
   margin: 0;
+}
+
+p:hover {
+  cursor: pointer;
+}
+
+.body {
+  height: 90vh;
+  font-size: 300px;
+  margin: 20px 60px;
+}
+
+.welcome {
+  color: #043A25;
+}
+
+.options {
+  color: #B4C6BC;
 }
