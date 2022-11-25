@@ -1,0 +1,15 @@
+.mazeOuter {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  cursor: grab;
+}
+
+.mazeInner {
+  position: relative;
+  max-width: 100vh;
+  min-width: 0;
+  max-height: min(90vh);
+  display: grid;
+  place-items: start;
+}
