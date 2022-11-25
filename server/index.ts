@@ -8,8 +8,8 @@ require("dotenv").config();
 const config = {
   authRequired: false,
   auth0Logout:true,
-  secret: process.env.AUTH0_SECRET,
-  baseURL: process.env.URL,
+  secret: process.env.AUTH0_SECRET || 'averydifficultpassword',
+  baseURL: process.env.URL || 'http://localhost:3000',
   clientID: process.env.AUTH0_CLIENT_ID,
   issuerBaseURL: process.env.AUTH0_DOMAIN,
   
@@ -27,11 +27,6 @@ app.use(auth(config))
 app.use(Express.json());
 app.use(router);
 app.use(cors(corsConfig));
-
-app.get('/authorized', function (req, res) {
-  res.send('Secured Resource');
-});
-
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);
