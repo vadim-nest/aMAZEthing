@@ -12,22 +12,23 @@
   .navbar-start {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     width: 40vw;
   }
   
   .maze {
-      margin: 12px 40px;
+      margin: 0px 40px;
   }
   
   .do {
     display: flex;
     justify-content: space-end;
-    margin: 12px;
   }
   
   .navbar-end {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     width: 40vw;
   }
   

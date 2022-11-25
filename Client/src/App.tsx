@@ -7,10 +7,12 @@ import Navbar from './components/navbar';
 function App(props:any) {
   return (
     <Auth0ProviderWithHistory>
-      <div>
-        <Navbar />
-        <Outlet />
+    <div>
+      <Navbar />
+      <div className="outlet">
+        <Outlet />  
       </div>
+    </div>
     </Auth0ProviderWithHistory>
   )
 }

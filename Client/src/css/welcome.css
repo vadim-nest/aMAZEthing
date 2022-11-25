@@ -1,21 +1,16 @@
 .welcome-page {
   background-color: #1B432E;
-  height: 100vh;
+  height: 90vh;
   position: relative;
-  top: -20px;
-  z-index: 0;
-  padding-top: 80px;
-}
-
-.body {
   font-size: 115px;
-  margin: 20px 40px;
 }
 
 .welcome {
   color: #043A25;
+  padding: 60px 40px 0px 40px;
 }
 
 .options {
   color: #B4C6BC;
+  padding: 0px 40px;
 }
