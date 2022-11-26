@@ -1,13 +1,15 @@
 import '../css/minion.css';
 import { minionType } from '../utils/types';
 
-function Minion({boxSize, minion, setCurrentMinion, setCurrentTile}: {boxSize: number, 
+function Minion({boxSize, minion, setCurrentMinion, setCurrentTile}: {
+  boxSize: number, 
   minion: minionType,
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
 }) {
 
   function handleClick() {
+    setCurrentTile(null);
     setCurrentMinion(minion.id);
   }
 

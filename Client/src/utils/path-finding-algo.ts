@@ -1,5 +1,11 @@
 import { Graph, value } from "./graph";
 
+export function getDirection(valueX: number, valueY: number, width:number) {
+  if (valueX - valueY === 1) return {xPos: -1, yPos: 0};
+  if (valueX - valueY === -1) return {xPos: 1, yPos: 0};
+  if (valueX - valueY === width) return {xPos: 0, yPos: -1};
+  return {xPos: 0, yPos: 1};
+}
 
 export function dFSShortest (valueX: value, valueY: value, graph: Graph, path = [valueX]) { // TODO: Will we ever use this?
   let paths: value[][] = [];
@@ -50,37 +56,50 @@ export function vDFS (valueX: value, valueY: value, graph: Graph) {
   return { path, visited };
 }
 
-
 export function bFS (valueX: value, valueY: value, graph: Graph) {
-  let neighbors: [value, value[]][] = [[valueX, [valueX]]];
+  let set = new Set<value>();
+  let neighbors: [value, Set<value>][] = [[valueX, set]];
+  let visited: {[key: value]: boolean} = {};
   for (let i = 0; i < neighbors.length; i++) {
     let neighbor = neighbors[i][0];
     let path = neighbors[i][1];
     if (neighbor === valueY) {
-      return path;
+      return path.values();
     }
     for (let nextNeighbor of graph.neighbors(neighbor)) {
-      if (path.includes(nextNeighbor)) continue;
-      neighbors.push([nextNeighbor, path.concat([nextNeighbor])]);
+      if (visited[nextNeighbor]) continue;
+      visited[nextNeighbor] = true;
+      let newPath = new Set(path);
+      newPath.add(nextNeighbor);
+      neighbors.push([nextNeighbor, newPath]);
+
     }
   }
   return false;
 }
 
 export function vBFS(valueX: value, valueY: value, graph: Graph) {
-  const visited: value[] = [];
+  console.log('hmmmm')
+  const thoughtProcess: value[] = [];
   function modifiedBFS (valueX: value, valueY: value, graph: Graph) {
-    let neighbors: [value, value[]][] = [[valueX, [valueX]]];
+    let set = new Set<value>();
+    let neighbors: [value, Set<value>][] = [[valueX, set]];
+    let visited: {[key: value]: boolean} = {};
     for (let i = 0; i < neighbors.length; i++) {
+      console.log('hi')
       let neighbor = neighbors[i][0];
-      visited.push(neighbor);
       let path = neighbors[i][1];
       if (neighbor === valueY) {
-        return path;
+        return path.values();
       }
       for (let nextNeighbor of graph.neighbors(neighbor)) {
-        if (path.includes(nextNeighbor)) continue;
-        neighbors.push([nextNeighbor, path.concat([nextNeighbor])]);
+        if (visited[nextNeighbor]) continue;
+        thoughtProcess.push(nextNeighbor);
+        visited[nextNeighbor] = true;
+        let newPath = new Set(path);
+        newPath.add(nextNeighbor);
+        neighbors.push([nextNeighbor, newPath]);
+  
       }
     }
     return false;
@@ -88,7 +107,7 @@ export function vBFS(valueX: value, valueY: value, graph: Graph) {
   const path = modifiedBFS(valueX, valueY, graph);
 
   if (path === false) return false;
-  return {visited, path};
+  return {visited: thoughtProcess, path: Array.from(path)};
 }
 
 export function dijkstra (valueX: value, valueY: value, graph: Graph) {

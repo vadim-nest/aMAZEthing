@@ -6,18 +6,19 @@ import { minionType } from "../utils/types";
 import MazeTile from "./mazeTile";
 import Minion from "./minion";
 
-function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile}: {
+function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width}: {
   boxSize:number, 
+  height: number,
+  width: number,
   setMazeCompleted: () => void, 
   minions: minionType[],
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
+  setCurrentGraph: React.Dispatch<React.SetStateAction<Graph | undefined>>,
+  currentGraph: Graph | undefined,
 }) {
 
   // TODO: Set as state
-
-  let width = 72;
-  let height = 48;
   // const [boxSize, setBoxSize] = useState(50);
 
   function setCurrentTileHelper(value: number) {
@@ -36,14 +37,13 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   // const [displayClasses, setDisplayClasses] = useState<{[key: value]: string[]}>({});
   const [mazeGenerated, setMazeGenerated] = useState(false);
   const [allTilesHidden, setAllTilesHidden] = useState(true);
-  let currentGraph: Graph;
 
   useEffect(() => {
     const mazeTiles = document.getElementsByClassName('mazeTile');
     if (mazeGenerated === false) {
       setMazeGenerated(true);
       const {graph, visited, classes} = generateMaze(width, height);
-      currentGraph = graph;
+      setCurrentGraph(graph);
       setDisplayVisited(visited);
       setMaze(oldMaze => {
         const newMaze = [...oldMaze];
