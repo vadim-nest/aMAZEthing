@@ -107,7 +107,7 @@ export default function LearningPage () {
             <image className='nuts' onClick={(() => navigate('/insertionLesson'))} x="17" y="19" href={theNut} height='6' width='6' />
 
             <circle className='circles' cx="30.2" cy="29.6" r="3" />
-            <image className='nuts' onClick={(() => alert('Are you nuts??'))} x="27" y="27" href={theNut} height='6' width='6' />
+            <image className='nuts' onClick={(() =>navigate('/selectionLesson'))} x="27" y="27" href={theNut} height='6' width='6' />
 
             <circle className='circles' cx="40.2" cy="17.6" r="3" />
             <image className='nuts' onClick={(() => alert('Are you nuts??'))} x="37" y="15" href={theNut} height='6' width='6' />

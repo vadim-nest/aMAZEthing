@@ -33,36 +33,28 @@ export function insertionSortAlgo(arr: number[]) {
   return { ArrayStates, animations };
 }
 
-export function selectionSort(arr: number[]) {
+export function selectionSortAlgo(arr: number[]) {
   const ArrayStates: number[][] = [];
   ArrayStates.push([...arr]);
-
-  const visitedIndex: {
-    msg?: string | undefined;
-    i?: number;
-    el?: number;
-    j?: number;
-  }[] = [];
+  let animations:number[][] = []
 
   for (let i = 0; i < arr.length; i++) {
-    visitedIndex.push({ i, el: arr[i] });
+    // animations.push({ i, el: arr[i] });
     let min = i;
     for (let j = i + 1; j < arr.length; j++) {
-      visitedIndex.push({ j, el: arr[j] });
+      // animations.push({ j, el: arr[j] });
       min = arr[j] < arr[min] ? j : min;
     }
     if (min !== i) {
+      animations.push([min, arr[min], i, arr[i]]);
       [arr[i], arr[min]] = [arr[min], arr[i]];
-      visitedIndex.push({
-        msg: `swapped element ${arr[min]} with element ${arr[i]}`,
-      });
       ArrayStates.push([...arr]);
     } else {
-      visitedIndex.push({ msg: 'found no things to swap this iteration' });
+      // animations.push({ msg: 'found no things to swap this iteration' });
     }
   }
 
-  return { ArrayStates, visitedIndex };
+  return { ArrayStates, animations };
 }
 
 console.log(bubbleSortAlgo([5, 1, 4, 2, 8]))

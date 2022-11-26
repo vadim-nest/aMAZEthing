@@ -12,6 +12,7 @@ import SortLesson from './components/sort-lesson';
 import { Provider } from "react-redux";
 import InsertionLesson from './components/insertion-lesson';
 import {store} from './features/store'
+import SelectionLesson from './components/selection-lesson';
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,9 @@ const router = createBrowserRouter([
       },
       {path:'/insertionLesson', 
       element: <InsertionLesson/>
-      }
+      },
+      {path:'/selectionLesson',
+    element: <SelectionLesson/>}
     ],
   },
 ]);
