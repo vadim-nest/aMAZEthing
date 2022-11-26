@@ -1,25 +1,37 @@
-
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {useAuth0} from '@auth0/auth0-react'
-
-// const { user } = useAuth0()
 interface UserState{ //shape of the state inside inside of the slice
-    email: string | undefined;
+    email: string | undefined,
+    username: string,
+    games:any,
+    overallWins:{
+        wins:number,
+        losses:number,
+        draws:number
+    },
+    pathFindPath:number,
+    sortingPath:number
 }
 
 const initialState: UserState = {
-    // email: user.email,
-    email: 'josep',
-
+    email: 'bruce',
+    username: 'Bruce Lee',
+    games: [],
+    overallWins:{wins:0,losses:0,draws:0},
+    pathFindPath:0,
+    sortingPath:0
 }
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        refreshData(state, action: PayloadAction<string|undefined>){
-            state.email = action.payload;
-            //request data to backend
+        refreshData(state, action: PayloadAction<UserState>){
+            state.email = action.payload.email;
+            state.username = action.payload.username;
+            state.games = action.payload.games;
+            state.overallWins = action.payload.overallWins;
+            state.pathFindPath = action.payload.pathFindPath;
+            state.sortingPath = action.payload.sortingPath;
         },
     }
 })

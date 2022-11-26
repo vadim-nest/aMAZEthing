@@ -22,14 +22,14 @@ function Navbar() {
     setModalOpen(!modalOpen)
   };
   const dispatch = useAppDispatch();
-  
+
   useEffect(()=>
   {
     (async function evalAuth(){
       if(isAuthenticated===true){
-        const userData = await apiService.profile();
-        console.log(user,userData)
-        dispatch(refreshData(user?.email))
+        const {user, message} = await apiService.profile();
+        if(user) dispatch(refreshData(user));
+        else console.log(message);
       }
     })()
 
