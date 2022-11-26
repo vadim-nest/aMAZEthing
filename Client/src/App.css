@@ -1,17 +1,27 @@
 * {
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
-html {
-    margin: 0px;
-    padding: 0px;
+:root {
+    --main-green: #1B432E;
+    --dark-green: #043A25;
+    --white-green: #B4C6BC;
+    --red: #c1121f;
+    --yellow: #ffb703;
+    --dark-brown: #3C2923;
+    --white: #ffff;
+}
+
+body {
+    background-color: var(--main-green);
 }
 
 h1, h2, h3, button {
     font-family: 'Staatliches', cursive;
     font-weight: 100;
-    color: #B4C6BC;
+    color: var( --white-green);
 }
 
 .outlet {

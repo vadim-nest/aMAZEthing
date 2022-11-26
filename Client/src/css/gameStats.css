@@ -1,6 +1,6 @@
 .game-stats {
   height: 5vh;
-  background-color: #1b432e;
+  background-color: var(--main-green);
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -23,17 +23,17 @@
 }
 
 .money-count {
-  color: #c1121f;
+  color: var(--red);
 }
 
 .time-count {
-  color: #ffb703;
+  color: var(--yellow);
 }
 
 .score-you {
-  color: #c1121f;
+  color: var(--red);
 }
 
 .score-opponent {
-  color: #ffb703;
+  color: var(--yellow);
 }

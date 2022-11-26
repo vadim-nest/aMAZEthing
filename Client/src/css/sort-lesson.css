@@ -1,6 +1,6 @@
 .whole-page-wrapper {
   padding-top: 100px;
-  background-color: #dce4e0;
+  background-color: var(--white);
   height: 90vh;
 
 }
@@ -9,7 +9,7 @@
   /* To remove */
   /* border: 3px solid green; */
 
-  background-color: #3b6554;
+  background-color: var(--main-green);
   border-radius: 30px;
 
   margin-left: auto;
@@ -43,7 +43,7 @@
   /* display: flex; */
   width: 20px;
   height: 10px;
-  background-color: #fff;
+  background-color: var(--white);
   margin: 10px;
   position: relative;
   display: flex;

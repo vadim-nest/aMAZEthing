@@ -2,15 +2,30 @@ import { useEffect, useState } from "react";
 import '../css/maze.css';
 import { Graph, value } from "../utils/graph";
 import { generateMaze } from "../utils/maze";
+import { minionType } from "../utils/types";
 import MazeTile from "./mazeTile";
+import Minion from "./minion";
 
-function Maze() {
+function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile}: {
+  boxSize:number, 
+  setMazeCompleted: () => void, 
+  minions: minionType[],
+  setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
+  setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
+}) {
 
   // TODO: Set as state
 
   let width = 72;
   let height = 48;
-  let boxSize = 16; 
+  // const [boxSize, setBoxSize] = useState(50);
+
+  function setCurrentTileHelper(value: number) {
+    setCurrentTile({
+      xPos: value%width,
+      yPos: Math.floor(value / width)
+    })
+  }
 
   const array: {value: value, classes: ('b' | 't' | 'l' | 'r')[]}[] = [];
   for (let i = 0; i < width*height; i++) {
@@ -18,20 +33,17 @@ function Maze() {
   }
   const [maze, setMaze] = useState(array);
   const [displayVisited, setDisplayVisited] = useState<value[]>([]);
-  const [displayClasses, setDisplayClasses] = useState<{[key: value]: string[]}>({});
+  // const [displayClasses, setDisplayClasses] = useState<{[key: value]: string[]}>({});
   const [mazeGenerated, setMazeGenerated] = useState(false);
-  const [mazeAnimating, setMazeAnimating] = useState(true);
   const [allTilesHidden, setAllTilesHidden] = useState(true);
   let currentGraph: Graph;
 
   useEffect(() => {
     const mazeTiles = document.getElementsByClassName('mazeTile');
     if (mazeGenerated === false) {
-      console.log(mazeGenerated)
       setMazeGenerated(true);
       const {graph, visited, classes} = generateMaze(width, height);
       currentGraph = graph;
-      setDisplayClasses(classes);
       setDisplayVisited(visited);
       setMaze(oldMaze => {
         const newMaze = [...oldMaze];
@@ -44,10 +56,10 @@ function Maze() {
         return newMaze;
       })
     }
-    else if (mazeAnimating) {
+    else if (allTilesHidden) {
       const mazeTiles = document.getElementsByClassName('mazeTile');
       const halfway = Math.floor(mazeTiles.length/2);
-      let index = 0;
+      let index = -1;
       function step() {
         for (let i = 0; i < 50 - 49*((Math.abs(halfway - index)/halfway)); i++) {
           index++;
@@ -57,26 +69,21 @@ function Maze() {
         }
 
         if (index < displayVisited.length) requestAnimationFrame(step)
-        else setAllTilesHidden(false);
+        else {
+          setAllTilesHidden(false);
+          setMazeCompleted();
+        };
       }
       requestAnimationFrame(step);
     }
   },[maze]);
 
-
-  // useEffect(() => {
-  //   let value = displayVisited[0];
-  //   if (value === undefined) {
-  //     return;
-  //   }
-    
-  // }, [displayVisited])
-
   return (
     <>
-      <div className="mazeOuter">
+      <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-        {maze.map((value: {value: value, classes: string[]}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} classes={value.classes} boxSize={boxSize}/>)}
+          {minions.map(minion => <Minion boxSize={boxSize} minion={minion} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile}/>)}
+        {maze.map((value: {value: value, classes: string[]}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>
       </div>
     </>
