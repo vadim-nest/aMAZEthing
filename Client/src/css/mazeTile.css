@@ -78,3 +78,7 @@
   background-image: url(../assets/tiles/blrt.png);
   background-size: contain;
 }
+
+.showNone {
+  background-image: none !important;
+}
