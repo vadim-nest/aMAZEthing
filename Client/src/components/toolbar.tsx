@@ -1,6 +1,12 @@
 import '../css/toolbar.css';
 
-function ToolBar({setBoxSize, minBoxSize, maxBoxSize}: {setBoxSize: React.Dispatch<React.SetStateAction<number>>, minBoxSize: number, maxBoxSize: number}) {
+function ToolBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile}: {
+  setBoxSize: React.Dispatch<React.SetStateAction<number>>,  
+  minBoxSize: number, 
+  maxBoxSize: number,
+  currentMinion: null | number,
+  currentTile: null | {xPos:number, yPos:number},
+}) {
   
   function zoomIn(amount: number) {
     setBoxSize(oldBoxSize => {
@@ -21,6 +27,12 @@ function ToolBar({setBoxSize, minBoxSize, maxBoxSize}: {setBoxSize: React.Dispat
       <h1>Hello</h1>
       <button onClick={()=>zoomIn(10)}>Zoom In</button>
       <button onClick={()=>zoomOut(10)}>Zoom Out</button>
+      {currentMinion !== null && <h1>The current minion is {currentMinion}</h1>}
+      {currentTile !== null && <>
+        <h1>The current tile is</h1>
+        <p>X: {currentTile.xPos}</p>
+        <p>Y: {currentTile.yPos}</p>
+      </>}
     </div>
   );
 }
