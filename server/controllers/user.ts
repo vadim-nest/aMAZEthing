@@ -4,18 +4,19 @@ import { User } from '../models/user'
 
 async function getUserData(req: express.Request, res: express.Response) {
     try {
-        const { email } = req.oidc.user;
+        const  {email} = req.oidc.user
+        console.log('request opened to retrieve information from: ',email)
         const user = await User.findOne({ email: email })
         if (user) {
-            res.status(201).json({ "statusCode": 200, "message": "Retrieving information of the user", user: req.oidc.user });
+            res.status(201).json({ "statusCode": 200, "message": "Retrieving information of the user", user: user });
         } else {
             const newUser = new User({
-                email: req.oidc.user.email,       
+                email: email,       
             });
             console.log(newUser)
             const user = await newUser.save();
-
-            res.status(201).json({ "statusCode": 200, "message": "User created", user });
+            const userSaved = await User.findOne({ email: email })
+            res.status(201).json({ "statusCode": 200, "message": "User created", user: userSaved });
         }
     } catch (error) {
         console.log(error);
