@@ -19,25 +19,18 @@ export function bubbleSortAlgo(arr: number[]) {
 export function insertionSortAlgo(arr: number[]) {
   const ArrayStates: number[][] = [];
   ArrayStates.push([...arr]);
-  const visitedIndex: {
-    j?: number;
-    i?: number;
-    msg?: string;
-    el?: number;
-  }[] = [];
-
+  let animations:number[][] = []
   for (let i = 1; i < arr.length; i++) {
-    visitedIndex.push({ i, msg: 'outside', el: arr[i] });
     for (let j = i; j > 0; j--) {
       if (arr[j] < arr[j - 1]) {
-        visitedIndex.push({ j: j - 1 }); // it feels kinda weird repeating the same index if the condition is met, so I just put j index as minus 1 to actually record where the element as been swapped to
+        animations.push([j, arr[j], j-1, arr[j-1]]); 
         [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]];
         ArrayStates.push([...arr]);
       } else break;
     }
   }
 
-  return { ArrayStates, visitedIndex };
+  return { ArrayStates, animations };
 }
 
 export function selectionSort(arr: number[]) {
