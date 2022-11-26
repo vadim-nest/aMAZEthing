@@ -5,7 +5,7 @@ import { useAuth0} from "@auth0/auth0-react";
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {loginWithRedirect,logout,user,isLoading } = useAuth0();
+  const {loginWithRedirect,logout, user, isLoading, isAuthenticated } = useAuth0();
   return (
     <div className='navbar'>
       <div className='navbar-start'>
@@ -15,6 +15,7 @@ function Navbar() {
       </div>
       <div className='navbar-end'>
       {location.pathname ==='/' && <button className='button' onClick={() => navigate('/about')}>ABOUT</button>}
+      {isAuthenticated && <button className='button' onClick={() => navigate('/about')}>PROFILE</button>}
       {!isLoading && !user && (
           <button  
             className='button' 
