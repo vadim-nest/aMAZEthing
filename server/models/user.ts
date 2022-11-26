@@ -20,15 +20,14 @@ const gameSchema = new Schema({
   }
 })
 
-
 const userSchema = new Schema({
-  username: {
-    type: String,
-    default: ""
-  },
   email: {
     type: String,
     required: true,
+  },
+  username: {
+    type: String,
+    default: " "
   },
   sortingPath: {
     type: Number,

@@ -8,34 +8,34 @@ async function getUserData(req: express.Request, res: express.Response) {
         console.log('request opened to retrieve information from: ',email)
         const user = await User.findOne({ email: email })
         if (user) {
-            res.status(201).json({ "statusCode": 200, "message": "Retrieving information of the user", user: user });
+            res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: user });
         } else {
             const newUser = new User({
                 email: email,       
             });
             console.log(newUser)
             const user = await newUser.save();
-            const userSaved = await User.findOne({ email: email })
-            res.status(201).json({ "statusCode": 200, "message": "User created", user: userSaved });
+            res.status(201).json({ "statusCode": 201, "message": "User created", user: user });
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ "statusCode": 200, "message": error });
+        res.status(500).json({ "statusCode": 500, "message": error });
     }
 }
 
 async function updateUsername(req: express.Request, res: express.Response) {
     try {
-        const username = req.body.username;
+        const {username} = req.body;
+        console.log(username)
         const { email } = req.oidc.user;
         const user = await User.findOne({ email: email })
         user.username = username;
         await user.save();
         console.log(user);
-        res.status(201).json({ "statusCode": 200, "message": "New username has been stored", user});
+        res.status(201).json({ "statusCode": 201, "message": "New username has been stored", user});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ "statusCode": 200, "message": error });
+        res.status(500).json({ "statusCode": 500, "message": error });
     }
 }
 
@@ -49,10 +49,10 @@ async function updateLearning(req: express.Request, res: express.Response) {
         user.pathFindPath = pathFindPath;
         await user.save();
         console.log(user);
-        res.status(201).json({ "statusCode": 200, "message": "Learning path updated!", user});
+        res.status(201).json({ "statusCode": 201, "message": "Learning path updated!", user});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ "statusCode": 200, "message": error });
+        res.status(500).json({ "statusCode": 500, "message": error });
     }
 }
 
@@ -65,10 +65,10 @@ async function updateGameStats(req: express.Request, res: express.Response) {
         
         await user.save();
         console.log(user);
-        res.status(201).json({ "statusCode": 200, "message": "Learning path updated!", user});
+        res.status(201).json({ "statusCode": 201, "message": "Learning path updated!", user});
     } catch (error) {
         console.log(error);
-        res.status(500).json({ "statusCode": 200, "message": error });
+        res.status(500).json({ "statusCode": 500, "message": error });
     }
 }
 
