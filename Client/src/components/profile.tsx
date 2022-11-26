@@ -2,14 +2,20 @@ import '../css/profile.css';
 import { User} from "@auth0/auth0-react";
 import { useAppSelector } from '../features/hooks';
 import apiService from '../services/apiService';
-import { useState } from 'react';
+import { Buffer } from "buffer";
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { refreshData } from '../features/user_slice';
 
 function Profile() {
   const [username,setUsername] = useState('');
   const user  = useAppSelector((state)=>state.user);
+  const [img,setImg] = useState()
 
+  useEffect(()=>{
+    const base64String:any = Buffer.from(user.avatar.data.data).toString("base64");
+    setImg(base64String);
+  },[user])
   function changeUsername(e:any){ //TODO if type is EVENT, value not recognized
     const { value } = e.target;
     setUsername(value);
@@ -25,6 +31,9 @@ function Profile() {
   }
   return (
     <div>
+      <div className='logo-img'>
+        <img src={"data:image/jpeg;base64,"+ img} />
+      </div>
       {
         <h1>HELLO {user.username ?(user as User).username: 'THERE'},</h1>
       }

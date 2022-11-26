@@ -28,6 +28,7 @@ function Navbar() {
     (async function evalAuth() {
       if (isAuthenticated === true) {
         const { user, message } = await apiService.profile();
+        console.log(user)
         if (user) dispatch(refreshData(user));
         else console.log(message);
       }

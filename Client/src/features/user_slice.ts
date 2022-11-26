@@ -9,7 +9,13 @@ interface UserState{ //shape of the state inside inside of the slice
         draws:number
     },
     pathFindPath:number,
-    sortingPath:number
+    sortingPath:number,
+    avatar:{
+        data:{
+            data:number[]
+        },
+        contentType:string;
+    },
 }
 
 const initialState: UserState = {
@@ -18,7 +24,14 @@ const initialState: UserState = {
     games: [],
     overallWins:{ wins:0, losses:0, draws:0},
     pathFindPath:0,
-    sortingPath:0
+    sortingPath:0,
+    avatar:{
+        data:{
+            data:[]
+        },
+        contentType: "monkey.png",
+        
+    }
 }
 
 const userSlice = createSlice({
@@ -32,6 +45,7 @@ const userSlice = createSlice({
             state.overallWins = action.payload.overallWins;
             state.pathFindPath = action.payload.pathFindPath;
             state.sortingPath = action.payload.sortingPath;
+            state.avatar = action.payload.avatar;
         },
     }
 })
