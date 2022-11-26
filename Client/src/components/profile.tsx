@@ -18,8 +18,10 @@ function Profile() {
   async function updateProfile(e:any){
     e.preventDefault();
     console.log(username)
-    const newUser = await apiService.updateProfile({username: username});
-    //if (newUser) dispatch(refreshData(newUser));
+    const {user,message} = await apiService.updateProfile({username: username});
+    console.log(user)
+    if (user) dispatch(refreshData(user));
+    else console.log(message);
   }
   return (
     <div>

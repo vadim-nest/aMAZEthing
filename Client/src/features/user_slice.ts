@@ -14,7 +14,7 @@ interface UserState{ //shape of the state inside inside of the slice
 
 const initialState: UserState = {
     email: 'bruce@lee.com',
-    username: 'Bruce Lee',
+    username: '',
     games: [],
     overallWins:{ wins:0, losses:0, draws:0},
     pathFindPath:0,
