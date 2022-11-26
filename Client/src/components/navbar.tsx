@@ -12,6 +12,7 @@ function Navbar() {
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const {loginWithRedirect,logout, user, isLoading, isAuthenticated } = useAuth0();
 
   const toggleNavbar = () => {
     setToggle(!toggle);
@@ -20,7 +21,21 @@ function Navbar() {
   const toggleModal = () => {
     setModalOpen(!modalOpen)
   };
-  const {loginWithRedirect,logout, user, isLoading, isAuthenticated } = useAuth0();
+  const dispatch = useAppDispatch();
+  
+  useEffect(()=>
+  {
+    (async function evalAuth(){
+      if(isAuthenticated===true){
+        const userData = await apiService.profile();
+        console.log(user,userData)
+        dispatch(refreshData(user?.email))
+      }
+    })()
+
+  },[isAuthenticated]);
+
+
   return (
     <>
     <div className="navbar">
