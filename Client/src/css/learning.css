@@ -15,7 +15,7 @@
 
 .initial-view {
   background-color: var(--main-green);
-  height: 100vh;
+  height: 90vh;
   /* width: 100vw; */
   margin: 0;
   padding: 0;
@@ -35,12 +35,13 @@
   margin: 0px;
   padding: 0px;
   margin-left: 10vw;
+  padding-top: 20vh;
 }
 
 .path-finding-algs {
   background-color: var(--white);
   /* width: 100vw; */
-  margin-top: 200px;
+  /* margin-top: 200px; */
 }
 
 .curve-1 {
@@ -70,10 +71,22 @@ path {
   fill: #fff;
   stroke: var(--dark-brown);
   stroke-width: 0.6;
-
 }
 
-.nuts {
+.circles:hover {
+  fill: var(--dark-brown);
   cursor: pointer;
 }
 
+.nuts {
+  pointer-events: none;
+}
+
+.lesson-name {
+  font-size: 2px;
+  fill: #fff;
+}
+
+.lesson-name-label {
+  fill: var(--white-green);
+}

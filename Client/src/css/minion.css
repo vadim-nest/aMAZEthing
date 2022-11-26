@@ -1,6 +1,6 @@
 .minion {
   position: absolute;
-  background-image: url('../assets/tiles/minion-v1.png');
+  background-image: url('../assets/minions/squirrel.svg');
   background-size: contain;
   width: 30px;
   height: 30px;

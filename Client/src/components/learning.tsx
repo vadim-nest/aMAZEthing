@@ -97,10 +97,12 @@ export default function LearningPage () {
               M 70, 20
               L 140, 20
             '/>
-            
 
-            <circle className='circles' cx="13.2" cy="14.6" r="3" />
-            <image className='nuts' onClick={(() => navigate('/bubbleLesson'))}  x="10" y="12" href={theNut} height='6' width='6' />
+
+            <circle className='circles' onClick={(() => navigate('/bubbleLesson'))} cx="13.2" cy="14.6" r="3" />
+            <image className='nuts' x="10" y="12" href={theNut} height='6' width='6' />
+            <rect x="7" y="6.8" className="lesson-name-label" width="12" height="3.5" rx="1" />
+            <text x="8" y="9" className="lesson-name">Bubble sort</text>
 
 
             <circle className='circles' cx="20.2" cy="21.6" r="3" />
