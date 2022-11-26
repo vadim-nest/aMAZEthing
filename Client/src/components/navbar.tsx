@@ -10,6 +10,16 @@ import { refreshData } from '../features/user_slice';
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [toggle, setToggle] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const toggleNavbar = () => {
+    setToggle(!toggle);
+  };
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen)
+  };
   const {loginWithRedirect,logout, user, isLoading, isAuthenticated } = useAuth0();
   return (
     <>
