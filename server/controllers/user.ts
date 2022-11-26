@@ -10,8 +10,10 @@ async function getUserData(req: express.Request, res: express.Response) {
         if (user) {
             res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: user });
         } else {
+            const username = email.substr(0,email.indexOf('@'));
             const newUser = new User({
-                email: email,       
+                email: email,
+                username: username    
             });
             console.log(newUser)
             const user = await newUser.save();
