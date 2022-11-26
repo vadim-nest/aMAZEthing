@@ -7,13 +7,9 @@ const automateImages = async function () {
     await Avatar.deleteMany();
     for (let file of files) {
         console.log(file);
-        
-
-        const image = new Avatar({ 
-
+        const image = new Avatar({
             data: fs.readFileSync(path.join(__dirname + '/avatars/' + file)),
             contentType: file
-            
         })
         await image.save();
     }

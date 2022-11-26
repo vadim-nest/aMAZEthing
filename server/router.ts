@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-const multer = require('multer');
+
 
 
 const { requiresAuth } = require('express-openid-connect');
