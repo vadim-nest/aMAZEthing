@@ -10,6 +10,7 @@ import Profile from './components/profile';
 import About from './components/about';
 import SortLesson from './components/sort-lesson';
 import { Provider } from "react-redux";
+import InsertionLesson from './components/insertion-lesson';
 import {store} from './features/store'
 
 const router = createBrowserRouter([
@@ -45,6 +46,9 @@ const router = createBrowserRouter([
         path: '/sortLesson',
         element: <SortLesson />,
       },
+      {path:'/insertionLesson', 
+      element: <InsertionLesson/>
+      }
     ],
   },
 ]);

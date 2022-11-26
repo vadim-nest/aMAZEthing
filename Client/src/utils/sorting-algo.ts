@@ -16,7 +16,7 @@ export function bubbleSortAlgo(arr: number[]) {
   return {ArrayStates, animations};
 }
 
-export function insertionSort(arr: number[]) {
+export function insertionSortAlgo(arr: number[]) {
   const ArrayStates: number[][] = [];
   ArrayStates.push([...arr]);
   const visitedIndex: {

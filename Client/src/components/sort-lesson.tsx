@@ -72,7 +72,7 @@ export default function SortLesson() {
 
         <div className="lesson-wrapper-2">
           <p>{paragraphs.secondP}</p>
-            {!clicked && <button className="button" onClick={bubbleSort}> click </button>}
+            {!clicked && <button className="button clickSort" onClick={bubbleSort}> click </button>}
         </div>
 
         <div className="array">

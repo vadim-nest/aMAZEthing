@@ -24,6 +24,10 @@ h1, h2, h3, button {
     color: var( --white-green);
 }
 
+button:hover{
+    color: var(--white)
+}
+
 .outlet {
     position: relative;
     top: 10vh

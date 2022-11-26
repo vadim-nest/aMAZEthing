@@ -97,13 +97,14 @@ export default function LearningPage () {
               M 70, 20
               L 140, 20
             '/>
+            
 
             <circle className='circles' cx="13.2" cy="14.6" r="3" />
-            {/* +3.2, + 2.6 */}
             <image className='nuts' onClick={(() => navigate('/sortLesson'))}  x="10" y="12" href={theNut} height='6' width='6' />
 
+
             <circle className='circles' cx="20.2" cy="21.6" r="3" />
-            <image className='nuts' onClick={(() => alert('Are you nuts??'))} x="17" y="19" href={theNut} height='6' width='6' />
+            <image className='nuts' onClick={(() => navigate('/insertionLesson'))} x="17" y="19" href={theNut} height='6' width='6' />
 
             <circle className='circles' cx="30.2" cy="29.6" r="3" />
             <image className='nuts' onClick={(() => alert('Are you nuts??'))} x="27" y="27" href={theNut} height='6' width='6' />
