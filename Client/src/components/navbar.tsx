@@ -12,10 +12,12 @@ function Navbar() {
         <button className='button' onClick={() => navigate('/')}>aMAZEthing</button>
         {location.pathname ==='/game' && <button className='button' onClick={() => navigate('/learning')}>LEARN</button>}
         {location.pathname ==='/learning' && <button className='button' onClick={() => navigate('/game')}>PLAY</button>}
+        {location.pathname ==='/profile' && <button className='button' onClick={() => navigate('/game')}>PLAY</button>}
+        {location.pathname ==='/profile' && <button className='button' onClick={() => navigate('/learning')}>LEARN</button>}
       </div>
       <div className='navbar-end'>
       {location.pathname ==='/' && <button className='button' onClick={() => navigate('/about')}>ABOUT</button>}
-      {isAuthenticated && <button className='button' onClick={() => navigate('/about')}>PROFILE</button>}
+      {isAuthenticated && !(location.pathname ==='/profile') && <button className='button' onClick={() => navigate('/profile')}>PROFILE</button>}
       {!isLoading && !user && (
           <button  
             className='button' 
