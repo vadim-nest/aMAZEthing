@@ -2,17 +2,19 @@
   background-color: #1B432E;
   width: 100vw;
   height: 90vh;
-  position: relative;
-  font-size: 115px;
+  font-size: 120px;
   position: fixed;
 }
 
 .welcome {
   color: #043A25;
-  padding: 40px 40px 0px 40px;
+  padding: 0px 40px;
 }
 
 .options {
   color: #B4C6BC;
   padding: 0px 40px;
+  font-size: 180px;
+  background-color: transparent;
+  border: 0;
 }

@@ -23,9 +23,13 @@
     width: 40vw;
   }
 
-  button {
+  .button {
     background-color: transparent;
     border: 0;
     font-size: 40px;
     margin: 40px;
+  }
+
+  button:hover {
+    cursor: pointer;
   }
