@@ -1,7 +1,3 @@
-.mazeTile {
-  border: 1px solid black;
-}
-
 .b {
   background-image: url(../assets/tiles/b.png);
   background-size: contain;

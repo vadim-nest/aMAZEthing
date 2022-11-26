@@ -9,6 +9,7 @@ import Login from './components/login';
 import Register from './components/register';
 import Profile from './components/profile';
 import About from './components/about';
+import SortLesson from './components/sort-lesson';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: <About />,
+      },
+      {
+        path: '/sortLesson',
+        element: <SortLesson />,
       },
     ],
   },

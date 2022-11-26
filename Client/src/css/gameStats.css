@@ -1,20 +1,39 @@
 .game-stats {
-    height: 5vh;
-    background-color: #1B432E;
-    font-size: 20px;
-    display: flex;
-    justify-content: flex-end;
-}
-.money {
-    margin: 10px;
-    color: #c1121f;
+  height: 5vh;
+  background-color: #1b432e;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
 
-.time {
-    margin: 10px;
-    color: #ffb703;
+.money-time {
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 40px;
 }
 
-.score {
-    margin: 10px;
+.scores {
+  width: 15%;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 40px;
+}
+
+.money-count {
+  color: #c1121f;
+}
+
+.time-count {
+  color: #ffb703;
+}
+
+.score-you {
+  color: #c1121f;
+}
+
+.score-opponent {
+  color: #ffb703;
 }
