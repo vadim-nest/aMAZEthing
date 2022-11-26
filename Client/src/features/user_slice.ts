@@ -16,7 +16,7 @@ const initialState: UserState = {
     email: 'bruce',
     username: 'Bruce Lee',
     games: [],
-    overallWins:{wins:0,losses:0,draws:0},
+    overallWins:{ wins:0, losses:0, draws:0},
     pathFindPath:0,
     sortingPath:0
 }
