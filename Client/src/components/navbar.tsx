@@ -102,7 +102,42 @@ function Navbar() {
       </div>
     <MediaQuery maxWidth={950}>
         <div className={`modal-body open-${modalOpen}`}>
-          <h1>hello</h1>
+        {location.pathname === '/' && (
+            <button className="button" onClick={() => {
+              navigate('/about');
+              toggleModal();
+              toggleNavbar();
+            }}>
+              ABOUT
+            </button>
+        )}
+        {location.pathname === '/' && !user &&(
+            <button className="button" onClick={() => {
+              loginWithRedirect()
+              toggleModal();
+              toggleNavbar();
+            }}>
+              LOGIN
+            </button>
+        )}
+        {location.pathname === '/' && user && (
+            <button className="button" onClick={() => {
+              navigate('/profile');
+              toggleModal();
+              toggleNavbar();
+            }}>
+              PROFILE
+            </button>
+        )}
+        {location.pathname === '/' && user && (
+            <button className="button" onClick={() => {
+              logout();
+              toggleModal();
+              toggleNavbar();
+            }}>
+              LOGOUT
+            </button>
+        )}
         </div>
     </MediaQuery>
     </div>

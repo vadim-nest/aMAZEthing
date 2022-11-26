@@ -65,6 +65,10 @@ button:hover {
   height: 90vh;
   width: 100vw;
   position: absolute;
+  margin: 10vh 0 0 0;
+  background-color: var(--main-green);
+  display: flex;
+  flex-direction: column;
 }
 
 .open-false {
