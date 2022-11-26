@@ -8,13 +8,13 @@
 .initial-view-text p {
   text-align: center;
   font-size: 26px;
-  color: #fff;
+  color: var(--white);
   margin-top: 15px;
   /* font-family: 'Roboto', sans-serif; */
 }
 
 .initial-view {
-  background-color: #1B432E;
+  background-color: var(--main-green);
   height: 100vh;
   /* width: 100vw; */
   margin: 0;
@@ -38,7 +38,7 @@
 }
 
 .path-finding-algs {
-  background-color: #fff;
+  background-color: var(--white);
   /* width: 100vw; */
   margin-top: 200px;
 }
@@ -62,13 +62,13 @@ svg {
 
 path {
   fill: none;
-  stroke: #b4751c;
+  stroke: var(--dark-brown);
   stroke-width: 0.8;
 }
 
 .circles {
   fill: #fff;
-  stroke: #b4751c;
+  stroke: var(--dark-brown);
   stroke-width: 0.6;
 
 }

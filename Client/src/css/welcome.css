@@ -1,5 +1,5 @@
 .welcome-page {
-  background-color: #1B432E;
+  background-color: var(--main-green);
   width: 100vw;
   height: 90vh;
   font-size: 120px;
@@ -7,12 +7,12 @@
 }
 
 .welcome {
-  color: #043A25;
+  color: var(--dark-green);
   padding: 0px 40px;
 }
 
 .options {
-  color: #B4C6BC;
+  color: var(--white-green);
   padding: 0px 40px;
   font-size: 180px;
   background-color: transparent;

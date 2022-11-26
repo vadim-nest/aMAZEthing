@@ -3,9 +3,15 @@
     font-family: 'Roboto', sans-serif;
 }
 
-html {
-    margin: 0px;
-    padding: 0px;
+:root {
+    --main-green: #1B432E;
+    --dark-green: #043A25;
+    --white-green: #B4C6BC;
+    --red: #c1121f;
+    --yellow: #ffb703;
+    --dark-brown: #3C2923;
+    --white: #EDE0D4;
+
 }
 
 h1, h2, h3, button {
@@ -17,4 +23,12 @@ h1, h2, h3, button {
 .outlet {
     position: relative;
     top: 10vh
+}
+
+@media only screen and (min-width: 992px) {
+
+}
+
+@media only screen and (max-width: 600px) {
+
 }
