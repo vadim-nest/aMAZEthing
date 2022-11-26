@@ -100,7 +100,7 @@ export default function LearningPage () {
             
 
             <circle className='circles' cx="13.2" cy="14.6" r="3" />
-            <image className='nuts' onClick={(() => navigate('/sortLesson'))}  x="10" y="12" href={theNut} height='6' width='6' />
+            <image className='nuts' onClick={(() => navigate('/bubbleLesson'))}  x="10" y="12" href={theNut} height='6' width='6' />
 
 
             <circle className='circles' cx="20.2" cy="21.6" r="3" />

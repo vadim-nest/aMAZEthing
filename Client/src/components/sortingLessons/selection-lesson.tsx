@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { selectionSortAlgo } from "../utils/sorting-algo";
+import { selectionSortAlgo } from "../../utils/sorting-algo";
 
 export default function SelectionLesson() {
 
@@ -9,7 +9,7 @@ export default function SelectionLesson() {
     let paragraphs = {
         sortName: "Selection sort",
         firstP:
-          "Selection Sort is also a simple sorting algorithm that swaps two elements if they are in the wrong order. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.",
+          "Selection Sort  This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.",
         secondP: "As we go through each element, if the current element is smaller than the previous one, the elements are swapped"
       };
 

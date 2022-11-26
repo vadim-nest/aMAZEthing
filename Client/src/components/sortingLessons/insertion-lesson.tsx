@@ -1,6 +1,6 @@
-import '../css/sort-lesson.css'
+import '../../css/sort-lesson.css'
 import { useEffect, useState } from 'react'
-import { insertionSortAlgo } from "../utils/sorting-algo";
+import { insertionSortAlgo } from "../../utils/sorting-algo";
 
 export default function InsertionLesson() {
 

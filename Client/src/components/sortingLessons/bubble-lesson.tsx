@@ -1,9 +1,9 @@
-import "../css/sort-lesson.css";
+import "../../css/sort-lesson.css";
 import { useEffect, useState } from "react";
-import { bubbleSortAlgo } from "../utils/sorting-algo";
+import { bubbleSortAlgo } from "../../utils/sorting-algo";
 // import bubbleSort from '../utils/'
 
-export default function SortLesson() {
+export default function BubbleLesson() {
   const [array, setArray] = useState([5, 1, 4, 2, 8]);
   const [clicked, setClicked] = useState(false)
   // Should store all the text/arrays in the db and just reuse this component for every lesson

@@ -8,11 +8,11 @@ import Learning from './components/learning';
 import Login from './components/login';
 import Profile from './components/profile';
 import About from './components/about';
-import SortLesson from './components/sort-lesson';
+import BubbleLesson from './components/sortingLessons/bubble-lesson';
 import { Provider } from "react-redux";
-import InsertionLesson from './components/insertion-lesson';
+import InsertionLesson from './components/sortingLessons/insertion-lesson';
 import {store} from './features/store'
-import SelectionLesson from './components/selection-lesson';
+import SelectionLesson from './components/sortingLessons/selection-lesson';
 
 const router = createBrowserRouter([
   {
@@ -44,8 +44,8 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/sortLesson',
-        element: <SortLesson />,
+        path: '/bubbleLesson',
+        element: <BubbleLesson />,
       },
       {path:'/insertionLesson', 
       element: <InsertionLesson/>
