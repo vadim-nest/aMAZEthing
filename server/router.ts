@@ -1,5 +1,8 @@
 import express from 'express';
 const router = express.Router();
+const multer = require('multer');
+
+
 const { requiresAuth } = require('express-openid-connect');
 
 const users = require('./controllers/user');
@@ -9,6 +12,11 @@ const users = require('./controllers/user');
 router.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
   });
+
+
+
+
+
 
 //protected route
 router.get('/profile', requiresAuth(), users.getUserData);

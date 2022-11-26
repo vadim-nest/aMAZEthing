@@ -1,4 +1,5 @@
 import Express from 'express';
+import { automateImages } from './utils/automateAvatars';
 const { router } = require('./router');
 const cors = require('cors');
 import {auth} from 'express-openid-connect'
@@ -27,6 +28,9 @@ app.use(auth(config))
 app.use(Express.json());
 app.use(cors(corsConfig));
 app.use(router);
+
+//Upload Avatar images to collection
+automateImages();
 
 app.get('/authorize', function (req, res) {
   res.json('Secured Resource');

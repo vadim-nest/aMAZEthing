@@ -1,23 +1,28 @@
 import express from 'express'
 import { User } from '../models/user'
+import {Avatar} from '../models/avatar'
 
 
 async function getUserData(req: express.Request, res: express.Response) {
     try {
-        const  {email} = req.oidc.user
+        const  {email,sub} = req.oidc.user
         console.log('request opened to retrieve information from: ',email)
         const user = await User.findOne({ email: email })
         if (user) {
-            res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: user });
+            const resUser = await User.findOne({ email: email }).populate('avatar');
+            res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: resUser });
         } else {
             const username = email.substr(0,email.indexOf('@'));
+            const avatar = await Avatar.findOne({'image.contentType': 'monkey.png'});
             const newUser = new User({
+                id: sub,
                 email: email,
-                username: username    
+                username: username,
+                avatar:avatar.id, 
             });
-            console.log(newUser)
-            const user = await newUser.save();
-            res.status(201).json({ "statusCode": 201, "message": "User created", user: user });
+            await newUser.save();
+            const resUser = await User.findOne({ email: email }).populate('avatar');
+            res.status(201).json({ "statusCode": 201, "message": "User created", user: resUser });
         }
     } catch (error) {
         console.log(error);
@@ -28,7 +33,7 @@ async function getUserData(req: express.Request, res: express.Response) {
 async function updateUsername(req: express.Request, res: express.Response) {
     try {
         const {username} = req.body;
-        console.log(username)
+        console.log(username);
         const { email } = req.oidc.user;
         const user = await User.findOne({ email: email })
         user.username = username;
