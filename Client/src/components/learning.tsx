@@ -3,9 +3,12 @@ import theNut from '../assets/learning/nut.png';
 import treePic from '../assets/learning/tree.png';
 import grassPic from '../assets/learning/grass.png';
 import tallGrassPic from '../assets/learning/tall_grass.png';
+import { useNavigate } from 'react-router-dom';
 // import squirrel from '../assets/learning/squirrel.png';
 
 export default function LearningPage () {
+
+  const navigate = useNavigate()
 
 
 
@@ -97,7 +100,7 @@ export default function LearningPage () {
 
             <circle className='circles' cx="13.2" cy="14.6" r="3" />
             {/* +3.2, + 2.6 */}
-            <image className='nuts' onClick={(() => alert('Are you nuts??'))} x="10" y="12" href={theNut} height='6' width='6' />
+            <image className='nuts' onClick={(() => navigate('/sortLesson'))}  x="10" y="12" href={theNut} height='6' width='6' />
 
             <circle className='circles' cx="20.2" cy="21.6" r="3" />
             <image className='nuts' onClick={(() => alert('Are you nuts??'))} x="17" y="19" href={theNut} height='6' width='6' />

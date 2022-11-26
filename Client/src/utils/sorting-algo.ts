@@ -1,28 +1,19 @@
 export function bubbleSortAlgo(arr: number[]) {
   const ArrayStates: number[][] = [];
-  ArrayStates.push([...arr]);
-  const visitedIndex: {
-    msg?: string;
-    i?: number;
-    el?: number;
-  }[] = []; //We can perhaps use this visited index to animate it more extensively (displaying an arrow on which el of the array we are on)
+  let animations:number[][] = []
   let hasChanged = true;
   while (hasChanged) {
     hasChanged = false;
     for (let i = 0; i <= arr.length - 2; i++) {
-      visitedIndex.push({ i, el: arr[i] });
       if (arr[i] > arr[i + 1]) {
-        visitedIndex.push({
-          i,
-          msg: `swapped from ${arr[i]} to ${arr[i + 1]}`,
-        });
+        animations.push([i, arr[i], i+1, arr[i+1]]);
         [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
         ArrayStates.push([...arr]);
         hasChanged = true;
       }
     }
   }
-  return ArrayStates;
+  return {ArrayStates, animations};
 }
 
 export function insertionSort(arr: number[]) {
@@ -80,4 +71,6 @@ export function selectionSort(arr: number[]) {
 
   return { ArrayStates, visitedIndex };
 }
+
+console.log(bubbleSortAlgo([5, 1, 4, 2, 8]))
 
