@@ -1,6 +1,7 @@
 * {
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
 :root {
@@ -11,6 +12,10 @@
     --yellow: #ffb703;
     --dark-brown: #3C2923;
     --white: #ffff;
+}
+
+body {
+    background-color: var(--main-green);
 }
 
 h1, h2, h3, button {
