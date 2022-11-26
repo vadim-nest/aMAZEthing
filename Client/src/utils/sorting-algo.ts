@@ -1,4 +1,4 @@
-export function bubbleSort(arr: number[]) {
+export function bubbleSortAlgo(arr: number[]) {
   const ArrayStates: number[][] = [];
   ArrayStates.push([...arr]);
   const visitedIndex: {
@@ -22,7 +22,7 @@ export function bubbleSort(arr: number[]) {
       }
     }
   }
-  return { ArrayStates, visitedIndex };
+  return ArrayStates;
 }
 
 export function insertionSort(arr: number[]) {
@@ -81,4 +81,3 @@ export function selectionSort(arr: number[]) {
   return { ArrayStates, visitedIndex };
 }
 
-console.log(bubbleSort([0, 3, 1, 6, 2, 1]));

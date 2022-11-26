@@ -10,45 +10,73 @@ function Maze() {
 
   let width = 72;
   let height = 48;
-  let boxSize = 15; 
+  let boxSize = 16; 
 
-  const [maze, setMaze] = useState(Array(height * width).fill({value: '', classes: []}));
+  const array: {value: value, classes: ('b' | 't' | 'l' | 'r')[]}[] = [];
+  for (let i = 0; i < width*height; i++) {
+    array.push({value: i, classes: []})
+  }
+  const [maze, setMaze] = useState(array);
   const [displayVisited, setDisplayVisited] = useState<value[]>([]);
   const [displayClasses, setDisplayClasses] = useState<{[key: value]: string[]}>({});
+  const [mazeGenerated, setMazeGenerated] = useState(false);
+  const [mazeAnimating, setMazeAnimating] = useState(true);
+  const [allTilesHidden, setAllTilesHidden] = useState(true);
   let currentGraph: Graph;
-  let mazeGenerated = false;
 
   useEffect(() => {
+    const mazeTiles = document.getElementsByClassName('mazeTile');
     if (mazeGenerated === false) {
-      mazeGenerated = true;
+      console.log(mazeGenerated)
+      setMazeGenerated(true);
       const {graph, visited, classes} = generateMaze(width, height);
       currentGraph = graph;
       setDisplayClasses(classes);
       setDisplayVisited(visited);
+      setMaze(oldMaze => {
+        const newMaze = [...oldMaze];
+        for (let value of visited) {
+          newMaze[value as number] = {
+            ...newMaze[value as number],
+            classes: classes[value as value]
+          } 
+        }
+        return newMaze;
+      })
     }
-  },[]);
+    else if (mazeAnimating) {
+      const mazeTiles = document.getElementsByClassName('mazeTile');
+      const halfway = Math.floor(mazeTiles.length/2);
+      let index = 0;
+      function step() {
+        for (let i = 0; i < 50 - 49*((Math.abs(halfway - index)/halfway)); i++) {
+          index++;
+          if (index === displayVisited.length) break;
+          const currentTile = mazeTiles[displayVisited[index] as number];
+          currentTile.classList.remove('showNone');
+        }
 
-  useEffect(() => {
-    let value = displayVisited[0];
-    if (value === undefined) {
-      return;
+        if (index < displayVisited.length) requestAnimationFrame(step)
+        else setAllTilesHidden(false);
+      }
+      requestAnimationFrame(step);
     }
-    setMaze(oldMaze => {
-      const newMaze = [...oldMaze];
-      newMaze[value as number] = {
-        ...newMaze[value as number],
-        classes: displayClasses[value as value]
-      } 
-      return newMaze;
-    })
-    setDisplayVisited(displayVisited.slice(1))
-  }, [displayVisited])
+  },[maze]);
+
+
+  // useEffect(() => {
+  //   let value = displayVisited[0];
+  //   if (value === undefined) {
+  //     return;
+  //   }
+    
+  // }, [displayVisited])
 
   return (
     <>
       <div className="mazeOuter">
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-        {maze.map((value: {value: string, classes: string[]}, index) => <MazeTile key={index} value={value.value} classes={value.classes} boxSize={boxSize}/>)}
+        {maze.map((value: {value: value, classes: string[]}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} classes={value.classes} boxSize={boxSize}/>)}
         </div>
       </div>
     </>

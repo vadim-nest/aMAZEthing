@@ -6,7 +6,6 @@ import Welcome from './components/welcome';
 import Game from './components/game';
 import Learning from './components/learning';
 import Login from './components/login';
-import Register from './components/register';
 import Profile from './components/profile';
 import About from './components/about';
 import SortLesson from './components/sort-lesson';
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
-      },
-      {
-        path: '/register',
-        element: <Register />,
       },
       {
         path: '/profile',
