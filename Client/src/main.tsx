@@ -10,6 +10,8 @@ import Register from './components/register';
 import Profile from './components/profile';
 import About from './components/about';
 import SortLesson from './components/sort-lesson';
+import { Provider } from "react-redux";
+import {store} from './features/store'
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store = {store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 )
