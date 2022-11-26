@@ -1,11 +1,27 @@
 import '../css/navbar.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth0} from "@auth0/auth0-react";
+import { useEffect } from 'react';
+import apiService from '../services/apiService';
+import { useAppDispatch, useAppSelector } from '../features/hooks';
+import { refreshData } from '../features/user_slice';
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const {loginWithRedirect,logout, user, isLoading, isAuthenticated } = useAuth0();
+  const dispatch = useAppDispatch();
+  useEffect(()=>
+  {
+    (async function evalAuth(){
+      if(isAuthenticated===true){
+        const userData = await apiService.profile();
+        console.log(user,userData)
+        dispatch(refreshData(user?.email))
+      }
+    })()
+    
+  },[isAuthenticated])
   return (
     <div className='navbar'>
       <div className='navbar-start'>
