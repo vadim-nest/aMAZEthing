@@ -6,7 +6,7 @@
 :root {
     --main-green: #1B432E;
     --dark-green: #043A25;
-    --white-green: #B4C6BC;
+    --white-green: #ffff;
     --red: #c1121f;
     --yellow: #ffb703;
     --dark-brown: #3C2923;
@@ -17,7 +17,7 @@
 h1, h2, h3, button {
     font-family: 'Staatliches', cursive;
     font-weight: 100;
-    color: #B4C6BC;
+    color: var(--white-green);
 }
 
 .outlet {
