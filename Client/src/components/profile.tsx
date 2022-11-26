@@ -1,15 +1,40 @@
 import '../css/profile.css';
-import { useAuth0, User} from "@auth0/auth0-react";
+import { User} from "@auth0/auth0-react";
 import { useAppSelector } from '../features/hooks';
+import apiService from '../services/apiService';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { refreshData } from '../features/user_slice';
 
 function Profile() {
+  const [username,setUsername] = useState('');
   const user  = useAppSelector((state)=>state.user);
 
+  function changeUsername(e:any){ //TODO if type is EVENT, value not recognized
+    const { value } = e.target;
+    setUsername(value);
+  }
+  const dispatch = useDispatch();
+  async function updateProfile(e:any){
+    e.preventDefault();
+    console.log(username)
+    const newUser = await apiService.updateProfile({username: username});
+    //if (newUser) dispatch(refreshData(newUser));
+  }
   return (
     <div>
       {
         <h1>HELLO {user.username ?(user as User).username: 'THERE'},</h1>
       }
+      <input
+          type="text"
+          placeholder={user.username}
+          name="username"
+          onChange={changeUsername}
+        />
+      <button onClick={updateProfile} >
+          &nbsp;Save&nbsp;
+        </button>
       <h1>Your learning progress</h1>
       <h2>Sorting Algorithms: {user.sortingPath}</h2>
       <h2>Path Finding Algorithms: {user.pathFindPath}</h2>
@@ -21,7 +46,8 @@ function Profile() {
       <div>
         <h2>Game history</h2>
         <p>user.games.map</p>
-      </div>:
+      </div>
+      :
       <h2>No games played yet</h2>}
     </div>
   );
