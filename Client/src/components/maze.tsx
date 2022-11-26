@@ -4,13 +4,13 @@ import { Graph, value } from "../utils/graph";
 import { generateMaze } from "../utils/maze";
 import MazeTile from "./mazeTile";
 
-function Maze() {
+function Maze({boxSize}: {boxSize:number}) {
 
   // TODO: Set as state
 
   let width = 72;
   let height = 48;
-  let boxSize = 16; 
+  // const [boxSize, setBoxSize] = useState(50);
 
   const array: {value: value, classes: ('b' | 't' | 'l' | 'r')[]}[] = [];
   for (let i = 0; i < width*height; i++) {
@@ -63,18 +63,9 @@ function Maze() {
     }
   },[maze]);
 
-
-  // useEffect(() => {
-  //   let value = displayVisited[0];
-  //   if (value === undefined) {
-  //     return;
-  //   }
-    
-  // }, [displayVisited])
-
   return (
     <>
-      <div className="mazeOuter">
+      <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
         {maze.map((value: {value: value, classes: string[]}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} classes={value.classes} boxSize={boxSize}/>)}
         </div>
