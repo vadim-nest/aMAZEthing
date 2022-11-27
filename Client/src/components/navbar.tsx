@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import MediaQuery from 'react-responsive';
 import apiService from '../services/apiService';
-import { useAppDispatch, useAppSelector } from '../features/hooks';
+import { useAppDispatch } from '../features/hooks';
 import { refreshData } from '../features/user_slice';
 
 function Navbar() {
