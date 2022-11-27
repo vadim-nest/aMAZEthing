@@ -25,7 +25,7 @@ export default function LearningPage () {
     </div>
     <div className='all-algs'>
       <div className='path-finding-algs'>
-        <h3>PATH FINDING ALGORITHMS</h3>
+        <h3>SORTING ALGORITHMS</h3>
         <div className='curve-1'>
           <svg viewBox='-10 4 150 24'>
             {/* L - line, Q - curve */}

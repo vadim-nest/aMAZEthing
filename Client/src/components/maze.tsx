@@ -7,10 +7,10 @@ import MazeTile from "./mazeTile";
 import Minion from "./minion";
 
 function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze}: {
-  boxSize:number, 
+  boxSize:number,
   height: number,
   width: number,
-  setMazeCompleted: () => void, 
+  setMazeCompleted: () => void,
   minions: minionType[],
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
@@ -48,7 +48,7 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
           newMaze[value as number] = {
             ...newMaze[value as number],
             classes: classes[value as value]
-          } 
+          }
         }
         return newMaze;
       })
