@@ -18,18 +18,26 @@ export default function SelectionLesson() {
         const copyArr = array.slice();
         const {ArrayStates, animations} = selectionSortAlgo(copyArr);
         for(let i = 0; i<animations.length; i++) {
-          await delay(1000)
-          const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
+          await delay(500)
+          if(animations[i].length > 2) {
+            const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
           const distance = (indexOne - indexTwo)
-          console.log(animations)
-          console.log(distance)
           document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
           document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'red'
           document.getElementById(`${elementOne}`)!.style.transform += `translateX(${distance*-40}px)`
           document.getElementById(`${elementTwo}`)!.style.transform += `translateX(${distance*40}px)`
-          await delay(1000)
+          await delay(500)
           document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
           document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'green'
+          } else {
+            const [elementOne, elementTwo] = animations[i]
+            document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
+            document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'red'
+            await delay(500)
+            document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
+            document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'green'
+          }
+          
         }
           
       }

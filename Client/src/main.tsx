@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/bubbleLesson',
+        path: '/learning/bubbleLesson',
         element: <BubbleLesson />,
       },
       {path:'/insertionLesson', 

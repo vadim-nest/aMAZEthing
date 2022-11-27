@@ -1,7 +1,6 @@
 import "../../css/sort-lesson.css";
 import { useEffect, useState } from "react";
-import { bubbleSortAlgo } from "../../utils/sorting-algo";
-// import bubbleSort from '../utils/'
+import bubbleSortAlgo from "../../utils/sorting-algo";
 
 export default function BubbleLesson() {
   const [array, setArray] = useState([5, 1, 4, 2, 8]);
@@ -45,16 +44,25 @@ export default function BubbleLesson() {
     setClicked(true)
     const copyArr = array.slice();
     const {ArrayStates, animations} = bubbleSortAlgo(copyArr);
+    console.log(animations)
     for(let i = 0; i<animations.length; i++) {
-      await delay(1000)
-      const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
-      document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
-      document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'red'
-      document.getElementById(`${elementOne}`)!.style.transform += `translateX(40px)`
-      document.getElementById(`${elementTwo}`)!.style.transform += `translateX(-40px)`
-      await delay(1000)
-      document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
-      document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'green'
+      await delay(500)
+      if(animations[i].length > 2) {
+        const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
+        document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
+        document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'red'
+        document.getElementById(`${elementOne}`)!.style.transform += `translateX(40px)`
+        document.getElementById(`${elementTwo}`)!.style.transform += `translateX(-40px)`
+        await delay(500)
+        document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
+        document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'green'
+      } else {
+        const [indexOne, elementOne] = animations[i]
+        document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
+        await delay(500)
+        document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
+
+      }
     }
       
   }
