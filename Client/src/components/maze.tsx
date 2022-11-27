@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import '../css/maze.css';
 import { Graph, value } from "../utils/graph";
 import { generateMaze } from "../utils/maze";
-import { minionType } from "../utils/types";
+import { MazeTileType, minionType } from "../utils/types";
 import MazeTile from "./mazeTile";
 import Minion from "./minion";
 
-function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width}: {
+function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze}: {
   boxSize:number, 
   height: number,
   width: number,
@@ -16,6 +16,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
   setCurrentGraph: React.Dispatch<React.SetStateAction<Graph | undefined>>,
   currentGraph: Graph | undefined,
+  maze: MazeTileType[],
+  setMaze: React.Dispatch<React.SetStateAction<MazeTileType[]>>
 }) {
 
   // TODO: Set as state
@@ -28,11 +30,6 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
     })
   }
 
-  const array: {value: value, classes: ('b' | 't' | 'l' | 'r')[]}[] = [];
-  for (let i = 0; i < width*height; i++) {
-    array.push({value: i, classes: []})
-  }
-  const [maze, setMaze] = useState(array);
   const [displayVisited, setDisplayVisited] = useState<value[]>([]);
   // const [displayClasses, setDisplayClasses] = useState<{[key: value]: string[]}>({});
   const [mazeGenerated, setMazeGenerated] = useState(false);
@@ -83,7 +80,7 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
       <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           {minions.map(minion => <Minion boxSize={boxSize} minion={minion} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile}/>)}
-        {maze.map((value: {value: value, classes: string[]}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
+        {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>
       </div>
     </>

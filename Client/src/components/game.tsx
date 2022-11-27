@@ -3,21 +3,15 @@ import Maze from './maze';
 import GameStats from './gameStats';
 import ToolBar from './toolbar';
 import { useEffect, useState } from 'react';
-import { minionType } from '../utils/types';
+import { MazeTileType, minionType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
 import { bFS, dijkstra, getDirection, vBFS } from '../utils/path-finding-algo';
 
-function Game() {
+function Game() { // TODO: Extract logic to maze class
 
   const [boxSize, setBoxSize] = useState(30);
   const [mazeCompleted, setMazeCompleted] = useState(false);
-  const [minions, setMinions] = useState<{[key: number]: minionType}>({
-    0: {id: 0, xPos: 1, yPos: 0, rotation: 0}, 
-    1: {id: 1, xPos: 1, yPos: 0, rotation: 0}, 
-    2: {id: 2, xPos: 1, yPos: 0, rotation: 0}, 
-    3: {id: 3, xPos: 1, yPos: 0, rotation: 0}, 
-    4: {id: 4, xPos: 2, yPos: 4, rotation: 0}
-  });
+  const [minions, setMinions] = useState<{[key: number]: minionType}>({});
   const [currentMinion, setCurrentMinion] = useState<null | number>(null);
   const [currentTile, setCurrentTile] = useState<null | {xPos:number, yPos:number}>(null);
   const [waitingForTile, setWaitingForTile] = useState(false);
@@ -25,11 +19,17 @@ function Game() {
   const [height, setHeight] = useState(48);
   const [width, setWidth] = useState(72);
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
+  const array: MazeTileType[] = [];
+  for (let i = 0; i < width*height; i++) {
+    array.push({value: i, classes: [], path: ''})
+  }
+
+  const [maze, setMaze] = useState(array);
   const speed = 200;
   const minBoxSize = 5;
   const maxBoxSize = 100;
 
-  function addNewMinion() {
+  function addNewMinion() { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
     setMinions(prevMinions => {
       return {
@@ -38,36 +38,65 @@ function Game() {
           id: newId,
           xPos: 0,
           yPos: 0,
-          rotation: 0
+          rotation: 0,
+          path: [],
+          thoughtProcess: []
         }
       }
     })
   }
 
   useEffect(() => {
-    console.log({minions});
-  }, [minions])
-
-  useEffect(() => {
-    if (currentMinion !== null) {
+    console.log('hello');
+    setPath([], []);
+    if (currentMinion !== null && !movingMinions.includes(currentMinion as number)) {
       console.log(currentMinion);
       setCurrentTile(null);
       setWaitingForTile(true);
+    } else if (currentMinion !== null) {
+      const minion = minions[currentMinion as number];
+      setPath(minion.path, minion.thoughtProcess);
     } else {
       setWaitingForTile(false);
     }
   }, [currentMinion])
 
-  useEffect(() => {
+  function setPath(path: number[], visited: number[]) {
+    console.log('Setting path:', path, visited)
+    setMaze(prevMaze => {
+      const newMaze = [...prevMaze];
+      for (let i = 0; i < newMaze.length; i++) {
+        if (path.includes(i)) newMaze[i].path = 'PATH';
+        else if (visited.includes(i)) newMaze[i].path = 'THOUGHTPROCESS';
+        else newMaze[i].path = '';
+      }
+      return newMaze;
+    });
+  }
+
+  useEffect(() => { // TODO: Extract to a new file
     if (waitingForTile && currentTile !== null && currentGraph && !movingMinions.includes(currentMinion as number)) {
       setMovingMinions(prevMinions => [...prevMinions, currentMinion as number]);
-      console.log('set moving')
       async function func(currentTile: {xPos: number, yPos: number}, currentGraph: Graph) {
         let minion = minions[currentMinion as number];
         console.log(minion);
         const directions = vBFS(minion.xPos + minion.yPos*width, currentTile.xPos + currentTile.yPos*width, currentGraph);
         if (directions === false) return;
-        const path = [...directions.path];
+        const path = [...directions.path] as number[];
+        const visited = [...directions.visited] as number[];
+
+        minion = {
+          ...minion,
+          path: [...path],
+          thoughtProcess: visited
+        }
+        setMinions(prevMinions => {
+          return {
+            ...prevMinions,
+            [currentMinion as number]: minion
+          }
+        })
+        setPath(minion.path, minion.thoughtProcess);
         let xAdd = 0;
         let yAdd = 0;
         let previousTimeStamp: undefined | number;
@@ -83,8 +112,6 @@ function Game() {
             xAdd += direction.xPos;
             yAdd += direction.yPos;
             previousDirection = nextDirection;
-            minion = minions[currentMinion as number];
-            console.log(minion)
             const updatedMinion = {
               ...minion,
               moving: true,
@@ -107,17 +134,13 @@ function Game() {
     }
   }, [currentTile])
 
-  async function applyDirections(minion: minionType, directions: value[]) {
-
-  }
-
   return (
     <>
       <div>
         <GameStats/>
         <div className='gameContainer'>
           <ToolBar setBoxSize={setBoxSize} minBoxSize={minBoxSize} maxBoxSize={maxBoxSize} currentMinion={currentMinion} currentTile={currentTile} addNewMinion={addNewMinion}/>
-          <Maze boxSize={boxSize} setMazeCompleted={() => setMazeCompleted(true)} minions={Object.values(minions)} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} currentGraph={currentGraph} setCurrentGraph={setCurrentGraph} height={height} width={width}/>
+          <Maze maze={maze} setMaze={setMaze} boxSize={boxSize} setMazeCompleted={() => setMazeCompleted(true)} minions={Object.values(minions)} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} currentGraph={currentGraph} setCurrentGraph={setCurrentGraph} height={height} width={width}/>
         </div>
       </div>
     </>

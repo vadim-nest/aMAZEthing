@@ -82,3 +82,18 @@
 .showNone {
   background-image: none !important;
 }
+
+.mazeTile {
+  position: relative;
+}
+
+.thoughtProcess::after {
+  height: inherit;
+  width: inherit;
+  top: 0;
+  left: 0;
+  content: '';
+  background-color: blue;
+  opacity: 0.5;
+  z-index: 5;
+}
