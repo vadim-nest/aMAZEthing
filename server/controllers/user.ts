@@ -13,7 +13,7 @@ async function getUserData(req: express.Request, res: express.Response) {
             res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: resUser });
         } else {
             const username = email.substr(0,email.indexOf('@'));
-            const avatar = await Avatar.findOne({'contentType': 'monkey.png'});
+            const avatar = await Avatar.findOne({contentType: 'monkey.png'});
             const newUser = new User({
                 id: sub,
                 email: email,
