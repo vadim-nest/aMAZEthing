@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 //protected route
 router.get('/profile', requiresAuth(), users.getUserData);
-router.post('/updateProfile',requiresAuth(), users.updateUsername);
+router.post('/updateUsername',requiresAuth(), users.updateUsername);
 router.post('/updateLearning',requiresAuth(), users.updateLearning);
 router.post('/getAvatars',requiresAuth(), avatars.getAvatars);
 //update game

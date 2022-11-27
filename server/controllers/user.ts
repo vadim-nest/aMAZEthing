@@ -13,15 +13,9 @@ async function getUserData(req: express.Request, res: express.Response) {
             res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: resUser });
         } else {
             const username = email.substr(0,email.indexOf('@'));
-            const avatar = await Avatar.findOne({contentType: 'monkey.png'});
-            const newUser = new User({
-                id: sub,
-                email: email,
-                username: username,
-                avatar:avatar.id, 
-            });
-            await newUser.save();
-            const resUser = await User.findOne({ email: email }).populate('avatar');
+            const {id} = await Avatar.findOne({contentType: 'monkey.png'});
+            const newUser = await User.create({ id: sub, email: email, username: username, avatar:id });
+            const resUser = await User.findOne({email:newUser.email}).populate('avatar');
             res.status(201).json({ "statusCode": 201, "message": "User created", user: resUser });
         }
     } catch (error) {
@@ -33,12 +27,9 @@ async function getUserData(req: express.Request, res: express.Response) {
 async function updateUsername(req: express.Request, res: express.Response) {
     try {
         const {username} = req.body;
-        console.log(username);
         const { email } = req.oidc.user;
-        const user = await User.findOne({ email: email })
-        user.username = username;
-        await user.save();
-        console.log(user);
+        const user = await User.findOneAndUpdate({ email: email }, {username:username}, {new:true});
+        console.log('User changed username to',user.username);
         res.status(201).json({ "statusCode": 201, "message": "New username has been stored", user});
     } catch (error) {
         console.log(error);
@@ -51,11 +42,8 @@ async function updateLearning(req: express.Request, res: express.Response) {
     try {
         const {sortingPath, pathFindPath} = req.body
         const { email } = req.oidc.user;
-        const user = await User.findOne({ email: email })
-        user.sortingPath = sortingPath;
-        user.pathFindPath = pathFindPath;
-        await user.save();
-        console.log(user);
+        const user = await User.findOneAndUpdate({ email: email },{sortingPath:sortingPath,pathFindPath:pathFindPath},{new:true});
+        console.log('learning path updated to:', user);
         res.status(201).json({ "statusCode": 201, "message": "Learning path updated!", user});
     } catch (error) {
         console.log(error);
@@ -69,7 +57,6 @@ async function updateGameStats(req: express.Request, res: express.Response) {
         const {game} = req.body
         const { email } = req.oidc.user;
         const user = await User.findOne({ email: email })
-        
         await user.save();
         console.log(user);
         res.status(201).json({ "statusCode": 201, "message": "Learning path updated!", user});

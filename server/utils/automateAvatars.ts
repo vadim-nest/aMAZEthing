@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path')
+import fs from 'fs';
+import path from 'path';
 import { Avatar } from "../models/avatar";
 import { User } from "../models/user";
 const files = fs.readdirSync(__dirname + '/avatars');
