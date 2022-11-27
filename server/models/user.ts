@@ -13,24 +13,44 @@ const gameSchema = new Schema({
     type: Number
   },
   opponentID: {
-    type: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   towersTaken: {
     type: Number
+  },
+  winner:{
+    type: Boolean
+  },
+  startedAt:{
+    type: Date
+  },
+  finishedAt:{
+    type: Date
+  },
+  duration:{
+    type:Date
   }
 })
 
-
 const userSchema = new Schema({
-  username: {
+  id:{
     type: String,
-    default: ""
+    required: true
   },
   email: {
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    default: " "
+  },
   sortingPath: {
+    type: Number,
+    default: 0
+  },
+  totalGold: {
     type: Number,
     default: 0
   },
@@ -54,10 +74,14 @@ const userSchema = new Schema({
       type: Number,
       default: 0
     }
-
+  },
+  avatar:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Avatar',
+    require:true
   }
 })
 
-const User = mongoose.model('Users', userSchema)
+const User = mongoose.model('User', userSchema)
 
 export { User }
