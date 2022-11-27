@@ -16,8 +16,8 @@ apiService.profile = function () {
     .catch((err) => console.log(err));
 };
 
-apiService.updateProfile = function (user:any) { //TODO solve type ->in redux userSlice
-  return fetch(`${BASE_URL}/updateProfile`, {
+apiService.updateUsername = function (user:any) { //TODO solve type ->in redux userSlice
+  return fetch(`${BASE_URL}/updateUsername`, {
     method: 'POST',
     credentials: 'include',
     headers: { "Access-Control-Allow-Origin": '*','Content-Type': 'application/json' },
