@@ -14,9 +14,9 @@ export default function BubbleLesson() {
   let paragraphs = {
     sortName: 'Bubble sort',
     firstP:
-      'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.',
-    secondP:
-      'As we go through each element, if the current element is bigger than the next one, we swap them',
+      'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. As we go through each element, if the current element is bigger than the next one, we swap them. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.',
+    // secondP:
+    // 'As we go through each element, if the current element is bigger than the next one, we swap them.',
   };
 
   // Write a nice view for the columns in the array
@@ -87,10 +87,17 @@ export default function BubbleLesson() {
       </div>
 
       <div className="lesson-wrapper-2">
-        <p>{paragraphs.secondP}</p>
-      </div>
-
-      <div className="lesson-wrapper-3">
+        <div>
+          {!clicked ? (
+            <button className="button clickSort" onClick={bubbleSort}>
+              visualize
+            </button>
+          ) : 
+            <button className="button clickSort-clicked">
+                refresh the page
+            </button>
+          }
+        </div>
         <div className="array">
           {array.map((element, index) => (
             <div
@@ -103,18 +110,9 @@ export default function BubbleLesson() {
               id={`${element}`}
               key={index}
             >
-              {' '}
-              {element}{' '}
+              {element}
             </div>
           ))}
-        </div>
-        <div>
-          {!clicked && (
-            <button className="button clickSort" onClick={bubbleSort}>
-              {' '}
-              click{' '}
-            </button>
-          )}
         </div>
       </div>
     </div>

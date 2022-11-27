@@ -1,5 +1,5 @@
 .whole-page-wrapper {
-  padding-top: 20vh;
+  padding-top: 10vh;
   background-color: var(--white);
   height: 90vh;
   display: flex;
@@ -9,7 +9,7 @@
   overflow: scroll;
 }
 
-.lesson-wrapper, .lesson-wrapper-2, .lesson-wrapper-3 {
+.lesson-wrapper, .lesson-wrapper-2 {
   background-color: var(--main-green);
   border-radius: 30px;
   width: 50vw;
@@ -21,21 +21,16 @@
   flex-direction: column;
 }
 
-.lesson-wrapper, .lesson-wrapper-2 h1 {
+.lesson-wrapper h1 {
   font-size: 50px;
 }
 
-.lesson-wrapper, .lesson-wrapper-2 p {
+.lesson-wrapper p {
   font-size: 25px;
   text-align: center;
 }
 
 .lesson-wrapper-2 {
-  display: flex;
-  justify-content: center;
-}
-
-.lesson-wrapper-3{
   background-color: var(--white-green);
 }
 
@@ -46,6 +41,10 @@
 
 .clickSort{
  color: var(--main-green);
+}
+
+.clickSort-clicked {
+  color: var(--white);
 }
 
 .array-el {
