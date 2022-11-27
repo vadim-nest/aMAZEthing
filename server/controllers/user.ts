@@ -5,7 +5,6 @@ import {Avatar} from '../models/avatar'
 
 async function getUserData(req: express.Request, res: express.Response) {
     try {
-        
         const {email,sub} = req.body;
         console.log('Request opened to retrieve information from: ',email)
         const user = await User.findOne({ email: email })
@@ -25,18 +24,17 @@ async function getUserData(req: express.Request, res: express.Response) {
     }
 }
 
-// async function updateUsername(req: express.Request, res: express.Response) {
-//     try {
-//         const {username} = req.body;
-//         const { email } = req.oidc.user;
-//         const user = await User.findOneAndUpdate({ email: email }, {username:username}, {new:true});
-//         console.log('User changed username to',user.username);
-//         res.status(201).json({ "statusCode": 201, "message": "New username has been stored", user});
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ "statusCode": 500, "message": error });
-//     }
-// }
+async function updateUsername(req: express.Request, res: express.Response) {
+    try {
+        const {username,email} = req.body;
+        const user = await User.findOneAndUpdate({ email: email }, {username:username}, {new:true});
+        console.log('User changed username to',user.username);
+        res.status(201).json({ "statusCode": 201, "message": "New username has been stored", user});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ "statusCode": 500, "message": error });
+    }
+}
 
 
 // async function updateLearning(req: express.Request, res: express.Response) {
@@ -73,4 +71,4 @@ async function getUserData(req: express.Request, res: express.Response) {
 
 // export { getUserData, updateLearning, updateUsername,updateGameStats };
 
-export {getUserData}
+export {getUserData, updateUsername}

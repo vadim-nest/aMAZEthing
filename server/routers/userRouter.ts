@@ -12,7 +12,7 @@ const avatars = require('../controllers/avatar');
 
 // This route needs authentication
 userRouter.post('/profile', validateAccessToken, users.getUserData);
-
+userRouter.post('/updateUsername', validateAccessToken, users.updateUsername);
 
 
 export {userRouter};

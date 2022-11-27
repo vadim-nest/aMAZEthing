@@ -11,19 +11,22 @@ apiService.profile = function (accessToken:any,user:any) {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`},
-      body: JSON.stringify(user), 
+      Authorization: `Bearer ${accessToken}`
+    },
+    body: JSON.stringify(user), 
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
 };
 
-apiService.updateUsername = function (user:any) { //TODO solve type ->in redux userSlice
+apiService.updateUsername = function (accessToken:any,user:any) { //TODO solve type ->in redux userSlice
   return fetch(`${BASE_URL}/updateUsername`, {
     method: 'POST',
-    credentials: 'include',
-    headers: { "Access-Control-Allow-Origin": '*','Content-Type': 'application/json' },
-    body: JSON.stringify(user),
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    },
+    body: JSON.stringify(user), 
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
