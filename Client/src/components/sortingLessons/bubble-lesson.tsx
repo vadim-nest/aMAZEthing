@@ -15,8 +15,6 @@ export default function BubbleLesson() {
     sortName: 'Bubble sort',
     firstP:
       'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. As we go through each element, if the current element is bigger than the next one, we swap them. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.',
-    // secondP:
-    // 'As we go through each element, if the current element is bigger than the next one, we swap them.',
   };
 
   // Write a nice view for the columns in the array
@@ -90,11 +88,11 @@ export default function BubbleLesson() {
         <div>
           {!clicked ? (
             <button className="button clickSort" onClick={bubbleSort}>
-              visualize
+              visualize 
             </button>
           ) : 
             <button className="button clickSort-clicked">
-                refresh the page
+                refresh the page {/*refresh to visualize again after the array is sorted*/}
             </button>
           }
         </div>
