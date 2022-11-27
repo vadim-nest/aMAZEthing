@@ -18,3 +18,21 @@
   background-color: transparent;
   border: 0;
 }
+
+.welcome-medium, .welcome-small {
+  color: var(--dark-green);
+  font-size: 150px;
+  padding: 30px 40px;
+}
+
+.options-medium, .options-small {
+  color: var(--white-green);
+  padding: 40px 40px;
+  font-size: 150px;
+  background-color: transparent;
+  border: 0;
+}
+
+.welcome-small, .options-small {
+  padding: 0px 40px;
+}
