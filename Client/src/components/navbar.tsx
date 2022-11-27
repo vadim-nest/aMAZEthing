@@ -12,8 +12,8 @@ function Navbar() {
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const { loginWithRedirect, logout, user, isLoading, isAuthenticated } =
-    useAuth0();
+  const { loginWithRedirect, logout, user, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
+
 
   const toggleNavbar = () => {
     setToggle(!toggle);
@@ -24,16 +24,36 @@ function Navbar() {
   };
   const dispatch = useAppDispatch();
 
+  // useEffect(() => {
+  //   (async function evalAuth() {
+  //     if (isAuthenticated === true) {
+  //       const { user, message } = await apiService.profile();
+  //       console.log(user)
+  //       if (user) dispatch(refreshData(user));
+  //       else console.log(message);
+  //     }
+  //   })();
+  // }, [isAuthenticated]);
+
   useEffect(() => {
-    (async function evalAuth() {
+    let isMounted = true;
+
+    const getMessage = async () => {
       if (isAuthenticated === true) {
-        const { user, message } = await apiService.profile();
+        const accessToken = await getAccessTokenSilently();
         console.log(user)
-        if (user) dispatch(refreshData(user));
-        else console.log(message);
+        const data = await apiService.profile(accessToken,user);
+        if(data.user) dispatch(refreshData(data.user));
+        if (!isMounted) {
+          return;
+        }
       }
-    })();
-  }, [isAuthenticated]);
+    };
+    getMessage();
+    return () => {
+      isMounted = false;
+    };
+  }, [user]);
 
   return (
     <>

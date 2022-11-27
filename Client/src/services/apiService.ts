@@ -6,11 +6,13 @@ type ApiService = {
 }
 const apiService: any = {};
 
-apiService.profile = function () {
+apiService.profile = function (accessToken:any,user:any) {
   return fetch(`${BASE_URL}/profile`, {
-    method: 'GET',
-    credentials: 'include',
-    headers: { "Access-Control-Allow-Origin": '*', 'Content-Type': 'application/json' }
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`},
+      body: JSON.stringify(user), 
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
