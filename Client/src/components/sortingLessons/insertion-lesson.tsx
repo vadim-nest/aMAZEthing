@@ -57,7 +57,17 @@ export default function InsertionLesson() {
   
           <div className="lesson-wrapper-2">
             <p>{paragraphs.secondP}</p>
-              {!clicked && <button className="button clickSort" onClick={insertionSort} > click </button>}
+            <div>
+          {!clicked ? (
+            <button className="button clickSort" onClick={insertionSort}>
+              visualize 
+            </button>
+          ) : 
+            <button className="button clickSort-clicked" onClick={() => window.location.reload()}>
+                refresh the page {/*refresh to visualize again after the array is sorted*/}
+            </button>
+          }
+        </div>
           </div>
   
           <div className="array">

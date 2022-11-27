@@ -1,5 +1,5 @@
 import '../../css/sort-lesson.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import bubbleSortAlgo from '../../utils/sorting-algo';
 
 export default function BubbleLesson() {
@@ -19,18 +19,20 @@ export default function BubbleLesson() {
   //----------------------------------------------------------
 
   // random Array Gen func
+useEffect(() => {
+  generateArray()
+},[])
+  function generateArray() {
+    const array = []
+    for(let i = 0; i< 8; i++) {
+      array.push(randomNumGen(1, 12 ))
+    }
+    setArray(array)
+  }
 
-  // function genereateArray() {
-  //   const array = []
-  //   for(let i = 0; i<ARR_BAR_NUM; i++) {
-  //     array.push(randomNumGen(3, 18))
-  //   }
-  //   setArray(array)
-  // }
-
-  // function randomNumGen(min:number, max:number) {
-  //   return Math.floor(Math.random() * (max - min + 1) + min);
-  // }
+  function randomNumGen(min:number, max:number) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
   //---------------------------------------------------------------------------
 
