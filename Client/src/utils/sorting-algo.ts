@@ -44,7 +44,7 @@ export function selectionSortAlgo(arr: number[]) {
     let min = i;
     for (let j = i + 1; j < arr.length; j++) {
       min = arr[j] < arr[min] ? j : min;
-      animations.push([arr[i], arr[j]])
+      animations.push([i, j])
     }
     if (min !== i) {
       animations.push([min, arr[min], i, arr[i]]);

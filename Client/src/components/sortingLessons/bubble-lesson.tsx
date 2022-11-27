@@ -3,14 +3,11 @@ import { useState } from 'react';
 import bubbleSortAlgo from '../../utils/sorting-algo';
 
 export default function BubbleLesson() {
-  const [array, setArray] = useState([5, 1, 4, 2, 8]);
-  const [clicked, setClicked] = useState(false);
+  const [array, setArray] = useState([5, 1, 1, 3, 6, 5, 4, 2, 8]);
+  const [clicked, setClicked] = useState(false)
   // Should store all the text/arrays in the db and just reuse this component for every lesson
   // But we'll just write everything here for now
   // Took the info from geeksforgeeks.com
-
-  const ARR_BAR_NUM = 8;
-
   let paragraphs = {
     sortName: 'Bubble sort',
     firstP:
@@ -42,34 +39,28 @@ export default function BubbleLesson() {
   async function bubbleSort() {
     setClicked(true);
     const copyArr = array.slice();
-    const { ArrayStates, animations } = bubbleSortAlgo(copyArr);
-    console.log(animations);
-    for (let i = 0; i < animations.length; i++) {
-      await delay(500);
-      if (animations[i].length > 2) {
-        const [indexOne, elementOne, indexTwo, elementTwo] = animations[i];
-        document.getElementById(`${elementOne}`)!.style.backgroundColor =
-          'var(--red)';
-        document.getElementById(`${elementTwo}`)!.style.backgroundColor =
-          'var(--red)';
-        document.getElementById(
-          `${elementOne}`
-        )!.style.transform += `translateX(40px)`;
-        document.getElementById(
-          `${elementTwo}`
-        )!.style.transform += `translateX(-40px)`;
-        await delay(500);
-        document.getElementById(`${elementOne}`)!.style.backgroundColor =
-          'var(--main-green)';
-        document.getElementById(`${elementTwo}`)!.style.backgroundColor =
-          'var(--main-green)';
+    const {ArrayStates, animations} = bubbleSortAlgo(copyArr);
+    console.log(animations)
+    for(let i = 0; i<animations.length; i++) {
+      await delay(500)
+      if(animations[i].length > 2) {
+        const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
+        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'red'
+        document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'red'
+        document.getElementById(`${indexOne}`)!.style.transform += `translateX(40px)`
+        document.getElementById(`${indexTwo}`)!.style.transform += `translateX(-40px)`
+        await delay(500)
+        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'green'
+        document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'green'
+        let tempNode =  document.getElementById(`${indexTwo}`) 
+        document.getElementById(`${indexOne}`)!.id = `${indexTwo}`
+        tempNode!.id =`${indexOne}`
       } else {
-        const [indexOne, elementOne] = animations[i];
-        document.getElementById(`${elementOne}`)!.style.backgroundColor =
-          'var(--red)';
-        await delay(500);
-        document.getElementById(`${elementOne}`)!.style.backgroundColor =
-          'var(--main-green)';
+        const [indexOne, elementOne] = animations[i]
+        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'red'
+        await delay(500)
+        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'green'
+
       }
     }
   }
@@ -91,7 +82,7 @@ export default function BubbleLesson() {
               visualize 
             </button>
           ) : 
-            <button className="button clickSort-clicked">
+            <button className="button clickSort-clicked" onClick={() => window.location.reload()}>
                 refresh the page {/*refresh to visualize again after the array is sorted*/}
             </button>
           }
@@ -103,9 +94,8 @@ export default function BubbleLesson() {
               style={{
                 backgroundColor: 'var(--main-green)',
                 height: `${element * 20}px`,
-                order: `${index}`,
               }}
-              id={`${element}`}
+              id={`${index}`}
               key={index}
             >
               {element}

@@ -4,7 +4,7 @@ import { insertionSortAlgo } from "../../utils/sorting-algo";
 
 export default function InsertionLesson() {
 
-    const [array, setArray] = useState([5, 1, 4, 2, 8]);
+    const [array, setArray] = useState([5, 6, 1, 2, 3, 1, 7, 2, 8]);
     const [clicked, setClicked] = useState(false)
 
     let paragraphs = {
@@ -17,24 +17,27 @@ export default function InsertionLesson() {
     async function insertionSort() {
         setClicked(true)
         const copyArr = array.slice();
-        const {ArrayStates, animations} = insertionSortAlgo(copyArr);
+        const {ArrayStates, animations} = insertionSortAlgo(copyArr as any);
         for(let i = 0; i<animations.length; i++) {
-          await delay(500)
+          await delay(300)
           if(animations[i].length > 2){
 
             const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
-            document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
-            document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'red'
-            document.getElementById(`${elementOne}`)!.style.transform += `translateX(-40px)`
-            document.getElementById(`${elementTwo}`)!.style.transform += `translateX(40px)`
-            await delay(500)
-            document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
-            document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'green'
+            document.getElementById(`${indexOne}`)!.style.backgroundColor = 'red'
+            document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'red'
+            document.getElementById(`${indexOne}`)!.style.transform += `translateX(-40px)`
+            document.getElementById(`${indexTwo}`)!.style.transform += `translateX(40px)`
+            await delay(300)
+            document.getElementById(`${indexOne}`)!.style.backgroundColor = 'green'
+            document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'green'
+            let tempNode =  document.getElementById(`${indexTwo}`) 
+            document.getElementById(`${indexOne}`)!.id = `${indexTwo}`
+            tempNode!.id =`${indexOne}`
           } else {
               const [indexOne, elementOne] = animations[i]
-              document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
-              await delay(500)
-              document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
+              document.getElementById(`${indexOne}`)!.style.backgroundColor = 'red'
+              await delay(300)
+              document.getElementById(`${indexOne}`)!.style.backgroundColor = 'green'
           }
         }
           
@@ -58,15 +61,14 @@ export default function InsertionLesson() {
           </div>
   
           <div className="array">
-              {array.map((element, index) => (
+              {array.map((element:any, index) => (
                 <div
                 className={`array-el`}
                 style={{
                   backgroundColor: "green",
                   height: `${element*20}px`,
-                  order : `${index}`
                 }}
-                id={`${element}`}
+                id={`${index}`}
                 key={index}
                 >
                   {" "}

@@ -3,7 +3,7 @@ import { selectionSortAlgo } from "../../utils/sorting-algo";
 
 export default function SelectionLesson() {
 
-    const [array, setArray] = useState([5, 1, 4, 2, 8 ,3 ]);
+    const [array, setArray] = useState([5,1, 1,3, 4, 2, 8 ,2, 3 ]);
     const [clicked, setClicked] = useState(false)
 
     let paragraphs = {
@@ -22,20 +22,23 @@ export default function SelectionLesson() {
           if(animations[i].length > 2) {
             const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
           const distance = (indexOne - indexTwo)
-          document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
-          document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'red'
-          document.getElementById(`${elementOne}`)!.style.transform += `translateX(${distance*-40}px)`
-          document.getElementById(`${elementTwo}`)!.style.transform += `translateX(${distance*40}px)`
+          document.getElementById(`${indexOne}`)!.style.backgroundColor = 'red'
+          document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'red'
+          document.getElementById(`${indexOne}`)!.style.transform += `translateX(${distance*-40}px)`
+          document.getElementById(`${indexTwo}`)!.style.transform += `translateX(${distance*40}px)`
           await delay(500)
-          document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
-          document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'green'
+          document.getElementById(`${indexOne}`)!.style.backgroundColor = 'green'
+          document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'green'
+          let tempNode =  document.getElementById(`${indexTwo}`) 
+          document.getElementById(`${indexOne}`)!.id = `${indexTwo}`
+          tempNode!.id =`${indexOne}`
           } else {
-            const [elementOne, elementTwo] = animations[i]
-            document.getElementById(`${elementOne}`)!.style.backgroundColor = 'red'
-            document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'red'
+            const [indexOne, indexTwo] = animations[i]
+            document.getElementById(`${indexOne}`)!.style.backgroundColor = 'red'
+            document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'red'
             await delay(500)
-            document.getElementById(`${elementOne}`)!.style.backgroundColor = 'green'
-            document.getElementById(`${elementTwo}`)!.style.backgroundColor = 'green'
+            document.getElementById(`${indexOne}`)!.style.backgroundColor = 'green'
+            document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'green'
           }
           
         }
@@ -66,9 +69,8 @@ export default function SelectionLesson() {
                 style={{
                   backgroundColor: "green",
                   height: `${element*20}px`,
-                  order : `${index}`
                 }}
-                id={`${element}`}
+                id={`${index}`}
                 key={index}
                 >
                   {" "}
