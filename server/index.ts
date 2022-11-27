@@ -1,10 +1,9 @@
 import Express from 'express';
 import { automateImages } from './utils/automateAvatars';
+import {auth} from 'express-openid-connect'
 const { router } = require('./router');
 const cors = require('cors');
-import {auth} from 'express-openid-connect'
 require("dotenv").config();
-
 
 const config = {
   authRequired: false,
@@ -31,10 +30,6 @@ app.use(router);
 
 //Upload Avatar images to collection
 automateImages();
-
-app.get('/authorize', function (req, res) {
-  res.json('Secured Resource');
-});
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);
