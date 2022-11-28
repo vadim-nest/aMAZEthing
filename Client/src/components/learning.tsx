@@ -39,11 +39,11 @@ export default function LearningPage () {
       <div className='path-finding-algs'>
         <h3>SORTING ALGORITHMS</h3>
         <div className='curve-1'>
-          <div  className='over-curve-1'>
+          {/* <div  className='over-curve-1'>
             <p className='path-labels' id='bubble-sort-label'>Bubble sort</p>
             <p className='path-labels' id='insertion-sort-label'>Insertion sort</p>
             <p className='path-labels' id='selection-sort-label'>Selection sort</p>
-          </div>
+          </div> */}
           <svg viewBox='-10 4 150 24'>
             {/* L - line, Q - curve */}
             <path d='
@@ -126,9 +126,13 @@ export default function LearningPage () {
 
             <circle className='circles' onClick={(() => navigate('/insertionLesson'))} cx="20.2" cy="21.6" r="3" />
             <image className='nuts'  x="17" y="19" href={theNut} height='6' width='6' />
+            <rect x="20.5" y="14.5" className="lesson-name-label" width="13.7" height="3.5" rx="1" />
+            <text x="21.5" y="16.7" className="lesson-name">Insertion sort</text>
 
             <circle className='circles'onClick={(() =>navigate('/selectionLesson'))} cx="30.2" cy="29.6" r="3" />
             <image className='nuts'  x="27" y="27" href={theNut} height='6' width='6' />
+            <rect x="24" y="34" className="lesson-name-label" width="13.7" height="3.5" rx="1" />
+            <text x="25" y="36.2" className="lesson-name">Selection sort</text>
 
             <circle className='circles' cx="40.2" cy="17.6" r="3" />
             <image className='nuts' onClick={(() => alert('Are you nuts??'))} x="37" y="15" href={theNut} height='6' width='6' />
