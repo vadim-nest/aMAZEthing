@@ -32,15 +32,13 @@ function addTowers(width:number, height:number, graph: Graph) {
     towers.push(midW + Math.floor((width/3)*Math.sin(2*i*Math.PI/nTowers)) + width*(midH + Math.floor((height/3)*Math.cos(2*i*Math.PI/nTowers))))
   }
   for (let tower of towers) {
-    graph.removeVertex(tower - width);
+    graph.removeVertex(tower - 1);
+    graph.removeVertex(tower + 1);
     graph.removeVertex(tower - width - 1);
     graph.removeVertex(tower - width + 1);
     graph.removeVertex(tower - 2*width);
     graph.removeVertex(tower - 2*width - 1);
     graph.removeVertex(tower - 2*width + 1);
-    graph.removeVertex(tower - 3*width);
-    graph.removeVertex(tower - 3*width - 1);
-    graph.removeVertex(tower - 3*width + 1);
   }
   return towers;
 }
@@ -105,8 +103,21 @@ export function generateMaze(width: number, height: number, graph: Graph | false
     }
   }
   graph.edges = edges;
+  function conflictWithTowers(towers: number[], num: number) {
+    for (let tower of towers) {
+      if (num >= tower - 2 && num <= tower + 2) return true;
+      if (num >= tower + width - 2 && num <= tower + width + 2) return true;
+      if (num >= tower - width - 2 && num <= tower - width + 2) return true;
+      if (num >= tower - 2*width - 2 && num <= tower - 2*width + 2) return true;
+      if (num >= tower - 3*width - 2 && num <= tower - 3*width + 2) return true;
+    }
+    return false;
+  }
   for (let j = 0; j < width; j++) {
     let i = Math.floor(Math.random()*nodeNum);
+    while(conflictWithTowers(towers, i)) {
+      i = Math.floor(Math.random()*nodeNum);
+    }
     if (i > width) {
       graph.addEdge(i, i - width);
       if (classes[i]) {

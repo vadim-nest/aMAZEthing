@@ -4,7 +4,7 @@ export interface minionType {
   id: number;
   xPos: number;
   yPos: number;
-  rotation: number;
+  rotation: 'minionR' | 'minionL' | 'minionU' | 'minionD' | '';
   path: number[];
   thoughtProcess: number[];
 }
@@ -16,7 +16,9 @@ export interface MazeTileType {
 }
 
 export interface TowerType {
+  id: number,
   xPos: number,
   yPos: number,
+  numbers: number[],
   color: 'red' | 'blue'
 }

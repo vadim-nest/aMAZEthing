@@ -1,10 +1,14 @@
 import { Graph, value } from "./graph";
 
-export function getDirection(valueX: number, valueY: number, width:number) {
-  if (valueX - valueY === 1) return {xPos: -1, yPos: 0};
-  if (valueX - valueY === -1) return {xPos: 1, yPos: 0};
-  if (valueX - valueY === width) return {xPos: 0, yPos: -1};
-  return {xPos: 0, yPos: 1};
+export function getDirection(valueX: number, valueY: number, width:number): {
+  xPos: -1 | 0 | 1,
+  yPos: -1 | 0 | 1,
+  rotation: 'minionL' | 'minionR' | 'minionD' | 'minionU'
+} {
+  if (valueX - valueY === 1) return {xPos: -1, yPos: 0, rotation: 'minionL'};
+  if (valueX - valueY === -1) return {xPos: 1, yPos: 0, rotation: 'minionR'};
+  if (valueX - valueY === width) return {xPos: 0, yPos: -1, rotation: 'minionD'};
+  return {xPos: 0, yPos: 1, rotation: 'minionU'};
 }
 
 export function dFSShortest (valueX: value, valueY: value, graph: Graph, path = [valueX]) { // TODO: Will we ever use this?

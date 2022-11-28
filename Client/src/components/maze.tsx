@@ -7,7 +7,7 @@ import MazeTile from "./mazeTile";
 import Minion from "./minion";
 import Tower from "./tower";
 
-function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers}: {
+function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers, currentTower, setCurrentTower, allTilesHidden, setAllTilesHidden}: {
   boxSize:number,
   height: number,
   width: number,
@@ -19,12 +19,15 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   currentGraph: Graph | undefined,
   maze: MazeTileType[],
   setMaze: React.Dispatch<React.SetStateAction<MazeTileType[]>>
-  towers: TowerType[];
-  setTowers: React.Dispatch<React.SetStateAction<TowerType[]>>
+  towers: TowerType[],
+  setTowers: React.Dispatch<React.SetStateAction<TowerType[]>>,
+  currentTower: null | TowerType,
+  setCurrentTower: React.Dispatch<React.SetStateAction<null|TowerType>>
+  allTilesHidden: boolean,
+  setAllTilesHidden: React.Dispatch<React.SetStateAction<boolean>>,
 }) {
 
   // TODO: Set as state
-  // const [boxSize, setBoxSize] = useState(50);
 
   function setCurrentTileHelper(value: number) {
     setCurrentTile({
@@ -34,9 +37,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   }
 
   const [displayVisited, setDisplayVisited] = useState<value[]>([]);
-  // const [displayClasses, setDisplayClasses] = useState<{[key: value]: string[]}>({});
   const [mazeGenerated, setMazeGenerated] = useState(false);
-  const [allTilesHidden, setAllTilesHidden] = useState(true);
+  
 
   useEffect(() => {
     const mazeTiles = document.getElementsByClassName('mazeTile');
@@ -45,8 +47,10 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
       const {graph, visited, classes, towers} = generateMaze(width, height);
       setTowers(() => towers.map(tower => {
           return {
+            id: tower,
             xPos: tower%width,
             yPos: Math.floor(tower/width),
+            numbers: [Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10)],
             color: 'red'
           }
         })
@@ -90,9 +94,9 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
     <>
       <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          {minions.map(minion => <Minion boxSize={boxSize} minion={minion} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile}/>)}
-          {towers.map(tower => <Tower xPos={tower.xPos} yPos={tower.yPos} color={tower.color} boxSize={boxSize}/>)}
-          {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
+          {minions.map(minion => <Minion boxSize={boxSize} minion={minion} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower}/>)}
+          {!allTilesHidden && towers.map(tower => <Tower tower={tower} boxSize={boxSize} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower} setCurrentMinion={setCurrentMinion}/>)}
+          {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} setCurrentTower={setCurrentTower} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>
       </div>
     </>
