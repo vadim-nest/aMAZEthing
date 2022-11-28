@@ -1,61 +1,63 @@
-import '../css/profileGameHistory.css'
+import '../css/profileGameHistory.css';
 import { User } from '@auth0/auth0-react';
 import { useAppSelector } from '../features/hooks';
 import SVG from './svg';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
+import coin from '../assets/profile/coin.png';
 
 export default function ProfileGameHistory() {
-    const user = useAppSelector((state) => state.user);
-    //Im hard coding the data
-    const games =  [{amountMinions:7,
-    result:"VICTORY",
-    goldAmount:200,
-    opponentID:"string",
-    towersTaken:2,
-    winner:true,
-    startedAt: new Date(),
-    finishedAt: new Date(),
-    duration: '5:00'},
-    {amountMinions:7,
-        result:"VICTORY",
-        goldAmount:200,
-        opponentID:"string",
-        towersTaken:2,
-        winner:true,
-        startedAt: new Date(),
-        finishedAt: new Date(),
-        duration: '5:00'}]
+  const user = useAppSelector((state) => state.user);
+  //Im hard coding the data
+  const games = [
+    {
+      amountMinions: 7,
+      result: 'VICTORY',
+      goldAmount: 200,
+      opponentID: 'string',
+      towersTaken: 2,
+      winner: true,
+      startedAt: new Date().toLocaleDateString(),
+      finishedAt: new Date().toLocaleDateString(),
+      duration: '5:00',
+    },
+    {
+      amountMinions: 7,
+      result: 'DEFEAT',
+      goldAmount: 200,
+      opponentID: 'string',
+      towersTaken: 2,
+      winner: false,
+      startedAt: new Date().toLocaleDateString(),
+      finishedAt: new Date().toLocaleDateString(),
+      duration: '5:00',
+    },
+  ];
 
-    return(
-        <div className="gameDashboard">
-            {games.map((element) => {
-                return (
-                <div className="match">
-                    <div className="gameDuration">
-                        <div className="result">
-                            <span className='resultSpan'>
-                            <b>{element.result}</b>
-                            </span>
-                        </div>
-                        <div className="duration">
-                            {element.duration} min
-                        </div>
-                        <div className="date">
-                          
-                        </div>
-                    </div>
-                    <div className="minionStats">
-                    </div>
-                    <div className="towerStats">
-
-                    </div>
-                    <div className="goldStats">
-
-                    </div>
-                </div>
-                )
-            })}
-        </div>
-    )
-
+  return (
+    <div className="gameDashboard">
+      {games.map((element) => {
+        return (
+          <div className="match">
+            <div className="gameDuration">
+              <div>
+                {element.winner === true ? <h1 className="result-win">{element.result}</h1> : <h1 className="result-loss">{element.result}</h1>}
+              </div>
+              <div className="duration"><h3>TIME: {element.duration} min</h3></div>
+              <div className="date"><h3>DATE: {element.finishedAt}</h3></div>
+            </div>
+            <div className="minionStats">
+                <h3>{element.amountMinions} Minions</h3>
+            </div>
+            <div className="towerStats">
+                <h3>{element.towersTaken} Towers</h3>
+            </div>
+            <div className="goldStats">
+                <img className='coin' src={coin}/>
+                <h3>{element.goldAmount} Gold</h3>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }

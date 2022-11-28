@@ -10,7 +10,6 @@ import { refreshDataNoAvatar } from '../features/user_slice';
 import ProfileGameHistory from './profileGameHistory';
 import sort from '../assets/profile/sort.png'
 import path from '../assets/profile/path.png';
-import coin from '../assets/profile/coin.png';
 import changeMe from '../assets/profile/changeMe.png';
 
 function Profile() {
@@ -101,11 +100,11 @@ function Profile() {
             <div className='circle'></div>
           </div>
           <div className='stats-line'>
-            <p>MATCHES<p>14</p></p>
-            <p>WINS<p>3</p></p>
-            <p>LOSSES<p>2</p></p>
-            <p>WIN RATE<p>60%</p></p>
-            <p>GOLD EARNED<p>200<img className='coin' src={coin}/></p></p>
+            <h3 className='stats-text'>MATCHES<h3>14</h3></h3>
+            <h3 className='stats-text'>WINS<h3 className='wins-yellow'>3</h3></h3>
+            <h3 className='stats-text'>LOSSES<h3 className='losses-red'>2</h3></h3>
+            <h3 className='stats-text'>WIN RATE<h3>60%</h3></h3>
+            <h3 className='stats-text'>GOLD EARNED<h3>200</h3></h3>
           </div>
           <h3 className='created'>Account created {new Date().toLocaleDateString()}</h3> {/* get the date when the account was created */}
         </div>

@@ -3,6 +3,7 @@
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
     line-height: 1.5;
+    scroll-behavior: smooth;
 }
 
 :root {
