@@ -64,7 +64,7 @@ export function insertionSortAlgo(arr: number[], ASC_MODE:boolean) {
   return  animations;
 }
 
-export function selectionSortAlgo(arr: number[]) {
+export function selectionSortAlgo(arr: number[], ASC_MODE:boolean) {
   const ArrayStates: number[][] = [];
   ArrayStates.push([...arr]);
   let animations: number[][] = [];
@@ -72,7 +72,13 @@ export function selectionSortAlgo(arr: number[]) {
   for (let i = 0; i < arr.length; i++) {
     let min = i;
     for (let j = i + 1; j < arr.length; j++) {
-      min = arr[j] < arr[min] ? j : min;
+      if(ASC_MODE) {
+        min = arr[j] < arr[min] ? j : min;
+
+      } else {
+        min = arr[j] > arr[min] ? j : min;
+
+      }
       animations.push([i, j])
     }
     if (min !== i) {

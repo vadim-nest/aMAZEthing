@@ -6,7 +6,7 @@ export default function Visualization(props: any) {
 
     const {array, animations, clicked, sortingAlgo } = props
 
-    if(clicked) sortingAlgo(animations )
+    if(clicked) sortingAlgo(animations, 100)
    
 
     return(

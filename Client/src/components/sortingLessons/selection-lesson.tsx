@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../../css/sorting.css';
 import { selectionSortAlgo, generateArray } from "../../utils/sorting-algo";
+import { selectionSortVisual } from '../../utils/sorting-helper-visual';
 import Visualization from './visualization';
 
 export default function SelectionLesson() {
@@ -22,44 +23,12 @@ export default function SelectionLesson() {
       useEffect(() => {
         console.log(array)
         const copyArr = array.slice()
-        setAnimations(selectionSortAlgo(copyArr))
+        setAnimations(selectionSortAlgo(copyArr , true))
       }, [array])
     
       function initArr(ARR_BARS:number) {
         setClicked(false)
         setArray(array => array = generateArray(ARR_BARS));
-      }
-
-    async function selectionSort() {
-        for(let i = 0; i<animations.length; i++) {
-          await delay(300)
-          if(animations[i].length > 2) {
-            const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
-          const distance = (indexOne - indexTwo)
-          document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)'
-          document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--red)'
-          document.getElementById(`${indexOne}`)!.style.transform += `translateX(${distance*-60}px)`
-          document.getElementById(`${indexTwo}`)!.style.transform += `translateX(${distance*60}px)`
-          await delay(300)
-          document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)'
-          document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--main-green)'
-          let tempNode =  document.getElementById(`${indexTwo}`) 
-          document.getElementById(`${indexOne}`)!.id = `${indexTwo}`
-          tempNode!.id =`${indexOne}`
-          } else {
-            const [indexOne, indexTwo] = animations[i]
-            document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)'
-            document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--red)'
-            await delay(300)
-            document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)'
-            document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--main-green)'
-          }
-          
-        }          
-      }
-
-      function delay(time:number) {
-        return new Promise((res) => setTimeout(res, time));
       }
     
 
@@ -79,7 +48,7 @@ export default function SelectionLesson() {
             </button>
           }
         </div>
-        <Visualization array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={selectionSort}/>
+        <Visualization array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={selectionSortVisual}/>
 
       </div>
     </div>
