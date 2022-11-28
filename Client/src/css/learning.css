@@ -1,29 +1,18 @@
-/* body {
-  margin: 0;
-  padding: 0;
-} */
-
-
-
-.initial-view-text p {
+.initial-view-text {
   text-align: center;
   font-size: 26px;
   color: var(--white);
-  margin-top: 15px;
-  /* font-family: 'Roboto', sans-serif; */
 }
 
 .initial-view {
   background-color: var(--main-green);
   height: 90vh;
-  /* width: 100vw; */
   margin: 0;
   padding: 0;
 }
 
-.initial-view-text p:first-of-type {
-  padding-top: 300px;
-  margin-top: 0px;
+.initial-view-text {
+  padding-top: 50px;
 }
 
 .all-algs {
@@ -118,3 +107,8 @@ path {
   top: 64.6vh;
   left: 19.8vw;
 } */
+
+.sorting-algo, .path-algo {
+  margin: 50px 150px;
+  text-align: left;
+}
