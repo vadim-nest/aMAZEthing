@@ -1,11 +1,12 @@
 import '../../css/sorting.css';
 import { useState, useEffect } from 'react';
 import { insertionSortAlgo, generateArray } from '../../utils/sorting-algo';
+import Visualization from './visualization';
 
 export default function InsertionLesson() {
-  const [array, setArray] = useState([0]);
+  const [array, setArray] = useState([3,5,7]);
   const [clicked, setClicked] = useState(false);
-  const [newArray, setNewArray] = useState(0)
+  const [animations, setAnimations] = useState([[1]])
 
   let paragraphs = {
     sortName: 'Insertion sort',
@@ -14,35 +15,43 @@ export default function InsertionLesson() {
   };
 
   useEffect(() => {
-    if(newArray === 0){
-      const arr = generateArray();
-      setArray(arr);
-    }
-    if(newArray > 1) {
-      const arr = generateArray();
-      setArray(arr);
-    }
-  }, [newArray]);
+    setArray(array => array = generateArray(3))
+  }, [])
+
+  useEffect(() => {
+    console.log(array)
+    const copyArr = array.slice()
+    setAnimations(insertionSortAlgo(copyArr))
+  }, [array])
+
+  function initArr(ARR_BARS:number) {
+    setClicked(false)
+    setArray(array => array = generateArray(ARR_BARS));
+  }
+  
 
   async function insertionSort() {
-    setClicked(true);
-    const copyArr = array.slice();
-    const { ArrayStates, animations } = insertionSortAlgo(copyArr as any);
+
     for (let i = 0; i < animations.length; i++) {
       await delay(300);
       if (animations[i].length > 2) {
         const [indexOne, elementOne, indexTwo, elementTwo] = animations[i];
         document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)';
         document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--red)';
+
+        
         document.getElementById(
           `${indexOne}`
         )!.style.transform += `translateX(-60px)`;
         document.getElementById(
           `${indexTwo}`
         )!.style.transform += `translateX(60px)`;
+
         await delay(300);
         document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)';
         document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--main-green)';
+
+
         let tempNode = document.getElementById(`${indexTwo}`);
         document.getElementById(`${indexOne}`)!.id = `${indexTwo}`;
         tempNode!.id = `${indexOne}`;
@@ -53,7 +62,6 @@ export default function InsertionLesson() {
         document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)';
       }
     }
-    setClicked(false);
   }
 
   function delay(time: number) {
@@ -68,37 +76,15 @@ export default function InsertionLesson() {
       </div>
 
       <div className="lesson-wrapper-2">
-        <div>
-          {!clicked ? (
-            <button className="button clickSort" onClick={insertionSort}>
+      <div>
+          <button className='button clickSort' onClick={() => initArr(5)}> new array </button>
+          {!clicked && 
+            <button className="button clickSort" onClick={() => setClicked(true)}>
               visualize
             </button>
-          ) : (
-            <button
-              className="button clickSort-clicked"
-            >
-             wait...
-            </button>
-          )}
+          }
         </div>
-        <div>
-          <div className="array">
-            {array.map((element: any, index) => (
-              <div
-                className={`array-el`}
-                style={{
-                  backgroundColor: 'var(--main-green)',
-                  height: `${element * 20}px`,
-                }}
-                id={`${index}`}
-                key={index}
-              >
-                {' '}
-                {element}{' '}
-              </div>
-            ))}
-          </div>
-        </div>
+        <Visualization array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSort}/>
       </div>
     </div>
   );

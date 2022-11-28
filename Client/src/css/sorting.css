@@ -1,5 +1,5 @@
 .whole-page-wrapper {
-  padding-top: 35vh;
+  padding-top: 30vh;
   background-color: var(--white);
   height: 90vh;
   display: flex;
@@ -32,6 +32,7 @@
 
 .lesson-wrapper-2 {
   background-color: var(--white-green);
+  /* min-height: 600px; */
 }
 
 .array {
