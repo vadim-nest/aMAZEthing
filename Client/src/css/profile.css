@@ -4,14 +4,20 @@
 }
 
 .profile-page {
-    background-color: var(--white-green);
-    height: 100vh;
+    background-color: var(--white);
+    height: 90vh;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .user-dashboard {
     background-color: var(--main-green);
-    height: 60vh;
+    min-height: 40vh;
+    height: max-content;
     width: 90vw;
     margin: 5vh 5vw;
     border-radius: 20px;
@@ -52,6 +58,7 @@
 }
 
 .sort-progress-img, .path-progress-img {
+    position: relative;
     height: 120px;
     width: 160px;
 }

@@ -7,6 +7,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { refreshDataNoAvatar } from '../features/user_slice';
+import ProfileGameHistory from './profileGameHistory';
 import sort from '../assets/profile/sort.png'
 import path from '../assets/profile/path.png';
 
@@ -80,24 +81,7 @@ function Profile() {
         </div>
         <div className="user-stats"><h1>STATS</h1></div>
       </div>
-      <div className="user-games">
-        <div className="game-victory">
-          <h2>Wins: {user.overallWins.wins}</h2>
-        </div>
-        <div className="game-defeat">
-          <h2>Losses: {user.overallWins.losses}</h2>
-        </div>
-      </div>
-      <div>
-        {user.games ? (
-          <div>
-            <h2>Game history</h2>
-            <p>{user.games.map}</p>
-          </div>
-        ) : (
-          <h2>No games played yet</h2>
-        )}
-      </div>
+      <ProfileGameHistory/>
     </div>
   );
 }
