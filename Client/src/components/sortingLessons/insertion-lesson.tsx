@@ -16,13 +16,13 @@ export default function InsertionLesson() {
   };
 
   useEffect(() => {
-    setArray(array => array = generateArray(5))
+    setArray(array => array = generateArray(225))
   }, [])
 
   useEffect(() => {
     console.log(array)
     const copyArr = array.slice()
-    setAnimations(insertionSortAlgo(copyArr, false))
+    setAnimations(insertionSortAlgo(copyArr, true))
   }, [array])
 
   function initArr(ARR_BARS:number) {
@@ -49,7 +49,7 @@ export default function InsertionLesson() {
             </button>
           }
         </div>
-        <Visualization array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual}/>
+        <Visualization width={3}array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual}/>
       </div>
     </div>
   );

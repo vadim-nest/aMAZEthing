@@ -17,7 +17,7 @@ export default function SelectionLesson() {
 
 
       useEffect(() => {
-        setArray(array => array = generateArray(5))
+        setArray(array => array = generateArray(100))
       }, [])
     
       useEffect(() => {
@@ -48,7 +48,7 @@ export default function SelectionLesson() {
             </button>
           }
         </div>
-        <Visualization array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={selectionSortVisual}/>
+        <Visualization width={10} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={selectionSortVisual}/>
 
       </div>
     </div>

@@ -1,4 +1,5 @@
-export async function bubbleSortVisual(animations:number[][], DELAY_MS:number) {
+
+export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, width:number) {
     for (let i = 0; i < animations.length; i++) {
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
@@ -9,10 +10,10 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number) {
 
         document.getElementById(
           `${indexOne}`
-        )!.style.transform += `translateX(60px)`;
+        )!.style.transform += `translateX(${width+4}px)`;
         document.getElementById(
           `${indexTwo}`
-        )!.style.transform += `translateX(-60px)`;
+        )!.style.transform += `translateX(-${width+4}px)`;
 
 
         await delay(DELAY_MS);
@@ -42,7 +43,7 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number) {
     return new Promise((res) => setTimeout(res, time));
   }
 
-  export async function insertionSortVisual(animations:number[][], DELAY_MS:number) {
+  export async function insertionSortVisual(animations:number[][], DELAY_MS:number, width:number) {
 
     for (let i = 0; i < animations.length; i++) {
       await delay(DELAY_MS);
@@ -54,10 +55,10 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number) {
         
         document.getElementById(
           `${indexOne}`
-        )!.style.transform += `translateX(-60px)`;
+        )!.style.transform += `translateX(-${width+4}px)`;
         document.getElementById(
           `${indexTwo}`
-        )!.style.transform += `translateX(60px)`;
+        )!.style.transform += `translateX(${width+4}px)`;
 
         await delay(DELAY_MS);
         document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)';
@@ -76,7 +77,7 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number) {
     }
   }
 
-export async function selectionSortVisual(animations:number[][], ASC_MODE:number) {
+export async function selectionSortVisual(animations:number[][], ASC_MODE:number, width:number) {
     for(let i = 0; i<animations.length; i++) {
       await delay(ASC_MODE)
       if(animations[i].length > 2) {
@@ -84,8 +85,8 @@ export async function selectionSortVisual(animations:number[][], ASC_MODE:number
       const distance = (indexOne - indexTwo)
       document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)'
       document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--red)'
-      document.getElementById(`${indexOne}`)!.style.transform += `translateX(${distance*-60}px)`
-      document.getElementById(`${indexTwo}`)!.style.transform += `translateX(${distance*60}px)`
+      document.getElementById(`${indexOne}`)!.style.transform += `translateX(${distance*-(width+4)}px)`
+      document.getElementById(`${indexTwo}`)!.style.transform += `translateX(${distance*(width+4)}px)`
       await delay(ASC_MODE)
       document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)'
       document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--main-green)'

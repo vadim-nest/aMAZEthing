@@ -4,9 +4,9 @@ import '../../css/sorting.css';
 
 export default function Visualization(props: any) {
 
-    const {array, animations, clicked, sortingAlgo } = props
+    const {array, animations, clicked, sortingAlgo, width } = props
 
-    if(clicked) sortingAlgo(animations, 100)
+    if(clicked) sortingAlgo(animations, 5, width)
    
 
     return(
@@ -19,11 +19,11 @@ export default function Visualization(props: any) {
               style={{
                 backgroundColor: 'var(--main-green)',
                 height: `${element * 20}px`,
+                 width: `${width}px`
               }}
               id={`${index}`}
               key={index}
             >
-              {element}
             </div>
           )})}
             
