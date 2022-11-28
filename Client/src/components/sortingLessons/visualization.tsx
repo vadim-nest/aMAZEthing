@@ -4,9 +4,9 @@ import '../../css/sorting.css';
 
 export default function Visualization(props: any) {
 
-    const {array, animations, clicked, sortingAlgo} = props
+    const {array, animations, clicked, sortingAlgo } = props
 
-    if(clicked) sortingAlgo(animations)
+    if(clicked) sortingAlgo(animations )
    
 
     return(

@@ -1,4 +1,4 @@
-export function bubbleSortAlgo(arr: any, MODE:number) {
+export function bubbleSortAlgo(arr: any, ASC_MODE:boolean) {
   const ArrayStates: number[][] = [];
   let animations: number[][] = [];
   let swaps = false;
@@ -7,7 +7,7 @@ export function bubbleSortAlgo(arr: any, MODE:number) {
     swaps = true;
     for (let i = 0; i < arr.length - 1 - iterations; i++) {
       animations.push([i, arr[i]]);
-      if(MODE === 1) {
+      if(ASC_MODE === false) {
         if (arr[i] > arr[i + 1]) {
           animations.push([i, arr[i], i + 1, arr[i + 1]]);
           swaps = false;
@@ -38,18 +38,27 @@ function randomNumGen(min:number, max:number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function insertionSortAlgo(arr: number[]) {
+export function insertionSortAlgo(arr: number[], ASC_MODE:boolean) {
   const ArrayStates: number[][] = [];
   ArrayStates.push([...arr]);
   let animations: number[][] = [];
   for (let i = 1; i < arr.length; i++) {
     for (let j = i; j > 0; j--) {
       animations.push([j, arr[j]]);
-      if (arr[j] < arr[j - 1]) {
-        animations.push([j, arr[j], j - 1, arr[j - 1]]);
-        [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]];
-        ArrayStates.push([...arr]);
-      } else break;
+      if(ASC_MODE) {
+        if (arr[j] < arr[j - 1]) {
+          animations.push([j, arr[j], j - 1, arr[j - 1]]);
+          [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]];
+          ArrayStates.push([...arr]);
+        } else break;
+      } else  {
+        if (arr[j] > arr[j - 1]) {
+          animations.push([j, arr[j], j - 1, arr[j - 1]]);
+          [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]];
+          ArrayStates.push([...arr]);
+        } else break;
+      }
+    
     }
   }
   return  animations;
