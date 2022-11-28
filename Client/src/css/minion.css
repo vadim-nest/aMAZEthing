@@ -6,6 +6,8 @@
   width: 30px;
   height: 30px;
   transition: 500ms;
+  transform: rotateY('0deg') rotateZ('0deg');
+  animation: none;
 }
 
 .player-color-svg {
@@ -16,4 +18,29 @@
 }
 .minion-svg-border {
   fill: black;
+}
+
+.minionR {
+  transform: rotate(0deg);
+}
+
+.minionL {
+  transform: scale(-1);
+}
+
+.minionU {
+  transform: rotate(90deg);
+}
+
+.minionD {
+  transform: rotate(-90deg);
+}
+
+@keyframes move {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.8);
+  }
 }

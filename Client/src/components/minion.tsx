@@ -1,16 +1,19 @@
+import React from 'react';
 import '../css/minion.css';
-import { minionType } from '../utils/types';
+import { minionType, TowerType } from '../utils/types';
 import AnimalSVG from './animal-svg';
 
-function Minion({boxSize, minion, setCurrentMinion, setCurrentTile}: {
+function Minion({boxSize, minion, setCurrentMinion, setCurrentTile, setCurrentTower}: {
   boxSize: number,
   minion: minionType,
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
+  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>
 }) {
 
   function handleClick() {
     setCurrentTile(null);
+    setCurrentTower(null);
     setCurrentMinion(minion.id);
   }
 
@@ -22,7 +25,7 @@ function Minion({boxSize, minion, setCurrentMinion, setCurrentTile}: {
   }
 
   return (
-      <div onClick={handleClick} onContextMenu={handleContextMenu}  className="minion" style={{fill: `red`, height: `${boxSize}px`, width: `${boxSize}px`, top: `${boxSize*minion.yPos}px`, left: `${boxSize*minion.xPos}px`}}>
+      <div onClick={handleClick} onContextMenu={handleContextMenu}  id={`${minion.id}`} className={`minion ${minion.rotation}`} style={{fill: `red`, height: `${boxSize}px`, width: `${boxSize}px`, top: `${boxSize*minion.yPos}px`, left: `${boxSize*minion.xPos}px`}}>
         <AnimalSVG />
       </div>
   )
