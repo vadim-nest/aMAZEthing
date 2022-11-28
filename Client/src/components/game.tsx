@@ -56,10 +56,8 @@ function Game() { // TODO: Extract logic to maze class
   }
 
   useEffect(() => {
-    console.log('hello');
     setPath([], []);
     if (currentMinion !== null && !movingMinions.includes(currentMinion as number)) {
-      console.log(currentMinion);
       setCurrentTile(null);
       setWaitingForTile(true);
     } else if (currentMinion !== null) {
@@ -71,7 +69,6 @@ function Game() { // TODO: Extract logic to maze class
   }, [currentMinion])
 
   function setPath(path: number[], visited: number[]) {
-    console.log('Setting path:', path, visited)
     setMaze(prevMaze => {
       const newMaze = [...prevMaze];
       for (let i = 0; i < newMaze.length; i++) {
@@ -88,7 +85,6 @@ function Game() { // TODO: Extract logic to maze class
       setMovingMinions(prevMinions => [...prevMinions, currentMinion as number]);
       async function func(currentTile: {xPos: number, yPos: number}, currentGraph: Graph) {
         let minion = minions[currentMinion as number];
-        console.log(minion);
         const directions = vBFS(minion.xPos + minion.yPos*width, currentTile.xPos + currentTile.yPos*width, currentGraph);
         if (directions === false) return;
         const path = [...directions.path] as number[];
@@ -144,9 +140,7 @@ function Game() { // TODO: Extract logic to maze class
             })
             setMovingMinions(prevMoving => prevMoving.filter(id => id !== minion.id));
             for (let tower of towers) {
-              console.log('Checking tower', tower.id)
-              if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos) {
-                console.log('Success:', tower.id, minion.id)
+              if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
                 enterTower(tower.id, minion.id);
               }
             }
@@ -158,7 +152,7 @@ function Game() { // TODO: Extract logic to maze class
     }
   }, [currentTile])
 
-  function enterTower(towerId: number, minionId: number) {
+  async function enterTower(towerId: number, minionId: number) {
     setTowers(prevTowers => {
       const newTowers = [...prevTowers];
       return newTowers.map(tower => {
@@ -181,39 +175,38 @@ function Game() { // TODO: Extract logic to maze class
       }
     })
     if (currentMinion === minionId) {
-      console.log({currentMinion, minionId})
       setCurrentMinion(null);
     };
+    await new Promise((resolve, reject) => setTimeout(()=>resolve(true), 5000))
+    exitTower(towerId, minionId);
   }
 
   function exitTower(towerId: number, minionId: number) {
+    let minion = minions[minionId];
     setTowers(prevTowers => {
       const newTowers = [...prevTowers];
       return newTowers.map(tower => {
         if (towerId !== tower.id) return tower;
         else return {
           ...tower,
-          minion: null
+          minion: null,
+          alignment: minion.alignment
         }
       })
     })
     setMinions(prevMinions => {
-      const minion = prevMinions[minionId];
+      minion = prevMinions[minionId]
       return {
         ...prevMinions,
         [minionId]: {
           ...minion,
-          yPos: minion.yPos - 1,
+          yPos: minion.yPos + 1,
           inTower: false
         }
       }
     })
+    let old;
   }
-
-
-  useEffect(() => {
-    console.log({towers});
-  }, [towers])
 
   return (
     <>

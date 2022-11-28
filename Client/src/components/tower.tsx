@@ -11,10 +11,12 @@ function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMini
 } ) {
 
   function handleContextMenu() {
-    setCurrentTile({
-      xPos: tower.xPos,
-      yPos: tower.yPos
-    })
+    if (tower.minion === null) {
+      setCurrentTile({
+        xPos: tower.xPos,
+        yPos: tower.yPos
+      })
+    }
   }
 
   function handleClick() {
