@@ -1,7 +1,6 @@
 import '../css/profileGameHistory.css'
 import { User } from '@auth0/auth0-react';
 import { useAppSelector } from '../features/hooks';
-import moment from 'moment'
 import SVG from './svg';
 import { useEffect, useState} from 'react';
 
@@ -42,7 +41,7 @@ export default function ProfileGameHistory() {
                             {element.duration} min
                         </div>
                         <div className="date">
-                            {moment(element.startedAt).format('h:mm , MMMM Do YYYY')}
+                          
                         </div>
                     </div>
                     <div className="minionStats">

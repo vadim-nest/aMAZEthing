@@ -7,11 +7,6 @@
     background-color: var(--white);
     height: 100vh;
     overflow: scroll;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
 }
 
 .user-dashboard {
@@ -58,7 +53,6 @@
 }
 
 .sort-progress-img, .path-progress-img {
-    position: relative;
     height: 120px;
     width: 160px;
 }
