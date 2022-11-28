@@ -1,4 +1,4 @@
-export default function bubbleSortAlgo(arr: any) {
+export function bubbleSortAlgo(arr: any) {
   const ArrayStates: number[][] = [];
   let animations: number[][] = [];
   let swaps = false;
@@ -16,6 +16,18 @@ export default function bubbleSortAlgo(arr: any) {
     iterations++;
   }
   return { ArrayStates, animations };
+}
+
+export function generateArray() {
+  const array = []
+  for(let i = 0; i< 5; i++) {
+    array.push(randomNumGen(3, 20))
+  }
+  return array;
+}
+
+function randomNumGen(min:number, max:number) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export function insertionSortAlgo(arr: number[]) {

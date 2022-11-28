@@ -3,14 +3,13 @@ import { selectionSortAlgo } from "../../utils/sorting-algo";
 
 export default function SelectionLesson() {
 
-    const [array, setArray] = useState([5,1, 1,3, 4, 2, 8 ,2, 3 ]);
+    const [array, setArray] = useState([0]);
     const [clicked, setClicked] = useState(false)
 
     let paragraphs = {
         sortName: "Selection sort",
         firstP:
-          "Selection Sort  This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.",
-        secondP: "As we go through each element, if the current element is smaller than the previous one, the elements are swapped"
+          "As we go through each element, if the current element is smaller than the previous one, the elements are swapped. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.",
       };
 
     async function selectionSort() {
