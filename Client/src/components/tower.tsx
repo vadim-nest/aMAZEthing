@@ -30,7 +30,7 @@ function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMini
                   tower.minion !== null? 'contestedTower' :
                   tower.alignment === 'p1' ? 'p1Tower' :
                   tower.alignment === 'p2' ? 'p2Tower' :
-                  'neutralTower'} 
+                  'neutralTower'}
                 playerClassShadow={
                   tower.minion !== null ? 'contestedTowerShadow' :
                   tower.alignment === 'p1' ? 'p1TowerShadow' :

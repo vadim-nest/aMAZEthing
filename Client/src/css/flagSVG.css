@@ -1,0 +1,8 @@
+
+.p1FlagColor {
+  fill: var(--yellow);
+}
+
+.p2FlagColor {
+  fill: var(--red);
+}
