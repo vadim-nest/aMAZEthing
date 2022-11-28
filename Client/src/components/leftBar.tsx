@@ -1,6 +1,10 @@
 import '../css/leftBar.css';
 import { TowerType } from '../utils/types';
 import FlagSVG from './flagSVG';
+import MediaQuery from 'react-responsive';
+import { useAppSelector } from '../features/hooks';
+import zoomInSVG from '../assets/game-different/search-3079.svg'
+import zoomOutSVG from '../assets/game-different/search-3080.svg'
 
 function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, currentTower}: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>,
@@ -25,10 +29,12 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
     })
   }
 
+  const user  = useAppSelector((state)=>state.user);
+
   return(
     <div className="leftBarContainer">
       <div className='flags'>
-      <h1 className='p1Name'>You</h1>
+      <h3 className='p1Name'>{user.username ? user.username:'You'}</h3>
       <div className='p1Flag'>
         <FlagSVG playerClass='p1FlagColor'/>
       </div>
@@ -36,15 +42,36 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
         <div className='p2Flag'>
           <FlagSVG playerClass='p2FlagColor'/>
         </div>
+        <h3 className='score-you'>3</h3>
+        <h3 className='score-opponent'>4</h3>
       </div>
-      <button onClick={()=>zoomIn(10)}>Zoom In</button>
-      <button onClick={()=>zoomOut(10)}>Zoom Out</button>
+
+      <MediaQuery minWidth={951}>
+      <div className='money-time'>
+        <h3 className='time-money-text'>Time remaining</h3>
+        <h3 className='time-count'>1:29</h3>
+        <h3 className='time-money-text'>Money</h3>
+        <h3 className='money-count'>200</h3>
+      </div>
+      <div className='scores'>
+      </div>
+      </MediaQuery>
+
       {currentMinion !== null && <h1>The current minion is {currentMinion}</h1>}
       {currentTower !== null && <div>
         <h1>The current tower is {currentTower.id}</h1>
         <h1>{currentTower.numbers.join(', ')}</h1>
         {currentTower.minion !== null && <h1>Tower contains minion {currentTower.minion}</h1>}
         </div>}
+
+        <div className='zoom-buttons'>
+          <button onClick={() => zoomIn(10)}>
+            <img className='zoomInButton' src={zoomInSVG} alt="" />
+          </button>
+          <button onClick={() => zoomOut(10)}>
+            <img className='zoomOutButton' src={zoomOutSVG} alt="" />
+          </button>
+        </div>
     </div>
   );
 }

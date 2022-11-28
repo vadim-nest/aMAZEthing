@@ -14,7 +14,7 @@
 }
 
 .p2Flag {
-  left: 21px;
+  left: 3vw;
   top: -20px;
 }
 
@@ -29,10 +29,73 @@
 
 .p1Name {
   top: 12px;
-  left: 12px;
+  left: 0.9vw;
 }
 
 .p2Name {
   top: 95px;
-  left: 50px;
+  left: 3.7vw;
+}
+
+.score-you, .score-opponent {
+  color: var(--black);
+  position: absolute;
+  font-size: 32px;
+}
+
+.score-you {
+  top: 50px;
+  left: 2.2vw;
+}
+
+.score-opponent {
+  top: 130px;
+  left: 5vw;
+}
+
+.money-time, .scores {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.time-money-text {
+  font-size: 20px;
+}
+
+.money-count {
+  color: var(--yellow);
+}
+
+
+.time-count {
+  color: var(--red);
+}
+
+.time-count, .money-count {
+  font-size: 35px;
+}
+
+/* .zoomInButton svg {
+  fill: white;
+  background-color: red;
+} */
+
+.zoom-buttons button {
+  flex-direction: column-reverse;
+  background-color: var(--main-green);
+  border: none;
+  width: 45%;
+
+}
+
+.zoomInButton, .zoomOutButton {
+  width: 110%;
+}
+
+.zoomInButton {
+  transform: scaleX(-1);
+}
+
+.zoomOutButton {
+  transform: rotate(90deg);
 }
