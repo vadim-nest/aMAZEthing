@@ -47,8 +47,11 @@ const userSlice = createSlice({
             state.sortingPath = action.payload.sortingPath;
             state.avatar = action.payload.avatar;
         },
+        refreshDataNoAvatar(state,action:PayloadAction<UserState>){
+            state.username = action.payload.username;
+        }
     }
 })
 
-export const{ refreshData } = userSlice.actions;
+export const{ refreshData, refreshDataNoAvatar } = userSlice.actions;
 export default userSlice.reducer;

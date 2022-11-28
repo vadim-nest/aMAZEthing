@@ -18,7 +18,7 @@ export default function SelectionLesson() {
         const copyArr = array.slice();
         const {ArrayStates, animations} = selectionSortAlgo(copyArr);
         for(let i = 0; i<animations.length; i++) {
-          await delay(500)
+          await delay(200)
           if(animations[i].length > 2) {
             const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
           const distance = (indexOne - indexTwo)
@@ -26,7 +26,7 @@ export default function SelectionLesson() {
           document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'red'
           document.getElementById(`${indexOne}`)!.style.transform += `translateX(${distance*-40}px)`
           document.getElementById(`${indexTwo}`)!.style.transform += `translateX(${distance*40}px)`
-          await delay(500)
+          await delay(200)
           document.getElementById(`${indexOne}`)!.style.backgroundColor = 'green'
           document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'green'
           let tempNode =  document.getElementById(`${indexTwo}`) 
@@ -36,7 +36,7 @@ export default function SelectionLesson() {
             const [indexOne, indexTwo] = animations[i]
             document.getElementById(`${indexOne}`)!.style.backgroundColor = 'red'
             document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'red'
-            await delay(500)
+            await delay(200)
             document.getElementById(`${indexOne}`)!.style.backgroundColor = 'green'
             document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'green'
           }
@@ -58,8 +58,18 @@ export default function SelectionLesson() {
           </div>
   
           <div className="lesson-wrapper-2">
+            <div>
+          {!clicked ? (
+            <button className="button clickSort" onClick={selectionSort}>
+              visualize 
+            </button>
+          ) : 
+            <button className="button clickSort-clicked" onClick={() => window.location.reload()}>
+                refresh the page {/*refresh to visualize again after the array is sorted*/}
+            </button>
+          }
+        </div>
             <p>{paragraphs.secondP}</p>
-              {!clicked && <button className="button clickSort" onClick={selectionSort} > click </button>}
           </div>
   
           <div className="array">

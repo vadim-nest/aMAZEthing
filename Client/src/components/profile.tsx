@@ -5,34 +5,40 @@ import apiService from '../services/apiService';
 import { Buffer } from "buffer";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { refreshData } from '../features/user_slice';
+import { refreshDataNoAvatar } from '../features/user_slice';
 
 function Profile() {
-  const [username,setUsername] = useState('');
+  const [username, setUsername] = useState('');
   const user  = useAppSelector((state)=>state.user);
-  const [img,setImg] = useState()
+  const [img, setImg] = useState()
 
   useEffect(()=>{
     const base64String:any = Buffer.from(user.avatar.data.data).toString("base64");
     setImg(base64String);
-  },[user])
-  function changeUsername(e:any){ //TODO if type is EVENT, value not recognized
+  },[]);
+  
+  function changeUsername(e:any){ //TODO if type is Event value is not recognized
     const { value } = e.target;
     setUsername(value);
   }
+
   const dispatch = useDispatch();
-  async function updateProfile(e:any){
+  async function updateChanges(e:any){
     e.preventDefault();
     console.log(username)
-    const {user,message} = await apiService.updateProfile({username: username});
-    console.log(user)
-    if (user) dispatch(refreshData(user));
-    else console.log(message);
+    try{
+    const obj = await apiService.updateUsername({username: username});
+    dispatch(refreshDataNoAvatar(obj.user));
+    }catch(err){
+      console.log(err)
+    }
+   
+    
   }
   return (
     <div>
       <div className='logo-img'>
-        <img src={"data:image/jpeg;base64,"+ img} />
+        {img?<img src={"data:image/jpeg;base64,"+ img}/>:null}
       </div>
       {
         <h1>HELLO {user.username ?(user as User).username: 'THERE'},</h1>
@@ -43,7 +49,7 @@ function Profile() {
           name="username"
           onChange={changeUsername}
         />
-      <button onClick={updateProfile} >
+      <button onClick={updateChanges} >
           &nbsp;Save&nbsp;
         </button>
       <h1>Your learning progress</h1>
