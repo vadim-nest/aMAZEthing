@@ -1,7 +1,7 @@
 import '../css/game.css';
 import Maze from './maze';
-import GameStats from './gameStats';
-import ToolBar from './toolbar';
+import RightBar from './rightBar';
+import LeftBar from './leftBar';
 import { useEffect, useState } from 'react';
 import { MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
@@ -211,36 +211,38 @@ function Game() { // TODO: Extract logic to maze class
   return (
     <>
       <div>
-        <GameStats/>
         <div className='gameContainer'>
-          <ToolBar 
-            setBoxSize={setBoxSize} 
-            currentTower={currentTower} 
-            minBoxSize={minBoxSize} 
-            maxBoxSize={maxBoxSize} 
-            currentMinion={currentMinion} 
-            currentTile={currentTile} 
-            addNewMinion={addNewMinion}
-            allTilesHidden={allTilesHidden}
-          />
-          <Maze 
-            maze={maze} 
-            setMaze={setMaze} 
-            towers={towers} 
-            setTowers={setTowers} 
-            currentTower={currentTower} 
-            setCurrentTower={setCurrentTower} 
-            boxSize={boxSize} 
-            setMazeCompleted={() => setMazeCompleted(true)} 
-            minions={Object.values(minions)} 
-            setCurrentMinion={setCurrentMinion} 
-            setCurrentTile={setCurrentTile} 
-            currentGraph={currentGraph} 
-            setCurrentGraph={setCurrentGraph} 
-            height={height} 
+          {/* Need to rename the components, but for now: ToolBar is on the left, GameStats is on the right */}
+          <LeftBar
+            setBoxSize={setBoxSize}
+            currentTower={currentTower}
+            minBoxSize={minBoxSize}
+            maxBoxSize={maxBoxSize}
+            currentMinion={currentMinion}
+            currentTile={currentTile}
+            />
+          <Maze
+            maze={maze}
+            setMaze={setMaze}
+            towers={towers}
+            setTowers={setTowers}
+            currentTower={currentTower}
+            setCurrentTower={setCurrentTower}
+            boxSize={boxSize}
+            setMazeCompleted={() => setMazeCompleted(true)}
+            minions={Object.values(minions)}
+            setCurrentMinion={setCurrentMinion}
+            setCurrentTile={setCurrentTile}
+            currentGraph={currentGraph}
+            setCurrentGraph={setCurrentGraph}
+            height={height}
             width={width}
             allTilesHidden={allTilesHidden}
             setAllTilesHidden={setAllTilesHidden}
+            />
+          <RightBar
+            addNewMinion={addNewMinion}
+            allTilesHidden={allTilesHidden}
           />
         </div>
       </div>

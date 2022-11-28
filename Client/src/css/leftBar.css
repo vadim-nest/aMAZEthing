@@ -1,0 +1,38 @@
+.leftBarContainer {
+  background-color: var(--main-green);
+  height: 100%;
+  width: 10vw;
+}
+
+.flags {
+  margin-top: 50px;
+}
+
+.p1Flag, .p2Flag {
+  width: 90px;
+  position: relative;
+}
+
+.p2Flag {
+  left: 21px;
+  top: -20px;
+}
+
+.p2Flag {
+  transform: scaleX(-1);
+}
+
+.p1Name, .p2Name {
+  font-size: 24px;
+  position: absolute;
+}
+
+.p1Name {
+  top: 12px;
+  left: 12px;
+}
+
+.p2Name {
+  top: 95px;
+  left: 50px;
+}

@@ -1,11 +1,11 @@
-import '../css/gameStats.css';
+import '../css/rightBar.css';
 import { useAppSelector } from '../features/hooks';
 import MediaQuery from 'react-responsive';
 
-function GameStats() {
+function RightBar({addNewMinion, allTilesHidden}: {addNewMinion: () => void, allTilesHidden: boolean}) {
   const user  = useAppSelector((state)=>state.user);
   return (
-    <div className='game-stats'>
+    <div className='right-bar'>
       <MediaQuery minWidth={951}>
       <div className='money-time'>
         <h3>Money: </h3><h3 className='money-count'>200</h3>
@@ -51,8 +51,9 @@ function GameStats() {
         </div>
       </div>
       </MediaQuery>
+      {!allTilesHidden && <button onClick={addNewMinion}>New Minion</button>}
     </div>
   );
 }
 
-export default GameStats;
+export default RightBar;
