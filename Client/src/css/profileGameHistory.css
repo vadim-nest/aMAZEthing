@@ -29,12 +29,14 @@
 }
 
 .result-win{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    font-size: 50px;
     color: var(--yellow);
 }
 
 .result-loss {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    font-size: 50px;
     color: var(--red);
 }
 
@@ -55,7 +57,8 @@
 
 }
 
-.coin {
+.image-profile {
     height: 70px;
     width: 70px;
+    margin: 20px;
 }

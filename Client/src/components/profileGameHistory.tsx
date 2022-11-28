@@ -1,9 +1,10 @@
 import '../css/profileGameHistory.css';
 import { User } from '@auth0/auth0-react';
 import { useAppSelector } from '../features/hooks';
-import SVG from './svg';
 import { useEffect, useState } from 'react';
 import coin from '../assets/profile/coin.png';
+import TowerSVG from './towerSVG';
+import squirrel from '../assets/minions/squirrel.svg';
 
 export default function ProfileGameHistory() {
   const user = useAppSelector((state) => state.user);
@@ -46,13 +47,17 @@ export default function ProfileGameHistory() {
               <div className="date"><h3>DATE: {element.finishedAt}</h3></div>
             </div>
             <div className="minionStats">
+                <img className='image-profile' src={squirrel}/>
                 <h3>{element.amountMinions} Minions</h3>
             </div>
             <div className="towerStats">
+                <div className='image-profile'>
+                  <TowerSVG playerClass='neutralTower' playerClassShadow='p1TowerShadow'/>
+                </div>
                 <h3>{element.towersTaken} Towers</h3>
             </div>
             <div className="goldStats">
-                <img className='coin' src={coin}/>
+                <img className='image-profile' src={coin}/>
                 <h3>{element.goldAmount} Gold</h3>
             </div>
           </div>
