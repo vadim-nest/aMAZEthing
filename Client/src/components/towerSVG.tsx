@@ -10,7 +10,7 @@ const castle = ({playerClass, playerClassShadow}: {playerClass: string, playerCl
 	<polygon  className={playerClassShadow} points="288.003,192.004 352.002,192.004 352.002,224.003 416.001,224.003 416.001,192.004
 		335.999,122.671 256.002,53.336 96,192.004 96,224.003 159.999,224.003 159.999,192.004 223.998,192.004 223.998,224.003
 		256.002,224.003 288.003,224.003 	"/>
-	<rect className="minion-svg-border" x="256.003" y="10.667" width="63.331" height="40"/>
+	<rect className={playerClass} x="256.003" y="10.667" width="63.331" height="40"/>
 </g>
 <g>
 	<path className="minion-svg-border" d="M480.001,181.336h-60.02L281.515,61.334h37.816c5.89,0,10.667-4.778,10.667-10.667v-40
