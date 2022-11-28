@@ -3,13 +3,13 @@ import Maze from './maze';
 import GameStats from './gameStats';
 import ToolBar from './toolbar';
 import { useEffect, useState } from 'react';
-import { MazeTileType, minionType } from '../utils/types';
+import { MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
 import { bFS, dijkstra, getDirection, vBFS } from '../utils/path-finding-algo';
 
 function Game() { // TODO: Extract logic to maze class
 
-  const [boxSize, setBoxSize] = useState(30);
+  const [boxSize, setBoxSize] = useState(20);
   const [mazeCompleted, setMazeCompleted] = useState(false);
   const [minions, setMinions] = useState<{[key: number]: minionType}>({});
   const [currentMinion, setCurrentMinion] = useState<null | number>(null);
@@ -19,6 +19,7 @@ function Game() { // TODO: Extract logic to maze class
   const [height, setHeight] = useState(48);
   const [width, setWidth] = useState(72);
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
+  const [towers, setTowers] = useState<TowerType[]>([]);
   const array: MazeTileType[] = [];
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
@@ -44,6 +45,7 @@ function Game() { // TODO: Extract logic to maze class
         }
       }
     })
+    setCurrentMinion(newId);
   }
 
   useEffect(() => {
@@ -134,13 +136,17 @@ function Game() { // TODO: Extract logic to maze class
     }
   }, [currentTile])
 
+  useEffect(() => {
+    console.log({towers});
+  }, [towers])
+
   return (
     <>
       <div>
         <GameStats/>
         <div className='gameContainer'>
           <ToolBar setBoxSize={setBoxSize} minBoxSize={minBoxSize} maxBoxSize={maxBoxSize} currentMinion={currentMinion} currentTile={currentTile} addNewMinion={addNewMinion}/>
-          <Maze maze={maze} setMaze={setMaze} boxSize={boxSize} setMazeCompleted={() => setMazeCompleted(true)} minions={Object.values(minions)} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} currentGraph={currentGraph} setCurrentGraph={setCurrentGraph} height={height} width={width}/>
+          <Maze maze={maze} setMaze={setMaze} towers={towers} setTowers={setTowers} boxSize={boxSize} setMazeCompleted={() => setMazeCompleted(true)} minions={Object.values(minions)} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} currentGraph={currentGraph} setCurrentGraph={setCurrentGraph} height={height} width={width}/>
         </div>
       </div>
     </>

@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../css/maze.css';
 import { Graph, value } from "../utils/graph";
 import { generateMaze } from "../utils/maze";
-import { MazeTileType, minionType } from "../utils/types";
+import { MazeTileType, minionType, TowerType } from "../utils/types";
 import MazeTile from "./mazeTile";
 import Minion from "./minion";
+import Tower from "./tower";
 
-function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze}: {
+function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers}: {
   boxSize:number,
   height: number,
   width: number,
@@ -18,6 +19,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   currentGraph: Graph | undefined,
   maze: MazeTileType[],
   setMaze: React.Dispatch<React.SetStateAction<MazeTileType[]>>
+  towers: TowerType[];
+  setTowers: React.Dispatch<React.SetStateAction<TowerType[]>>
 }) {
 
   // TODO: Set as state
@@ -39,7 +42,15 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
     const mazeTiles = document.getElementsByClassName('mazeTile');
     if (mazeGenerated === false) {
       setMazeGenerated(true);
-      const {graph, visited, classes} = generateMaze(width, height);
+      const {graph, visited, classes, towers} = generateMaze(width, height);
+      setTowers(() => towers.map(tower => {
+          return {
+            xPos: tower%width,
+            yPos: Math.floor(tower/width),
+            color: 'red'
+          }
+        })
+      )
       setCurrentGraph(graph);
       setDisplayVisited(visited);
       setMaze(oldMaze => {
@@ -80,7 +91,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
       <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           {minions.map(minion => <Minion boxSize={boxSize} minion={minion} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile}/>)}
-        {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
+          {towers.map(tower => <Tower xPos={tower.xPos} yPos={tower.yPos} color={tower.color} boxSize={boxSize}/>)}
+          {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>
       </div>
     </>

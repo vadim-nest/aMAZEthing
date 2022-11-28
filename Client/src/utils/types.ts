@@ -14,3 +14,9 @@ export interface MazeTileType {
   classes: ('b' | 't' | 'l' | 'r')[], 
   path: '' | 'THOUGHTPROCESS' | 'PATH'
 }
+
+export interface TowerType {
+  xPos: number,
+  yPos: number,
+  color: 'red' | 'blue'
+}

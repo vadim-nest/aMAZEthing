@@ -1,4 +1,4 @@
-
+import '../css/towerSVG.css'
 const castle = ({playerClass, playerClassShadow}: {playerClass: string, playerClassShadow: string}) =>
 (
   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -71,5 +71,5 @@ const castle = ({playerClass, playerClassShadow}: {playerClass: string, playerCl
 </svg>
 );
 
-const towerSVG = castle;
-export default towerSVG;
+const TowerSVG = castle;
+export default TowerSVG;

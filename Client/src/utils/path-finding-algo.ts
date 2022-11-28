@@ -79,7 +79,6 @@ export function bFS (valueX: value, valueY: value, graph: Graph) {
 }
 
 export function vBFS(valueX: value, valueY: value, graph: Graph) {
-  console.log('hmmmm')
   const thoughtProcess: value[] = [];
   function modifiedBFS (valueX: value, valueY: value, graph: Graph) {
     let set = new Set<value>();
