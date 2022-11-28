@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { refreshDataNoAvatar } from '../features/user_slice';
 import sort from '../assets/profile/sort.png'
 import path from '../assets/profile/path.png';
+import coin from '../assets/profile/coin.png';
+import changeMe from '../assets/profile/changeMe.png';
 
 function Profile() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
@@ -16,6 +18,7 @@ function Profile() {
   const [username, setUsername] = useState('');
   const user = useAppSelector((state) => state.user);
   const [img, setImg] = useState();
+  const [inputOpen, setInputOpen] = useState(false);
 
   useEffect(() => {
     const base64String: any = Buffer.from(user.avatar.data.data).toString(
@@ -32,6 +35,7 @@ function Profile() {
 
   async function updateChanges(e: any) {
     e.preventDefault();
+    console.log('hi', username);
     if (!isAuthenticated) return;
     try {
       const accessToken = await getAccessTokenSilently();
@@ -45,6 +49,11 @@ function Profile() {
     }
   }
 
+  const toggleInput = () => {
+    setInputOpen(!inputOpen);
+  };
+
+
   return (
     <div className='profile-page'>
       <div className="user-dashboard">
@@ -54,15 +63,20 @@ function Profile() {
               {img && <img className='icon' src={'data:image/jpeg;base64,' + img} />}
             </div>
             <div className='user-name'>
-              <h1>HELLO {user.username ? (user as User).username : 'THERE'},</h1>
-              <input
-              id='text'
-              type="text"
-              placeholder="username"
-              name="username"
-              onChange={changeUsername}
-              />
-              <button onClick={updateChanges}>Save</button>
+              {inputOpen === false && <h1>HELLO {user.username ? (user as User).username : 'THERE'},<img className='changeMe' src={changeMe} onClick={toggleInput} /></h1>}
+                <form className={`open-${inputOpen}`}>
+                  <input
+                    type="text"
+                    placeholder="username"
+                    name="username"
+                    onChange={changeUsername}
+                    className='input-body'
+                    />
+                  <button className='input-button' onClick={(e) => {
+                    updateChanges(e);
+                    setInputOpen(false)
+                    }}>Save</button>
+                </form>
               <h2>Email: {user.email}</h2>
             </div>
           </div>
@@ -78,25 +92,22 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="user-stats"><h1>STATS</h1></div>
-      </div>
-      <div className="user-games">
-        <div className="game-victory">
-          <h2>Wins: {user.overallWins.wins}</h2>
-        </div>
-        <div className="game-defeat">
-          <h2>Losses: {user.overallWins.losses}</h2>
-        </div>
-      </div>
-      <div>
-        {user.games ? (
-          <div>
-            <h2>Game history</h2>
-            <p>{user.games.map}</p>
+        <div className="user-stats">
+          <h1 className='achievements'>ACHIEVEMENTS</h1>
+          <div className='circles'>
+            <div className='circle'></div>
+            <div className='circle'></div>
+            <div className='circle'></div>
           </div>
-        ) : (
-          <h2>No games played yet</h2>
-        )}
+          <div className='stats-line'>
+            <p>MATCHES<p>14</p></p>
+            <p>WINS<p>3</p></p>
+            <p>LOSSES<p>2</p></p>
+            <p>WIN RATE<p>60%</p></p>
+            <p>GOLD EARNED<p>200<img className='coin' src={coin}/></p></p>
+          </div>
+          <h3 className='created'>Account created {new Date().toLocaleDateString()}</h3> {/* get the date when the account was created */}
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@
 }
 
 .profile-page {
-    background-color: var(--white-green);
+    background-color: var(--white);
     height: 100vh;
     overflow: scroll;
 }
@@ -16,10 +16,10 @@
     margin: 5vh 5vw;
     border-radius: 20px;
     display: flex;
-    justify-content: space-between;
 }
 
 .user-info {
+    width: 55vw;
     margin: 40px;
     display: flex;
     flex-direction: column;
@@ -41,6 +41,7 @@
 .progress {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .sort-progress, .path-progress {
@@ -54,4 +55,72 @@
 .sort-progress-img, .path-progress-img {
     height: 120px;
     width: 160px;
+}
+
+.user-stats {
+    margin: 40px;
+    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.circle {
+    height: 80px;
+    width: 80px;
+    border-radius: 80px;
+    background-color: var(--white-green);
+}
+
+.circles {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 40px 20px;
+}
+
+.stats-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    color: var(--white-green);
+    font-weight: bold;
+    border-top: 1px solid var(--white-green);
+    border-bottom: 1px solid var(--white-green);
+}
+
+.coin {
+    height: 50px;
+    width: 50px;
+}
+
+.achievements {
+    text-align: center;
+}
+
+.created {
+    text-align: right;
+}
+
+.changeMe {
+    height: 50px;
+    width: 100px;
+    margin: 0 0 0 20px;
+}
+
+.input-body, .input-button {
+    height: 50px;
+    width: 250px;
+    border: 0;
+    border-bottom: 1px solid var(--white-green);
+    background-color: transparent;
+    color: var(--white-green);
+    margin: 6px;
+}
+
+.input-button {
+    width: 50px;
+    border: 0;
+    padding: 0;
 }
