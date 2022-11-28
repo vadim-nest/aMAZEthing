@@ -3,22 +3,25 @@ import Maze from './maze';
 import GameStats from './gameStats';
 import ToolBar from './toolbar';
 import { useEffect, useState } from 'react';
-import { MazeTileType, minionType } from '../utils/types';
+import { MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
 import { bFS, dijkstra, getDirection, vBFS } from '../utils/path-finding-algo';
 
 function Game() { // TODO: Extract logic to maze class
 
-  const [boxSize, setBoxSize] = useState(30);
+  const [boxSize, setBoxSize] = useState(20);
   const [mazeCompleted, setMazeCompleted] = useState(false);
   const [minions, setMinions] = useState<{[key: number]: minionType}>({});
   const [currentMinion, setCurrentMinion] = useState<null | number>(null);
   const [currentTile, setCurrentTile] = useState<null | {xPos:number, yPos:number}>(null);
+  const [currentTower, setCurrentTower] = useState<null | TowerType>(null);
   const [waitingForTile, setWaitingForTile] = useState(false);
   const [currentGraph, setCurrentGraph] = useState<Graph>();
-  const [height, setHeight] = useState(48);
-  const [width, setWidth] = useState(72);
+  const [height, setHeight] = useState(40);
+  const [width, setWidth] = useState(86);
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
+  const [towers, setTowers] = useState<TowerType[]>([]);
+  const [allTilesHidden, setAllTilesHidden] = useState(true);
   const array: MazeTileType[] = [];
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
@@ -26,7 +29,7 @@ function Game() { // TODO: Extract logic to maze class
 
   const [maze, setMaze] = useState(array);
   const speed = 200;
-  const minBoxSize = 5;
+  const minBoxSize = 20;
   const maxBoxSize = 100;
 
   function addNewMinion() { // TODO: Extract to minion class
@@ -38,19 +41,23 @@ function Game() { // TODO: Extract logic to maze class
           id: newId,
           xPos: 0,
           yPos: 0,
-          rotation: 0,
+          rotation: 'minionR',
           path: [],
-          thoughtProcess: []
+          alignment: 'p1',
+          thoughtProcess: [],
+          inTower: false,
+          pathFindingAlgo: 'bfs',
+          sortingAlgo: 'bubble'
         }
       }
     })
+    setCurrentMinion(newId);
+    setCurrentTower(null);
   }
 
   useEffect(() => {
-    console.log('hello');
     setPath([], []);
     if (currentMinion !== null && !movingMinions.includes(currentMinion as number)) {
-      console.log(currentMinion);
       setCurrentTile(null);
       setWaitingForTile(true);
     } else if (currentMinion !== null) {
@@ -62,7 +69,6 @@ function Game() { // TODO: Extract logic to maze class
   }, [currentMinion])
 
   function setPath(path: number[], visited: number[]) {
-    console.log('Setting path:', path, visited)
     setMaze(prevMaze => {
       const newMaze = [...prevMaze];
       for (let i = 0; i < newMaze.length; i++) {
@@ -79,7 +85,6 @@ function Game() { // TODO: Extract logic to maze class
       setMovingMinions(prevMinions => [...prevMinions, currentMinion as number]);
       async function func(currentTile: {xPos: number, yPos: number}, currentGraph: Graph) {
         let minion = minions[currentMinion as number];
-        console.log(minion);
         const directions = vBFS(minion.xPos + minion.yPos*width, currentTile.xPos + currentTile.yPos*width, currentGraph);
         if (directions === false) return;
         const path = [...directions.path] as number[];
@@ -105,6 +110,7 @@ function Game() { // TODO: Extract logic to maze class
           if (previousTimeStamp === undefined) {
             previousTimeStamp = timestamp;
           }
+          let updatedMinion: minionType = minion;
           if ((previousTimeStamp as number) + speed < timestamp) {
             previousTimeStamp = timestamp
             const nextDirection = path.shift() as number;
@@ -112,11 +118,11 @@ function Game() { // TODO: Extract logic to maze class
             xAdd += direction.xPos;
             yAdd += direction.yPos;
             previousDirection = nextDirection;
-            const updatedMinion = {
+            updatedMinion = {
               ...minion,
-              moving: true,
               yPos: minion.yPos + yAdd,
-              xPos: minion.xPos + xAdd
+              xPos: minion.xPos + xAdd,
+              rotation: direction.rotation
             }
             setMinions(prevMinions => {
               return {...prevMinions,
@@ -125,7 +131,19 @@ function Game() { // TODO: Extract logic to maze class
           }
           if (path.length) requestAnimationFrame(step);
           else {
+            setMinions(prevMinions => {
+              return {...prevMinions,
+              [minion.id]: {
+                ...updatedMinion,
+                rotation: ''
+              },}
+            })
             setMovingMinions(prevMoving => prevMoving.filter(id => id !== minion.id));
+            for (let tower of towers) {
+              if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
+                enterTower(tower.id, minion.id);
+              }
+            }
           }
         }
         requestAnimationFrame(step);
@@ -134,13 +152,96 @@ function Game() { // TODO: Extract logic to maze class
     }
   }, [currentTile])
 
+  async function enterTower(towerId: number, minionId: number) {
+    setTowers(prevTowers => {
+      const newTowers = [...prevTowers];
+      return newTowers.map(tower => {
+        if (towerId !== tower.id) return tower;
+        else return {
+          ...tower,
+          minion: minionId
+        }
+      })
+    })
+    setMinions(prevMinions => {
+      const minion = prevMinions[minionId];
+      return {
+        ...prevMinions,
+        [minionId]: {
+          ...minion,
+          yPos: minion.yPos - 1,
+          inTower: towerId
+        }
+      }
+    })
+    if (currentMinion === minionId) {
+      setCurrentMinion(null);
+    };
+    await new Promise((resolve, reject) => setTimeout(()=>resolve(true), 5000))
+    exitTower(towerId, minionId);
+  }
+
+  function exitTower(towerId: number, minionId: number) {
+    let minion = minions[minionId];
+    setTowers(prevTowers => {
+      const newTowers = [...prevTowers];
+      return newTowers.map(tower => {
+        if (towerId !== tower.id) return tower;
+        else return {
+          ...tower,
+          minion: null,
+          alignment: minion.alignment
+        }
+      })
+    })
+    setMinions(prevMinions => {
+      minion = prevMinions[minionId]
+      return {
+        ...prevMinions,
+        [minionId]: {
+          ...minion,
+          yPos: minion.yPos + 1,
+          inTower: false
+        }
+      }
+    })
+    let old;
+  }
+
   return (
     <>
       <div>
         <GameStats/>
         <div className='gameContainer'>
-          <ToolBar setBoxSize={setBoxSize} minBoxSize={minBoxSize} maxBoxSize={maxBoxSize} currentMinion={currentMinion} currentTile={currentTile} addNewMinion={addNewMinion}/>
-          <Maze maze={maze} setMaze={setMaze} boxSize={boxSize} setMazeCompleted={() => setMazeCompleted(true)} minions={Object.values(minions)} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} currentGraph={currentGraph} setCurrentGraph={setCurrentGraph} height={height} width={width}/>
+          <ToolBar 
+            setBoxSize={setBoxSize} 
+            currentTower={currentTower} 
+            minBoxSize={minBoxSize} 
+            maxBoxSize={maxBoxSize} 
+            currentMinion={currentMinion} 
+            currentTile={currentTile} 
+            addNewMinion={addNewMinion}
+            allTilesHidden={allTilesHidden}
+          />
+          <Maze 
+            maze={maze} 
+            setMaze={setMaze} 
+            towers={towers} 
+            setTowers={setTowers} 
+            currentTower={currentTower} 
+            setCurrentTower={setCurrentTower} 
+            boxSize={boxSize} 
+            setMazeCompleted={() => setMazeCompleted(true)} 
+            minions={Object.values(minions)} 
+            setCurrentMinion={setCurrentMinion} 
+            setCurrentTile={setCurrentTile} 
+            currentGraph={currentGraph} 
+            setCurrentGraph={setCurrentGraph} 
+            height={height} 
+            width={width}
+            allTilesHidden={allTilesHidden}
+            setAllTilesHidden={setAllTilesHidden}
+          />
         </div>
       </div>
     </>

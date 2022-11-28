@@ -1,10 +1,14 @@
 import { Graph, value } from "./graph";
 
-export function getDirection(valueX: number, valueY: number, width:number) {
-  if (valueX - valueY === 1) return {xPos: -1, yPos: 0};
-  if (valueX - valueY === -1) return {xPos: 1, yPos: 0};
-  if (valueX - valueY === width) return {xPos: 0, yPos: -1};
-  return {xPos: 0, yPos: 1};
+export function getDirection(valueX: number, valueY: number, width:number): {
+  xPos: -1 | 0 | 1,
+  yPos: -1 | 0 | 1,
+  rotation: 'minionL' | 'minionR' | 'minionD' | 'minionU'
+} {
+  if (valueX - valueY === 1) return {xPos: -1, yPos: 0, rotation: 'minionL'};
+  if (valueX - valueY === -1) return {xPos: 1, yPos: 0, rotation: 'minionR'};
+  if (valueX - valueY === width) return {xPos: 0, yPos: -1, rotation: 'minionD'};
+  return {xPos: 0, yPos: 1, rotation: 'minionU'};
 }
 
 export function dFSShortest (valueX: value, valueY: value, graph: Graph, path = [valueX]) { // TODO: Will we ever use this?
@@ -25,10 +29,8 @@ export function dFSShortest (valueX: value, valueY: value, graph: Graph, path = 
 
 export function dFS (valueX: value, valueY: value, graph: Graph, path = [valueX]): (false | value[]) {
   let neighbors = graph.neighbors(valueX);
-  //console.log(neighbors);
   if (neighbors.includes(valueY)) return path.concat([valueY]);
   for (let neighbor of neighbors) {
-    // console.log({neighbor, path});
     if (path.includes(neighbor)) continue;
     let search = dFS(neighbor, valueY, graph, path.concat(neighbor));
     if (search) return search;
@@ -41,10 +43,8 @@ export function vDFS (valueX: value, valueY: value, graph: Graph) {
   function modifiedDFS (valueX: value, valueY: value, graph: Graph, path = [valueX]): (false | value[]) {
     visited.push(valueX);
     let neighbors = graph.neighbors(valueX);
-    //console.log(neighbors);
     if (neighbors.includes(valueY)) return path.concat([valueY]);
     for (let neighbor of neighbors) {
-      // console.log({neighbor, path});
       if (path.includes(neighbor)) continue;
       let search = modifiedDFS(neighbor, valueY, graph, path.concat(neighbor));
       if (search) return search;
@@ -79,14 +79,12 @@ export function bFS (valueX: value, valueY: value, graph: Graph) {
 }
 
 export function vBFS(valueX: value, valueY: value, graph: Graph) {
-  console.log('hmmmm')
   const thoughtProcess: value[] = [];
   function modifiedBFS (valueX: value, valueY: value, graph: Graph) {
     let set = new Set<value>();
     let neighbors: [value, Set<value>][] = [[valueX, set]];
     let visited: {[key: value]: boolean} = {};
     for (let i = 0; i < neighbors.length; i++) {
-      console.log('hi')
       let neighbor = neighbors[i][0];
       let path = neighbors[i][1];
       if (neighbor === valueY) {
@@ -122,12 +120,9 @@ export function dijkstra (valueX: value, valueY: value, graph: Graph) {
       return unvisitedNodes[key] < acc[1] ? [key, unvisitedNodes[key]] : acc;
     }, ['null', Infinity]);
     visitedNodes[node[0]] = unvisitedNodes[node[0]];
-    console.log(node, visitedNodes, unvisitedNodes);
     if (node[0] === valueY) break;
     if (node[1] === Infinity) return false;
-    console.log();
     let neighbors = graph.neighbors(node[0]);
-    console.log({neighbors})
     for (let neighbor of neighbors) {
       let weight = graph.getEdgeValue(node[0], neighbor);
       let sum = unvisitedNodes[node[0]] + (weight as number);
@@ -139,12 +134,10 @@ export function dijkstra (valueX: value, valueY: value, graph: Graph) {
   let keys = Object.keys(visitedNodes).reverse();
   let path = [keys[0]];
   for (let i = 0; i < keys.length; i++) {
-    console.log(path);
     let to = path[path.length-1];
     for (let j = i; j < keys.length; j++) {
       let from = keys[j];
       let weight = graph.getEdgeValue(from, to);
-      console.log({from, to, weight});
       if (weight) {
         if (visitedNodes[to] - weight === visitedNodes[from]) {
           path.push(from);
@@ -171,7 +164,6 @@ export function vDijkstra(valueX: value, valueY: value, graph: Graph) {
         return unvisitedNodes[key] < acc[1] ? [key, unvisitedNodes[key]] : acc;
       }, ['null', Infinity]);
       visitedNodes[node[0]] = unvisitedNodes[node[0]];
-      console.log(node, visitedNodes, unvisitedNodes);
       if (node[0] === valueY) break;
       if (node[1] === Infinity) return false;
       visited.push(node[0]);
@@ -187,12 +179,10 @@ export function vDijkstra(valueX: value, valueY: value, graph: Graph) {
     let keys = Object.keys(visitedNodes).reverse();
     let path = [keys[0]];
     for (let i = 0; i < keys.length; i++) {
-      console.log(path);
       let to = path[path.length-1];
       for (let j = i; j < keys.length; j++) {
         let from = keys[j];
         let weight = graph.getEdgeValue(from, to);
-        console.log({from, to, weight});
         if (weight) {
           if (visitedNodes[to] - weight === visitedNodes[from]) {
             path.push(from);
@@ -232,17 +222,14 @@ export function aStar (valueX: value, valueY: value, graph: Graph, distance: (st
     delete unvisitedNodes[node[0]];
     if (node[1] === Infinity) return false;
     if (Number(node[0]) === valueY) {
-      console.log('made it');
       break;
     };
     if (Number(node[0])!==valueX) thoughtProcess.push(node[0]);
     let neighbors = graph.neighbors(node[0]).filter(neighbor => !visitedNodes.has(neighbor));
-    console.log({neighbors});
     for (let neighbor of neighbors) {
       let weight = graph.getEdgeValue(node[0], neighbor) as number;
       let sum = cost + weight;
       if (sum < unvisitedNodes[neighbor][0]) {
-        console.log(`True for ${neighbor}`);
         unvisitedNodes[neighbor] = [sum, unvisitedNodes[neighbor][1]]
       };
     }

@@ -1,0 +1,15 @@
+.neutralTower {
+  fill: grey
+}
+
+.p1Tower {
+  fill: var(--yellow);
+}
+
+.p2Tower {
+  fill: var(--red)
+}
+
+.contestedTower {
+  fill: var(--sand)
+}

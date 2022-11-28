@@ -5,14 +5,26 @@ import grassPic from '../assets/learning/grass.png';
 import tallGrassPic from '../assets/learning/tall_grass.png';
 import { useNavigate } from 'react-router-dom';
 import { Routes, Route, Link, Outlet,createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 // import squirrel from '../assets/learning/squirrel.png';
 
 export default function LearningPage () {
 
   const navigate = useNavigate()
+  // const [loaded, setLoaded] = useState(false);
 
+  // let bubbleCircleCoordinates = document.querySelector('#circle-bubble-sort')?.getBoundingClientRect();
+  // function setCoordForLabels() {
+  //   console.log('Something');
 
+  //   if (document.getElementById('bubble-sort-label')) (document.getElementById('bubble-sort-label') as HTMLElement).style.left = bubbleCircleCoordinates?.x as unknown as string;
+
+  // }
+
+  // useEffect(() => {
+  //   setCoordForLabels;
+  // }, [loaded]);
 
   return (
     <>
@@ -27,6 +39,11 @@ export default function LearningPage () {
       <div className='path-finding-algs'>
         <h3>SORTING ALGORITHMS</h3>
         <div className='curve-1'>
+          {/* <div  className='over-curve-1'>
+            <p className='path-labels' id='bubble-sort-label'>Bubble sort</p>
+            <p className='path-labels' id='insertion-sort-label'>Insertion sort</p>
+            <p className='path-labels' id='selection-sort-label'>Selection sort</p>
+          </div> */}
           <svg viewBox='-10 4 150 24'>
             {/* L - line, Q - curve */}
             <path d='
@@ -101,7 +118,7 @@ export default function LearningPage () {
             '/>
 
 
-            <circle className='circles' onClick={(() => navigate('/learning/bubbleLesson'))} cx="13.2" cy="14.6" r="3" />
+            <circle className='circles' id='circle-bubble-sort' onClick={(() => navigate('/learning/bubbleLesson'))} cx="13.2" cy="14.6" r="3" />
             <image className='nuts' x="10" y="12" href={theNut} height='6' width='6' />
             <rect x="7" y="6.8" className="lesson-name-label" width="12" height="3.5" rx="1" />
             <text x="8" y="9" className="lesson-name">Bubble sort</text>
@@ -109,9 +126,13 @@ export default function LearningPage () {
 
             <circle className='circles' onClick={(() => navigate('/insertionLesson'))} cx="20.2" cy="21.6" r="3" />
             <image className='nuts'  x="17" y="19" href={theNut} height='6' width='6' />
+            <rect x="20.5" y="14.5" className="lesson-name-label" width="13.7" height="3.5" rx="1" />
+            <text x="21.5" y="16.7" className="lesson-name">Insertion sort</text>
 
             <circle className='circles'onClick={(() =>navigate('/selectionLesson'))} cx="30.2" cy="29.6" r="3" />
             <image className='nuts'  x="27" y="27" href={theNut} height='6' width='6' />
+            <rect x="24" y="34" className="lesson-name-label" width="13.7" height="3.5" rx="1" />
+            <text x="25" y="36.2" className="lesson-name">Selection sort</text>
 
             <circle className='circles' cx="40.2" cy="17.6" r="3" />
             <image className='nuts' onClick={(() => alert('Are you nuts??'))} x="37" y="15" href={theNut} height='6' width='6' />
@@ -135,6 +156,11 @@ export default function LearningPage () {
             <image className='decorations' x="-2" y="36" href={grassPic} height='4' width='4' />
             <image className='decorations' x="55" y="25" href={grassPic} height='5' width='5' />
           </svg>
+          {/* <img src='' onLoad={() => {
+            console.log('Loaded');
+
+            setLoaded(true);
+          }}></img> */}
         </div>
       </div>
     </div>

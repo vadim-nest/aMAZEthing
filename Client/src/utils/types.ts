@@ -4,13 +4,27 @@ export interface minionType {
   id: number;
   xPos: number;
   yPos: number;
-  rotation: number;
+  rotation: 'minionR' | 'minionL' | 'minionU' | 'minionD' | '';
   path: number[];
+  alignment: 'p1' | 'p2';
   thoughtProcess: number[];
+  inTower: false | number;
+  pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
+  sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
 }
 
 export interface MazeTileType {
   value: value, 
   classes: ('b' | 't' | 'l' | 'r')[], 
   path: '' | 'THOUGHTPROCESS' | 'PATH'
+}
+
+export interface TowerType {
+  id: number;
+  xPos: number;
+  yPos: number;
+  numbers: number[];
+  color: 'red' | 'blue';
+  minion: null | number;
+  alignment: 'none' | 'p1' | 'p2';
 }

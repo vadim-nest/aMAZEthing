@@ -22,6 +22,28 @@ export function resetGraph(graph: Graph, edges: [value, value, number][]) {
   // TODO: reset
 }
 
+function addTowers(width:number, height:number, graph: Graph) {
+  const midW = Math.floor(width/2);
+  const midH = Math.floor(height/2);
+  const towers: number[] = [midW + midH*width];
+  const nTowers = 6;
+  // let radius = Math.floor(Math.min(width, height)/3);
+  for (let i = 0; i < nTowers; i++) {
+    towers.push(midW + Math.floor((width/3)*Math.sin(2*i*Math.PI/nTowers)) + width*(midH + Math.floor((height/3)*Math.cos(2*i*Math.PI/nTowers))))
+  }
+  for (let tower of towers) {
+    graph.removeVertex(tower - 1);
+    graph.removeVertex(tower + 1);
+    graph.removeVertex(tower - width);
+    graph.removeVertex(tower - width - 1);
+    graph.removeVertex(tower - width + 1);
+    graph.removeVertex(tower - 2*width);
+    graph.removeVertex(tower - 2*width - 1);
+    graph.removeVertex(tower - 2*width + 1);
+  }
+  return towers;
+}
+
 export function generateMaze(width: number, height: number, graph: Graph | false = false) {
   if (graph === false) {
     graph = generateConnectedGraph(width, height);
@@ -31,6 +53,7 @@ export function generateMaze(width: number, height: number, graph: Graph | false
   const visited:value[] = [0];
   const stack:value[] = [0];
   const edges: [value, value, number][] = [];
+  const towers: number[] = addTowers(width, height, graph);
   while(stack.length) {
     let i = stack.pop() as number;
     let neighbors = graph.neighbors(i).filter(neighbor => !visited.includes(neighbor));
@@ -81,8 +104,21 @@ export function generateMaze(width: number, height: number, graph: Graph | false
     }
   }
   graph.edges = edges;
+  function conflictWithTowers(towers: number[], num: number) {
+    for (let tower of towers) {
+      if (num >= tower - 2 && num <= tower + 2) return true;
+      if (num >= tower + width - 2 && num <= tower + width + 2) return true;
+      if (num >= tower - width - 2 && num <= tower - width + 2) return true;
+      if (num >= tower - 2*width - 2 && num <= tower - 2*width + 2) return true;
+      if (num >= tower - 3*width - 2 && num <= tower - 3*width + 2) return true;
+    }
+    return false;
+  }
   for (let j = 0; j < width; j++) {
     let i = Math.floor(Math.random()*nodeNum);
+    while(conflictWithTowers(towers, i)) {
+      i = Math.floor(Math.random()*nodeNum);
+    }
     if (i > width) {
       graph.addEdge(i, i - width);
       if (classes[i]) {
@@ -131,6 +167,7 @@ export function generateMaze(width: number, height: number, graph: Graph | false
   return {
     graph,
     visited,
-    classes
+    classes,
+    towers
   }
 }

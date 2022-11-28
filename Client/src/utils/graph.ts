@@ -60,7 +60,6 @@ export class Graph {
     for (let vertex1 of this.vertices) {
       for (let vertex2 of this.vertices) {
         if (!this.findPath(vertex1, vertex2)) {
-          // console.log(vertex1, vertex2);
           return false;
         }
       }
@@ -69,7 +68,6 @@ export class Graph {
   }
 
   findPath (valueX: value, valueY: value, method = 'dfs') {
-    console.log('Choosing path');
     if (!this.vertices.includes(valueX) || !this.vertices.includes(valueY)) return false;
     let path;
     if (valueX === valueY) return true;
@@ -81,7 +79,6 @@ export class Graph {
       path = dFSShortest(valueX, valueY, this);
       break;
     default:
-      console.log('dfs');
       path = dFS(valueX, valueY, this);
       break;
     }
