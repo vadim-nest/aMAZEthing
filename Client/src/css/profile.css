@@ -1,6 +1,57 @@
+.icon {
+    width: 120px;
+    height: 110px;
+}
 
+.profile-page {
+    background-color: var(--white-green);
+    height: 100vh;
+    overflow: scroll;
+}
 
-img{
-    width: 75px;
-    height: 70px;
+.user-dashboard {
+    background-color: var(--main-green);
+    height: 60vh;
+    width: 90vw;
+    margin: 5vh 5vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-info {
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-part {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-name {
+    margin: 0px 20px;
+}
+
+.learning-progress {
+    margin: 20px;
+}
+
+.progress {
+    display: flex;
+    flex-direction: row;
+}
+
+.sort-progress, .path-progress {
+    margin: 40px 40px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sort-progress-img, .path-progress-img {
+    height: 120px;
+    width: 160px;
 }
