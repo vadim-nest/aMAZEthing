@@ -3,6 +3,7 @@
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
     line-height: 1.5;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -13,7 +14,6 @@
     --yellow: #ffb703;
     --dark-brown: #3C2923;
     --white: #ffff;
-    --sand: #e6ccb2
 }
 
 body {

@@ -1,6 +1,141 @@
+.icon {
+    width: 120px;
+    height: 110px;
+}
 
+.profile-page {
+    background-color: var(--white);
+    height: 100vh;
+    overflow: scroll;
+}
 
-img{
-    width: 75px;
-    height: 70px;
+.user-dashboard {
+    background-color: var(--main-green);
+    height: 60vh;
+    width: 80vw;
+    margin: 10vh 10vw 0 10vw;
+    border-radius: 20px;
+    display: flex;
+}
+
+.user-info {
+    width: 55vw;
+    margin: 40px 0 40px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-part {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-name {
+    margin: 0px 20px;
+}
+
+.learning-progress {
+    margin: 20px;
+}
+
+.progress {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.sort-progress, .path-progress {
+    margin: 40px 40px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sort-progress-img, .path-progress-img {
+    height: 120px;
+    width: 160px;
+}
+
+.user-stats {
+    margin: 40px 40px 40px 0px;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.circle {
+    height: 80px;
+    width: 80px;
+    border-radius: 80px;
+    background-color: var(--white-green);
+}
+
+.circles {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 40px 20px;
+}
+
+.stats-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    color: var(--white-green);
+    border-top: 1px solid var(--white-green);
+    border-bottom: 1px solid var(--white-green);
+}
+
+.stats-text {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.achievements {
+    text-align: center;
+}
+
+.wins-yellow {
+    color: var(--yellow);
+}
+
+.losses-red {
+    color: var(--red);
+}
+
+.created {
+    text-align: right;
+}
+
+.changeMe {
+    height: 50px;
+    width: 100px;
+    margin: 0 0 0 20px;
+}
+
+.input-body, .input-button {
+    height: 50px;
+    width: 250px;
+    border: 0;
+    border-bottom: 1px solid var(--white-green);
+    background-color: transparent;
+    color: var(--white-green);
+    margin: 6px;
+}
+
+.input-button {
+    width: 50px;
+    border: 0;
+    padding: 0;
+    outline: none;
+}
+
+*:focus {
+    outline: none;
+    background-color: transparent;
 }

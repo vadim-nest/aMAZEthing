@@ -1,4 +1,4 @@
-export default function bubbleSortAlgo(arr: any) {
+export function bubbleSortAlgo(arr: any, MODE:number) {
   const ArrayStates: number[][] = [];
   let animations: number[][] = [];
   let swaps = false;
@@ -7,15 +7,35 @@ export default function bubbleSortAlgo(arr: any) {
     swaps = true;
     for (let i = 0; i < arr.length - 1 - iterations; i++) {
       animations.push([i, arr[i]]);
-      if (arr[i] > arr[i + 1]) {
+      if(MODE === 1) {
+        if (arr[i] > arr[i + 1]) {
+          animations.push([i, arr[i], i + 1, arr[i + 1]]);
+          swaps = false;
+          [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+        }
+    } else {
+      if (arr[i] < arr[i + 1]) {
         animations.push([i, arr[i], i + 1, arr[i + 1]]);
         swaps = false;
         [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
       }
     }
+  }
     iterations++;
   }
-  return { ArrayStates, animations };
+  return animations;
+}
+
+export function generateArray(NUM:number) {
+  const array = []
+  for(let i = 0; i< NUM; i++) {
+    array.push(randomNumGen(3, 20))
+  }
+  return array;
+}
+
+function randomNumGen(min:number, max:number) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export function insertionSortAlgo(arr: number[]) {
@@ -32,7 +52,7 @@ export function insertionSortAlgo(arr: number[]) {
       } else break;
     }
   }
-  return { ArrayStates, animations };
+  return  animations;
 }
 
 export function selectionSortAlgo(arr: number[]) {
@@ -53,7 +73,5 @@ export function selectionSortAlgo(arr: number[]) {
     }
   }
 
-  return { ArrayStates, animations };
+  return animations;
 }
-
-console.log(bubbleSortAlgo([5, 1, 4, 2, 8]));
