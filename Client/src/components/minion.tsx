@@ -1,6 +1,6 @@
 import '../css/minion.css';
 import { minionType } from '../utils/types';
-import SVG from './svg';
+import AnimalSVG from './animal-svg';
 
 function Minion({boxSize, minion, setCurrentMinion, setCurrentTile}: {
   boxSize: number,
@@ -23,7 +23,7 @@ function Minion({boxSize, minion, setCurrentMinion, setCurrentTile}: {
 
   return (
       <div onClick={handleClick} onContextMenu={handleContextMenu}  className="minion" style={{fill: `red`, height: `${boxSize}px`, width: `${boxSize}px`, top: `${boxSize*minion.yPos}px`, left: `${boxSize*minion.xPos}px`}}>
-        <SVG />
+        <AnimalSVG />
       </div>
   )
 }
