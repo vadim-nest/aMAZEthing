@@ -16,7 +16,7 @@ export default function BubbleLesson() {
 
 
   useEffect(() => {
-    setArray(array => array = generateArray(125))
+    setArray(array => array = generateArray(1250))
   }, [])
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function BubbleLesson() {
             </button>
           }
         </div>
-        <Visualization width={5} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={bubbleSortVisual}/>
+        <Visualization width={1} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={bubbleSortVisual}/>
 
       </div>
     </div>

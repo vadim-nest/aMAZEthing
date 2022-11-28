@@ -5,24 +5,28 @@ import MediaQuery from 'react-responsive';
 import { useAppSelector } from '../features/hooks';
 import zoomInSVG from '../assets/game-different/search-3079.svg'
 import zoomOutSVG from '../assets/game-different/search-3080.svg'
+import React from 'react';
 
-function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, currentTower}: {
+function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, currentTower, setCurrentTower}: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>,
   minBoxSize: number,
   maxBoxSize: number,
   currentMinion: null | number,
   currentTile: null | {xPos:number, yPos:number},
-  currentTower: null | TowerType
+  currentTower: null | TowerType,
+  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>
 }) {
 
   function zoomIn(amount: number) {
+    setCurrentTower(null);
     setBoxSize(oldBoxSize => {
       if (oldBoxSize + amount > maxBoxSize) return maxBoxSize;
       return oldBoxSize + amount;
     })
   }
-
+  
   function zoomOut(amount: number) {
+    setCurrentTower(null);
     setBoxSize(oldBoxSize => {
       if (oldBoxSize - amount < minBoxSize) return minBoxSize;
       return oldBoxSize - amount;

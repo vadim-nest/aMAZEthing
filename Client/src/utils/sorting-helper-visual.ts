@@ -4,36 +4,36 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
         const [indexOne, elementOne, indexTwo, elementTwo] = animations[i];
-        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)';
-        document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--red)';
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--red)';
+        document.getElementById(`${indexTwo}arrayColumn`)!.style.backgroundColor = 'var(--red)';
 
 
         document.getElementById(
-          `${indexOne}`
+          `${indexOne}arrayColumn`
         )!.style.transform += `translateX(${width+4}px)`;
         document.getElementById(
-          `${indexTwo}`
+          `${indexTwo}arrayColumn`
         )!.style.transform += `translateX(-${width+4}px)`;
 
 
         await delay(DELAY_MS);
-        document.getElementById(`${indexOne}`)!.style.backgroundColor =
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor =
           'var(--main-green)';
-        document.getElementById(`${indexTwo}`)!.style.backgroundColor =
+        document.getElementById(`${indexTwo}arrayColumn`)!.style.backgroundColor =
           'var(--main-green)';
 
 
-        let tempNode = document.getElementById(`${indexTwo}`);
+        let tempNode = document.getElementById(`${indexTwo}arrayColumn`);
         console.log(tempNode)
-        document.getElementById(`${indexOne}`)!.setAttribute('id', `${indexTwo}`)
-        tempNode!.setAttribute('id', `${indexOne}`);
+        document.getElementById(`${indexOne}arrayColumn`)!.setAttribute('id', `${indexTwo}arrayColumn`)
+        tempNode!.setAttribute('id', `${indexOne}arrayColumn`);
 
       } else {
         const [indexOne, elementOne] = animations[i];
-        document.getElementById(`${indexOne}`)!.style.backgroundColor =
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor =
           'var(--red)';
         await delay(DELAY_MS);
-        document.getElementById(`${indexOne}`)!.style.backgroundColor =
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor =
           'var(--main-green)';
       }
 
@@ -49,30 +49,30 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
         const [indexOne, elementOne, indexTwo, elementTwo] = animations[i];
-        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)';
-        document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--red)';
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--red)';
+        document.getElementById(`${indexTwo}arrayColumn`)!.style.backgroundColor = 'var(--red)';
 
         
         document.getElementById(
-          `${indexOne}`
+          `${indexOne}arrayColumn`
         )!.style.transform += `translateX(-${width+4}px)`;
         document.getElementById(
-          `${indexTwo}`
+          `${indexTwo}arrayColumn`
         )!.style.transform += `translateX(${width+4}px)`;
 
         await delay(DELAY_MS);
-        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)';
-        document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--main-green)';
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--main-green)';
+        document.getElementById(`${indexTwo}arrayColumn`)!.style.backgroundColor = 'var(--main-green)';
 
 
-        let tempNode = document.getElementById(`${indexTwo}`);
-        document.getElementById(`${indexOne}`)!.id = `${indexTwo}`;
-        tempNode!.id = `${indexOne}`;
+        let tempNode = document.getElementById(`${indexTwo}arrayColumn`);
+        document.getElementById(`${indexOne}arrayColumn`)!.id = `${indexTwo}arrayColumn`;
+        tempNode!.id = `${indexOne}arrayColumn`;
       } else {
         const [indexOne, elementOne] = animations[i];
-        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)';
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--red)';
         await delay(DELAY_MS);
-        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)';
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--main-green)';
       }
     }
   }
@@ -83,23 +83,23 @@ export async function selectionSortVisual(animations:number[][], ASC_MODE:number
       if(animations[i].length > 2) {
         const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
       const distance = (indexOne - indexTwo)
-      document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)'
-      document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--red)'
-      document.getElementById(`${indexOne}`)!.style.transform += `translateX(${distance*-(width+4)}px)`
-      document.getElementById(`${indexTwo}`)!.style.transform += `translateX(${distance*(width+4)}px)`
+      document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--red)'
+      document.getElementById(`${indexTwo}arrayColumn`)!.style.backgroundColor = 'var(--red)'
+      document.getElementById(`${indexOne}arrayColumn`)!.style.transform += `translateX(${distance*-(width+4)}px)`
+      document.getElementById(`${indexTwo}arrayColumn`)!.style.transform += `translateX(${distance*(width+4)}px)`
       await delay(ASC_MODE)
-      document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)'
-      document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--main-green)'
-      let tempNode =  document.getElementById(`${indexTwo}`) 
-      document.getElementById(`${indexOne}`)!.id = `${indexTwo}`
-      tempNode!.id =`${indexOne}`
+      document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--main-green)'
+      document.getElementById(`${indexTwo}arrayColumn`)!.style.backgroundColor = 'var(--main-green)'
+      let tempNode =  document.getElementById(`${indexTwo}arrayColumn`) 
+      document.getElementById(`${indexOne}arrayColumn`)!.id = `${indexTwo}arrayColumn`
+      tempNode!.id =`${indexOne}arrayColumn`
       } else {
         const [indexOne, indexTwo] = animations[i]
-        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--red)'
-        document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--red)'
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--red)'
+        document.getElementById(`${indexTwo}arrayColumn`)!.style.backgroundColor = 'var(--red)'
         await delay(ASC_MODE)
-        document.getElementById(`${indexOne}`)!.style.backgroundColor = 'var(--main-green)'
-        document.getElementById(`${indexTwo}`)!.style.backgroundColor = 'var(--main-green)'
+        document.getElementById(`${indexOne}arrayColumn`)!.style.backgroundColor = 'var(--main-green)'
+        document.getElementById(`${indexTwo}arrayColumn`)!.style.backgroundColor = 'var(--main-green)'
       }
       
     }          
