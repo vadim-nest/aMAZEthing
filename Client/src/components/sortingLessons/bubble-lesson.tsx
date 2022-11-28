@@ -15,7 +15,7 @@ export default function BubbleLesson() {
 
 
   useEffect(() => {
-    setArray(array => array = generateArray(3))
+    setArray(array => array = generateArray(5))
   }, [])
 
   useEffect(() => {
