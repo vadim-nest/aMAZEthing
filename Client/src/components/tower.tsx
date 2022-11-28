@@ -18,19 +18,23 @@ function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMini
   }
 
   function handleClick() {
-    setCurrentTower({
-      id: tower.id, 
-      xPos: tower.xPos, 
-      yPos: tower.yPos,
-      numbers: tower.numbers,
-      color: tower.color
-    })
+    setCurrentTower(tower)
     setCurrentMinion(null);
   }
 
   return (
-    <div style={{width: `${boxSize*3}px`, top: `${(tower.yPos-2)*boxSize}px`, left: `${(tower.xPos-1)*boxSize}px`}} className="tower" onContextMenu={handleContextMenu} onClick={handleClick}>
-      <TowerSVG playerClass="neutralTower" playerClassShadow="neutralTowerShadow"/>
+    <div style={{width: `${boxSize*3}px`, top: `${(tower.yPos-2)*boxSize}px`, left: `${(tower.xPos-1)*boxSize}px`}} className='tower' onContextMenu={handleContextMenu} onClick={handleClick}>
+      <TowerSVG playerClass={
+                  tower.minion !== null? 'contestedTower' :
+                  tower.alignment === 'p1' ? 'p1Tower' :
+                  tower.alignment === 'p2' ? 'p2Tower' :
+                  'neutralTower'} 
+                playerClassShadow={
+                  tower.minion !== null ? 'contestedTowerShadow' :
+                  tower.alignment === 'p1' ? 'p1TowerShadow' :
+                  tower.alignment === 'p2' ? 'p2TowerShadow' :
+                  'neutralTowerShadow'}
+      />
     </div>
   )
 }

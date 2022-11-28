@@ -43,7 +43,11 @@ function Game() { // TODO: Extract logic to maze class
           yPos: 0,
           rotation: 'minionR',
           path: [],
-          thoughtProcess: []
+          alignment: 'p1',
+          thoughtProcess: [],
+          inTower: false,
+          pathFindingAlgo: 'bfs',
+          sortingAlgo: 'bubble'
         }
       }
     })
@@ -139,6 +143,13 @@ function Game() { // TODO: Extract logic to maze class
               },}
             })
             setMovingMinions(prevMoving => prevMoving.filter(id => id !== minion.id));
+            for (let tower of towers) {
+              console.log('Checking tower', tower.id)
+              if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos) {
+                console.log('Success:', tower.id, minion.id)
+                enterTower(tower.id, minion.id);
+              }
+            }
           }
         }
         requestAnimationFrame(step);
@@ -146,6 +157,59 @@ function Game() { // TODO: Extract logic to maze class
       func(currentTile, currentGraph);
     }
   }, [currentTile])
+
+  function enterTower(towerId: number, minionId: number) {
+    setTowers(prevTowers => {
+      const newTowers = [...prevTowers];
+      return newTowers.map(tower => {
+        if (towerId !== tower.id) return tower;
+        else return {
+          ...tower,
+          minion: minionId
+        }
+      })
+    })
+    setMinions(prevMinions => {
+      const minion = prevMinions[minionId];
+      return {
+        ...prevMinions,
+        [minionId]: {
+          ...minion,
+          yPos: minion.yPos - 1,
+          inTower: towerId
+        }
+      }
+    })
+    if (currentMinion === minionId) {
+      console.log({currentMinion, minionId})
+      setCurrentMinion(null);
+    };
+  }
+
+  function exitTower(towerId: number, minionId: number) {
+    setTowers(prevTowers => {
+      const newTowers = [...prevTowers];
+      return newTowers.map(tower => {
+        if (towerId !== tower.id) return tower;
+        else return {
+          ...tower,
+          minion: null
+        }
+      })
+    })
+    setMinions(prevMinions => {
+      const minion = prevMinions[minionId];
+      return {
+        ...prevMinions,
+        [minionId]: {
+          ...minion,
+          yPos: minion.yPos - 1,
+          inTower: false
+        }
+      }
+    })
+  }
+
 
   useEffect(() => {
     console.log({towers});

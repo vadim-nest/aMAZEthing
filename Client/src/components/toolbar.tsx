@@ -35,6 +35,7 @@ function ToolBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       {currentTower !== null && <div>
         <h1>The current tower is {currentTower.id}</h1>
         <h1>{currentTower.numbers.join(', ')}</h1>
+        {currentTower.minion !== null && <h1>Tower contains minion {currentTower.minion}</h1>}
         </div>}
       {!allTilesHidden && <button onClick={addNewMinion}>New Minion</button>}
     </div>

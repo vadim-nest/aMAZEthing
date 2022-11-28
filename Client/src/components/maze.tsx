@@ -51,7 +51,9 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
             xPos: tower%width,
             yPos: Math.floor(tower/width),
             numbers: [Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10)],
-            color: 'red'
+            color: 'red',
+            minion: null,
+            alignment: 'none'
           }
         })
       )

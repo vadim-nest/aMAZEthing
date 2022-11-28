@@ -34,6 +34,7 @@ function addTowers(width:number, height:number, graph: Graph) {
   for (let tower of towers) {
     graph.removeVertex(tower - 1);
     graph.removeVertex(tower + 1);
+    graph.removeVertex(tower - width);
     graph.removeVertex(tower - width - 1);
     graph.removeVertex(tower - width + 1);
     graph.removeVertex(tower - 2*width);

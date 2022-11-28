@@ -6,7 +6,11 @@ export interface minionType {
   yPos: number;
   rotation: 'minionR' | 'minionL' | 'minionU' | 'minionD' | '';
   path: number[];
+  alignment: 'p1' | 'p2';
   thoughtProcess: number[];
+  inTower: false | number;
+  pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
+  sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
 }
 
 export interface MazeTileType {
@@ -16,9 +20,11 @@ export interface MazeTileType {
 }
 
 export interface TowerType {
-  id: number,
-  xPos: number,
-  yPos: number,
-  numbers: number[],
-  color: 'red' | 'blue'
+  id: number;
+  xPos: number;
+  yPos: number;
+  numbers: number[];
+  color: 'red' | 'blue';
+  minion: null | number;
+  alignment: 'none' | 'p1' | 'p2';
 }
