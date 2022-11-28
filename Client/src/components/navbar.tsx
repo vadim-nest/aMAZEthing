@@ -43,24 +43,14 @@ function Navbar() {
             aMAZEthing
           </button>
           <MediaQuery minWidth={951}>
-            {location.pathname === '/game' && (
+            {!(location.pathname === '/') && !(location.pathname === '/learning') && (
               <button className="button" onClick={() => navigate('/learning')}>
                 LEARN
               </button>
             )}
-            {location.pathname === '/learning' && (
+            {!(location.pathname === '/')&& !(location.pathname === '/game') && (
               <button className="button" onClick={() => navigate('/game')}>
                 PLAY
-              </button>
-            )}
-            {location.pathname === '/profile' && (
-              <button className="button" onClick={() => navigate('/game')}>
-                PLAY
-              </button>
-            )}
-            {location.pathname === '/profile' && (
-              <button className="button" onClick={() => navigate('/learning')}>
-                LEARN
               </button>
             )}
           </MediaQuery>
@@ -116,7 +106,7 @@ function Navbar() {
                 ABOUT
               </button>
             )}
-            {(location.pathname === '/game' || location.pathname === '/profile') && user && (
+            {!(location.pathname === '/') && !(location.pathname === '/learning') && user && (
               <button
                 className="button"
                 onClick={() => {
@@ -128,7 +118,7 @@ function Navbar() {
                 LEARN
               </button>
             )}
-              {(location.pathname === '/learning' || location.pathname === '/profile') && user && (
+              {!(location.pathname === '/')&& !(location.pathname === '/game') && user && (
               <button
                 className="button"
                 onClick={() => {
@@ -137,7 +127,7 @@ function Navbar() {
                   toggleNavbar();
                 }}
               >
-                GAME
+                PLAY
               </button>
             )}
             {!(location.pathname === '/profile') && user && (

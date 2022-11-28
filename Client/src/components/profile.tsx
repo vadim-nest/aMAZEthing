@@ -40,7 +40,7 @@ function Profile() {
   return (
     <div>
       <div className='logo-img'>
-        {img?<img src={"data:image/jpeg;base64,"+ img}/>:null}
+        {img && <img src={"data:image/jpeg;base64,"+ img}/>}
       </div>
       {
         <h1>HELLO {user.username ?(user as User).username: 'THERE'},</h1>
