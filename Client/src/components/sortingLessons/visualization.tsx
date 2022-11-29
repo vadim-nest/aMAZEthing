@@ -4,11 +4,13 @@ import '../../css/sorting.css';
 
 export default function Visualization(props: any) {
 
-    let {array, animations, clicked, sortingAlgo, margin, paddingTop, width, delay, height, tower } = props
+    let {array, animations, clicked, sortingAlgo, margin, fontColor, fontSize, paddingTop, width, delay, height, tower } = props
 
     if (!delay) delay = 100;
     if(!margin) margin = 5
     if (!height) height = 20;
+    if(!fontColor) fontColor = 'white'
+    if(!fontSize) fontSize = 15
     if (!tower) tower = '';
 
     if(clicked) {
@@ -28,7 +30,9 @@ export default function Visualization(props: any) {
                 width: `${width}px`,
                 margin: `${margin}px`,
                 paddingTop: `${paddingTop}px`,
-                transition: `transform ${delay/1000}s ease-in-out `
+                transition: `transform ${delay/1000}s ease-in-out `,
+                color: `${fontColor}`,
+                fontSize:`${fontSize}px`
               }}
               id={`${index}arrayColumn${tower}`}
               key={`${index}`}

@@ -90,3 +90,7 @@ export function selectionSortAlgo(arr: number[], ASC_MODE:boolean) {
 
   return animations;
 }
+
+export function mergeSortAlgo(arr:number[], ASC_MODE:boolean) {
+  
+}
