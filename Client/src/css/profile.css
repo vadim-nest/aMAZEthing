@@ -58,7 +58,7 @@
 }
 
 .sort-progress, .path-progress {
-    margin: 5%;
+    margin: 2% 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
