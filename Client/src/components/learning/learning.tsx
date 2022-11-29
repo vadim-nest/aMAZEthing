@@ -35,12 +35,6 @@ export default function LearningPage() {
                 be no smaller/larger than the previous element, according to the
                 required order.
               </p>
-              <p className="explanation-text">
-                The output of any sorting algorithm must include a reordering,
-                retaining all of the original elements and each element has to
-                be no smaller/larger than the previous element, according to the
-                required order.
-              </p>
             </div>
             <CurveSort />
             <div className="path-algo">
