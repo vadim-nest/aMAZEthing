@@ -94,6 +94,25 @@
   margin: auto 10px auto 10px;
 }
 
+.left-just-two-columns {
+  display: flex;
+}
+
+.left-just-top {
+  display: inline;
+}
+
+.left-just-text {
+  color: var(--white-green);
+  font-size: 14px;
+  width: 30%;
+  align-self: flex-end;
+}
+
+.left-just-stats {
+  width: 70%;
+}
+
 .current-minion-name-left-bar, .current-tower-name-left-bar {
   margin-top: 30px;
   text-align: center;
@@ -102,19 +121,6 @@
 .current-minion-svg-left-bar {
   width: 80%;
   margin: 0 auto 0 auto;
-}
-
-.current-minion-text-left-bar {
-  font-size: 24px;
-  color: var(--white-green);
-}
-
-.current-minion-small-text-left-bar {
-  font-size: 18px;
-  font-family: 'Staatliches', cursive;
-  font-weight: 100;
-  margin-right: 20px;
-  color: grey;
 }
 
 /* width */

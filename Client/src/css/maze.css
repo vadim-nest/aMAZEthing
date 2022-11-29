@@ -41,3 +41,7 @@
 .mazeOuter::-webkit-scrollbar-thumb:hover {
   background: var(--yellow);
 }
+
+.mazeOuter::-webkit-scrollbar-corner {
+  background: var(--green);
+}
