@@ -337,7 +337,7 @@ function Game() { // TODO: Extract logic to maze class
       }
       return newTowerSorting;
     })
-    
+
     setTowers(prevTowers => {
       const newTowers = [...prevTowers];
       return newTowers.map(tower => {
@@ -375,7 +375,7 @@ function Game() { // TODO: Extract logic to maze class
           p2Towers: [towerId, ...gameStats.p2Towers]
         }
       }
-      
+
     })
     setMovingMinions(prevMinions => [...prevMinions, currentMinion as number]);
     tower = towers.find(tower => tower.id === towerId) as TowerType;
@@ -442,6 +442,8 @@ function Game() { // TODO: Extract logic to maze class
           <RightBar
             addNewMinion={addNewMinion}
             allTilesHidden={allTilesHidden}
+            currentMinion={currentMinion}
+            minions={minions}
           />
         </div>
       </div>

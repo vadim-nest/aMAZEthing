@@ -1,5 +1,5 @@
 import '../../css/TowerSVG.css';
-function store() {
+export default function ShopSVG() {
   return (
     <svg
       width='64'
@@ -131,6 +131,3 @@ function store() {
     </svg>
   );
 }
-
-const StoreSVG = store;
-export default StoreSVG;
