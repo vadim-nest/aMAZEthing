@@ -1,12 +1,10 @@
 import '../../css/learning.css';
-import { useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { Squirrel } from '../svg/animalsSVG';
 import CurveSort from './curveSortSVG';
 import CurvePath from './curvePathSVG';
 
 export default function LearningPage() {
-  const navigate = useNavigate();
 
   return (
     <>

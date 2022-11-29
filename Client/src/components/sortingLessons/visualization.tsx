@@ -9,7 +9,7 @@ export default function Visualization(props: any) {
     if (!delay) delay = 100;
     if(!margin) margin = 5
     if (!height) height = 20;
-    if(!fontColor) fontColor = 'white'
+    if(!fontColor) fontColor = 'var(--white-green)';
     if(!fontSize) fontSize = 15
     if (!tower) tower = '';
 
