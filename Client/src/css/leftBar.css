@@ -80,7 +80,7 @@
   background-color: red;
 } */
 
-.zoom-buttons button {
+/* .zoom-buttons button {
   flex-direction: column-reverse;
   background-color: var(--main-green);
   border: none;
@@ -94,8 +94,50 @@
 
 .zoomInButton {
   transform: scaleX(-1);
+} */
+
+/* .zoomOutButton {
+  transform: rotate(90deg);
+} */
+
+/* .zoomInSVG {
+  fill: var(--white-green);
+  stroke: var(--white-green);
+} */
+
+.zoom-buttons {
+  display: flex;
+  margin-left: 5px;
+}
+
+.zoomInOutSVG {
+  fill: var(--white-green);
+  stroke: var(--white-green);
+}
+
+.zoomInButton, .zoomOutButton {
+  width: 45%;
+  cursor: pointer;
+}
+
+.zoom-buttons:hover {
+  fill: var(--white);
+}
+
+.zoomInButton {
+  transform: scaleX(-1);
 }
 
 .zoomOutButton {
   transform: rotate(90deg);
+}
+
+.zoomInSVG {
+  fill: var(--white-green);
+  stroke: var(--white-green);
+}
+
+.zoomOutSVG {
+  fill: none;
+  stroke: none;
 }

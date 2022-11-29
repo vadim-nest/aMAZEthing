@@ -3,9 +3,10 @@ import { TowerType } from '../utils/types';
 import FlagSVG from './flagSVG';
 import MediaQuery from 'react-responsive';
 import { useAppSelector } from '../features/hooks';
-import zoomInSVG from '../assets/game-different/search-3079.svg'
-import zoomOutSVG from '../assets/game-different/search-3080.svg'
+// import zoomInSVG from '../assets/game-different/search-3079.svg'
+// import zoomOutSVG from '../assets/game-different/search-3080.svg'
 import React from 'react';
+import ZoomInOutSVG from './zoomButtonsSVG';
 
 function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, currentTower, setCurrentTower}: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>,
@@ -24,7 +25,7 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       return oldBoxSize + amount;
     })
   }
-  
+
   function zoomOut(amount: number) {
     setCurrentTower(null);
     setBoxSize(oldBoxSize => {
@@ -69,12 +70,12 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
         </div>}
 
         <div className='zoom-buttons'>
-          <button onClick={() => zoomIn(10)}>
-            <img className='zoomInButton' src={zoomInSVG} alt="" />
-          </button>
-          <button onClick={() => zoomOut(10)}>
-            <img className='zoomOutButton' src={zoomOutSVG} alt="" />
-          </button>
+          <div className='zoomInButton' onClick={() => zoomIn(10)}>
+            <ZoomInOutSVG inOrOut='zoomInSVG' />
+          </div>
+          <div className='zoomOutButton' onClick={() => zoomOut(10)}>
+            <ZoomInOutSVG inOrOut='zoomOutSVG' />
+          </div>
         </div>
     </div>
   );
