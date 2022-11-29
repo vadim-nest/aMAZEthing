@@ -35,7 +35,9 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
   }
 
   function zoomInHover() {
-    document.querySelectorAll('.zoomInSVG').forEach(svgEl => {
+    console.log();
+
+    document.querySelectorAll('.zoomInButton .zoomInSVG').forEach(svgEl => {
       console.log(svgEl);
 
       // svgEl.style.fill()
