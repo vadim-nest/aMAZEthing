@@ -6,7 +6,8 @@ import { useAppSelector } from '../features/hooks';
 // import zoomInSVG from '../assets/game-different/search-3079.svg'
 // import zoomOutSVG from '../assets/game-different/search-3080.svg'
 import React from 'react';
-import ZoomInOutSVG from './zoomButtonsSVG';
+// import ZoomInOutSVG from './zoomButtonsSVG';
+import { ZoomInSVG, ZoomOutSVG } from './zoomButtonsSVG'
 
 function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, currentTower, setCurrentTower}: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>,
@@ -34,13 +35,24 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
     })
   }
 
-  function zoomInHover() {
-    console.log();
+  // function zoomInHover() {
+  //   document.querySelectorAll('.zoom-in-svg').forEach(svgEl => {
+  //     (svgEl as unknown as HTMLElement).style.fill = 'var(--yellow)';
+  //     (svgEl as unknown as HTMLElement).style.stroke = 'var(--yellow)';
+  //   })
+  // }
 
-    document.querySelectorAll('.zoomInButton .zoomInSVG').forEach(svgEl => {
-      console.log(svgEl);
+  // function zoomInOffHover() {
+  //   document.querySelectorAll('.zoom-in-svg').forEach(svgEl => {
+  //     (svgEl as unknown as HTMLElement).style.fill = 'var(--white-green)';
+  //     (svgEl as unknown as HTMLElement).style.stroke = 'var(--white-green)';
+  //   })
+  // }
 
-      // svgEl.style.fill()
+  function zoomHover(zoomInOrOut: string, color: string) {
+    document.querySelectorAll(`.zoom-${zoomInOrOut}-svg`).forEach(svgEl => {
+      (svgEl as unknown as HTMLElement).style.fill = `${color}`;
+      (svgEl as unknown as HTMLElement).style.stroke = `${color}`;
     })
   }
 
@@ -80,11 +92,11 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
         </div>}
 
         <div className='zoom-buttons'>
-          <div className='zoomInButton' onMouseEnter={zoomInHover} onClick={() => zoomIn(10)}>
-            <ZoomInOutSVG inOrOut='zoomInSVG' />
+          <div className='zoomInButton' onMouseEnter={() => zoomHover('in', 'var(--yellow)')} onMouseLeave={() => zoomHover('in', 'var(--white-green)')} onClick={() => zoomIn(10)}>
+            <ZoomInSVG />
           </div>
-          <div className='zoomOutButton' onClick={() => zoomOut(10)}>
-            <ZoomInOutSVG inOrOut='zoomOutSVG' />
+          <div className='zoomOutButton' onMouseEnter={() => zoomHover('out', 'var(--yellow)')} onMouseLeave={() => zoomHover('out', 'var(--white-green)')} onClick={() => zoomOut(10)}>
+            <ZoomOutSVG />
           </div>
         </div>
     </div>

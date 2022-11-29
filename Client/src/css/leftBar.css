@@ -1,4 +1,6 @@
 .leftBarContainer {
+  display: flex;
+  flex-direction: column;
   background-color: var(--main-green);
   height: 100%;
   width: 10vw;
@@ -75,53 +77,23 @@
   font-size: 35px;
 }
 
-/* .zoomInButton svg {
-  fill: white;
-  background-color: red;
-} */
-
-/* .zoom-buttons button {
-  flex-direction: column-reverse;
-  background-color: var(--main-green);
-  border: none;
-  width: 45%;
-
-}
-
-.zoomInButton, .zoomOutButton {
-  width: 110%;
-}
-
-.zoomInButton {
-  transform: scaleX(-1);
-} */
-
-/* .zoomOutButton {
-  transform: rotate(90deg);
-} */
-
-/* .zoomInSVG {
-  fill: var(--white-green);
-  stroke: var(--white-green);
-} */
-
 .zoom-buttons {
   display: flex;
-  margin-left: 5px;
+  /* margin-left: auto;
+  margin-right: auto;
+  margin-top: auto; */
+  margin: auto auto 0px auto
+
 }
 
-.zoomInOutSVG {
+.zoom-in-svg, .zoom-out-svg {
   fill: var(--white-green);
   stroke: var(--white-green);
 }
 
 .zoomInButton, .zoomOutButton {
-  width: 45%;
   cursor: pointer;
-}
-
-.zoomInOutSVG:hover {
-  fill: var(--white);
+  width: 3.5vw;
 }
 
 .zoomInButton {
@@ -130,16 +102,4 @@
 
 .zoomOutButton {
   transform: rotate(90deg);
-}
-
-.zoomInSVG {
-  fill: var(--white-green);
-  stroke: var(--white-green);
-}
-
-.zoomOutSVG {
-  /* fill: none;
-  stroke: none; */
-  /* fill: var(--white-green);
-  stroke: var(--white-green); */
 }
