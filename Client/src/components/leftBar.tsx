@@ -1,5 +1,5 @@
 import '../css/leftBar.css';
-import { TowerType } from '../utils/types';
+import { minionType, TowerType } from '../utils/types';
 import FlagSVG from './svg/flagSVG';
 import MediaQuery from 'react-responsive';
 import { useAppSelector } from '../features/hooks';
@@ -7,15 +7,17 @@ import { useAppSelector } from '../features/hooks';
 // import zoomOutSVG from '../assets/game-different/search-3080.svg'
 import React from 'react';
 // import ZoomInOutSVG from './zoomButtonsSVG';
-import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG'
+import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG';
+import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 
-function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, currentTower, setCurrentTower}: {
+function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, minions, currentTower, setCurrentTower}: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>,
   minBoxSize: number,
   maxBoxSize: number,
   currentMinion: null | number,
   currentTile: null | {xPos:number, yPos:number},
   currentTower: null | TowerType,
+  minions: {[key: number]: minionType},
   setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>
 }) {
 
@@ -42,11 +44,23 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
     })
   }
 
+  // Just a temporary timer
   const [counter, setCounter] = React.useState(60);
   React.useEffect(() => {
     const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer as any);
   }, [counter]);
+
+  function whichAnimalSVG (minion: minionType) {
+    return (
+      minion.type === 'Squirrel' ? <Squirrel currentPlayer={`${minion.alignment}-color`} /> :
+      minion.type === 'Badger' ? <Badger currentPlayer={`${minion.alignment}-color`} /> :
+      minion.type === 'Hare' ? <Hare currentPlayer={`${minion.alignment}-color`} /> :
+      minion.type === 'Deer' ? <Deer currentPlayer={`${minion.alignment}-color`} /> :
+      minion.type === 'Koala' ? <Koala currentPlayer={`${minion.alignment}-color`} /> :
+      minion.type === 'Bear' && <Bear currentPlayer={`${minion.alignment}-color`} />
+    )
+  }
 
 
 
@@ -78,7 +92,18 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       </div>
       </MediaQuery>
       <div className='selected-info'>
-      {currentMinion !== null && <h1 className='current-minion-name-left-bar'>{currentMinion}</h1>}
+      {/* {currentMinion !== null && <h1 className='current-minion-name-left-bar'>{minions[currentMinion].id}</h1>} */}
+      {currentMinion !== null && <div className='current-minion-left-bar'>
+        <h1 className='current-minion-name-left-bar'>Jacky</h1>
+        <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1>
+        <h1 className='current-minion-text-left-bar'><span className='current-minion-small-text-left-bar'>Type</span>{minions[currentMinion].type}</h1>
+        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].alignment}</h1>
+        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].inTower}</h1>
+        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].pathFindingAlgo}</h1>
+        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].sortingAlgo}</h1>
+        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].sortingSpeed}</h1>
+        </div>}
+
       {currentTower !== null && <div>
         <h1 className='current-tower-name-left-bar'>{currentTower.id}</h1>
         <h1>{currentTower.numbers.join(', ')}</h1>
