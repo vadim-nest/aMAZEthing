@@ -1,3 +1,4 @@
+
 export function bubbleSortAlgo(arr: any, ASC_MODE:boolean) {
   const ArrayStates: number[][] = [];
   let animations: number[][] = [];
@@ -91,6 +92,50 @@ export function selectionSortAlgo(arr: number[], ASC_MODE:boolean) {
   return animations;
 }
 
-export function mergeSortAlgo(arr:number[], ASC_MODE:boolean) {
-  
+export function mergeSortAlgo(arr:number[]) {
+  const copy = [...arr];
+  const len = copy.length;
+  const aux = Array(len);
+  const animations:any = [];
+  mergeSortHelper(copy, aux, 0, len - 1, animations);
+  return {animations, aux};
 }
+
+function mergeSortHelper(arr:any, aux:any, left:any, right:any, animations:any) {
+  if (right <= left) return;
+  const mid = left + Math.floor((right - left) / 2);
+  mergeSortHelper(arr, aux, left, mid, animations);
+  mergeSortHelper(arr, aux, mid + 1, right, animations);
+  mergeNow(arr, aux,mid, left, right, animations)
+}
+ 
+function mergeNow(arr:any, aux:any, mid:any, left:any, right:any, animations:any) {
+  for (let i = left; i <= right; i++) aux[i] = arr[i];
+  let i = left;
+  let j = mid + 1;
+  for (let k = left; k <= right; k++) {
+    if (i > mid) {
+      animations.push([j]);
+      animations.push([k, aux[j]]);
+      arr[k] = aux[j++];
+    } else if (j > right) {
+      animations.push([i]);
+      animations.push([k, aux[i]]);
+      arr[k] = aux[i++];
+    } else if (aux[j] < aux[i]) {
+      animations.push([i, j]);
+      animations.push([k, aux[j]]);
+      arr[k] = aux[j++];
+    } else {
+      animations.push([i, j]);
+      animations.push([k, aux[i]]);
+      arr[k] = aux[i++];
+    }
+  }
+
+
+}
+
+// console.log(mergeSortAlgo([5,2,1 ,3,6, 4]))
+console.log(mergeSortAlgo([5,2,1 ,3,6, 4]))
+
