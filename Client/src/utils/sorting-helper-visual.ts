@@ -1,5 +1,6 @@
 
-export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, width:number, tower:'' = '') {
+export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number,  tower:'' = '') {
+    console.log(margin)
     for (let i = 0; i < animations.length; i++) {
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
@@ -10,10 +11,10 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
 
         document.getElementById(
           `${indexOne}arrayColumn${tower}`
-        )!.style.transform += `translateX(${width+4}px)`;
+        )!.style.transform += `translateX(${width+margin*2}px)`;
         document.getElementById(
           `${indexTwo}arrayColumn${tower}`
-        )!.style.transform += `translateX(-${width+4}px)`;
+        )!.style.transform += `translateX(-${width+margin*2}px)`;
 
 
         await delay(DELAY_MS);
