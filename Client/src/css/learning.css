@@ -32,7 +32,7 @@ svg {
   width:100%;
 }
 
-path {
+.learning-path {
   fill: none;
   stroke: var(--dark-brown);
   stroke-width: 0.8;

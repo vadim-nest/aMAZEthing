@@ -53,73 +53,73 @@ export default function LearningPage () {
           </div> */}
           <svg viewBox='-10 4 150 24'>
             {/* L - line, Q - curve */}
-            <path d='
+            <path className='learning-path' d='
               M -10, 15
               L 15, 15
             '/>
-            <path d='
+            <path className='learning-path' d='
               M 15, 15
               Q 20, 15
                 20, 20
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 20, 20
               L 20, 25
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 20, 25
               Q 20, 30
                 25, 30
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 25, 30
               L 35, 30
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 35, 30
               Q 40, 30
                 40, 25
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 40, 25
               L 40, 10
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 40, 10
               Q 40, 5
                 45, 5
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 45, 5
               L 60, 5
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 60, 5
 
               Q 65, 5
                 65, 10
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 65, 10
               L 65, 15
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 65, 15
               Q 65, 20
                 70, 20
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 70, 20
               L 140, 20
             '/>
@@ -177,7 +177,7 @@ export default function LearningPage () {
       </div>
     </div>
     <div className='path-finding-algs'>
-      
+
     </div>
     <Outlet/>
     </>
