@@ -8,6 +8,15 @@ export default function InsertionLesson() {
   const [array, setArray] = useState([3,5,7]);
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[1]])
+  const [isSorted, setIsSorted] = useState(false)
+
+  let WIDTH = 40
+  let MIN_VAL = 3
+  let MAX_VAL = 20
+  let NUM_BARS = 12
+  let DELAY = 10
+  let PADTOP = 10
+  let MARGIN = 5
 
   let paragraphs = {
     sortName: 'Insertion sort',
@@ -16,7 +25,7 @@ export default function InsertionLesson() {
   };
 
   useEffect(() => {
-    setArray(array => array = generateArray(15))
+    setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL))
   }, [])
 
   useEffect(() => {
@@ -25,9 +34,10 @@ export default function InsertionLesson() {
     setAnimations(insertionSortAlgo(copyArr, true))
   }, [array])
 
-  function initArr(ARR_BARS:number) {
+  function initArr() {
     setClicked(false)
-    setArray(array => array = generateArray(ARR_BARS));
+    setIsSorted(false)
+    setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
   }
   
 
@@ -42,14 +52,23 @@ export default function InsertionLesson() {
 
       <div className="lesson-wrapper-2">
       <div>
-          <button className='button clickSort' onClick={() => initArr(15)}> new array </button>
           {!clicked && 
-            <button className="button clickSort" onClick={() => setClicked(true)}>
+           < button className="button clickSort" onClick={() => initArr()}>
+            new array
+          </button>}
+
+          {!clicked &&!isSorted && 
+            <button
+              className="button clickSort"
+              onClick={() => {
+                setClicked(true);
+              }}
+            >
               visualize
             </button>
           }
         </div>
-        <Visualization width={30} delay={200} margin={5} paddingTop={10} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual}/>
+        <Visualization width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual} setClicked={setClicked} setIsSorted={setIsSorted}/>
       </div>
     </div>
   );

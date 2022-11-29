@@ -8,6 +8,15 @@ export default function SelectionLesson() {
   const [array, setArray] = useState([] as number[]);
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[]] as number[][])
+  const [isSorted, setIsSorted] = useState(false)
+
+  let WIDTH = 40
+  let MIN_VAL = 3
+  let MAX_VAL = 20
+  let NUM_BARS = 12
+  let DELAY = 10
+  let PADTOP = 10
+  let MARGIN = 5
 
     let paragraphs = {
         sortName: "Selection sort",
@@ -17,7 +26,7 @@ export default function SelectionLesson() {
 
 
       useEffect(() => {
-        setArray(array => array = generateArray(15))
+        setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL))
       }, [])
     
       useEffect(() => {
@@ -26,9 +35,10 @@ export default function SelectionLesson() {
         setAnimations(selectionSortAlgo(copyArr , true))
       }, [array])
     
-      function initArr(ARR_BARS:number) {
+      function initArr() {
         setClicked(false)
-        setArray(array => array = generateArray(ARR_BARS));
+        setIsSorted(false)
+        setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
       }
     
 
@@ -41,14 +51,23 @@ export default function SelectionLesson() {
 
       <div className="lesson-wrapper-2">
       <div>
-          <button className='button clickSort' onClick={() => initArr(15)}> new array </button>
-          {!clicked && 
-            <button className="button clickSort" onClick={() => setClicked(true)}>
+      {!clicked && 
+           < button className="button clickSort" onClick={() => initArr()}>
+            new array
+          </button>}
+
+          {!clicked &&!isSorted && 
+            <button
+              className="button clickSort"
+              onClick={() => {
+                setClicked(true);
+              }}
+            >
               visualize
             </button>
           }
         </div>
-        <Visualization width={30} delay={100} fontColor={'white'} fontSize={15} margin={5} paddingTop={10} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={selectionSortVisual}/>
+        <Visualization  fontColor={'white'} fontSize={15} width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={selectionSortVisual} setClicked={setClicked}   setIsSorted={ setIsSorted}/>
 
       </div>
     </div>

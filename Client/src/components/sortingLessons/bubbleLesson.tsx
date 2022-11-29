@@ -8,6 +8,18 @@ export default function BubbleLesson() {
   const [array, setArray] = useState([3, 5, 7]);
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[1]]);
+  const [isSorted, setIsSorted] = useState(false)
+
+  let WIDTH = 40
+  let MIN_VAL = 3
+  let MAX_VAL = 20
+  let NUM_BARS = 12
+  let DELAY = 10
+  let PADTOP = 10
+  let MARGIN = 5
+
+
+
   let paragraphs = {
     sortName: 'Bubble sort',
     firstP:
@@ -15,7 +27,7 @@ export default function BubbleLesson() {
   };
 
   useEffect(() => {
-    setArray((array) => (array = generateArray(12)));
+    setArray((array) => (array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL)));
   }, []);
 
   useEffect(() => {
@@ -24,9 +36,10 @@ export default function BubbleLesson() {
     setAnimations(bubbleSortAlgo(copyArr, false));
   }, [array]);
 
-  function initArr(ARR_BARS: number) {
+  function initArr() {
     setClicked(false);
-    setArray((array) => (array = generateArray(ARR_BARS)));
+    setIsSorted(false)
+    setArray((array) => (array = generateArray(NUM_BARS , MIN_VAL, MAX_VAL)));
   }
 
   return (
@@ -38,10 +51,12 @@ export default function BubbleLesson() {
 
       <div className="lesson-wrapper-2">
         <div>
-          <button className="button clickSort" onClick={() => initArr(12)}>
+        {!clicked && 
+           < button className="button clickSort" onClick={() => initArr()}>
             new array
-          </button>
-          {!clicked && (
+          </button>}
+
+          {!clicked &&!isSorted && 
             <button
               className="button clickSort"
               onClick={() => {
@@ -50,18 +65,20 @@ export default function BubbleLesson() {
             >
               visualize
             </button>
-          )}
+          }
         </div>
         <Visualization
-          width={40}
-          delay={10}
-          margin={5}
-          paddingTop={10}
+          width={WIDTH}
+          delay={DELAY}
+          margin={MARGIN}
+          paddingTop={PADTOP}
           array={array}
           key={array}
           animations={animations}
           clicked={clicked}
           sortingAlgo={bubbleSortVisual}
+          setClicked={setClicked}
+          setIsSorted={ setIsSorted}
         />
       </div>
     </div>
