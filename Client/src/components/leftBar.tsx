@@ -93,21 +93,53 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       </MediaQuery>
       <div className='selected-info'>
       {/* {currentMinion !== null && <h1 className='current-minion-name-left-bar'>{minions[currentMinion].id}</h1>} */}
-      {currentMinion !== null && <div className='current-minion-left-bar'>
-        <h1 className='current-minion-name-left-bar'>Jacky</h1>
-        <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1>
-        <h1 className='current-minion-text-left-bar'><span className='current-minion-small-text-left-bar'>Type</span>{minions[currentMinion].type}</h1>
-        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].alignment}</h1>
-        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].inTower}</h1>
-        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].pathFindingAlgo}</h1>
-        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].sortingAlgo}</h1>
-        <h1 className='current-minion-text-left-bar'>{minions[currentMinion].sortingSpeed}</h1>
+
+
+
+        {currentMinion !== null && <div className='current-minion-left-bar'>
+
+          <div className='left-just-top'>
+            <h1 className='current-minion-name-left-bar'>Jacky</h1>
+            <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1>
+          </div>
+
+          <div className='left-just-two-columns'>
+              <h1 className='left-just-text'>Type</h1>
+              <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
+          </div>
+
+          <div className='left-just-two-columns'>
+            <h1 className='left-just-text'>Alignment</h1>
+            <h1 className='left-just-stats'>{minions[currentMinion].alignment}</h1>
+          </div>
+
+          <div className='left-just-two-columns'>
+              <h1 className='left-just-text'>In tower</h1>
+              <h1 className='left-just-stats'>{minions[currentMinion].inTower}</h1>
+          </div>
+
+          <div className='left-just-two-columns'>
+              <h1 className='left-just-text'>pathFindingAlgo</h1>
+              <h1 className='left-just-stats'>{minions[currentMinion].pathFindingAlgo}</h1>
+          </div>
+
+          <div className='left-just-two-columns'>
+              <h1 className='left-just-text'>sortingAlgo</h1>
+              <h1 className='left-just-stats'>{minions[currentMinion].sortingAlgo}</h1>
+          </div>
+
+          <div className='left-just-two-columns'>
+            <h1 className='left-just-text'>{minions[currentMinion].sortingSpeed}</h1>
+            <h1 className='left-just-stats'>{minions[currentMinion].sortingSpeed}</h1>
+          </div>
+
         </div>}
 
-      {currentTower !== null && <div>
-        <h1 className='current-tower-name-left-bar'>{currentTower.id}</h1>
-        <h1>{currentTower.numbers.join(', ')}</h1>
-        {currentTower.minion !== null && <h1>Tower contains minion {currentTower.minion}</h1>}
+
+        {currentTower !== null && <div>
+          <h1 className='current-tower-name-left-bar'>{currentTower.id}</h1>
+          <h1>{currentTower.numbers.join(', ')}</h1>
+          {currentTower.minion !== null && <h1>Tower contains minion {currentTower.minion}</h1>}
         </div>}
       </div>
 
