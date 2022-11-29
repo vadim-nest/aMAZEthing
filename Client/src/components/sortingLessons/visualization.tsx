@@ -11,7 +11,7 @@ export default function Visualization(props: any) {
     if (!tower) tower = '';
 
     if(clicked) {
-      console.log('sorting');
+      console.log('sorting', array, animations);
       sortingAlgo(animations, delay, width, tower)
     }
 

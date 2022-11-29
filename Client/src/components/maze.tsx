@@ -25,7 +25,7 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   setCurrentTower: React.Dispatch<React.SetStateAction<null|TowerType>>
   allTilesHidden: boolean,
   setAllTilesHidden: React.Dispatch<React.SetStateAction<boolean>>,
-  towersSorting: number[]
+  towersSorting: {[key: number]: number}
 }) {
 
   // TODO: Set as state

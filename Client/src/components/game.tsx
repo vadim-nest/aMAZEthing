@@ -22,7 +22,7 @@ function Game() { // TODO: Extract logic to maze class
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
   const [towers, setTowers] = useState<TowerType[]>([]);
   const [allTilesHidden, setAllTilesHidden] = useState(true);
-  const [towersSorting, setTowersSorting] = useState<number[]>([0,0,0,0,0,0,0]);
+  const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
   const array: MazeTileType[] = [];
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
@@ -176,8 +176,10 @@ function Game() { // TODO: Extract logic to maze class
 
   async function enterTower(towerId: number, minionId: number) {
     setTowersSorting(prevTowerSorting => {
-      const newTowerSorting = [...prevTowerSorting];
-      newTowerSorting.push(towerId);
+      const newTowerSorting = {
+        ...prevTowerSorting,
+        [towerId]: 0
+      }
       return newTowerSorting;
     })
     setTowers(prevTowers => {
@@ -213,8 +215,11 @@ function Game() { // TODO: Extract logic to maze class
   function exitTower(towerId: number, minionId: number) {
     let minion = minions[minionId];
     setTowersSorting(prevTowerSorting => {
-      const newTowerSorting = [...prevTowerSorting];
-      return newTowerSorting.filter(tower => tower !== towerId);
+      const newTowerSorting = {
+        ...prevTowerSorting,
+        [towerId]: 0
+      }
+      return newTowerSorting;
     })
     setTowers(prevTowers => {
       const newTowers = [...prevTowers];

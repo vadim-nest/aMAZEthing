@@ -12,7 +12,7 @@ function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, currentTower, 
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   width: number,
   height: number,
-  towersSorting: number[]
+  towersSorting: {[key: number]: number}
 } ) {
 
   function handleContextMenu() {
@@ -42,7 +42,7 @@ function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, currentTower, 
                   tower.alignment === 'p2' ? 'p2TowerShadow' :
                   'neutralTowerShadow'}
       />
-      {<TowerPopup towersSorting={towersSorting} boxSize={boxSize} tower={tower} width={width} height={height} visible={currentTower !== null && currentTower.id === tower.id}/>}
+      {currentTower !== null && currentTower.id === tower.id && <TowerPopup towersSorting={towersSorting} boxSize={boxSize} tower={tower} width={width} height={height} visible={currentTower !== null && currentTower.id === tower.id}/>}
     </div>
   )
 }
