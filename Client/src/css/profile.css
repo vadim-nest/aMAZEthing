@@ -1,6 +1,6 @@
 .icon {
     width: 6rem;
-    height: 5rem;
+    height: 5.5rem;
     margin: 5% 0;
 }
 
@@ -10,16 +10,16 @@
     overflow: auto;
 }
 
-.profile-page h1 {
+.profile-page h1, h2 {
     font-size: 2rem;
-}
-
-.profile-page h2 {
-    font-size: 1.5rem;
 }
 
 .profile-page h3 {
     font-size: 1rem;
+}
+
+.profile-page h4 {
+    font-size: 0.75rem;
 }
 
 .user-dashboard {
@@ -66,8 +66,8 @@
 }
 
 .sort-progress-img, .path-progress-img {
-    height: 7.5rem;
-    width: 9rem;
+    height: 8rem;
+    width: 10rem;
 }
 
 .algo-name {
@@ -110,6 +110,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 .achievements {

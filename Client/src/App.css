@@ -23,7 +23,7 @@ body {
     background-color: var(--main-green);
 }
 
-h1, h2, h3, button {
+h1, h2, h3, h4, button {
     font-family: 'Staatliches', cursive;
     font-weight: 100;
     color: var( --white-green);
