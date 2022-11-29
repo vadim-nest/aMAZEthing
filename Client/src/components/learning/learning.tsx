@@ -13,10 +13,10 @@ export default function LearningPage() {
           <h1>Welcome to the amazing learning experience.</h1>
           <h1>Learn sorting and path finding algorithms.</h1>
         </div>
-        <div className="scroll-learning">
+        <button className="scroll-learning" onClick={() => window.scrollBy(0, window.innerHeight)}>
           <h3>Scroll to learn more.</h3>
           <h3>↓</h3>
-        </div>
+        </button>
       </div>
       <div className="all-algs">
         <div className="sorting-algs">

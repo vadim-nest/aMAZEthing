@@ -10,8 +10,14 @@
   color: var(--white-green);
 }
 
+.scroll-learning {
+  background-color: transparent;
+  border: 0;
+}
+
 .scroll-learning h3 {
   color: var(--yellow);
+  font-size: 30px;
 }
 
 .explanation {
