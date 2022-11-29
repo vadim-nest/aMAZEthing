@@ -92,19 +92,23 @@ export function selectionSortAlgo(arr: number[], ASC_MODE:boolean) {
   return animations;
 }
 
-export function mergeSortAlgo(arr:number[]) {
+export function mergeSortAlgo(arr:number[] ,ASC_MODE:boolean) {
   const aux = arr.slice();
   const animations:any = [];
-  mergeSortHelper(arr, aux, 0, arr.length - 1, animations);
+  mergeSortHelper(arr, aux, 0, arr.length - 1, animations, ASC_MODE);
   return animations;
 }
 
-function mergeSortHelper(arr:any, aux:any, left:any, right:any, animations:any) {
+function mergeSortHelper(arr:any, aux:any, left:any, right:any, animations:any, ASC_MODE:boolean) {
   if (right <= left) return;
   const mid = left + Math.floor((right - left) / 2);
-  mergeSortHelper(arr, aux, left, mid, animations);
-  mergeSortHelper(arr, aux, mid + 1, right, animations);
-  mergeNow(arr, aux,mid, left, right, animations)
+  mergeSortHelper(arr, aux, left, mid, animations,ASC_MODE);
+  mergeSortHelper(arr, aux, mid + 1, right, animations,ASC_MODE);
+  if(ASC_MODE) {
+    mergeNow(arr, aux,mid, left, right, animations)
+  } else {
+    mergeNowDesc(arr, aux,mid, left, right, animations)
+  }
 }
  
 function mergeNow(arr:any, aux:any, mid:any, left:any, right:any, animations:any) {
@@ -157,6 +161,54 @@ function mergeNow(arr:any, aux:any, mid:any, left:any, right:any, animations:any
   }
 }
 
-// console.log(mergeSortAlgo([5,2,1 ,3,6, 4]))
-console.log(mergeSortAlgo([5,2,1]))
+function mergeNowDesc(arr:any, aux:any, mid:any, left:any, right:any, animations:any) {
+  for (let i = left; i <= right; i++) aux[i] = arr[i];
+  let i = left;
+  let j = mid + 1;
+  let k = left
+  while (i <= mid && j <= right) {
+    // These are the values that we're comparing; we push them once
+    // to change their color.
+    animations.push([i, j]);
+    // These are the values that we're comparing; we push them a second
+    // time to revert their color.
+    animations.push([i, j]);
+    if (aux[i] >= aux[j]) {
+      // We overwrite the value at index k in the original array with the
+      // value at index i in the auxiliary array.
+      animations.push([k, aux[i]]);
+      arr[k++] = aux[i++];
+    } else {
+      // We overwrite the value at index k in the original array with the
+      // value at index j in the auxiliary array.
+      animations.push([k, aux[j]]);
+      arr[k++] = aux[j++];
+    }
+  }
+  while (i <= mid) {
+    // These are the values that we're comparing; we push them once
+    // to change their color.
+    animations.push([i, i]);
+    // These are the values that we're comparing; we push them a second
+    // time to revert their color.
+    animations.push([i, i]);
+    // We overwrite the value at index k in the original array with the
+    // value at index i in the auxiliary array.
+    animations.push([k, aux[i]]);
+    arr[k++] = aux[i++];
+  }
+  while (j <= right) {
+    // These are the values that we're comparing; we push them once
+    // to change their color.
+    animations.push([j, j]);
+    // These are the values that we're comparing; we push them a second
+    // time to revert their color.
+    animations.push([j, j]);
+    // We overwrite the value at index k in the original array with the
+    // value at index j in the auxiliary array.
+    animations.push([k, aux[j]]);
+    arr[k++] = aux[j++];
+  }
+}
+
 

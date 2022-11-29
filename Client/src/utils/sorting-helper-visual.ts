@@ -38,11 +38,11 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
           'var(--dark-green)';
       }
     }
-    for(let i = 0; i<arrayBars.length ; i++) {
-      const bar = arrayBars[i] as HTMLElement 
-      await delay(50)
-      bar.style.background = 'var(--main-green)'
-  }
+  //   for(let i = 0; i<arrayBars.length ; i++) {
+  //     const bar = arrayBars[i] as HTMLElement 
+  //     await delay(50)
+  //     bar.style.background = 'var(--main-green)'
+  // }
 
     if (cb) cb()
   }
@@ -83,11 +83,11 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
     }
     const arrayBars = document.getElementsByClassName('array-el');
 
-    for(let i = 0; i<arrayBars.length ; i++) {
-      const bar = arrayBars[i] as HTMLElement 
-      await delay(50)
-      bar.style.background = 'var(--main-green)'
-  }
+  //   for(let i = 0; i<arrayBars.length ; i++) {
+  //     const bar = arrayBars[i] as HTMLElement 
+  //     await delay(50)
+  //     bar.style.background = 'var(--main-green)'
+  // }
     if (cb) cb()
 
   }
@@ -120,11 +120,11 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
       }
       
     }   
-    for(let i = 0; i<arrayBars.length ; i++) {
-      const bar = arrayBars[i] as HTMLElement 
-      await delay(50)
-      bar.style.background = 'var(--main-green)'
-  }
+  //   for(let i = 0; i<arrayBars.length ; i++) {
+  //     const bar = arrayBars[i] as HTMLElement 
+  //     await delay(50)
+  //     bar.style.background = 'var(--main-green)'
+  // }
     if (cb) cb()
 
   }

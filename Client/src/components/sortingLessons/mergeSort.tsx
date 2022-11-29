@@ -12,10 +12,10 @@ export default function BubbleLesson() {
 
   let WIDTH = 40
   let MIN_VAL = 3
-  let MAX_VAL = 20
+  let MAX_VAL = 35
   let NUM_BARS = 12
   let DELAY = 10
-  let PADTOP = 10
+  let PADTOP = 5
   let MARGIN = 5
 
   let paragraphs = {
@@ -32,7 +32,7 @@ export default function BubbleLesson() {
   useEffect(() => {
     console.log(array)
     const copyArr = array.slice()
-    setAnimations(mergeSortAlgo(copyArr))
+    setAnimations(mergeSortAlgo(copyArr, false))
   }, [array])
 
   function initArr() {
