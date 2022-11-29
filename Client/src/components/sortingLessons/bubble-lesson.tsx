@@ -16,7 +16,7 @@ export default function BubbleLesson() {
 
 
   useEffect(() => {
-    setArray(array => array = generateArray(15))
+    setArray(array => array = generateArray(12))
   }, [])
 
   useEffect(() => {
@@ -41,14 +41,15 @@ export default function BubbleLesson() {
 
       <div className="lesson-wrapper-2">
         <div>
-          <button className='button clickSort' onClick={() => initArr(5)}> new array </button>
+        <button className='button clickSort' onClick={() => initArr(12)}> new array </button>
           {!clicked && 
-            <button className="button clickSort" onClick={() => setClicked(true)}>
+            <button className="button clickSort" onClick={() =>{
+              setClicked(true)}}>
               visualize
             </button>
           }
         </div>
-        <Visualization width={40} delay={350} margin={5} paddingTop={10}  array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={bubbleSortVisual}/>
+        <Visualization width={40} delay={10} margin={5} paddingTop={10}  array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={bubbleSortVisual}/>
 
       </div>
     </div>

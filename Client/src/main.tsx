@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import InsertionLesson from './components/sortingLessons/insertion-lesson';
 import {store} from './features/store'
 import SelectionLesson from './components/sortingLessons/selection-lesson';
+import MergeLesson from './components/sortingLessons/mergeSort';
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,9 @@ const router = createBrowserRouter([
       element: <InsertionLesson/>
       },
       {path:'/selectionLesson',
-    element: <SelectionLesson/>}
+    element: <SelectionLesson/>},
+    {path:'/mergeLesson',
+    element: <MergeLesson/>}
     ],
   },
 ]);

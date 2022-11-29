@@ -4,7 +4,7 @@ import '../../css/sorting.css';
 
 export default function Visualization(props: any) {
 
-    let {array, animations, clicked, sortingAlgo, margin, fontColor, fontSize, paddingTop, width, delay, height, tower } = props
+    let {array, animations, clicked, sortingAlgo, margin, fontColor, fontSize, paddingTop, width, delay, height, tower, setDisabledButton, setVisualFinished } = props
 
     if (!delay) delay = 100;
     if(!margin) margin = 5
@@ -14,8 +14,7 @@ export default function Visualization(props: any) {
     if (!tower) tower = '';
 
     if(clicked) {
-      console.log('sorting', array, animations);
-      sortingAlgo(animations, delay, width, margin, tower)
+        sortingAlgo(animations, delay, width, margin, tower)
     }
 
     return(
