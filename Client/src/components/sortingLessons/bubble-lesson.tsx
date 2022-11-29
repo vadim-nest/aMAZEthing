@@ -16,13 +16,13 @@ export default function BubbleLesson() {
 
 
   useEffect(() => {
-    setArray(array => array = generateArray(20))
+    setArray(array => array = generateArray(15))
   }, [])
 
   useEffect(() => {
     console.log(array)
     const copyArr = array.slice()
-    setAnimations(bubbleSortAlgo(copyArr, true))
+    setAnimations(bubbleSortAlgo(copyArr, false))
   }, [array])
 
   function initArr(ARR_BARS:number) {
@@ -48,7 +48,7 @@ export default function BubbleLesson() {
             </button>
           }
         </div>
-        <Visualization width={20} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={bubbleSortVisual}/>
+        <Visualization width={40} delay={350} margin={5} paddingTop={10}  array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={bubbleSortVisual}/>
 
       </div>
     </div>

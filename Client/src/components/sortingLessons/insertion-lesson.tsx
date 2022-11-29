@@ -16,7 +16,7 @@ export default function InsertionLesson() {
   };
 
   useEffect(() => {
-    setArray(array => array = generateArray(225))
+    setArray(array => array = generateArray(15))
   }, [])
 
   useEffect(() => {
@@ -42,14 +42,14 @@ export default function InsertionLesson() {
 
       <div className="lesson-wrapper-2">
       <div>
-          <button className='button clickSort' onClick={() => initArr(5)}> new array </button>
+          <button className='button clickSort' onClick={() => initArr(15)}> new array </button>
           {!clicked && 
             <button className="button clickSort" onClick={() => setClicked(true)}>
               visualize
             </button>
           }
         </div>
-        <Visualization width={3}array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual}/>
+        <Visualization width={30} delay={200} margin={5} paddingTop={10} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual}/>
       </div>
     </div>
   );
