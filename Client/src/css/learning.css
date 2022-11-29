@@ -54,8 +54,12 @@ path {
 }
 
 .lesson-name {
-  font-size: 2px;
-  fill: var(--white);
+  fill: var(--dark-brown);
+  stroke: var(--dark-brown);
+  stroke-width: 0.1px;
+  font-variant: all-small-caps;
+  font-weight: bold;
+  font-size: 2.5px;
 }
 
 .lesson-name-label {
