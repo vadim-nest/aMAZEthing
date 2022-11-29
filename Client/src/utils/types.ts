@@ -11,7 +11,8 @@ export interface minionType {
   inTower: false | number;
   pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
   sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
-  sortingSpeed: number
+  sortingSpeed: number;
+  type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear'
 }
 
 export interface MazeTileType {

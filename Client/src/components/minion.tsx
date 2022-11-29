@@ -27,6 +27,14 @@ function Minion({boxSize, minion, setCurrentMinion, setCurrentTile, setCurrentTo
   return (
       <div onClick={handleClick} onContextMenu={handleContextMenu}  id={`${minion.id}`} className={`minion ${minion.rotation} ${(minion.inTower && !minion.rotation)&& 'minionInTower'}`} style={{fill: `red`, height: `${boxSize}px`, width: `${boxSize}px`, top: `${boxSize*minion.yPos}px`, left: `${boxSize*minion.xPos}px`}}>
         <Bear currentPlayer={`${minion.alignment}-color`} />
+        {
+          minion.type === 'Squirrel' ? <Squirrel currentPlayer={`${minion.alignment}-color`} /> :
+          minion.type === 'Badger' ? <Badger currentPlayer={`${minion.alignment}-color`} /> :
+          minion.type === 'Hare' ? <Hare currentPlayer={`${minion.alignment}-color`} /> :
+          minion.type === 'Deer' ? <Deer currentPlayer={`${minion.alignment}-color`} /> :
+          minion.type === 'Koala' ? <Koala currentPlayer={`${minion.alignment}-color`} /> :
+          minion.type === 'Bear' && <Bear currentPlayer={`${minion.alignment}-color`} />
+        }
       </div>
   )
 }
