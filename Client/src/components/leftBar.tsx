@@ -10,7 +10,7 @@ import React from 'react';
 import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 
-function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, minions, currentTower, setCurrentTower}: {
+function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, minions, currentTower, setCurrentTower, gameStats}: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>,
   minBoxSize: number,
   maxBoxSize: number,
@@ -19,6 +19,7 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
   currentTower: null | TowerType,
   minions: {[key: number]: minionType},
   setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>
+  gameStats: {timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}
 }) {
 
   function zoomIn(amount: number) {
@@ -44,12 +45,6 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
     })
   }
 
-  // Just a temporary timer
-  const [counter, setCounter] = React.useState(60);
-  React.useEffect(() => {
-    const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => clearInterval(timer as any);
-  }, [counter]);
 
   function whichAnimalSVG (minion: minionType) {
     return (
@@ -84,9 +79,9 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       <MediaQuery minWidth={951}>
       <div className='money-time'>
         <h3 className='time-money-text'>Time remaining</h3>
-        <h3 className='time-count'>{counter}</h3>
+        <h3 className='time-count'>{gameStats.timeRemaining}</h3>
         <h3 className='time-money-text'>Money</h3>
-        <h3 className='money-count'>200</h3>
+        <h3 className='money-count'>{gameStats.p1Coins}</h3>
       </div>
       <div className='scores'>
       </div>

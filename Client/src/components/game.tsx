@@ -24,10 +24,41 @@ function Game() { // TODO: Extract logic to maze class
   const [towers, setTowers] = useState<TowerType[]>([]);
   const [allTilesHidden, setAllTilesHidden] = useState(true);
   const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
+  const [gameStats, setGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
+    timeRemaining: 300,
+    p1Coins: 0,
+    p2Coins: 0,
+    p1Towers: [],
+    p2Towers: [],
+    p1MinionCount: 0,
+    p2MinionCount: 0,
+  });
   const array: MazeTileType[] = [];
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
   }
+
+  const [counter, setCounter] = useState(300);
+  useEffect(() => {
+    const timer = counter > 0 && setInterval(() => {
+      setGameStats(prevStats => {
+        return {
+          ...prevStats,
+          timeRemaining: counter - 1
+        }
+      })
+      console.log(gameStats.p1Towers)
+      setGameStats(prevStats => {
+        return {
+          ...prevStats,
+          p1Coins: prevStats.p1Coins + 20*prevStats.p1Towers.length,
+          p2Coins: prevStats.p2Coins + 20*prevStats.p2Towers.length,
+        }
+      })
+      setCounter(counter - 1);
+    }, 1000);
+    return () => clearInterval(timer as any);
+  }, [counter]);
 
   const [maze, setMaze] = useState(array);
   const speed = 200;
@@ -37,6 +68,12 @@ function Game() { // TODO: Extract logic to maze class
   function addNewMinion(type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear') { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
     if ((newId + 1) % 2) {
+      setGameStats(prevStats => {
+        return {
+          ...prevStats,
+          p1MinionCount: prevStats.p1MinionCount + 1
+        }
+      })
       setMinions(prevMinions => {
         return {
           ...prevMinions,
@@ -57,7 +94,12 @@ function Game() { // TODO: Extract logic to maze class
         }
       })
     } else {
-      console.log('other Minion')
+      setGameStats(prevStats => {
+        return {
+          ...prevStats,
+          p1MinionCount: prevStats.p1MinionCount + 1
+        }
+      })
       setMinions(prevMinions => {
         return {
           ...prevMinions,
@@ -82,11 +124,24 @@ function Game() { // TODO: Extract logic to maze class
     setCurrentTower(null);
   }
 
+  function addCoins(alignment: 'p1' | 'p2', amount: number) {
+    setGameStats(prevStats => {
+      if (alignment === 'p1') {
+        return {
+          ...prevStats,
+          p1Coins: prevStats.p1Coins + amount
+        }
+      } else {
+        return {
+          ...prevStats,
+          p2Coins: prevStats.p2Coins + amount
+        }
+      }
+    })
+  }
+
   async function moveMinion(goTo: {xPos: number, yPos: number}, comeFrom: {xPos: number, yPos: number}, currentGraph: Graph, minion: false | minionType = false, showPath = true) {
     if (!minion) minion = minions[currentMinion as number] as minionType;
-    console.log('Current positions:')
-    console.log('Minion:', minion.xPos, minion.yPos);
-    console.log('Tile:', goTo.xPos, goTo.yPos);
     const directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
     if (directions === false) return;
     const path = [...directions.path] as number[];
@@ -270,6 +325,11 @@ function Game() { // TODO: Extract logic to maze class
 
   function exitTower(towerId: number, minionId: number) {
     let minion = minions[minionId];
+    let tower = towers.find(tower => tower.id === towerId) as TowerType;
+    console.log(tower.alignment);
+    if (tower.alignment === 'none') {
+      addCoins(minion.alignment, 200);
+    }
     setTowersSorting(prevTowerSorting => {
       const newTowerSorting = {
         ...prevTowerSorting,
@@ -277,6 +337,7 @@ function Game() { // TODO: Extract logic to maze class
       }
       return newTowerSorting;
     })
+    
     setTowers(prevTowers => {
       const newTowers = [...prevTowers];
       return newTowers.map(tower => {
@@ -299,8 +360,25 @@ function Game() { // TODO: Extract logic to maze class
         }
       }
     })
+    setGameStats(prevStats => {
+      console.log({towerId});
+      if (minion.alignment === 'p1') {
+        return {
+          ...prevStats,
+          p2Towers: gameStats.p2Towers.filter(tower => tower !== towerId),
+          p1Towers: [towerId, ...gameStats.p1Towers]
+        }
+      } else {
+        return {
+          ...prevStats,
+          p1Towers: gameStats.p1Towers.filter(tower => tower !== towerId),
+          p2Towers: [towerId, ...gameStats.p2Towers]
+        }
+      }
+      
+    })
     setMovingMinions(prevMinions => [...prevMinions, currentMinion as number]);
-    const tower = towers.find(tower => tower.id === towerId) as TowerType;
+    tower = towers.find(tower => tower.id === towerId) as TowerType;
     if (minion.alignment === 'p1') moveMinion({xPos:0, yPos:0}, {xPos: tower.xPos, yPos:tower.yPos}, currentGraph as Graph, minion, false);
     else moveMinion({xPos:width-1, yPos:height-1}, {xPos: tower.xPos, yPos:tower.yPos}, currentGraph as Graph, minion, false);
   }
@@ -339,6 +417,7 @@ function Game() { // TODO: Extract logic to maze class
             currentMinion={currentMinion}
             currentTile={currentTile}
             minions={minions}
+            gameStats={gameStats}
             />
           <Maze
             maze={maze}
