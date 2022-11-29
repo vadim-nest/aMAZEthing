@@ -22,35 +22,57 @@ function Game() { // TODO: Extract logic to maze class
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
   const [towers, setTowers] = useState<TowerType[]>([]);
   const [allTilesHidden, setAllTilesHidden] = useState(true);
+  const [towersSorting, setTowersSorting] = useState<number[]>([0,0,0,0,0,0,0]);
   const array: MazeTileType[] = [];
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
   }
 
   const [maze, setMaze] = useState(array);
-  const speed = 200;
+  const speed = 10;
   const minBoxSize = 20;
   const maxBoxSize = 100;
 
   function addNewMinion() { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
-    setMinions(prevMinions => {
-      return {
-        ...prevMinions,
-        [newId]: {
-          id: newId,
-          xPos: 0,
-          yPos: 0,
-          rotation: 'minionR',
-          path: [],
-          alignment: 'p1',
-          thoughtProcess: [],
-          inTower: false,
-          pathFindingAlgo: 'bfs',
-          sortingAlgo: 'bubble'
+    if ((newId + 1) % 2) {
+      setMinions(prevMinions => {
+        return {
+          ...prevMinions,
+          [newId]: {
+            id: newId,
+            xPos: 0,
+            yPos: 0,
+            rotation: 'minionR',
+            path: [],
+            alignment: 'p1',
+            thoughtProcess: [],
+            inTower: false,
+            pathFindingAlgo: 'bfs',
+            sortingAlgo: 'bubble'
+          }
         }
-      }
-    })
+      })
+    } else {
+      console.log('other Minion')
+      setMinions(prevMinions => {
+        return {
+          ...prevMinions,
+          [newId]: {
+            id: newId,
+            xPos: width-1,
+            yPos: height-1,
+            rotation: 'minionR',
+            path: [],
+            alignment: 'p2',
+            thoughtProcess: [],
+            inTower: false,
+            pathFindingAlgo: 'bfs',
+            sortingAlgo: 'bubble'
+          }
+        }
+      })
+    }
     setCurrentMinion(newId);
     setCurrentTower(null);
   }
@@ -153,13 +175,20 @@ function Game() { // TODO: Extract logic to maze class
   }, [currentTile])
 
   async function enterTower(towerId: number, minionId: number) {
+    setTowersSorting(prevTowerSorting => {
+      const newTowerSorting = [...prevTowerSorting];
+      newTowerSorting.push(towerId);
+      return newTowerSorting;
+    })
     setTowers(prevTowers => {
+      const minion = minions[minionId];
       const newTowers = [...prevTowers];
       return newTowers.map(tower => {
         if (towerId !== tower.id) return tower;
         else return {
           ...tower,
-          minion: minionId
+          minion: minion.id,
+          minionAlignment: minion.alignment
         }
       })
     })
@@ -183,6 +212,10 @@ function Game() { // TODO: Extract logic to maze class
 
   function exitTower(towerId: number, minionId: number) {
     let minion = minions[minionId];
+    setTowersSorting(prevTowerSorting => {
+      const newTowerSorting = [...prevTowerSorting];
+      return newTowerSorting.filter(tower => tower !== towerId);
+    })
     setTowers(prevTowers => {
       const newTowers = [...prevTowers];
       return newTowers.map(tower => {
@@ -226,6 +259,7 @@ function Game() { // TODO: Extract logic to maze class
             maze={maze}
             setMaze={setMaze}
             towers={towers}
+            towersSorting={towersSorting}
             setTowers={setTowers}
             currentTower={currentTower}
             setCurrentTower={setCurrentTower}

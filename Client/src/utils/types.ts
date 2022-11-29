@@ -26,5 +26,6 @@ export interface TowerType {
   numbers: number[];
   color: 'red' | 'blue';
   minion: null | number;
+  minionAlignment: null | 'p1' | 'p2';
   alignment: 'none' | 'p1' | 'p2';
 }

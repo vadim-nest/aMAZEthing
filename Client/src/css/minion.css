@@ -10,11 +10,11 @@
   animation: none;
 }
 
-.player1-color {
+.p1-color {
   fill: orange;
 }
 
-.player2-color {
+.p2-color {
   fill: var(--red);
 }
 
