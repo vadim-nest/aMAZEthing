@@ -34,7 +34,7 @@ function Game() { // TODO: Extract logic to maze class
   const minBoxSize = 20;
   const maxBoxSize = 100;
 
-  function addNewMinion() { // TODO: Extract to minion class
+  function addNewMinion(type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear') { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
     if ((newId + 1) % 2) {
       setMinions(prevMinions => {
@@ -51,7 +51,8 @@ function Game() { // TODO: Extract logic to maze class
             inTower: false,
             pathFindingAlgo: 'bfs',
             sortingAlgo: 'bubble',
-            sortingSpeed: 500
+            sortingSpeed: 500,
+            type
           }
         }
       })
@@ -71,7 +72,8 @@ function Game() { // TODO: Extract logic to maze class
             inTower: false,
             pathFindingAlgo: 'bfs',
             sortingAlgo: 'bubble',
-            sortingSpeed: 500
+            sortingSpeed: 500,
+            type
           }
         }
       })
