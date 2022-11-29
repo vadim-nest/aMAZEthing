@@ -1,40 +1,30 @@
 .initial-view-text {
   text-align: center;
-  font-size: 26px;
-  color: var(--white);
+  font-size: 30px;
+  color: var(--white-green);
 }
 
 .initial-view {
   background-color: var(--main-green);
   height: 90vh;
-  margin: 0;
-  padding: 0;
 }
 
 .initial-view-text {
-  padding-top: 50px;
+  padding: 20vh;
 }
 
 .all-algs {
   min-height: 90vh;
+  width: 100vw;
 }
 
-.all-algs h3 {
-  font-size: 60px;
-  margin: 0px;
-  padding: 0px;
-  margin-left: 10vw;
-  padding-top: 20vh;
-}
-
-.path-finding-algs {
+.path-finding-algs, .sorting-algs {
   background-color: var(--white);
 }
 
 .curve-1 {
-  height: 800px;
+  height: 500px;
   position: relative;
-
 }
 
 svg {
@@ -49,7 +39,7 @@ path {
 }
 
 .circles {
-  fill: #fff;
+  fill: var(--white);
   stroke: var(--dark-brown);
   stroke-width: 0.6;
 }
@@ -65,7 +55,7 @@ path {
 
 .lesson-name {
   font-size: 2px;
-  fill: #fff;
+  fill: var(--white);
 }
 
 .lesson-name-label {
@@ -108,7 +98,28 @@ path {
   left: 19.8vw;
 } */
 
+.explanation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .sorting-algo, .path-algo {
-  margin: 50px 150px;
+  margin: 20px 50px 30px 50px;
   text-align: left;
+}
+
+.explanation-title {
+  font-size: 50px;
+  margin: 5vh 0;
+  color: var(--main-green);
+}
+
+.explanation-text {
+  color: var(--main-green);
+  font-size: 30px;
+}
+
+.scroll-down {
+  padding: 30vh;
 }

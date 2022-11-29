@@ -31,20 +31,21 @@ export default function LearningPage () {
     <div className='initial-view'>
       <div className='initial-view-text'>
         <h1>Welcome to the amazing learning experience.</h1>
-        <div className='sorting-algo'>
-          <h3>Sorting algorithm</h3><p>Puts elements of a list into an order. It can be numerical and lexicographical, and either ascending or descending.</p>
-          <p>The output of any sorting algorithm must include a reordering, retaining all of the original elements and each element has to be no smaller/larger than the previous element, according to the required order.</p>
+        <h1>Learn sorting and path finding algorithms.</h1>
+        <div className='scroll-down'>
+          <h3>Scroll to learn more.</h3>
+          <h3>↓</h3>
         </div>
-        <div className='path-algo'>
-          <h3>Path finding algorithm</h3><p>Takes a start point (also known as a node) and a goal and attempts to make the shortest path between the two given possible obstacles blocking the way. The simplest example of path finding is a 2D grid in a game, that can be used to find a path from A to B on any type of graph. What you will soon see used here!</p>
-        </div>
-        <h3>Scroll to learn more.</h3>
       </div>
     </div>
     <div className='all-algs'>
-      <div className='path-finding-algs'>
-        <h3>SORTING ALGORITHMS</h3>
-        <div className='curve-1'>
+      <div className='sorting-algs'>
+        <div className='explanation'>
+          <div className='sorting-algo'>
+            <h3 className='explanation-title'>Sorting algorithms</h3>
+            <p className='explanation-text'>Puts elements of a list into an order. It can be numerical and lexicographical, and either ascending or descending. The output of any sorting algorithm must include a reordering, retaining all of the original elements and each element has to be no smaller/larger than the previous element, according to the required order.</p>
+          </div>
+          <div className='curve-1'>
           {/* <div  className='over-curve-1'>
             <p className='path-labels' id='bubble-sort-label'>Bubble sort</p>
             <p className='path-labels' id='insertion-sort-label'>Insertion sort</p>
@@ -168,7 +169,15 @@ export default function LearningPage () {
             setLoaded(true);
           }}></img> */}
         </div>
+          <div className='path-algo'>
+            <h3 className='explanation-title'>Path finding algorithms</h3>
+            <p className='explanation-text'>Takes a start point (also known as a node) and a goal and attempts to make the shortest path between the two given possible obstacles blocking the way. The simplest example of path finding is a 2D grid in a game, that can be used to find a path from A to B on any type of graph. What you will soon see used here!</p>
+          </div>
+        </div>
       </div>
+    </div>
+    <div className='path-finding-algs'>
+      
     </div>
     <Outlet/>
     </>
