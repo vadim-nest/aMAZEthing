@@ -12,7 +12,7 @@ export default function SelectionLesson() {
     let paragraphs = {
         sortName: "Selection sort",
         firstP:
-          "This algorithm is slightly different than the previous two. Someone write the explanation.",
+          "This algorithm scans all the items and finds the smallest, swaps it into position as the first item. Then repeats the selection sort on the remaining items. Worst time complexity O(N^2)",
       };
 
 

@@ -11,7 +11,7 @@ export default function BubbleLesson() {
   let paragraphs = {
     sortName: 'Bubble sort',
     firstP:
-      'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. As we go through each element, if the current element is bigger than the next one, we swap them. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.',
+      'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. Starting on one side, compares adjacent items and keep “bubbling” the larger one to the other side. Worst time complexity O(N^2).',
   };
 
   useEffect(() => {

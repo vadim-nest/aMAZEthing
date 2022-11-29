@@ -12,7 +12,7 @@ export default function InsertionLesson() {
   let paragraphs = {
     sortName: 'Insertion sort',
     firstP:
-      'Insertion Sort is also a simple sorting algorithm that swaps two elements if they are in the wrong order. As we go through each element, if the current element is smaller than the previous one, the elements are swapped. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.',
+      'Starts on one side and compares two first items, sorts them and moves on to the next item checking if it is smaller than the previous items and places it in its place. Worst time complexity O(N^2). ',
   };
 
   useEffect(() => {
