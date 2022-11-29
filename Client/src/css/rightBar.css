@@ -1,9 +1,15 @@
 .right-bar {
   width: 10vw;
-  /* background-color: var(--main-green); */
   font-size: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
+}
+
+.store-button {
+  width: 7vw;
+  margin-top: auto;
+  background-color: transparent;
+  border: none;
 }

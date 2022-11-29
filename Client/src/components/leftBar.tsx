@@ -42,6 +42,14 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
     })
   }
 
+  const [counter, setCounter] = React.useState(60);
+  React.useEffect(() => {
+    const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer as any);
+  }, [counter]);
+
+
+
   const user  = useAppSelector((state)=>state.user);
 
   return(
@@ -62,7 +70,7 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       <MediaQuery minWidth={951}>
       <div className='money-time'>
         <h3 className='time-money-text'>Time remaining</h3>
-        <h3 className='time-count'>1:29</h3>
+        <h3 className='time-count'>{counter}</h3>
         <h3 className='time-money-text'>Money</h3>
         <h3 className='money-count'>200</h3>
       </div>

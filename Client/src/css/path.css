@@ -10,9 +10,10 @@
 }
 
 .THOUGHTPROCESS {
-  background-color: blue;
+  background-color: var(--purple);
+  opacity: 0.4;
 }
 
 .PATH {
-  background-color: red;
+  background-color: var(--yellow);
 }

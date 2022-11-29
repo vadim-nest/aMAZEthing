@@ -298,7 +298,7 @@ function Game() { // TODO: Extract logic to maze class
   useEffect(() => {
     if (Object.keys(towersSorting).some(towerId=>{
       if (currentTower === null || Number(towerId) !== currentTower.id) {
-        return towersSorting[Number(towerId)] > 0 
+        return towersSorting[Number(towerId)] > 0
       }
     })) {
       setTowersSorting(prevTowersSorting => {
