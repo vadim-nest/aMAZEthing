@@ -10,8 +10,12 @@
   animation: none;
 }
 
-.player-color-svg {
+.player1-color {
   fill: orange;
+}
+
+.player2-color {
+  fill: var(--red);
 }
 
 .player-color-shadow-svg {

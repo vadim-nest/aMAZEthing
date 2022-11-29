@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/minion.css';
 import { minionType, TowerType } from '../utils/types';
-import AnimalSVG from './animalsSVG';
+import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './animalsSVG';
 
 function Minion({boxSize, minion, setCurrentMinion, setCurrentTile, setCurrentTower}: {
   boxSize: number,
@@ -26,7 +26,7 @@ function Minion({boxSize, minion, setCurrentMinion, setCurrentTile, setCurrentTo
 
   return (
       <div onClick={handleClick} onContextMenu={handleContextMenu}  id={`${minion.id}`} className={`minion ${minion.rotation} ${(minion.inTower && !minion.rotation)&& 'minionInTower'}`} style={{fill: `red`, height: `${boxSize}px`, width: `${boxSize}px`, top: `${boxSize*minion.yPos}px`, left: `${boxSize*minion.xPos}px`}}>
-        <AnimalSVG />
+        <Bear currentPlayer='player2-color' />
       </div>
   )
 }
