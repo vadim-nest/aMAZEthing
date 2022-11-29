@@ -14,95 +14,6 @@
   color: var(--yellow);
 }
 
-.all-algs {
-  min-height: 90vh;
-  width: 100vw;
-}
-
-.path-finding-algs, .sorting-algs {
-  background-color: var(--white-green);
-}
-
-.curve-1 {
-  height: 60vh;
-  position: relative;
-}
-
-svg {
-  height:100%;
-  width:100%;
-}
-
-.learning-path {
-  fill: none;
-  stroke: var(--dark-brown);
-  stroke-width: 0.8;
-}
-
-.circles {
-  fill: var(--white-green);
-  stroke: var(--dark-brown);
-  stroke-width: 0.6;
-}
-
-.circles:hover {
-  fill: var(--dark-brown);
-  cursor: pointer;
-}
-
-.nuts {
-  pointer-events: none;
-}
-
-.lesson-name {
-  fill: var(--dark-brown);
-  stroke: var(--dark-brown);
-  stroke-width: 0.1px;
-  font-variant: all-small-caps;
-  font-weight: bold;
-  font-size: 2.5px;
-}
-
-.lesson-name-label {
-  fill: var(--white-green);
-}
-
-/* .over-curve-1 {
-  margin: 0;
-  padding: 0;
-  z-index: 2;
-  color: var(--white-green);
-  font-weight: bold;
-  text-align: center;
-}
-
-.path-labels {
-  width: fit-content;
-  height: fit-content;
-  position: absolute;
-  font-size: 1.3vw;
-  padding: 5px 15px 5px 15px;
-  border: 3px solid var(--white-green);
-  border-radius: 20px;
-  background: #fff;
-  cursor: default;
-} */
-
-/* .bubble-sort-label {
-  top: 29vh;
-  left: 11vw;
-}
-
-.insertion-sort-label {
-  top: 38.5vh;
-  left: 19.8vw;
-}
-
-.selection-sort-label {
-  top: 64.6vh;
-  left: 19.8vw;
-} */
-
 .explanation {
   display: flex;
   flex-direction: column;
@@ -110,7 +21,7 @@ svg {
 }
 
 .sorting-algo, .path-algo {
-  margin: 30px 100px;
+  margin: 5vh 15vw;
   text-align: left;
 }
 
@@ -122,6 +33,6 @@ svg {
 
 .explanation-text {
   color: var(--dark-brown);
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 700;
 }

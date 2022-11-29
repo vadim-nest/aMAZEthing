@@ -1,24 +1,26 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './App'
+import App from './App';
 import Welcome from './components/welcome';
 import Game from './components/game';
-import Learning from './components/learning';
+import Learning from './components/learning/learning';
 import Login from './components/login';
 import Profile from './components/profile';
 import About from './components/about';
 import BubbleLesson from './components/sortingLessons/bubble-lesson';
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
 import InsertionLesson from './components/sortingLessons/insertion-lesson';
-import {store} from './features/store'
+import { store } from './features/store';
 import SelectionLesson from './components/sortingLessons/selection-lesson';
 import MergeLesson from './components/sortingLessons/mergeSort';
+import HeapLesson from './components/sortingLessons/heapSort';
+import QuickLesson from './components/sortingLessons/quickSort';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App/>,
+    element: <App />,
     children: [
       {
         path: '/',
@@ -52,19 +54,17 @@ const router = createBrowserRouter([
         path: '/learning/bubbleLesson',
         element: <BubbleLesson />,
       },
-      {path:'/insertionLesson', 
-      element: <InsertionLesson/>
-      },
-      {path:'/selectionLesson',
-    element: <SelectionLesson/>},
-    {path:'/mergeLesson',
-    element: <MergeLesson/>}
+      { path: '/learning/insertionLesson', element: <InsertionLesson /> },
+      { path: '/learning/selectionLesson', element: <SelectionLesson /> },
+      { path: '/learning/mergeLesson', element: <MergeLesson /> },
+      { path: '/learning/heapLesson', element: <HeapLesson /> },
+      { path: '/learning/quickLesson', element: <QuickLesson />}
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <Provider store = {store}>
-      <RouterProvider router={router} />
-    </Provider>
-)
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);
