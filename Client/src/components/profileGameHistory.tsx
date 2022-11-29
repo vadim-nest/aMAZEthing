@@ -4,7 +4,7 @@ import { useAppSelector } from '../features/hooks';
 import { useEffect, useState } from 'react';
 import coin from '../assets/profile/coin.png';
 import TowerSVG from './towerSVG';
-import squirrel from '../assets/minions/squirrel.svg';
+import { Squirrel } from './animalsSVG';
 
 export default function ProfileGameHistory() {
   const user = useAppSelector((state) => state.user);
@@ -47,7 +47,7 @@ export default function ProfileGameHistory() {
               <div className="date"><h3>DATE: {element.finishedAt}</h3></div>
             </div>
             <div className="minionStats">
-                <img className='image-profile' src={squirrel}/>
+                <Squirrel currentPlayer="p1-color"/>
                 <h3>{element.amountMinions} Minions</h3>
             </div>
             <div className="towerStats">

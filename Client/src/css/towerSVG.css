@@ -1,9 +1,15 @@
 .neutralTower {
-  fill: grey
+  fill: grey;
+  stroke: black;
+  stroke-width: 5px;
 }
 
 .p1Tower {
   fill: var(--yellow);
+}
+
+.p1TowerShadow, .p2TowerShadow, .neutralTowerShadow {
+  fill: black;
 }
 
 .p2Tower {

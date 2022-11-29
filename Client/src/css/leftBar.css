@@ -120,7 +120,7 @@
   cursor: pointer;
 }
 
-.zoom-buttons:hover {
+.zoomInOutSVG:hover {
   fill: var(--white);
 }
 
@@ -138,6 +138,8 @@
 }
 
 .zoomOutSVG {
-  fill: none;
-  stroke: none;
+  /* fill: none;
+  stroke: none; */
+  /* fill: var(--white-green);
+  stroke: var(--white-green); */
 }

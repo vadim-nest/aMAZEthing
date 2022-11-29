@@ -34,6 +34,14 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
     })
   }
 
+  function zoomInHover() {
+    document.querySelectorAll('.zoomInSVG').forEach(svgEl => {
+      console.log(svgEl);
+
+      // svgEl.style.fill()
+    })
+  }
+
   const user  = useAppSelector((state)=>state.user);
 
   return(
@@ -70,7 +78,7 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
         </div>}
 
         <div className='zoom-buttons'>
-          <div className='zoomInButton' onClick={() => zoomIn(10)}>
+          <div className='zoomInButton' onMouseEnter={zoomInHover} onClick={() => zoomIn(10)}>
             <ZoomInOutSVG inOrOut='zoomInSVG' />
           </div>
           <div className='zoomOutButton' onClick={() => zoomOut(10)}>
