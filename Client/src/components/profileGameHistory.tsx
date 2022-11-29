@@ -3,8 +3,8 @@ import { User } from '@auth0/auth0-react';
 import { useAppSelector } from '../features/hooks';
 import { useEffect, useState } from 'react';
 import coin from '../assets/profile/coin.png';
-import TowerSVG from './towerSVG';
-import { Squirrel } from './animalsSVG';
+import TowerSVG from './svg/towerSVG';
+import { Squirrel } from './svg/animalsSVG';
 
 export default function ProfileGameHistory() {
   const user = useAppSelector((state) => state.user);

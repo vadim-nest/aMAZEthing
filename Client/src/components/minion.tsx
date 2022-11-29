@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/minion.css';
 import { minionType, TowerType } from '../utils/types';
-import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './animalsSVG';
+import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 
 function Minion({boxSize, minion, setCurrentMinion, setCurrentTile, setCurrentTower}: {
   boxSize: number,

@@ -1,13 +1,13 @@
 import '../css/leftBar.css';
 import { TowerType } from '../utils/types';
-import FlagSVG from './flagSVG';
+import FlagSVG from './svg/flagSVG';
 import MediaQuery from 'react-responsive';
 import { useAppSelector } from '../features/hooks';
 // import zoomInSVG from '../assets/game-different/search-3079.svg'
 // import zoomOutSVG from '../assets/game-different/search-3080.svg'
 import React from 'react';
 // import ZoomInOutSVG from './zoomButtonsSVG';
-import { ZoomInSVG, ZoomOutSVG } from './zoomButtonsSVG'
+import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG'
 
 function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, currentTower, setCurrentTower}: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>,
@@ -34,20 +34,6 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       return oldBoxSize - amount;
     })
   }
-
-  // function zoomInHover() {
-  //   document.querySelectorAll('.zoom-in-svg').forEach(svgEl => {
-  //     (svgEl as unknown as HTMLElement).style.fill = 'var(--yellow)';
-  //     (svgEl as unknown as HTMLElement).style.stroke = 'var(--yellow)';
-  //   })
-  // }
-
-  // function zoomInOffHover() {
-  //   document.querySelectorAll('.zoom-in-svg').forEach(svgEl => {
-  //     (svgEl as unknown as HTMLElement).style.fill = 'var(--white-green)';
-  //     (svgEl as unknown as HTMLElement).style.stroke = 'var(--white-green)';
-  //   })
-  // }
 
   function zoomHover(zoomInOrOut: string, color: string) {
     document.querySelectorAll(`.zoom-${zoomInOrOut}-svg`).forEach(svgEl => {
@@ -83,13 +69,14 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       <div className='scores'>
       </div>
       </MediaQuery>
-
-      {currentMinion !== null && <h1>The current minion is {currentMinion}</h1>}
+      <div className='selected-info'>
+      {currentMinion !== null && <h1 className='current-minion-name-left-bar'>{currentMinion}</h1>}
       {currentTower !== null && <div>
-        <h1>The current tower is {currentTower.id}</h1>
+        <h1 className='current-tower-name-left-bar'>{currentTower.id}</h1>
         <h1>{currentTower.numbers.join(', ')}</h1>
         {currentTower.minion !== null && <h1>Tower contains minion {currentTower.minion}</h1>}
         </div>}
+      </div>
 
         <div className='zoom-buttons'>
           <div className='zoomInButton' onMouseEnter={() => zoomHover('in', 'var(--yellow)')} onMouseLeave={() => zoomHover('in', 'var(--white-green)')} onClick={() => zoomIn(10)}>

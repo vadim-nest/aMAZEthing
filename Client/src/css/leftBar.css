@@ -6,6 +6,10 @@
   width: 10vw;
 }
 
+.leftBarContainer h3 {
+  cursor: default;
+}
+
 .flags {
   margin-top: 50px;
 }
@@ -77,13 +81,18 @@
   font-size: 35px;
 }
 
+.selected-info {
+  margin: auto 10px auto 10px;
+}
+
+.current-minion-name-left-bar, .current-tower-name-left-bar {
+  margin-top: 30px;
+  text-align: center;
+}
+
 .zoom-buttons {
   display: flex;
-  /* margin-left: auto;
-  margin-right: auto;
-  margin-top: auto; */
   margin: auto auto 0px auto
-
 }
 
 .zoom-in-svg, .zoom-out-svg {
