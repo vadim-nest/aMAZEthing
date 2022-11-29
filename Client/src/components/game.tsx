@@ -365,14 +365,14 @@ function Game() { // TODO: Extract logic to maze class
       if (minion.alignment === 'p1') {
         return {
           ...prevStats,
-          p2Towers: gameStats.p2Towers.filter(tower => tower !== towerId),
-          p1Towers: [towerId, ...gameStats.p1Towers]
+          p2Towers: prevStats.p2Towers.filter(tower => tower !== towerId),
+          p1Towers: [towerId, ...prevStats.p1Towers]
         }
       } else {
         return {
           ...prevStats,
-          p1Towers: gameStats.p1Towers.filter(tower => tower !== towerId),
-          p2Towers: [towerId, ...gameStats.p2Towers]
+          p1Towers: prevStats.p1Towers.filter(tower => tower !== towerId),
+          p2Towers: [towerId, ...prevStats.p2Towers]
         }
       }
 
