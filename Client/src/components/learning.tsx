@@ -123,24 +123,24 @@ export default function LearningPage () {
               L 90, 20
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 90, 20
               Q 95, 20
                 95, 25
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 95, 25
               L 95, 30
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 95, 30
               Q 95, 35
                 100, 35
             '/>
 
-            <path d='
+            <path className='learning-path' d='
               M 100, 35
               L 130, 35
             '/>
