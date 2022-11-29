@@ -7,7 +7,6 @@ export class Graph {
   edges: [value, value, number][] = []; 
 
   addVertex (value: value) {
-    console.log('Adding vertex', value);
     
     if (!this.vertices.includes(value)) {
       this.vertices.push(value);
