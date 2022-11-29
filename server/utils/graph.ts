@@ -1,7 +1,6 @@
 import { bFS, dFS, dFSShortest } from "./path-finding-algo";
 
 export type value = string | number;
-
 export class Graph {
   vertices: value[] = []; // ! Vertices must be unique
   edges: [value, value, number][] = []; 

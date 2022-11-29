@@ -1,19 +1,4 @@
 import { Graph, value } from "./graph";
-
-export function reverseMaze(graph:Graph,visited:value[],classes:{ [key: value]: ('b' | 't' | 'r' | 'l')[] },towers:number[]){
-
-
-    let revGraph = JSON.parse(JSON.stringify(graph));
-    revGraph.vertices.reverse();
-    //reverse
-    let revVisited = visited;
-    let revClasses = classes;
-    let revTowers = towers;
-    console.log('reverse',revGraph.vertices);
-
-
-    return  {revGraph,revVisited,revClasses,revTowers}
-}
 export function generateConnectedGraph(width: number, height: number) {
     const nodeNum = width * height;
 

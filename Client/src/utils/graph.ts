@@ -6,6 +6,10 @@ export class Graph {
   vertices: value[] = []; // ! Vertices must be unique
   edges: [value, value, number][] = []; 
 
+  reAssign(graph:Graph){
+    Object.assign(this,graph)
+
+  }
   addVertex (value: value) {
     if (!this.vertices.includes(value)) {
       this.vertices.push(value);

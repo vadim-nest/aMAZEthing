@@ -33,7 +33,8 @@ apiService.updateUsername = function (accessToken:any,user:any) { //TODO solve t
     .catch((err) => console.log(err));
 }
 
-apiService.createMaze = function (width:number,height:number) { //TODO solve type ->in redux userSlice
+apiService.createMaze = function (width:number,height:number)
+ { 
   return fetch(`${BASE_URL}/createMaze`, {
     method: 'POST',
     headers: { 

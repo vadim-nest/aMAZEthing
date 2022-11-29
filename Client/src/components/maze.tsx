@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import '../css/maze.css';
+import apiService from "../services/apiService";
 import { Graph, value } from "../utils/graph";
 import { generateMaze } from "../utils/maze";
 import { MazeTileType, minionType, TowerType } from "../utils/types";
 import MazeTile from "./mazeTile";
 import Minion from "./minion";
 import Tower from "./tower";
+
 
 function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers, currentTower, setCurrentTower, allTilesHidden, setAllTilesHidden, towersSorting}: {
   boxSize:number,
@@ -40,13 +42,19 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   const [displayVisited, setDisplayVisited] = useState<value[]>([]);
   const [mazeGenerated, setMazeGenerated] = useState(false);
   
-
   useEffect(() => {
-    const mazeTiles = document.getElementsByClassName('mazeTile');
-    if (mazeGenerated === false) {
-      setMazeGenerated(true);
-      const {graph, visited, classes, towers} = generateMaze(width, height);
-      setTowers(() => towers.map(tower => {
+    // async function mazeInit(){
+      const mazeTiles = document.getElementsByClassName('mazeTile');
+      if (mazeGenerated === false) {
+        setMazeGenerated(true);
+        const {graph, visited, classes, towers} = generateMaze(width,height)
+        
+        //const {graph, visited, classes, towers} = await apiService.createMaze(width,height)
+        // let graph = new Graph()
+        // graph.reAssign(graphBE)
+        // console.log({graph, visited, classes, towers});
+        
+        setTowers(() => towers.map((tower:any) => {
           return {
             id: tower,
             xPos: tower%width,
@@ -60,40 +68,44 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
             minionSortingSpeed: null
           }
         })
-      )
-      setCurrentGraph(graph);
-      setDisplayVisited(visited);
-      setMaze(oldMaze => {
-        const newMaze = [...oldMaze];
-        for (let value of visited) {
-          newMaze[value as number] = {
-            ...newMaze[value as number],
-            classes: classes[value as value]
+        )
+        setCurrentGraph(graph);
+        setDisplayVisited(visited);
+        setMaze(oldMaze => {
+          const newMaze = [...oldMaze];
+          for (let value of visited) {
+            newMaze[value as number] = {
+              ...newMaze[value as number],
+              classes: classes[value as value]
+            }
           }
-        }
-        return newMaze;
-      })
-    }
-    else if (allTilesHidden) {
-      const mazeTiles = document.getElementsByClassName('mazeTile');
-      const halfway = Math.floor(mazeTiles.length/2);
-      let index = -1;
-      function step() {
-        for (let i = 0; i < 50 - 49*((Math.abs(halfway - index)/halfway)); i++) {
-          index++;
-          if (index === displayVisited.length) break;
-          const currentTile = mazeTiles[displayVisited[index] as number];
-          currentTile.classList.remove('showNone');
-        }
-
-        if (index < displayVisited.length) requestAnimationFrame(step)
-        else {
-          setAllTilesHidden(false);
-          setMazeCompleted();
-        };
+          return newMaze;
+        })
+        
       }
-      requestAnimationFrame(step);
-    }
+      else if (allTilesHidden && currentGraph) {
+        const mazeTiles = document.getElementsByClassName('mazeTile');
+        console.log({mazeTiles})
+        const halfway = Math.floor(mazeTiles.length/2);
+        let index = -1;
+        function step() {
+          for (let i = 0; i < 50 - 49*((Math.abs(halfway - index)/halfway)); i++) {
+            index++;
+            if (index === displayVisited.length) break;
+            const currentTile = mazeTiles[displayVisited[index] as number];
+            currentTile.classList.remove('showNone');
+          }
+
+          if (index < displayVisited.length) requestAnimationFrame(step)
+          else {
+            setAllTilesHidden(false);
+            setMazeCompleted();
+          };
+        }
+        requestAnimationFrame(step);
+      }
+    // }
+    // mazeInit();
   },[maze]);
 
   return (
