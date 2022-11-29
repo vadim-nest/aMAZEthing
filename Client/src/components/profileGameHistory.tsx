@@ -47,7 +47,9 @@ export default function ProfileGameHistory() {
               <div className="date"><h3>DATE: {element.finishedAt}</h3></div>
             </div>
             <div className="minionStats">
+              <div className='image-profile'>
                 <Squirrel currentPlayer="p1-color"/>
+              </div>
                 <h3>{element.amountMinions} Minions</h3>
             </div>
             <div className="towerStats">

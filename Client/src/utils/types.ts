@@ -11,6 +11,7 @@ export interface minionType {
   inTower: false | number;
   pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
   sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
+  sortingSpeed: number
 }
 
 export interface MazeTileType {
@@ -27,5 +28,7 @@ export interface TowerType {
   color: 'red' | 'blue';
   minion: null | number;
   minionAlignment: null | 'p1' | 'p2';
+  minionSortingSpeed: null | number;
   alignment: 'none' | 'p1' | 'p2';
+  animations: number[][]
 }
