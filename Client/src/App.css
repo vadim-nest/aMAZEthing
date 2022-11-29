@@ -30,7 +30,7 @@ h1, h2, h3, button {
 }
 
 button:hover{
-    color: var(--white)
+    color: var(--yellow)
 }
 
 .outlet {
