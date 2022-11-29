@@ -1,4 +1,4 @@
-import '../css/towerSVG.css'
+
 // const zoomInSVG = ({inOrOut}: {inOrOut: string}) =>
 const ZoomInSVG = () =>
 (
