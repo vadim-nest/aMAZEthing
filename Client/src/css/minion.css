@@ -5,7 +5,7 @@
   background-size: contain;
   width: 30px;
   height: 30px;
-  transition: 500ms;
+  transition: 200ms;
   transform: rotateY('0deg') rotateZ('0deg');
   animation: none;
 }
