@@ -1,12 +1,25 @@
 .icon {
-    width: 120px;
-    height: 110px;
+    width: 6rem;
+    height: 5rem;
+    margin: 5% 0;
 }
 
 .profile-page {
     background-color: var(--white);
     height: 90vh;
     overflow: auto;
+}
+
+.profile-page h1 {
+    font-size: 2rem;
+}
+
+.profile-page h2 {
+    font-size: 1.5rem;
+}
+
+.profile-page h3 {
+    font-size: 1rem;
 }
 
 .user-dashboard {
@@ -19,8 +32,8 @@
 }
 
 .user-info {
-    width: 55vw;
-    margin: 40px 0 40px 40px;
+    width: 60%;
+    margin: 3%;
     display: flex;
     flex-direction: column;
 }
@@ -31,12 +44,11 @@
 }
 
 .user-name {
-    margin: 0px 20px;
-    font-size: 20px;
+    margin: 0 0 0 2%;
 }
 
 .learning-progress {
-    margin: 20px;
+    margin: 2% 0 0 2%;
 }
 
 .progress {
@@ -46,7 +58,7 @@
 }
 
 .sort-progress, .path-progress {
-    margin: 40px 40px 0 0;
+    margin: 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,13 +66,17 @@
 }
 
 .sort-progress-img, .path-progress-img {
-    height: 120px;
-    width: 160px;
+    height: 7.5rem;
+    width: 9rem;
+}
+
+.algo-name {
+    text-align: center;
 }
 
 .user-stats {
-    margin: 40px 40px 40px 0px;
-    width: 40vw;
+    margin: 3%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -77,7 +93,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 40px 20px;
 }
 
 .stats-line {
@@ -114,9 +129,9 @@
 }
 
 .changeMe {
-    height: 50px;
-    width: 100px;
-    margin: 0 0 0 20px;
+    width: 8rem;
+    height: 4rem;
+    margin: 0 0 0 2%;
 }
 
 .input-body, .input-button {

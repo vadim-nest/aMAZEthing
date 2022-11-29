@@ -59,7 +59,7 @@ function Profile() {
       <div className="user-dashboard">
         <div className="user-info">
           <div className='user-part'>
-            <div>
+            <div className='icon'>
               {img && <img className='icon' src={'data:image/jpeg;base64,' + img} />}
             </div>
             <div className='user-name'>
@@ -84,10 +84,10 @@ function Profile() {
             <h1>Learning progress:</h1>
             <div className='progress'>
               <div className='sort-progress'>
-                <div><img className='sort-progress-img' src={sort}/></div><h2>Sorting Algorithms</h2><h2>{user.sortingPath}</h2>
+                <div><img className='sort-progress-img' src={sort}/></div><h2 className='algo-name'>Sorting Algorithms</h2><h2>{user.sortingPath}</h2>
               </div>
               <div className='path-progress'>
-                <div><img className='path-progress-img' src={path}/></div><h2>Path Finding Algorithms</h2><h2>{user.pathFindPath}</h2>
+                <div><img className='path-progress-img' src={path}/></div><h2 className='algo-name'>Path Finding Algorithms</h2><h2>{user.pathFindPath}</h2>
               </div>
             </div>
           </div>
