@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
 import { bFS, dijkstra, getDirection, vBFS } from '../utils/path-finding-algo';
+import { bubbleSortAlgo } from '../utils/sorting-algo';
 
 function Game() { // TODO: Extract logic to maze class
 
@@ -49,7 +50,8 @@ function Game() { // TODO: Extract logic to maze class
             thoughtProcess: [],
             inTower: false,
             pathFindingAlgo: 'bfs',
-            sortingAlgo: 'bubble'
+            sortingAlgo: 'bubble',
+            sortingSpeed: 500
           }
         }
       })
@@ -68,7 +70,8 @@ function Game() { // TODO: Extract logic to maze class
             thoughtProcess: [],
             inTower: false,
             pathFindingAlgo: 'bfs',
-            sortingAlgo: 'bubble'
+            sortingAlgo: 'bubble',
+            sortingSpeed: 500
           }
         }
       })
@@ -187,10 +190,15 @@ function Game() { // TODO: Extract logic to maze class
       const newTowers = [...prevTowers];
       return newTowers.map(tower => {
         if (towerId !== tower.id) return tower;
-        else return {
+        else {
+          let animations = bubbleSortAlgo([...tower.numbers], minion.alignment === 'p1');
+          return {
           ...tower,
           minion: minion.id,
-          minionAlignment: minion.alignment
+          minionAlignment: minion.alignment,
+          minionSortingSpeed: minion.sortingSpeed,
+          animations: animations
+          }
         }
       })
     })
@@ -208,7 +216,46 @@ function Game() { // TODO: Extract logic to maze class
     if (currentMinion === minionId) {
       setCurrentMinion(null);
     };
-    await new Promise((resolve, reject) => setTimeout(()=>resolve(true), 5000))
+    const minion = minions[minionId];
+    const tower = towers.find(tower => tower.id === towerId) as TowerType;
+    let animations = bubbleSortAlgo([...tower.numbers], minion.alignment === 'p1');
+    let array = tower.numbers;
+    await new Promise((resolve, reject) => {
+      const interval = setInterval(()=>{
+        const currentAnimation = animations.shift();
+        if (animations.length === 0) {
+          clearInterval(interval);
+          resolve(true);
+        };
+        if (currentAnimation && currentAnimation.length === 4) {
+          console.log('changing array')
+          let temp = array[currentAnimation[0]];
+          array[currentAnimation[0]] = array[currentAnimation[2]];
+          array[currentAnimation[2]] = temp;
+        }
+        if (towersSorting[towerId] === 0) {
+          console.log('towerId', towersSorting, towersSorting[towerId])
+          setTowers(prevTowers => {
+            const newTowers = [...prevTowers];
+            return newTowers.map(tower => {
+              if (tower.id !== towerId) return tower;
+              else {
+                if (currentAnimation && currentAnimation.length === 4) {
+                  return {
+                    ...tower,
+                    animations,
+                    numbers: array
+                  }
+                } else return {
+                  ...tower,
+                  animations,
+                }
+              }
+            })
+          });
+        }
+      }, minion.sortingSpeed*2);
+    })
     exitTower(towerId, minionId);
   }
 
@@ -245,6 +292,26 @@ function Game() { // TODO: Extract logic to maze class
     })
     let old;
   }
+
+  useEffect(() => {
+    if (Object.keys(towersSorting).some(towerId=>{
+      if (currentTower === null || Number(towerId) !== currentTower.id) {
+        return towersSorting[Number(towerId)] > 0 
+      }
+    })) {
+      setTowersSorting(prevTowersSorting => {
+        let newTowersSorting: {[key: number]: number} = {};
+        for (let key of Object.keys(prevTowersSorting)) {
+          if (currentTower === null || Number(key) !== currentTower.id) newTowersSorting[Number(key)] = 0;
+        }
+        return newTowersSorting;
+      });
+    }
+  }, [currentTower])
+
+  useEffect(() => {
+    console.log(towersSorting);
+  }, [towersSorting])
 
   return (
     <>
