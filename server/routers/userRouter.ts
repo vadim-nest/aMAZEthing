@@ -7,8 +7,11 @@ import {
   } from "../middleware/auth0.middleware.js";
 
 const users = require('../controllers/user');
+const mazes = require('../controllers/maze')
 const avatars = require('../controllers/avatar');
 
+//public route
+userRouter.post('/createMaze', mazes.createMaze);
 
 // This route needs authentication
 userRouter.post('/profile', validateAccessToken, users.getUserData);
