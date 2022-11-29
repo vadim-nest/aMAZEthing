@@ -1,16 +1,13 @@
-.initial-view-text {
+.initial-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: var(--main-green);
+  height: 90vh;
   text-align: center;
   font-size: 30px;
   color: var(--white-green);
-}
-
-.initial-view {
-  background-color: var(--main-green);
-  height: 90vh;
-}
-
-.initial-view-text {
-  padding: 20vh;
 }
 
 .all-algs {
@@ -122,8 +119,4 @@ path {
 .explanation-text {
   color: var(--main-green);
   font-size: 30px;
-}
-
-.scroll-down {
-  padding: 30vh;
 }

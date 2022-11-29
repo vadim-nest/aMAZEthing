@@ -28,13 +28,13 @@ export default function LearningPage () {
   return (
     <>
     <div className='initial-view'>
-      <div className='initial-view-text'>
+      <div>
         <h1>Welcome to the amazing learning experience.</h1>
         <h1>Learn sorting and path finding algorithms.</h1>
-        <div className='scroll-down'>
-          <h3>Scroll to learn more.</h3>
-          <h3>↓</h3>
-        </div>
+      </div>
+      <div>
+        <h3>Scroll to learn more.</h3>
+        <h3>↓</h3>
       </div>
     </div>
     <div className='all-algs'>
