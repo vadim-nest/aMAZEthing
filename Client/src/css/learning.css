@@ -10,17 +10,21 @@
   color: var(--white-green);
 }
 
+.scroll-learning h3 {
+  color: var(--yellow);
+}
+
 .all-algs {
   min-height: 90vh;
   width: 100vw;
 }
 
 .path-finding-algs, .sorting-algs {
-  background-color: var(--white);
+  background-color: var(--white-green);
 }
 
 .curve-1 {
-  height: 500px;
+  height: 60vh;
   position: relative;
 }
 
@@ -36,7 +40,7 @@ svg {
 }
 
 .circles {
-  fill: var(--white);
+  fill: var(--white-green);
   stroke: var(--dark-brown);
   stroke-width: 0.6;
 }
@@ -106,7 +110,7 @@ svg {
 }
 
 .sorting-algo, .path-algo {
-  margin: 20px 50px 30px 50px;
+  margin: 30px 100px;
   text-align: left;
 }
 
@@ -117,6 +121,7 @@ svg {
 }
 
 .explanation-text {
-  color: var(--main-green);
+  color: var(--dark-brown);
   font-size: 30px;
+  font-weight: 700;
 }

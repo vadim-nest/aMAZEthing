@@ -32,7 +32,7 @@ export default function LearningPage () {
         <h1>Welcome to the amazing learning experience.</h1>
         <h1>Learn sorting and path finding algorithms.</h1>
       </div>
-      <div>
+      <div className='scroll-learning'>
         <h3>Scroll to learn more.</h3>
         <h3>↓</h3>
       </div>
@@ -191,10 +191,11 @@ export default function LearningPage () {
           </div>
         </div>
       </div>
-    </div>
-    <div className='path-finding-algs'>
+      <div className='path-finding-algs'>
 
     </div>
+    </div>
+    
     <Outlet/>
     </>
   );
