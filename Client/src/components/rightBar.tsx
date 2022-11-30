@@ -43,6 +43,34 @@ function RightBar({
 
   const [shopOpen, setShopOpen] = useState(false);
 
+  console.log(minions);
+
+  let allP1Minions: Array<minionType> = [];
+
+  [minions].forEach((allMinions) => {
+    for (const minion in allMinions) {
+      if (allMinions[minion].alignment === 'p1') {
+        allP1Minions.push(allMinions[minion]);
+      }
+    }
+  });
+
+  console.log(allP1Minions);
+
+  let minionsToRender = allP1Minions.map((p1minion) => {
+    return (
+      <>
+        <ul>
+          <h1 className='left-just-stats'>{minions[p1minion.id].type}</h1>
+          <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[p1minion.id])}</h1>
+          <li>{p1minion.id}</li>
+        </ul>
+      </>
+    )
+  })
+
+
+
   return (
     <div className='right-bar'>
 
@@ -52,9 +80,10 @@ function RightBar({
       {currentMinion !== null &&
         // Should be a name instead
         <div>
-          <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
-          <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1>
+          {/* <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
+          <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1> */}
           {/* <h1>{minions}</h1> */}
+          {minionsToRender}
         </div>
       }
       </div>}
