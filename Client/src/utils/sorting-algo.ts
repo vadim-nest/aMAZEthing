@@ -213,26 +213,45 @@ function mergeNowDesc(arr:any, aux:any, mid:any, left:any, right:any, animations
 
 export function quickSortAlgo(arr:number[], ASC_MODE:boolean) {
   const animations:any = []
-   quickSortHelper(arr, 0, arr.length-1, animations)
+   quickSortHelper(arr, 0, arr.length-1, animations, ASC_MODE)
   return animations
 }
 
-function quickSortHelper(arr:number[], left:number , right:number, animations:any) {
+function quickSortHelper(arr:number[], left:number , right:number, animations:any, ASC_MODE:boolean) {
   if(left < right) {
     let part:number
-    part = partition(arr, left, right, animations)
-    quickSortHelper(arr, left, part-1, animations)
-    quickSortHelper(arr, part+1, right, animations)
+    if(ASC_MODE){
+      part = partition(arr, left, right, animations)
+    } else {
+      part = partitionDESC(arr, left, right, animations)
+    }
+    quickSortHelper(arr, left, part-1, animations,ASC_MODE)
+    quickSortHelper(arr, part+1, right, animations,ASC_MODE)
   }
 }
 
 function partition(arr:number[], left:number, right:number, animations:any) {
   let pivot = arr[right]
-  console.log(pivot)
   let i = (left - 1)
   for(let j = left; j < right; j++){
     animations.push([j, right])
     if(arr[j] < pivot) {
+      i++
+      animations.push([j, arr[j], i, arr[i]])
+      swap(arr, i, j)
+    }
+  }
+  animations.push([i+1, arr[i+1], right, arr[right]])
+  swap(arr, i+1, right)
+  return i+1
+}
+
+function partitionDESC(arr:number[], left:number, right:number, animations:any) {
+  let pivot = arr[right]
+  let i = (left - 1)
+  for(let j = left; j < right; j++){
+    animations.push([j, right])
+    if(arr[j] > pivot) {
       i++
       animations.push([j, arr[j], i, arr[i]])
       swap(arr, i, j)
@@ -248,7 +267,3 @@ function swap(arr:number[], i:number, j:number) {
   arr[i] = arr[j];
   arr[j] = temp;
 }
-
-let arr = [5,1,20,6,4,3]
-console.log(quickSortAlgo(arr, true))
-console.log(arr)

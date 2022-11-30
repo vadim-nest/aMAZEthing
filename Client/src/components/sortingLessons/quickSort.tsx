@@ -34,7 +34,7 @@ export default function QuickLesson() {
   useEffect(() => {
     console.log(array)
     const copyArr = array.slice()
-    setAnimations(quickSortAlgo(copyArr, true))
+    setAnimations(quickSortAlgo(copyArr, false))
   }, [array])
 
   function initArr() {

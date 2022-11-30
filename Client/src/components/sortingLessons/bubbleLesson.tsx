@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react';
 import { bubbleSortAlgo, generateArray } from '../../utils/sorting-algo';
 import Visualization from './visualization';
 import { bubbleSortVisual } from '../../utils/sorting-helper-visual';
+import { useAppSelector } from '../../features/hooks';
 
 export default function BubbleLesson() {
+  const user = useAppSelector((state) => state.user);
   const [array, setArray] = useState([3, 5, 7]);
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false)
+
+  console.log(user)
 
   let WIDTH = 40
   let MIN_VAL = 3
@@ -31,7 +35,6 @@ export default function BubbleLesson() {
   }, []);
 
   useEffect(() => {
-    console.log(array);
     const copyArr = array.slice();
     setAnimations(bubbleSortAlgo(copyArr, false));
   }, [array]);

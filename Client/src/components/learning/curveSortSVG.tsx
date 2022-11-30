@@ -1,12 +1,53 @@
 import '../../css/curveSortSVG.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0, User } from '@auth0/auth0-react';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../features/hooks';
+import user_slice, { refreshSortingPath, refreshData} from '../../features/user_slice';
 import NutSVG from './learningNut';
+import apiService from '../../services/apiService';
 import GrassSVG from './learningGrass';
 import TreeFilledSVG from './treeFilled';
 import TreeWinterSVG from './treeWinter';
+import { useState, useEffect } from 'react';
+import { updateNonNullChain } from 'typescript';
 
 function CurveSort() {
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+
+  function updateSVGHelper(e:any, numCheck:number, updateNum:number, navigateURL:string) {
+    if(user.sortLessons[numCheck]) {
+      updateSortingPaths(e, updateNum)
+      navigate(navigateURL)
+    }
+  }
+  
+
+  async function updateSortingPaths(e: any, num:number) {
+    e.preventDefault();
+    if (!isAuthenticated) return;
+    const sortArray = Array(6).fill(false)
+    for(let i = 0 ; i<sortArray.length; i++) {
+      if(i <= num) sortArray[i] = true
+      else break
+    }
+    console.log(sortArray)
+    try {
+      const accessToken = await getAccessTokenSilently();
+      const obj = await apiService.updateSortLearning(accessToken, {
+        email: user.email,
+        sortArr: sortArray
+      });
+      console.log(obj.user.sortLessons, 'curve')
+      if (obj.user) dispatch(refreshSortingPath(obj.user));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="curve">
       <svg viewBox="-10 4 140 24">
@@ -140,9 +181,12 @@ function CurveSort() {
             "
         />
         <circle
-          className="circles"
+        className={user.sortLessons[0] ? "circles doneLesson" : "circles"}
           id="circle-bubble-sort"
-          onClick={() => navigate('/learning/bubbleLesson')}
+           onClick={(e) =>{
+            updateSortingPaths(e, 0)
+            navigate('/learning/bubbleLesson')}
+          }
           cx="10"
           cy="14.6"
           r="3"
@@ -153,9 +197,11 @@ function CurveSort() {
         <text x="5" y="10" className="lesson-name">
           Bubble sort
         </text>
-        <circle
-          className="circles"
-          onClick={() => navigate('/learning/insertionLesson')}
+
+
+        <circle //INSERTION
+          className={user.sortLessons[1] ? "circles doneLesson" :  user.sortLessons[0] ? "circles" : "circles disabled" }
+          onClick={(e) => updateSVGHelper(e, 0, 1, '/learning/insertionLesson')}
           cx="30.2"
           cy="29.6"
           r="3"
@@ -164,11 +210,14 @@ function CurveSort() {
           <NutSVG />
         </svg>
         <text x="25" y="36" className="lesson-name">
-          Insertion sort
+          insertion sort
         </text>
+
+
         <circle
-          className="circles"
-          onClick={() => navigate('/learning/selectionLesson')}
+                   className={user.sortLessons[2] ? "circles doneLesson" :  user.sortLessons[1] ? "circles" : "circles disabled" }
+
+          onClick={(e) => updateSVGHelper(e, 1, 2, '/learning/selectionLesson')}
           cx="43"
           cy="6"
           r="3"
@@ -180,8 +229,9 @@ function CurveSort() {
           Selection sort
         </text>
         <circle
-          className="circles"
-          onClick={() => navigate('/learning/mergeLesson')}
+                     className={user.sortLessons[3] ? "circles doneLesson" :  user.sortLessons[2] ? "circles" : "circles disabled" }
+
+          onClick={(e) => updateSVGHelper(e, 2, 3, '/learning/mergeLesson')}
           cx="65.2"
           cy="12.6"
           r="3"
@@ -193,8 +243,8 @@ function CurveSort() {
           Merge sort
         </text>
         <circle
-          className="circles"
-          onClick={() => navigate('/learning/heapLesson')}
+          className={user.sortLessons[4] ? "circles doneLesson" :  user.sortLessons[3] ? "circles" : "circles disabled" }
+          onClick={(e) => updateSVGHelper(e, 3, 4, '/learning/quickLesson')}
           cx="85"
           cy="20"
           r="3"
@@ -203,11 +253,13 @@ function CurveSort() {
           <NutSVG />
         </svg>{' '}
         <text x="81" y="15" className="lesson-name">
-          Heap sort
+          Quick sort
         </text>
+
+
         <circle
-          className="circles"
-          onClick={() => navigate('/learning/quickLesson')}
+            className={user.sortLessons[5] ? "circles doneLesson" :  user.sortLessons[4] ? "circles" : "circles disabled" }
+            onClick={(e) => updateSVGHelper(e, 4, 5, '/learning/heapLesson')}
           cx="103.25"
           cy="34.5"
           r="3"
@@ -216,7 +268,7 @@ function CurveSort() {
           <NutSVG />
         </svg>{' '}
         <text x="99" y="30" className="lesson-name">
-          Quick sort
+          Heap sort
         </text>
         <svg
           x="-2"

@@ -40,6 +40,19 @@ svg {
   pointer-events: none;
 }
 
+.disabled {
+  fill: var(--dark-brown);
+}
+
+.disabled:hover{
+  cursor: default;
+}
+
+.doneLesson {
+  fill: var(--yellow);
+
+}
+
 /* .circles-after {
   fill: var(--dark-brown);
 }

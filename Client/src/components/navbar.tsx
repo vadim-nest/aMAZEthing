@@ -29,6 +29,7 @@ function Navbar() {
         const accessToken = await getAccessTokenSilently();
         console.log(user)
         const data = await apiService.profile(accessToken,user);
+        console.log(data)
         if(data.user) dispatch(refreshData(data.user));
       }
     };

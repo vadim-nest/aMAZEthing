@@ -84,10 +84,10 @@ function Profile() {
             <h1>Learning progress:</h1>
             <div className='progress'>
               <div className='sort-progress'>
-                <div><img className='sort-progress-img' src={sort}/></div><h3 className='algo-name'>Sorting Algorithms</h3><h3>{user.sortingPath}</h3>
+                <div><img className='sort-progress-img' src={sort}/></div><h3 className='algo-name'>Sorting Algorithms</h3><h3>{user.sortLessons}</h3>
               </div>
               <div className='path-progress'>
-                <div><img className='path-progress-img' src={path}/></div><h3 className='algo-name'>Path Finding Algorithms</h3><h3>{user.pathFindPath}</h3>
+                <div><img className='path-progress-img' src={path}/></div><h3 className='algo-name'>Path Finding Algorithms</h3><h3>{user.pathLessons}</h3>
               </div>
             </div>
           </div>

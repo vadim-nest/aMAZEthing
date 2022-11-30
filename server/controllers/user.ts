@@ -10,6 +10,7 @@ async function getUserData(req: express.Request, res: express.Response) {
         const user = await User.findOne({ email: email })
         if (user) {
             const resUser = await User.findOne({ email: email }).populate('avatar');
+            console.log(resUser)
             res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: resUser });
         } else {
             const username = email.substr(0,email.indexOf('@'));
@@ -38,8 +39,10 @@ async function updateUsername(req: express.Request, res: express.Response) {
 
 async function updateSortLearning(req: express.Request, res: express.Response) {
     try {
-        const {email, sortLessons} = req.body;
-        const user = await User.findOneAndUpdate({ email }, {sortLessons}, {new:true});
+        const {email, sortArr} = req.body;
+        console.log(sortArr, 'controller learning update')
+        const user = await User.findOneAndUpdate({ email:email }, {sortLessons:sortArr}, {new:true});
+        console.log(user)
         console.log('User increased learning Progress',user.username);
         res.status(201).json({ "statusCode": 201, "message": "learning Progress has been stored", user});
     } catch (error) {

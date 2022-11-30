@@ -6,8 +6,14 @@ import CurvePath from './curvePathSVG';
 import { useAppDispatch } from '../../features/hooks';
 import { useDispatch } from 'react-redux';
 import { refreshSortingPath } from '../../features/user_slice';
+import { useAuth0 } from '@auth0/auth0-react';
+import apiService from '../../services/apiService';
+import { useAppSelector } from '../../features/hooks';
 
 export default function LearningPage() {
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.user);
 
   return (
     <>
@@ -59,7 +65,6 @@ export default function LearningPage() {
           <CurvePath />
         </div>
       </div>
-      <Outlet />
     </>
   );
 }

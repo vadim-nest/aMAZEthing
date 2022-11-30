@@ -48,7 +48,6 @@ const userSchema = new Schema({
   },
   sortLessons: {
     type: [Boolean],
-    default: false
   },
   totalGold: {
     type: Number,
@@ -56,7 +55,6 @@ const userSchema = new Schema({
   },
   pathLessons:  {
     type: [Boolean],
-    default: false
   },
   games: [
     gameSchema
