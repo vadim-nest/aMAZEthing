@@ -5,7 +5,7 @@ import MediaQuery from 'react-responsive';
 import { useAppSelector } from '../features/hooks';
 // import zoomInSVG from '../assets/game-different/search-3079.svg'
 // import zoomOutSVG from '../assets/game-different/search-3080.svg'
-import React from 'react';
+import React, { useEffect } from 'react';
 // import ZoomInOutSVG from './zoomButtonsSVG';
 import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
@@ -43,7 +43,7 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
     document.querySelectorAll(`.zoom-${zoomInOrOut}-svg`).forEach(svgEl => {
       (svgEl as unknown as HTMLElement).style.fill = `${color}`;
       (svgEl as unknown as HTMLElement).style.stroke = `${color}`;
-    })
+    });
   }
 
 
@@ -58,7 +58,8 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
     )
   }
 
-
+  // Working, where do I put it?
+  // (document.getElementById('text-reverse-yep') as unknown as HTMLElement).textContent = `${gameStats.p2Towers.length}`;
 
   const user  = useAppSelector((state)=>state.user);
 
@@ -67,14 +68,14 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       <div className='flags'>
       <h3 className='p1Name'>{user.username ? user.username:'You'}</h3>
       <div className='p1Flag'>
-        <FlagSVG playerClass='p1FlagColor'/>
+        <FlagSVG playerName="you" playerScore={gameStats.p1Towers.length} playerClass='p1FlagColor' textReverse='text-reverse-nope'/>
       </div>
         <h1 className='p2Name'>Isaac</h1>
         <div className='p2Flag'>
-          <FlagSVG playerClass='p2FlagColor'/>
+          <FlagSVG playerName="Isaac" playerScore={gameStats.p2Towers.length} playerClass='p2FlagColor' textReverse='text-reverse-yep'/>
         </div>
-        <h3 className='score-you'>3</h3>
-        <h3 className='score-opponent'>4</h3>
+        {/* <h3 className='score-you'>3</h3>
+        <h3 className='score-opponent'>4</h3> */}
       </div>
 
       <MediaQuery minWidth={951}>
@@ -99,17 +100,13 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
             <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1>
           </div>
 
+          <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
+
           <h1 className='left-just-text'>ID</h1>
           <h1 className='left-just-stats'>{minions[currentMinion].id}</h1>
 
-          <h1 className='left-just-text'>Type</h1>
-          <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
-
           <h1 className='left-just-text'>Alignment</h1>
           <h1 className='left-just-stats'>{minions[currentMinion].alignment}</h1>
-
-          <h1 className='left-just-text'>In tower</h1>
-          <h1 className='left-just-stats'>{minions[currentMinion].inTower}</h1>
 
           <h1 className='left-just-text'>pathFindingAlgo</h1>
           <h1 className='left-just-stats'>{minions[currentMinion].pathFindingAlgo}</h1>
@@ -134,7 +131,7 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
           {/* <h1 className='current-tower-name-left-bar'>{currentTower.alignment}</h1> */}
 
           <h1 className='left-bar-tower-array'>{currentTower.numbers.join(', ')}</h1>
-          {currentTower.minion !== null && <h1>Tower contains minion {currentTower.minion}</h1>}
+          {currentTower.minion !== null && <h1 className='left-just-text'>Tower contains minion {currentTower.minion}</h1>}
         </div>}
       </div>
 
