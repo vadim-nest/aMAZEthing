@@ -14,7 +14,8 @@
 .lesson-wrapper, .lesson-wrapper-2 {
   background-color: var(--main-green);
   border-radius: 20px;
-  width: 70vw;
+  min-width: 70vw;
+  width: 900px;
   padding: 3vh 3vw;
   margin: 5vh;
   color: var(--white);
@@ -36,6 +37,7 @@
 .lesson-wrapper-2 {
   background-color: transparent;
   border: 3px solid var(--main-green);
+ 
 }
 
 .array {

@@ -185,10 +185,7 @@ function CurveSort() {
         <circle
         className={user.sortLessons[0] ? "circles doneLesson" : "circles"}
           id="circle-bubble-sort"
-           onClick={(e) =>{
-            updateSortingPaths(e, 0)
-            navigate('/learning/bubbleLesson')}
-          }
+           onClick={(e) => updateSVGHelper(e, 0, 0, '/learning/insertionLesson')}
           cx="10"
           cy="14.6"
           r="3"

@@ -14,11 +14,12 @@ export default function QuickLesson() {
 
   let WIDTH = 15
   let MIN_VAL = 3
-  let MAX_VAL = 50
-  let NUM_BARS = 50
+  let MAX_VAL = 200
+  let NUM_BARS = 68
   let DELAY = 5
   let PADTOP = 5
-  let MARGIN = 5
+  let MARGIN = 3
+  let HEIGHT = 2
 
   let paragraphs = {
     sortName: 'Quick sort',
@@ -71,7 +72,7 @@ export default function QuickLesson() {
           }
         </div>
         
-        <Visualization width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={10} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={quickSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
+        <Visualization width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={quickSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
 
       </div>
     </div>

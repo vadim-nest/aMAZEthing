@@ -17,7 +17,7 @@ export default function Visualization(props: any) {
 
 
     if(clicked) {
-        sortingAlgo(animations, delay, width, margin, tower, () => {
+        sortingAlgo(animations, delay, width, margin, tower, height, () => {
           setClicked(false) 
           setIsSorted(true)})
     }
@@ -29,7 +29,7 @@ export default function Visualization(props: any) {
             <div
               className={`array-el`}
               style={{
-                backgroundColor: 'var(--main-green)',
+                backgroundColor: 'grey',
                 height: `${element*height}px`,
                 width: `${width}px`,
                 margin: `${margin}px`,

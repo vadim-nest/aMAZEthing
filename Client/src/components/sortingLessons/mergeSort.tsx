@@ -10,13 +10,14 @@ export default function BubbleLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 15
+  let WIDTH = 10
   let MIN_VAL = 3
-  let MAX_VAL = 35
+  let MAX_VAL = 50
   let NUM_BARS = 50
   let DELAY = 5
-  let PADTOP = 5
-  let MARGIN = 5
+  let PADTOP = 10
+  let MARGIN = 3
+  let HEIGHT = 5
 
   let paragraphs = {
     sortName: 'Merge sort',
@@ -69,7 +70,7 @@ export default function BubbleLesson() {
           }
         </div>
         
-        <Visualization width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={10} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={mergeSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
+        <Visualization width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={mergeSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
 
       </div>
     </div>

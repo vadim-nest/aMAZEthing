@@ -10,13 +10,14 @@ export default function SelectionLesson() {
   const [animations, setAnimations] = useState([[]] as number[][])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 40
+  let WIDTH = 5
   let MIN_VAL = 3
   let MAX_VAL = 20
-  let NUM_BARS = 12
+  let NUM_BARS = 50
   let DELAY = 10
   let PADTOP = 10
-  let MARGIN = 5
+  let MARGIN = 3
+  let HEIGHT = 10
 
     let paragraphs = {
         sortName: "Selection sort",
@@ -67,7 +68,7 @@ export default function SelectionLesson() {
             </button>
           }
         </div>
-        <Visualization  fontColor={'white'} fontSize={15} width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={selectionSortVisual} setClicked={setClicked}   setIsSorted={ setIsSorted}/>
+        <Visualization  fontColor={'white'} fontSize={15} width={WIDTH} delay={DELAY} height={HEIGHT} margin={MARGIN} paddingTop={PADTOP} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={selectionSortVisual} setClicked={setClicked}   setIsSorted={ setIsSorted}/>
 
       </div>
     </div>

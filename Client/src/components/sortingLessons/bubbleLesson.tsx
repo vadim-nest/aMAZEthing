@@ -14,13 +14,13 @@ export default function BubbleLesson() {
 
   console.log(user)
 
-  let WIDTH = 40
+  let WIDTH = 15
   let MIN_VAL = 3
-  let MAX_VAL = 20
-  let NUM_BARS = 12
-  let DELAY = 10
+  let MAX_VAL = 50
+  let NUM_BARS = 75
+  let DELAY = 5
   let PADTOP = 10
-  let MARGIN = 5
+  let MARGIN = 3
 
 
 
@@ -76,6 +76,7 @@ export default function BubbleLesson() {
           margin={MARGIN}
           paddingTop={PADTOP}
           array={array}
+          height={10}
           key={array}
           animations={animations}
           clicked={clicked}
