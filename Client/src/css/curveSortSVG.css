@@ -1,57 +1,66 @@
 .all-algs {
-    min-height: 90vh;
-    width: 100vw;
-  }
-  
-  .path-finding-algs, .sorting-algs {
-    background-color: var(--white-green);
-  }
-  
-  .curve {
-    height: 70vh;
-    position: relative;
-  }
-  
-  svg {
-    height:100%;
-    width:100%;
-  }
-  
-  .learning-path {
-    fill: none;
-    stroke: var(--dark-brown);
-    stroke-width: 0.8;
-  }
-  
-  .circles {
-    fill: var(--white-green);
-    stroke: var(--dark-brown);
-    stroke-width: 0.6;
-  }
-  
-  .circles:hover {
-    fill: var(--dark-brown);
-    cursor: pointer;
-  }
-  
-  .nuts {
-    pointer-events: none;
-  }
-  
-  .lesson-name {
-    fill: var(--dark-brown);
-    stroke: var(--dark-brown);
-    stroke-width: 0.1px;
-    font-variant: all-small-caps;
-    font-weight: bold;
-    font-size: 2.5px;
-  }
-  
-  .lesson-name-label {
-    fill: var(--white-green);
-  }
-  
-  /* .over-curve-1 {
+  min-height: 90vh;
+  width: 100vw;
+}
+
+.path-finding-algs,
+.sorting-algs {
+  background-color: var(--white-green);
+}
+
+.curve {
+  height: 70vh;
+  position: relative;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+.learning-path {
+  fill: none;
+  stroke: var(--dark-brown);
+  stroke-width: 0.8;
+}
+
+.circles {
+  fill: var(--white-green);
+  stroke: var(--dark-brown);
+  stroke-width: 0.6;
+}
+
+.circles:hover {
+  fill: var(--dark-brown);
+  cursor: pointer;
+}
+
+.nut {
+  fill: var(--dark-brown);
+}
+
+/* .circles-after {
+  fill: var(--dark-brown);
+}
+
+.nut-after {
+  fill: var(--yellow);
+} */
+
+.lesson-name {
+  fill: var(--dark-brown);
+  stroke: var(--dark-brown);
+  stroke-width: 0.1px;
+  font-variant: all-small-caps;
+  font-weight: bold;
+  font-size: 2.5px;
+}
+
+.lesson-name-label {
+  fill: var(--white-green);
+}
+
+/* .over-curve-1 {
     margin: 0;
     padding: 0;
     z-index: 2;
@@ -71,8 +80,8 @@
     background: #fff;
     cursor: default;
   } */
-  
-  /* .bubble-sort-label {
+
+/* .bubble-sort-label {
     top: 29vh;
     left: 11vw;
   }
@@ -86,4 +95,3 @@
     top: 64.6vh;
     left: 19.8vw;
   } */
-  
