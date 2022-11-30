@@ -16,6 +16,7 @@ userRouter.post('/createMaze', mazes.createMaze);
 // This route needs authentication
 userRouter.post('/profile', validateAccessToken, users.getUserData);
 userRouter.post('/updateUsername', validateAccessToken, users.updateUsername);
+userRouter.post('/updateSortingPath',validateAccessToken, users.updateSortLearning );
 
 
 export {userRouter};

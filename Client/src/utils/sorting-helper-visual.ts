@@ -120,11 +120,11 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
       }
       
     }   
-  //   for(let i = 0; i<arrayBars.length ; i++) {
-  //     const bar = arrayBars[i] as HTMLElement 
-  //     await delay(50)
-  //     bar.style.background = 'var(--main-green)'
-  // }
+    for(let i = 0; i<arrayBars.length ; i++) {
+      const bar = arrayBars[i] as HTMLElement 
+      await delay(50)
+      bar.style.background = 'var(--main-green)'
+  }
     if (cb) cb()
 
   }
@@ -161,6 +161,48 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
   }
   if (cb) cb()
 
+
+}
+
+export async function quickSortVisual(animations:any, DELAY_MS:number, width:number, margin:number, tower: string = '',  cb?: () => void) {
+  const arrayBars = document.getElementsByClassName('array-el');
+  for(let i = 0; i<animations.length; i++) {
+    await delay(DELAY_MS)
+    if (animations[i].length === 2) {
+      const [barOneIdx, barTwoIdx] = animations[i];
+      const barOne = arrayBars[barOneIdx] as HTMLElement;
+      const barTwo = arrayBars[barTwoIdx] as HTMLElement;
+      console.log(barTwoIdx, barTwo)
+      const colorRed =  'var(--red)' 
+      const colorGreen = 'var(--sort-green)';
+      await delay(DELAY_MS)
+        barOne.style.backgroundColor = colorRed;
+        barTwo.style.backgroundColor = colorRed;
+      await delay(DELAY_MS)
+
+        barOne.style.backgroundColor = colorGreen;
+        barTwo.style.backgroundColor = colorGreen;
+
+   
+    } else {
+      const [barOneIdx, barOneHeight, barTwoIdx, barTwoHeight] = animations[i];
+      const barOne = arrayBars[barOneIdx] as HTMLElement;
+      const barTwo = arrayBars[barTwoIdx] as HTMLElement;
+      await delay(DELAY_MS)
+      barOne.style.height = `${barTwoHeight*10}px`;
+      barTwo.style.height= `${barOneHeight*10}px`;
+      await delay(DELAY_MS)
+      barOne.textContent = barTwoHeight
+      barTwo.textContent = barOneHeight
+  }
+}
+
+  for(let i = 0; i<arrayBars.length ; i++) {
+    const bar = arrayBars[i] as HTMLElement 
+    await delay(DELAY_MS*1.5)
+    bar.style.background = 'var(--dark-green)'
+}
+if (cb) cb()
 
 }
   

@@ -3,6 +3,9 @@ import { Outlet } from 'react-router-dom';
 import { Squirrel } from '../svg/animalsSVG';
 import CurveSort from './curveSortSVG';
 import CurvePath from './curvePathSVG';
+import { useAppDispatch } from '../../features/hooks';
+import { useDispatch } from 'react-redux';
+import { refreshSortingPath } from '../../features/user_slice';
 
 export default function LearningPage() {
 
@@ -24,14 +27,13 @@ export default function LearningPage() {
             <div className="sorting-algo">
               <h3 className="explanation-title">Sorting algorithms</h3>
               <p className="explanation-text">
-                Puts elements of a list into an order. It can be numerical and
-                lexicographical, and either ascending or descending.
+                {/* Puts elements of a list into an order. It can be numerical and
+                lexicographical, and either ascending or descending. */}
+                Sorting Algorithms are used to arrange elements in a list into a specific order, often either ascending or descending. 
               </p>
               <p className="explanation-text">
-                The output of any sorting algorithm must include a reordering,
-                retaining all of the original elements and each element has to
-                be no smaller/larger than the previous element, according to the
-                required order.
+                There are many sorting algorithms, but some are better than others.
+                
               </p>
             </div>
             <CurveSort />

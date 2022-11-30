@@ -46,17 +46,17 @@ const userSchema = new Schema({
     type: String,
     default: " "
   },
-  sortingPath: {
-    type: Number,
-    default: 0
+  sortLessons: {
+    type: [Boolean],
+    default: false
   },
   totalGold: {
     type: Number,
     default: 0
   },
-  pathFindPath: {
-    type: Number,
-    default: 0
+  pathLessons:  {
+    type: [Boolean],
+    default: false
   },
   games: [
     gameSchema

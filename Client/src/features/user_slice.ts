@@ -8,8 +8,8 @@ interface UserState{ //shape of the state inside inside of the slice
         losses:number,
         draws:number
     },
-    pathFindPath:number,
-    sortingPath:number,
+    pathFindPath:boolean[],
+    sortingPath:boolean[],
     avatar:{
         data:{
             data:number[]
@@ -23,8 +23,8 @@ const initialState: UserState = {
     username: '',
     games: [],
     overallWins:{ wins:0, losses:0, draws:0},
-    pathFindPath:0,
-    sortingPath:0,
+    pathFindPath:[],
+    sortingPath:[],
     avatar:{
         data:{
             data:[]
@@ -49,9 +49,12 @@ const userSlice = createSlice({
         },
         refreshDataNoAvatar(state,action:PayloadAction<UserState>){
             state.username = action.payload.username;
+        },
+        refreshSortingPath(state, action: PayloadAction<UserState>){
+            state.sortingPath = action.payload.sortingPath
         }
     }
 })
 
-export const{ refreshData, refreshDataNoAvatar } = userSlice.actions;
+export const{ refreshData, refreshDataNoAvatar, refreshSortingPath } = userSlice.actions;
 export default userSlice.reducer;

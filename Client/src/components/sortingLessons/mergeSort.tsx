@@ -10,11 +10,11 @@ export default function BubbleLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 40
+  let WIDTH = 15
   let MIN_VAL = 3
   let MAX_VAL = 35
-  let NUM_BARS = 12
-  let DELAY = 10
+  let NUM_BARS = 50
+  let DELAY = 5
   let PADTOP = 5
   let MARGIN = 5
 
