@@ -39,21 +39,23 @@ export function dFS (valueX: value, valueY: value, graph: Graph, path = [valueX]
 }
 
 export function vDFS (valueX: value, valueY: value, graph: Graph) {
-  const visited: value[] = [];
-  function modifiedDFS (valueX: value, valueY: value, graph: Graph, path = [valueX]): (false | value[]) {
-    visited.push(valueX);
-    let neighbors = graph.neighbors(valueX);
-    if (neighbors.includes(valueY)) return path.concat([valueY]);
-    for (let neighbor of neighbors) {
-      if (path.includes(neighbor)) continue;
-      let search = modifiedDFS(neighbor, valueY, graph, path.concat(neighbor));
-      if (search) return search;
+  let set = new Set<value>();
+  let stack: [value, Set<value>][] = [[valueX, set]];
+  let thoughtProcess: value[] = [];
+  let visited: {[key: value]: boolean} = {[valueX]: true};
+  while (stack.length) {
+    let [neighbor, path] = stack.pop() as [value, Set<value>];
+    if (neighbor === valueY) return {visited: thoughtProcess, path: Array.from(path)}
+    thoughtProcess.push(neighbor);
+    for (let nextNeighbor of graph.neighbors(neighbor)) {
+      if (visited[nextNeighbor]) continue;
+      visited[nextNeighbor] = true;
+      let newPath = new Set(path);
+      newPath.add(nextNeighbor);
+      stack.push([nextNeighbor, newPath]);
     }
-    return false;
   }
-  const path = modifiedDFS(valueX, valueY, graph);
-  if (path === false) return false;
-  return { path, visited };
+  return false;
 }
 
 export function bFS (valueX: value, valueY: value, graph: Graph) {

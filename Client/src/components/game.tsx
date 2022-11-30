@@ -5,7 +5,7 @@ import LeftBar from './leftBar';
 import { useEffect, useState } from 'react';
 import { MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
-import { bFS, dijkstra, getDirection, vBFS } from '../utils/path-finding-algo';
+import { bFS, dijkstra, getDirection, vBFS, vDFS } from '../utils/path-finding-algo';
 import { bubbleSortAlgo } from '../utils/sorting-algo';
 
 function Game() { // TODO: Extract logic to maze class
@@ -47,7 +47,6 @@ function Game() { // TODO: Extract logic to maze class
           timeRemaining: counter - 1
         }
       })
-      console.log(gameStats.p1Towers)
       setGameStats(prevStats => {
         return {
           ...prevStats,
@@ -55,6 +54,7 @@ function Game() { // TODO: Extract logic to maze class
           p2Coins: prevStats.p2Coins + 20*prevStats.p2Towers.length,
         }
       })
+      
       setCounter(counter - 1);
     }, 1000);
     return () => clearInterval(timer as any);
@@ -86,7 +86,7 @@ function Game() { // TODO: Extract logic to maze class
             alignment: 'p1',
             thoughtProcess: [],
             inTower: false,
-            pathFindingAlgo: 'bfs',
+            pathFindingAlgo: 'dfs',
             sortingAlgo: 'bubble',
             sortingSpeed: 10,
             type
@@ -142,7 +142,29 @@ function Game() { // TODO: Extract logic to maze class
 
   async function moveMinion(goTo: {xPos: number, yPos: number}, comeFrom: {xPos: number, yPos: number}, currentGraph: Graph, minion: false | minionType = false, showPath = true) {
     if (!minion) minion = minions[currentMinion as number] as minionType;
-    const directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
+    let directions : false | {
+      visited: value[];
+      path: value[];
+    };
+    if (minion.pathFindingAlgo === 'bfs') {
+      directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
+      console.log('BFS');
+      console.log((directions as {
+        visited: value[];
+        path: value[];
+      }).visited)
+    } 
+    else if (minion.pathFindingAlgo === 'dfs') {
+      directions = vDFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
+      console.log('DFS');
+      console.log((directions as {
+        visited: value[];
+        path: value[];
+      }).visited)
+    }
+    else {
+      directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
+    }
     if (directions === false) return;
     const path = [...directions.path] as number[];
     const visited = [...directions.visited] as number[];
@@ -154,6 +176,7 @@ function Game() { // TODO: Extract logic to maze class
       path: [...path],
       thoughtProcess: visited
     }
+
     setMinions(prevMinions => {
       return {
         ...prevMinions,
