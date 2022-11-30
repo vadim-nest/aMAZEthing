@@ -12,9 +12,26 @@ export default function Shop({
   return (
     <div className='shop-page'>
       <h1>Shop</h1>
-      <div onClick={() => addNewMinion('Hare')}>
-        <Squirrel currentPlayer='p1-color' />
-      </div>
+      <ul className='shop-list'>
+        <div className='buy-minion-button' onClick={() => addNewMinion('Squirrel')}>
+          <Squirrel currentPlayer='p1-color' />
+        </div>
+        <div className='buy-minion-button' onClick={() => addNewMinion('Badger')}>
+          <Badger currentPlayer='p1-color' />
+        </div>
+        <div className='buy-minion-button' onClick={() => addNewMinion('Hare')}>
+          <Hare currentPlayer='p1-color' />
+        </div>
+        <div className='buy-minion-button' onClick={() => addNewMinion('Deer')}>
+          <Deer currentPlayer='p1-color' />
+        </div>
+        <div className='buy-minion-button' onClick={() => addNewMinion('Koala')}>
+          <Koala currentPlayer='p1-color' />
+        </div>
+        <div className='buy-minion-button' onClick={() => addNewMinion('Bear')}>
+          <Bear currentPlayer='p1-color' />
+        </div>
+      </ul>
     </div>
   );
 }

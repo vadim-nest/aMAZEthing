@@ -54,7 +54,7 @@ function Game() { // TODO: Extract logic to maze class
           p2Coins: prevStats.p2Coins + 20*prevStats.p2Towers.length,
         }
       })
-      
+
       setCounter(counter - 1);
     }, 1000);
     return () => clearInterval(timer as any);
@@ -97,7 +97,7 @@ function Game() { // TODO: Extract logic to maze class
       setGameStats(prevStats => {
         return {
           ...prevStats,
-          p1MinionCount: prevStats.p1MinionCount + 1
+          p2MinionCount: prevStats.p2MinionCount + 1
         }
       })
       setMinions(prevMinions => {
@@ -148,7 +148,7 @@ function Game() { // TODO: Extract logic to maze class
     };
     if (minion.pathFindingAlgo === 'bfs') {
       directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
-    } 
+    }
     else if (minion.pathFindingAlgo === 'dfs') {
       directions = vDFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
     }
@@ -461,6 +461,7 @@ function Game() { // TODO: Extract logic to maze class
             addNewMinion={addNewMinion}
             allTilesHidden={allTilesHidden}
             currentMinion={currentMinion}
+            setCurrentMinion={setCurrentMinion}
             minions={minions}
           />
         </div>

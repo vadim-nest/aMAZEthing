@@ -29,21 +29,41 @@ function whichAnimalSVG (minion: minionType) {
   )
 }
 
+function styleCurrentMinionBorder(currentMinId: number) {
+  const allYourMinions = document.querySelectorAll('.your-minion-button');
+  // const allYourMinionsHoverFix = document.querySelectorAll('.your-minion-button:hover');
+
+  allYourMinions.forEach(minion => {
+    // (minion as unknown as HTMLElement).style.borderColor = 'transparent';
+    // (minion as unknown as HTMLElement).addEventListener('mouseover', () => (minion as unknown as HTMLElement).style.borderColor = 'var(--yellow)');
+    // (minion as unknown as HTMLElement).addEventListener('mouseout', () => (minion as unknown as HTMLElement).style.borderColor = 'var(--yellow)');
+
+    (minion as unknown as HTMLElement).style.backgroundColor = 'var(--green)';
+  });
+
+
+  (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).style.backgroundColor = 'var(--purple)';
+
+  // (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).classList.add('permanent-border-selected');
+
+  // permanent-border-selected
+}
+
 function RightBar({
   addNewMinion,
   allTilesHidden,
   currentMinion,
+  setCurrentMinion,
   minions
 }: {
   addNewMinion: (type: "Squirrel" | "Badger" | "Hare" | "Deer" | "Koala" | "Bear") => void;
   allTilesHidden: boolean;
   currentMinion: null | number,
+  setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   minions: {[key: number]: minionType},
 }) {
 
   const [shopOpen, setShopOpen] = useState(false);
-
-  console.log(minions);
 
   let allP1Minions: Array<minionType> = [];
 
@@ -55,16 +75,17 @@ function RightBar({
     }
   });
 
-  console.log(allP1Minions);
-
   let minionsToRender = allP1Minions.map((p1minion) => {
     return (
       <>
-        <ul>
-          <h1 className='left-just-stats'>{minions[p1minion.id].type}</h1>
+        <div className={`your-minion-button right-bar-selector-${p1minion.id}`} onClick={() => {
+            setCurrentMinion(p1minion.id);
+            styleCurrentMinionBorder(p1minion.id);
+
+          }}>
+          <h1 className='right-bar-name'>Name ;)</h1>
           <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[p1minion.id])}</h1>
-          <li>{p1minion.id}</li>
-        </ul>
+        </div>
       </>
     )
   })
@@ -77,14 +98,13 @@ function RightBar({
       {shopOpen ? (
         <Shop addNewMinion={addNewMinion} minions={minions}/>
       ) : <div className='your-minions'>
-      {currentMinion !== null &&
+      {minions &&
         // Should be a name instead
-        <div>
-          {/* <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
-          <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1> */}
-          {/* <h1>{minions}</h1> */}
-          {minionsToRender}
-        </div>
+        <>
+          <ul className='your-minions-list'>
+            {minionsToRender}
+          </ul>
+        </>
       }
       </div>}
 

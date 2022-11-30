@@ -98,35 +98,26 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
             <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1>
           </div>
 
-          <div className='left-just-two-columns'>
-              <h1 className='left-just-text'>Type</h1>
-              <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
-          </div>
+          <h1 className='left-just-text'>ID</h1>
+          <h1 className='left-just-stats'>{minions[currentMinion].id}</h1>
 
-          <div className='left-just-two-columns'>
-            <h1 className='left-just-text'>Alignment</h1>
-            <h1 className='left-just-stats'>{minions[currentMinion].alignment}</h1>
-          </div>
+          <h1 className='left-just-text'>Type</h1>
+          <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
 
-          <div className='left-just-two-columns'>
-              <h1 className='left-just-text'>In tower</h1>
-              <h1 className='left-just-stats'>{minions[currentMinion].inTower}</h1>
-          </div>
+          <h1 className='left-just-text'>Alignment</h1>
+          <h1 className='left-just-stats'>{minions[currentMinion].alignment}</h1>
 
-          <div className='left-just-two-columns'>
-              <h1 className='left-just-text'>pathFindingAlgo</h1>
-              <h1 className='left-just-stats'>{minions[currentMinion].pathFindingAlgo}</h1>
-          </div>
+          <h1 className='left-just-text'>In tower</h1>
+          <h1 className='left-just-stats'>{minions[currentMinion].inTower}</h1>
 
-          <div className='left-just-two-columns'>
-              <h1 className='left-just-text'>sortingAlgo</h1>
-              <h1 className='left-just-stats'>{minions[currentMinion].sortingAlgo}</h1>
-          </div>
+          <h1 className='left-just-text'>pathFindingAlgo</h1>
+          <h1 className='left-just-stats'>{minions[currentMinion].pathFindingAlgo}</h1>
 
-          <div className='left-just-two-columns'>
-            <h1 className='left-just-text'>{minions[currentMinion].sortingSpeed}</h1>
-            <h1 className='left-just-stats'>{minions[currentMinion].sortingSpeed}</h1>
-          </div>
+          <h1 className='left-just-text'>sortingAlgo</h1>
+          <h1 className='left-just-stats'>{minions[currentMinion].sortingAlgo}</h1>
+
+          <h1 className='left-just-text'>{minions[currentMinion].sortingSpeed}</h1>
+          <h1 className='left-just-stats'>{minions[currentMinion].sortingSpeed}</h1>
 
         </div>}
 
