@@ -7,6 +7,12 @@ import { MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
 import { getDirection, vBFS, vDFS, vDijk } from '../utils/path-finding-algo';
 import { bubbleSortAlgo } from '../utils/sorting-algo';
+import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
+
+
+const customConfig: Config = {
+  dictionaries: [names]
+}
 
 function Game() { // TODO: Extract logic to maze class
 
@@ -79,6 +85,7 @@ function Game() { // TODO: Extract logic to maze class
           ...prevMinions,
           [newId]: {
             id: newId,
+            name: uniqueNamesGenerator(customConfig),
             xPos: 0,
             yPos: 0,
             rotation: 'minionR',
@@ -105,6 +112,7 @@ function Game() { // TODO: Extract logic to maze class
           ...prevMinions,
           [newId]: {
             id: newId,
+            name: uniqueNamesGenerator(customConfig),
             xPos: width-1,
             yPos: height-1,
             rotation: 'minionR',

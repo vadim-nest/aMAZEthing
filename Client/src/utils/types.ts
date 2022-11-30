@@ -2,6 +2,7 @@ import { value } from "./graph";
 
 export interface minionType {
   id: number;
+  name: string;
   xPos: number;
   yPos: number;
   rotation: 'minionR' | 'minionL' | 'minionU' | 'minionD' | '';

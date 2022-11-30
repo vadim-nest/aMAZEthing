@@ -83,7 +83,7 @@ function RightBar({
             styleCurrentMinionBorder(p1minion.id);
 
           }}>
-          <h1 className='right-bar-name'>Name ;)</h1>
+          <h1 className='right-bar-name'>{p1minion.name}</h1>
           <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[p1minion.id])}</h1>
         </div>
       </>

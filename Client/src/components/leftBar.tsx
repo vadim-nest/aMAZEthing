@@ -94,7 +94,7 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
         {currentMinion !== null && <div className='current-minion-left-bar'>
 
           <div className='left-just-top'>
-            <h1 className='current-minion-name-left-bar'>Jacky</h1>
+            <h1 className='current-minion-name-left-bar'>{minions[currentMinion].name}</h1>
             <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1>
           </div>
 
