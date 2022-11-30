@@ -103,14 +103,17 @@
     color: var(--white-green);
     border-top: 1px solid var(--white-green);
     border-bottom: 1px solid var(--white-green);
+
+    height: 30%;
 }
 
 .stats-text {
+
     font-weight: bold;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .achievements {

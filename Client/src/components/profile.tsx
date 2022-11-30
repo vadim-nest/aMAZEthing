@@ -20,6 +20,12 @@ function Profile() {
   const [img, setImg] = useState();
   const [inputOpen, setInputOpen] = useState(false);
 
+  let currentSortProgress = 0
+  for(let bool of user.sortLessons) {
+    if (bool === true) currentSortProgress++
+    else break
+  }
+
   useEffect(() => {
     const base64String: any = Buffer.from(user.avatar.data.data).toString(
       'base64'
@@ -85,6 +91,7 @@ function Profile() {
             <div className='progress'>
               <div className='sort-progress'>
                 <div><img className='sort-progress-img' src={sort}/></div><h3 className='algo-name'>Sorting Algorithms</h3><h3>{user.sortLessons}</h3>
+                <h3>{currentSortProgress}/6</h3>
               </div>
               <div className='path-progress'>
                 <div><img className='path-progress-img' src={path}/></div><h3 className='algo-name'>Path Finding Algorithms</h3><h3>{user.pathLessons}</h3>

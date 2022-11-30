@@ -19,11 +19,13 @@ function CurveSort() {
   const navigate = useNavigate();
 
   function updateSVGHelper(e:any, numCheck:number, updateNum:number, navigateURL:string) {
-    if(user.sortLessons[numCheck]) {
+    if(user.sortLessons[numCheck] && !user.sortLessons[updateNum]) {
       updateSortingPaths(e, updateNum)
-      navigate(navigateURL)
     }
+    if(user.sortLessons[numCheck]) {
+    navigate(navigateURL)
   }
+}
   
 
   async function updateSortingPaths(e: any, num:number) {
