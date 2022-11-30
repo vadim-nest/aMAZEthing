@@ -59,39 +59,3 @@ svg {
 .lesson-name-label {
   fill: var(--white-green);
 }
-
-/* .over-curve-1 {
-    margin: 0;
-    padding: 0;
-    z-index: 2;
-    color: var(--white-green);
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .path-labels {
-    width: fit-content;
-    height: fit-content;
-    position: absolute;
-    font-size: 1.3vw;
-    padding: 5px 15px 5px 15px;
-    border: 3px solid var(--white-green);
-    border-radius: 20px;
-    background: #fff;
-    cursor: default;
-  } */
-
-/* .bubble-sort-label {
-    top: 29vh;
-    left: 11vw;
-  }
-  
-  .insertion-sort-label {
-    top: 38.5vh;
-    left: 19.8vw;
-  }
-  
-  .selection-sort-label {
-    top: 64.6vh;
-    left: 19.8vw;
-  } */

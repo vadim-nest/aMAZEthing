@@ -1,9 +1,9 @@
 import '../../css/curvePathSVG.css';
 import { useNavigate } from 'react-router-dom';
-import treePic from '../../assets/learning/tree.png';
-import grassPic from '../../assets/learning/grass.png';
-import tallGrassPic from '../../assets/learning/tall_grass.png';
 import NutSVG from './learningNut';
+import GrassSVG from './learningGrass';
+import TreeFilledSVG from './treeFilled';
+import TreeWinterSVG from './treeWinter';
 
 function CurvePath() {
   const navigate = useNavigate();
@@ -177,15 +177,35 @@ function CurvePath() {
         <text x="101" y="0" className="lesson-name">
           A*
         </text>
-        {/* <image className='decorations' x="-2" y="20" href={treePic} height='15' width='15' />
-            <image className='decorations' x="90" y="0" href={treePic} height='15' width='15' />
-
-            <image className='decorations' x="-2" y="9" href={tallGrassPic} height='5' width='5' />
-            <image className='decorations' x="-7" y="35" href={tallGrassPic} height='5' width='5' />
-            <image className='decorations' x="33" y="3" href={tallGrassPic} height='5' width='5' />
-
-            <image className='decorations' x="-2" y="36" href={grassPic} height='4' width='4' />
-            <image className='decorations' x="55" y="25" href={grassPic} height='5' width='5' /> */}
+        <svg
+          x="25"
+          y="-10"
+        ><TreeFilledSVG/></svg>
+        <svg
+          x="85"
+          y="10"
+        ><TreeFilledSVG/></svg>
+        <svg x="-6" y="26" height="4" width="4">
+          <GrassSVG />
+        </svg>
+        <svg x="53" y="0" height="4" width="4">
+          <GrassSVG />
+        </svg>
+        <svg x="80" y="30" height="4" width="4">
+          <GrassSVG />
+        </svg>
+        <svg x="115" y="0" height="4" width="4">
+          <GrassSVG />
+        </svg>
+        <svg x="40" y="15" height="4" width="4">
+          <GrassSVG />
+        </svg>
+        <svg x="20" y="20"  height="6" width="6">
+          <TreeWinterSVG />
+        </svg>
+        <svg x="80" y="0" height="6" width="6">
+          <TreeWinterSVG />
+        </svg>
       </svg>
     </div>
   );
