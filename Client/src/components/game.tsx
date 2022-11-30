@@ -5,7 +5,7 @@ import LeftBar from './leftBar';
 import { useEffect, useState } from 'react';
 import { MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
-import { bFS, dijkstra, getDirection, vBFS, vDFS } from '../utils/path-finding-algo';
+import { getDirection, vBFS, vDFS, vDijk } from '../utils/path-finding-algo';
 import { bubbleSortAlgo } from '../utils/sorting-algo';
 
 function Game() { // TODO: Extract logic to maze class
@@ -86,7 +86,7 @@ function Game() { // TODO: Extract logic to maze class
             alignment: 'p1',
             thoughtProcess: [],
             inTower: false,
-            pathFindingAlgo: 'dfs',
+            pathFindingAlgo: 'dijk',
             sortingAlgo: 'bubble',
             sortingSpeed: 10,
             type
@@ -148,19 +148,14 @@ function Game() { // TODO: Extract logic to maze class
     };
     if (minion.pathFindingAlgo === 'bfs') {
       directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
-      console.log('BFS');
-      console.log((directions as {
-        visited: value[];
-        path: value[];
-      }).visited)
     } 
     else if (minion.pathFindingAlgo === 'dfs') {
       directions = vDFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
-      console.log('DFS');
-      console.log((directions as {
-        visited: value[];
-        path: value[];
-      }).visited)
+    }
+    else if (minion.pathFindingAlgo === 'dijk') {
+      directions = vDijk(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph)
+      console.log('Dijkstra');
+      console.log((directions as any));
     }
     else {
       directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);

@@ -110,95 +110,43 @@ export function vBFS(valueX: value, valueY: value, graph: Graph) {
   return {visited: thoughtProcess, path: Array.from(path)};
 }
 
-export function dijkstra (valueX: value, valueY: value, graph: Graph) {
-  let unvisitedNodes: {[key: value]: number} = {};
-  let visitedNodes: {[key: value]: number} = {};
-  for (let vertex of graph.vertices) {
-    if (vertex === valueX) unvisitedNodes[valueX] = 0;
-    else unvisitedNodes[vertex] = Infinity;
+export function vDijk (valueX: number, valueY: number, graph: Graph) {
+  const visited: Set<number> = new Set();
+  let unvisitedNodes: Map<number, [number, number | null]> = new Map();
+  let visitedNodes: Map<number, [number, number]> = new Map();
+  let nNodes = graph.vertices.length;
+  for (let vertex of graph.vertices as number[]) {
+    if (vertex === valueX) unvisitedNodes.set(vertex, [0, null]);
+    else unvisitedNodes.set(vertex, [Infinity, null]);
   }
-  while (Object.keys(unvisitedNodes).length) {
-    let node = Object.keys(unvisitedNodes).reduce((acc, key) => {
-      return unvisitedNodes[key] < acc[1] ? [key, unvisitedNodes[key]] : acc;
-    }, ['null', Infinity]);
-    visitedNodes[node[0]] = unvisitedNodes[node[0]];
-    if (node[0] === valueY) break;
-    if (node[1] === Infinity) return false;
-    let neighbors = graph.neighbors(node[0]);
+  for (let i = 0; i < nNodes; i++) {
+    let currentNode: [number, [number, number | null]] = [-1, [Infinity, -1]];
+    unvisitedNodes.forEach((value, key) => {
+      if (value[0] < currentNode[1][0]) currentNode = [key, value];
+    })
+    visited.add(currentNode[0]);
+    if (currentNode[0] === valueX) {
+      visitedNodes.set(currentNode[0], [currentNode[1][0], -1]);
+    } else {
+      visitedNodes.set(currentNode[0], currentNode[1] as [number, number]);
+    }
+    if (currentNode[0] === valueY) break;
+    if (currentNode[1][0] === Infinity) return false;
+    let neighbors = graph.neighbors(currentNode[0]).map(neighbor => Number(neighbor));
     for (let neighbor of neighbors) {
-      let weight = graph.getEdgeValue(node[0], neighbor);
-      let sum = unvisitedNodes[node[0]] + (weight as number);
-      if (sum < unvisitedNodes[neighbor]) unvisitedNodes[neighbor] = sum;
+      if (visited.has(neighbor)) continue;
+      let weight = graph.getEdgeValue(currentNode[0], neighbor);
+      let sum = currentNode[1][0] + (weight as number);
+      let neighborCurrent = unvisitedNodes.get(neighbor) as [number, number];
+      if (sum < neighborCurrent[0]) unvisitedNodes.set(neighbor, [sum as number, currentNode[0]]);
     }
-    delete unvisitedNodes[node[0]];
+    unvisitedNodes.delete(currentNode[0]);
   }
-  
-  let keys = Object.keys(visitedNodes).reverse();
-  let path = [keys[0]];
-  for (let i = 0; i < keys.length; i++) {
-    let to = path[path.length-1];
-    for (let j = i; j < keys.length; j++) {
-      let from = keys[j];
-      let weight = graph.getEdgeValue(from, to);
-      if (weight) {
-        if (visitedNodes[to] - weight === visitedNodes[from]) {
-          path.push(from);
-          i = j;
-        }
-      }
-    }
+  const path = [valueY];
+  while(path[0] !== valueX) {
+    path.unshift(visitedNodes.get(path[0])![1])
   }
-  return path.reverse().map(el=>Number(el));
-}
-
-
-export function vDijkstra(valueX: value, valueY: value, graph: Graph) {
-  const visited: value[] = [];
-  function modifiedDijkstra (valueX: value, valueY: value, graph: Graph) {
-    let unvisitedNodes: {[key: value]: number} = {};
-    let visitedNodes: {[key: value]: number} = {};
-    for (let vertex of graph.vertices) {
-      if (vertex === valueX) unvisitedNodes[valueX] = 0;
-      else unvisitedNodes[vertex] = Infinity;
-    }
-    while (Object.keys(unvisitedNodes).length) {
-      let node = Object.keys(unvisitedNodes).reduce((acc, key) => {
-        return unvisitedNodes[key] < acc[1] ? [key, unvisitedNodes[key]] : acc;
-      }, ['null', Infinity]);
-      visitedNodes[node[0]] = unvisitedNodes[node[0]];
-      if (node[0] === valueY) break;
-      if (node[1] === Infinity) return false;
-      visited.push(node[0]);
-      let neighbors = graph.neighbors(node[0]);
-      for (let neighbor of neighbors) {
-        let weight = graph.getEdgeValue(node[0], neighbor);
-        let sum = unvisitedNodes[node[0]] + (weight as number);
-        if (sum < unvisitedNodes[neighbor]) unvisitedNodes[neighbor] = sum;
-      }
-      delete unvisitedNodes[node[0]];
-    }
-    
-    let keys = Object.keys(visitedNodes).reverse();
-    let path = [keys[0]];
-    for (let i = 0; i < keys.length; i++) {
-      let to = path[path.length-1];
-      for (let j = i; j < keys.length; j++) {
-        let from = keys[j];
-        let weight = graph.getEdgeValue(from, to);
-        if (weight) {
-          if (visitedNodes[to] - weight === visitedNodes[from]) {
-            path.push(from);
-            i = j;
-          }
-        }
-      }
-    }
-    return path.reverse().map(el=>Number(el));
-  }
-  const path = modifiedDijkstra(valueX, valueY, graph);
-  
-  if (path === false) return false;
-  return {path, visited};
+  return {path: path.slice(1), visited: Array.from(visited)}
 }
 
 // function distance (start: number, end: number, graph: Graph) { // TODO: Generalize distance function
