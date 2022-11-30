@@ -1,6 +1,6 @@
 import '../css/rightBar.css';
 import ShopSVG from './svg/ShopSVG';
-import { minionType } from '../utils/types';
+import { animal, minionType } from '../utils/types';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 import { useState } from 'react';
 import Shop from './shop';
@@ -56,7 +56,7 @@ function RightBar({
   setCurrentMinion,
   minions
 }: {
-  addNewMinion: (type: "Squirrel" | "Badger" | "Hare" | "Deer" | "Koala" | "Bear") => void;
+  addNewMinion: (type: animal) => void;
   allTilesHidden: boolean;
   currentMinion: null | number,
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,

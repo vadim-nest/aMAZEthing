@@ -3,7 +3,7 @@ import Maze from './maze';
 import RightBar from './rightBar';
 import LeftBar from './leftBar';
 import { useEffect, useState } from 'react';
-import { MazeTileType, minionType, TowerType } from '../utils/types';
+import { animal, MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
 import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../utils/path-finding-algo';
 import { bubbleSortAlgo } from '../utils/sorting-algo';
@@ -71,13 +71,8 @@ function Game() { // TODO: Extract logic to maze class
   const minBoxSize = 20;
   const maxBoxSize = 100;
 
-  function addNewMinion(type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear') { // TODO: Extract to minion class
+  function addNewMinion(type: animal) { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
-    let pathFindingAlgo: 'a*' | 'dfs' | 'dijk' | 'bfs' = 'a*';
-    if (type === 'Squirrel') pathFindingAlgo = 'dfs';
-    else if (type === 'Badger') pathFindingAlgo = 'bfs';
-    else if (type === 'Hare') pathFindingAlgo = 'dijk';
-    else pathFindingAlgo = 'a*';
     if ((newId + 1) % 2) {
       setGameStats(prevStats => {
         return {
@@ -98,10 +93,7 @@ function Game() { // TODO: Extract logic to maze class
             alignment: 'p1',
             thoughtProcess: [],
             inTower: false,
-            pathFindingAlgo,
-            sortingAlgo: 'bubble',
-            sortingSpeed: 10,
-            type
+            ...type
           }
         }
       })
@@ -125,10 +117,7 @@ function Game() { // TODO: Extract logic to maze class
             alignment: 'p2',
             thoughtProcess: [],
             inTower: false,
-            pathFindingAlgo: 'bfs',
-            sortingAlgo: 'bubble',
-            sortingSpeed: 10,
-            type
+            ...type
           }
         }
       })

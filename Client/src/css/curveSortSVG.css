@@ -37,6 +37,7 @@ svg {
 
 .nut {
   fill: var(--dark-brown);
+  pointer-events: none;
 }
 
 /* .circles-after {
