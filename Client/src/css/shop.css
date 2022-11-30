@@ -25,6 +25,8 @@
   cursor: pointer;
   border: 3px solid transparent;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .buy-minion-button:hover {
@@ -32,6 +34,25 @@
   border-radius: 15px;
 }
 
+.shop-just-text {
+  /* font-size: 20px; */
+  color: var(--white-green);
+  font-size: 14px;
+  width: 30%;
+  align-self: flex-end;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.shop-just-stats {
+  width: 70%;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.price {
+  color: var(--yellow)
+}
 
 /* width */
 .shop-list::-webkit-scrollbar {

@@ -94,13 +94,13 @@
   margin: auto 10px auto 10px;
 }
 
-.left-just-two-columns {
+/* .left-just-two-columns {
   display: flex;
-}
+} */
 
-.left-just-top {
+/* .left-just-top {
   display: inline;
-}
+} */
 
 .left-just-text {
   color: var(--white-green);
