@@ -24,7 +24,9 @@
 
 .user-dashboard {
     background-color: var(--main-green);
-    height: 60vh;
+    min-height: 510px;
+    min-width: 800px;
+    height: 50vh;
     width: 80vw;
     margin: 10vh auto 0 auto;
     border-radius: 20px;
@@ -32,7 +34,7 @@
 }
 
 .user-info {
-    width: 60%;
+    width: 45%;
     margin: 3%;
     display: flex;
     flex-direction: column;
@@ -76,10 +78,11 @@
 
 .user-stats {
     margin: 3%;
-    width: 40%;
+    width: 55%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex-grow: 2;
 }
 
 .circle {
@@ -101,15 +104,14 @@
     justify-content: space-between;
     padding: 10px;
     color: var(--white-green);
-    border-top: 1px solid var(--white-green);
-    border-bottom: 1px solid var(--white-green);
-
-    height: 30%;
+    border-top: 4px solid var(--white-green);
+    border-bottom: 4px solid var(--white-green);
+    height: 35%;
 }
 
 .stats-text {
-
-    font-weight: bold;
+    font-size: 25px !important;
+    font-weight: normal;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,10 +123,14 @@
 }
 
 .wins-yellow {
+    font-size: 20px !important;
+
     color: var(--yellow);
 }
 
 .losses-red {
+    font-size: 20px !important;
+
     color: var(--red);
 }
 
@@ -135,7 +141,8 @@
 .changeMe {
     width: 8rem;
     height: 4rem;
-    margin: 0 0 0 2%;
+    cursor: pointer;
+    margin: 0 0 0 10px;
 }
 
 .input-body, .input-button {

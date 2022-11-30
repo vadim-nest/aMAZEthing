@@ -1,6 +1,8 @@
 .gameDashboard{
-    height: 60vh;
+    min-height: 510px;
+    height: 50vh;
     width: 80vw;
+    min-width: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;

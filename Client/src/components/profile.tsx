@@ -87,7 +87,7 @@ function Profile() {
             </div>
           </div>
           <div className='learning-progress'> 
-            <h1>Learning progress:</h1>
+            <h1 className='learning-progress'>Learning progress:</h1>
             <div className='progress'>
               <div className='sort-progress'>
                 <div><img className='sort-progress-img' src={sort}/></div><h3 className='algo-name'>Sorting Algorithms</h3><h3>{user.sortLessons}</h3>
@@ -107,11 +107,15 @@ function Profile() {
             <div className='circle'></div>
           </div>
           <div className='stats-line'>
-            <h4 className='stats-text'>MATCHES<h4>14</h4></h4>
-            <h4 className='stats-text'>WINS<h4 className='wins-yellow'>3</h4></h4>
+            <h4 className='stats-text'>
+              MATCHES
+              <h4  className='stats-text'>14</h4></h4>
+            <h4 className='stats-text'>WINS
+            <h4 className='wins-yellow'>3</h4></h4>
+
             <h4 className='stats-text'>LOSSES<h4 className='losses-red'>2</h4></h4>
-            <h4 className='stats-text'>WIN RATE<h4>60%</h4></h4>
-            <h4 className='stats-text'>GOLD EARNED<h4>200</h4></h4>
+            <h4 className='stats-text'>WIN RATE<h4  className='stats-text'>60%</h4></h4>
+            <h4 className='stats-text'>GOLD EARNED<h4  className='stats-text'>200</h4></h4>
           </div>
           <h3 className='created'>Account created {new Date().toLocaleDateString()}</h3> {/* get the date when the account was created */}
         </div>
