@@ -54,9 +54,9 @@ function RightBar({
         <div>
           <h1 className='left-just-stats'>{minions[currentMinion].type}</h1>
           <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[currentMinion])}</h1>
+          {/* <h1>{minions}</h1> */}
         </div>
       }
-
       </div>}
 
 
@@ -69,7 +69,9 @@ function RightBar({
           onMouseEnter={() => storeButtonHover(true)}
           onMouseLeave={() => storeButtonHover(false)}
         >
-          <ShopSVG />
+          <div className='shopSVG'>
+            <ShopSVG />
+          </div>
         </button>
       )}
     </div>

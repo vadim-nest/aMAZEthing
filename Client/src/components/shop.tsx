@@ -11,7 +11,7 @@ export default function Shop({
 }) {
   return (
     <div className='shop-page'>
-      <h1>Welcome to the shop</h1>
+      <h1>Shop</h1>
       <div onClick={() => addNewMinion('Hare')}>
         <Squirrel currentPlayer='p1-color' />
       </div>
