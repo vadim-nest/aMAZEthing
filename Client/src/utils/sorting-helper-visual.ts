@@ -38,12 +38,12 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
           'var(--sort-green)';
       }
     }
-    for(let i = 0; i<arrayBars.length ; i++) {
-      const bar = document.getElementById(`${i}arrayColumn${tower}`)
-      console.log(bar)
-      await delay(50)
-      bar!.style.background = 'var(--dark-green)'
-  }
+  //   for(let i = 0; i<arrayBars.length ; i++) {
+  //     const bar = document.getElementById(`${i}arrayColumn${tower}`)
+  //     console.log(bar)
+  //     await delay(50)
+  //     bar!.style.background = 'var(--dark-green)'
+  // }
 
     if (cb) cb()
   }
@@ -82,14 +82,14 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
         document.getElementById(`${indexOne}arrayColumn${tower}`)!.style.backgroundColor = 'var(--dark-green)';
       }
     }
-    const arrayBars = document.getElementsByClassName('array-el');
+    // const arrayBars = document.getElementsByClassName('array-el');
 
-    for(let i = 0; i<arrayBars.length ; i++) {
-      const bar = document.getElementById(`${i}arrayColumn${tower}`)
-      console.log(bar)
-      await delay(50)
-      bar!.style.background = 'var(--main-green)'
-  }
+  //   for(let i = 0; i<arrayBars.length ; i++) {
+  //     const bar = document.getElementById(`${i}arrayColumn${tower}`)
+  //     console.log(bar)
+  //     await delay(50)
+  //     bar!.style.background = 'var(--main-green)'
+  // }
     if (cb) cb()
 
   }
@@ -122,18 +122,18 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
       }
       
     }   
-    for(let i = 0; i<arrayBars.length ; i++) {
-      const bar = document.getElementById(`${i}arrayColumn${tower}`)
-      console.log(bar)
-      await delay(50)
-      bar!.style.background = 'var(--main-green)'
-  }
+  //   for(let i = 0; i<arrayBars.length ; i++) {
+  //     const bar = document.getElementById(`${i}arrayColumn${tower}`)
+  //     console.log(bar)
+  //     await delay(50)
+  //     bar!.style.background = 'var(--main-green)'
+  // }
     if (cb) cb()
 
   }
 
   export async function mergeSortVisual(animations:any, DELAY_MS:number, width:number, margin:number, tower: string = '', height: number ,  cb?: () => void) {
-    const arrayBars = document.getElementsByClassName('array-el');
+    const arrayBars = document.getElementsByClassName(`array-el${tower}`);
     for(let i = 0; i<animations.length; i++) {
       await delay(DELAY_MS)
       const isColorChange = i % 3 !== 2;
@@ -145,30 +145,29 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
         await delay(DELAY_MS)
           barOne.style.backgroundColor = color;
           barTwo.style.backgroundColor = color;
-     
       } else {
         const [barOneIdx, newHeight] = animations[i];
         const barOne = arrayBars[barOneIdx] as HTMLElement;
         await delay(DELAY_MS)
         barOne.style.height = `${newHeight*height}px`;
-        await delay(DELAY_MS)
+        await delay(0)
 
         barOne.textContent = newHeight
     }
   }
 
-    for(let i = 0; i<arrayBars.length ; i++) {
-      const bar = arrayBars[i] as HTMLElement 
-      await delay(50)
-      bar.style.background = 'var(--main-green)'
-  }
+  //   for(let i = 0; i<arrayBars.length ; i++) {
+  //     const bar = arrayBars[i] as HTMLElement 
+  //     await delay(50)
+  //     bar.style.background = 'var(--main-green)'
+  // }
   if (cb) cb()
 
 
 }
 
 export async function quickSortVisual(animations:any, DELAY_MS:number, width:number, margin:number, tower: string = '', height:number,  cb?: () => void) {
-  const arrayBars = document.getElementsByClassName('array-el');
+  const arrayBars = document.getElementsByClassName(`array-el${tower}`);
   for(let i = 0; i<animations.length; i++) {
     await delay(DELAY_MS)
     if (animations[i].length === 2) {
@@ -181,12 +180,12 @@ export async function quickSortVisual(animations:any, DELAY_MS:number, width:num
       await delay(DELAY_MS)
         barOne.style.backgroundColor = colorRed;
         barTwo.style.backgroundColor = colorRed;
-      await delay(DELAY_MS)
+      await delay(0)
 
         barOne.style.backgroundColor = colorGreen;
         barTwo.style.backgroundColor = colorGreen;
 
-   
+
     } else {
       const [barOneIdx, barOneHeight, barTwoIdx, barTwoHeight] = animations[i];
       const barOne = arrayBars[barOneIdx] as HTMLElement;
@@ -194,17 +193,17 @@ export async function quickSortVisual(animations:any, DELAY_MS:number, width:num
       await delay(DELAY_MS)
       barOne.style.height = `${barTwoHeight*height}px`;
       barTwo.style.height= `${barOneHeight*height}px`;
-      await delay(DELAY_MS)
+      await delay(0)
       barOne.textContent = barTwoHeight
       barTwo.textContent = barOneHeight
   }
 }
 
-  for(let i = 0; i<arrayBars.length ; i++) {
-    const bar = arrayBars[i] as HTMLElement 
-    await delay(DELAY_MS*1.5)
-    bar.style.background = 'var(--dark-green)'
-}
+//   for(let i = 0; i<arrayBars.length ; i++) {
+//     const bar = arrayBars[i] as HTMLElement 
+//     await delay(DELAY_MS*1.5)
+//     bar.style.background = 'var(--dark-green)'
+// }
 if (cb) cb()
 
 }

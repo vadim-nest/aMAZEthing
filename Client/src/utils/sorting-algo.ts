@@ -47,13 +47,13 @@ export function insertionSortAlgo(arr: number[], ASC_MODE:boolean) {
     for (let j = i; j > 0; j--) {
       animations.push([j, arr[j]]);
       if(ASC_MODE) {
-        if (arr[j] < arr[j - 1]) {
+        if (arr[j] > arr[j - 1]) {
           animations.push([j, arr[j], j - 1, arr[j - 1]]);
           [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]];
           ArrayStates.push([...arr]);
         } else break;
       } else  {
-        if (arr[j] > arr[j - 1]) {
+        if (arr[j] < arr[j - 1]) {
           animations.push([j, arr[j], j - 1, arr[j - 1]]);
           [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]];
           ArrayStates.push([...arr]);
@@ -74,10 +74,10 @@ export function selectionSortAlgo(arr: number[], ASC_MODE:boolean) {
     let min = i;
     for (let j = i + 1; j < arr.length; j++) {
       if(ASC_MODE) {
-        min = arr[j] < arr[min] ? j : min;
+        min = arr[j] > arr[min] ? j : min;
 
       } else {
-        min = arr[j] > arr[min] ? j : min;
+        min = arr[j] < arr[min] ? j : min;
 
       }
       animations.push([i, j])
@@ -104,7 +104,7 @@ function mergeSortHelper(arr:any, aux:any, left:any, right:any, animations:any, 
   const mid = left + Math.floor((right - left) / 2);
   mergeSortHelper(arr, aux, left, mid, animations,ASC_MODE);
   mergeSortHelper(arr, aux, mid + 1, right, animations,ASC_MODE);
-  if(ASC_MODE) {
+  if(!ASC_MODE) {
     mergeNow(arr, aux,mid, left, right, animations)
   } else {
     mergeNowDesc(arr, aux,mid, left, right, animations)
@@ -220,7 +220,7 @@ export function quickSortAlgo(arr:number[], ASC_MODE:boolean) {
 function quickSortHelper(arr:number[], left:number , right:number, animations:any, ASC_MODE:boolean) {
   if(left < right) {
     let part:number
-    if(ASC_MODE){
+    if(!ASC_MODE){
       part = partition(arr, left, right, animations)
     } else {
       part = partitionDESC(arr, left, right, animations)

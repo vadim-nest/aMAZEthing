@@ -27,7 +27,7 @@ export default function Visualization(props: any) {
             {array.map((element:number, index:number) => {
             return (
             <div
-              className={`array-el`}
+              className={`array-el${tower}`}
               style={{
                 backgroundColor: 'grey',
                 height: `${element*height}px`,

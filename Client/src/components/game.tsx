@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { animal, MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
 import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../utils/path-finding-algo';
-import { bubbleSortAlgo } from '../utils/sorting-algo';
+import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, selectionSortAlgo } from '../utils/sorting-algo';
 import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 
 
@@ -67,9 +67,20 @@ function Game() { // TODO: Extract logic to maze class
   }, [counter]);
 
   const [maze, setMaze] = useState(array);
-  const speed = 200;
+  const speed = 10;
   const minBoxSize = 20;
   const maxBoxSize = 100;
+
+  useEffect(() => {
+    setTowers(prevTowers => {
+      return prevTowers.map(tower => {
+        return {
+          ...tower,
+          popupOpen: currentTower !== null && currentTower.id === tower.id
+        }
+      })
+    })
+  }, [currentTower])
 
   function addNewMinion(type: animal) { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
@@ -280,13 +291,21 @@ function Game() { // TODO: Extract logic to maze class
       return newTowers.map(tower => {
         if (towerId !== tower.id) return tower;
         else {
-          let animations = bubbleSortAlgo([...tower.numbers], minion.alignment === 'p1');
+          let animations = (
+            minion.sortingAlgo === 'bubble' ? bubbleSortAlgo([...tower.numbers], minion.alignment === 'p1') :
+            minion.sortingAlgo === 'insertion' ? insertionSortAlgo([...tower.numbers], minion.alignment === 'p1') :
+            minion.sortingAlgo === 'selection' ? selectionSortAlgo([...tower.numbers], minion.alignment === 'p1') :
+            minion.sortingAlgo === 'merge' ? mergeSortAlgo([...tower.numbers], minion.alignment === 'p1') :
+            quickSortAlgo([...tower.numbers], minion.alignment === 'p1')
+          )
+          console.log('animations', animations)
           return {
           ...tower,
           minion: minion.id,
           minionAlignment: minion.alignment,
           minionSortingSpeed: minion.sortingSpeed,
-          animations: animations
+          sortingAlgo: minion.sortingAlgo,
+          animations: [...animations],
           }
         }
       })
@@ -307,43 +326,102 @@ function Game() { // TODO: Extract logic to maze class
     };
     const minion = minions[minionId];
     const tower = towers.find(tower => tower.id === towerId) as TowerType;
-    let animations = bubbleSortAlgo([...tower.numbers], minion.alignment === 'p1');
-    let array = tower.numbers;
+    let array = [...tower.numbers];
+    let animations = (
+      minion.sortingAlgo === 'bubble' ? bubbleSortAlgo([...tower.numbers], minion.alignment === 'p1') :
+      minion.sortingAlgo === 'insertion' ? insertionSortAlgo([...tower.numbers], minion.alignment === 'p1') :
+      minion.sortingAlgo === 'selection' ? selectionSortAlgo([...tower.numbers], minion.alignment === 'p1') :
+      minion.sortingAlgo === 'merge' ? mergeSortAlgo([...tower.numbers], minion.alignment === 'p1') :
+      quickSortAlgo(array, minion.alignment === 'p1')
+    )
     await new Promise((resolve, reject) => {
       const interval = setInterval(()=>{
-        const currentAnimation = animations.shift();
-        if (animations.length === 0) {
-          clearInterval(interval);
-          resolve(true);
-        };
-        if (currentAnimation && currentAnimation.length === 4) {
-          console.log('changing array')
-          let temp = array[currentAnimation[0]];
-          array[currentAnimation[0]] = array[currentAnimation[2]];
-          array[currentAnimation[2]] = temp;
-        }
-        if (towersSorting[towerId] === 0) {
-          console.log('towerId', towersSorting, towersSorting[towerId])
-          setTowers(prevTowers => {
-            const newTowers = [...prevTowers];
-            return newTowers.map(tower => {
-              if (tower.id !== towerId) return tower;
-              else {
-                if (currentAnimation && currentAnimation.length === 4) {
-                  return {
-                    ...tower,
-                    animations,
-                    numbers: array
-                  }
-                } else return {
-                  ...tower,
-                  animations,
-                }
-              }
-            })
-          });
-        }
-      }, minion.sortingSpeed*2);
+        if (minion.alignment === 'p2') array.sort((a, b) => a - b);
+        else array.sort((a,b) => b - a);
+        setTowers(prevTowers => {
+          return prevTowers.map(tower => {
+            if (tower.id !== towerId) return tower;
+            return {
+              ...tower,
+              numbers: [...array]
+            }
+          })
+        })
+        clearInterval(interval);
+        resolve(true);
+
+        // const currentAnimation = animations.shift();
+        // if (animations.length === 0) {
+        //   clearInterval(interval);
+        //   resolve(true);
+        //   setTowers(prevTowers => {
+        //     return prevTowers.map(tower => {
+        //       if (tower.id !== towerId) return tower;
+        //       return {
+        //         ...tower,
+        //         numbers: [...array]
+        //       }
+        //     })
+        //   })
+        //   return;
+        // };
+        // if (currentAnimation && currentAnimation.length === 4) {
+        //   console.log('changing array')
+        //   let temp = array[currentAnimation[0]];
+        //   array[currentAnimation[0]] = array[currentAnimation[2]];
+        //   array[currentAnimation[2]] = temp;
+        // }
+        // setTowers(prevTowers => {
+        //   const newTowers = [...prevTowers];
+        //   return newTowers.map(tower => {
+        //     if (tower.id !== towerId) return tower;
+        //     if (tower.popupOpen) return tower;
+        //     console.log('hello');
+        //     if (currentAnimation && currentAnimation.length === 4) {
+        //       return {
+        //         ...tower,
+        //         animations,
+        //         numbers: [...array]
+        //       }
+        //     } else return {
+        //       ...tower,
+        //       animations: [...animations],
+        //     }
+        //   })
+
+        // })
+
+
+
+
+
+
+
+
+
+
+        // // if (!tower.popupOpen) {
+        // //   console.log('Popup is open')
+        // //   setTowers(prevTowers => {
+        // //     const newTowers = [...prevTowers];
+        // //     return newTowers.map(tower => {
+        // //       if (tower.id !== towerId) return tower;
+        // //       else {
+        // //         if (currentAnimation && currentAnimation.length === 4) {
+        // //           return {
+        // //             ...tower,
+        // //             animations,
+        // //             numbers: [...array]
+        // //           }
+        // //         } else return {
+        // //           ...tower,
+        // //           animations: [...animations],
+        // //         }
+        // //       }
+        // //     })
+        // //   });
+        // // }
+      }, minion.sortingSpeed*2*(animations.length + 4));
     })
     exitTower(towerId, minionId);
   }

@@ -32,8 +32,10 @@ export interface TowerType {
   minion: null | number;
   minionAlignment: null | 'p1' | 'p2';
   minionSortingSpeed: null | number;
+  popupOpen: boolean,
   alignment: 'none' | 'p1' | 'p2';
-  animations: number[][]
+  animations: number[][];
+  sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
 }
 
 export interface animal {
@@ -44,7 +46,7 @@ export interface animal {
 }
 
 export const squirrel: animal = {
-  pathFindingAlgo: 'dfs',
+  pathFindingAlgo: 'bfs',
   sortingAlgo: 'bubble',
   sortingSpeed: 300,
   type: 'Squirrel'
@@ -67,21 +69,21 @@ export const hare: animal = {
 export const deer: animal = {
   pathFindingAlgo: 'a*',
   sortingAlgo: 'merge',
-  sortingSpeed: 300,
+  sortingSpeed: 50,
   type: 'Deer'
 }
 
 export const koala: animal = {
   pathFindingAlgo: 'a*',
   sortingAlgo: 'quick',
-  sortingSpeed: 300,
+  sortingSpeed: 50,
   type: 'Koala'
 }
 
 export const bear: animal = {
   pathFindingAlgo: 'a*',
   sortingAlgo: 'quick',
-  sortingSpeed: 300,
+  sortingSpeed: 50,
   type: 'Bear'
 }
 

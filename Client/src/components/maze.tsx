@@ -63,9 +63,11 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
             color: 'red',
             minion: null,
             minionAlignment: null,
+            popupOpen: false,
             alignment: 'none',
             animations: [],
-            minionSortingSpeed: null
+            minionSortingSpeed: null,
+            sortingAlgo: 'bubble'
           }
         })
         )
