@@ -5,7 +5,7 @@ import LeftBar from './leftBar';
 import { useEffect, useState } from 'react';
 import { MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
-import { getDirection, vBFS, vDFS, vDijk } from '../utils/path-finding-algo';
+import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../utils/path-finding-algo';
 import { bubbleSortAlgo } from '../utils/sorting-algo';
 import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 
@@ -73,6 +73,11 @@ function Game() { // TODO: Extract logic to maze class
 
   function addNewMinion(type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear') { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
+    let pathFindingAlgo: 'a*' | 'dfs' | 'dijk' | 'bfs' = 'a*';
+    if (type === 'Squirrel') pathFindingAlgo = 'dfs';
+    else if (type === 'Badger') pathFindingAlgo = 'bfs';
+    else if (type === 'Hare') pathFindingAlgo = 'dijk';
+    else pathFindingAlgo = 'a*';
     if ((newId + 1) % 2) {
       setGameStats(prevStats => {
         return {
@@ -93,7 +98,7 @@ function Game() { // TODO: Extract logic to maze class
             alignment: 'p1',
             thoughtProcess: [],
             inTower: false,
-            pathFindingAlgo: 'dijk',
+            pathFindingAlgo,
             sortingAlgo: 'bubble',
             sortingSpeed: 10,
             type
@@ -164,6 +169,11 @@ function Game() { // TODO: Extract logic to maze class
       directions = vDijk(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph)
       console.log('Dijkstra');
       console.log((directions as any));
+    }
+    else if (minion.pathFindingAlgo === 'a*') {
+      directions = aStar(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph, distanceConstruct(width))
+      console.log('a*');
+      console.log((directions as any))
     }
     else {
       directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);

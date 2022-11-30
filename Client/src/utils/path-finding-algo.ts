@@ -149,11 +149,22 @@ export function vDijk (valueX: number, valueY: number, graph: Graph) {
   return {path: path.slice(1), visited: Array.from(visited)}
 }
 
-// function distance (start: number, end: number, graph: Graph) { // TODO: Generalize distance function
-//   let x = start%graph.width - end%graph.width;
-//   let y = Math.floor(start/this.width) - Math.floor(end/this.width);
-//   return Math.pow(Math.pow(x, 2) + Math.pow(y, 2), 0.5);
-// }
+export function distanceConstruct (width: number) {
+  return function distance (start: value, end: value) { // TODO: Generalize distance function
+    start = Number(start);
+    end = Number(end);
+    let x = start%width - end%width;
+    let y = Math.floor(start/width) - Math.floor(end/width);
+    return Math.pow(Math.pow(x, 2) + Math.pow(y, 2), 0.5);
+  }
+}
+export function distance (start: value, end: value, width: number) { // TODO: Generalize distance function
+  start = Number(start);
+  end = Number(end);
+  let x = start%width - end%width;
+  let y = Math.floor(start/width) - Math.floor(end/width);
+  return Math.pow(Math.pow(x, 2) + Math.pow(y, 2), 0.5);
+}
 
 export function aStar (valueX: value, valueY: value, graph: Graph, distance: (start:value, end: value) => number, h=10) {
   let unvisitedNodes: {[key: value]: [number, number]} = {};
@@ -167,6 +178,7 @@ export function aStar (valueX: value, valueY: value, graph: Graph, distance: (st
     let node = Object.keys(unvisitedNodes).reduce((acc, key) => {
       return unvisitedNodes[key][0] + unvisitedNodes[key][1] < (acc[1] as number) + (acc[2] as number) ? [key, unvisitedNodes[key][0], unvisitedNodes[key][1]] : acc;
     }, ['null', Infinity, Infinity]);
+    node = [Number(node[0]), Number(node[1])]
     let cost = unvisitedNodes[node[0]][0];
     visitedNodes.set(Number(node[0]), cost);
     delete unvisitedNodes[node[0]];
@@ -201,7 +213,7 @@ export function aStar (valueX: value, valueY: value, graph: Graph, distance: (st
   }
   path.push(valueX);
   return {
-    path: path.map(el=>Number(el)).reverse(),
+    path: path.map(el=>Number(el)).reverse().slice(2),
     visited: thoughtProcess
   };
 }
