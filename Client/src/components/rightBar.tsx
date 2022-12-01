@@ -4,7 +4,7 @@ import { animal, minionType } from '../utils/types';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 import { useState } from 'react';
 import Shop from './shop';
-import BackArrow from './svg/backArrow';
+import CloseCross from './svg/closeCross';
 
 function storeButtonHover(isOnHover: boolean) {
   document.querySelectorAll('.store-button-yellow').forEach((svgEl) => {
@@ -19,13 +19,15 @@ function storeButtonHover(isOnHover: boolean) {
   });
 }
 
-function arrowButtonHover(isOnHover: boolean) {
-  isOnHover
-    ? (document.querySelector('.arrow-hover-top') as unknown as HTMLElement).style.fill = `#3B7D5B`
-    : (document.querySelector('.arrow-hover-top') as unknown as HTMLElement).style.fill = `var(--sort-green)`
+function crossButtonHover(isOnHover: boolean) {
+  document.querySelectorAll('.close-cross-green').forEach((svgEl) => {
     isOnHover
-    ? (document.querySelector('.arrow-hover-bottom') as unknown as HTMLElement).style.fill = `#296646`
-    : (document.querySelector('.arrow-hover-bottom') as unknown as HTMLElement).style.fill = `var(--main-green)`
+      ? ((svgEl as unknown as HTMLElement).style.fill = `#96B0A2`)
+      : ((svgEl as unknown as HTMLElement).style.fill = `var(--white-green)`)
+
+  });
+
+
 }
 
 function whichAnimalSVG (minion: minionType) {
@@ -41,22 +43,12 @@ function whichAnimalSVG (minion: minionType) {
 
 function styleCurrentMinionBorder(currentMinId: number) {
   const allYourMinions = document.querySelectorAll('.your-minion-button');
-  // const allYourMinionsHoverFix = document.querySelectorAll('.your-minion-button:hover');
 
   allYourMinions.forEach(minion => {
-    // (minion as unknown as HTMLElement).style.borderColor = 'transparent';
-    // (minion as unknown as HTMLElement).addEventListener('mouseover', () => (minion as unknown as HTMLElement).style.borderColor = 'var(--yellow)');
-    // (minion as unknown as HTMLElement).addEventListener('mouseout', () => (minion as unknown as HTMLElement).style.borderColor = 'var(--yellow)');
-
     (minion as unknown as HTMLElement).style.backgroundColor = 'var(--green)';
   });
 
-
   (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).style.backgroundColor = 'var(--purple)';
-
-  // (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).classList.add('permanent-border-selected');
-
-  // permanent-border-selected
 }
 
 function RightBar({
@@ -123,14 +115,13 @@ function RightBar({
         <button
           className='store-button'
           style={shopOpen ? {backgroundColor: 'var(--sand)'} : {backgroundColor: 'transparent'}}
-          // onClick={() => addNewMinion('Hare')}
           onClick={() => {shopOpen ? setShopOpen(false) : setShopOpen(true)}}
-          onMouseEnter={() => {storeButtonHover(true); arrowButtonHover(true)}}
-          onMouseLeave={() => {storeButtonHover(false); arrowButtonHover(false)}}
+          onMouseEnter={() => {storeButtonHover(true); crossButtonHover(true)}}
+          onMouseLeave={() => {storeButtonHover(false); crossButtonHover(false)}}
         >
           <div className='shopSVG'>
             {shopOpen
-              ? <BackArrow />
+              ? <div className='cross-size'><CloseCross /></div>
               : <ShopSVG />
             }
 
