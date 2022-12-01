@@ -16,7 +16,7 @@ import SelectionLesson from './components/sortingLessons/selectionLesson';
 import MergeLesson from './components/sortingLessons/mergeSort';
 import HeapLesson from './components/sortingLessons/heapSort';
 import QuickLesson from './components/sortingLessons/quickSort';
-
+import DfsLesson from './components/pathfindingLessons/dfsLesson';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -58,7 +58,9 @@ const router = createBrowserRouter([
       { path: '/learning/selectionLesson', element: <SelectionLesson /> },
       { path: '/learning/mergeLesson', element: <MergeLesson /> },
       { path: '/learning/heapLesson', element: <HeapLesson /> },
-      { path: '/learning/quickLesson', element: <QuickLesson />}
+      { path: '/learning/quickLesson', element: <QuickLesson />},
+      { path: '/learning/dfsLesson', element: <DfsLesson />}
+
     ],
   },
 ]);
