@@ -112,7 +112,7 @@ function RightBar({
       {!allTilesHidden && (
         <button
           className='store-button'
-          style={shopOpen ? {backgroundColor: 'var(--sand)'} : {backgroundColor: 'transparent'}}
+          style={shopOpen ? {backgroundColor: 'var(--purple)'} : {backgroundColor: 'transparent'}}
           // onClick={() => addNewMinion('Hare')}
           onClick={() => {shopOpen ? setShopOpen(false) : setShopOpen(true)}}
           onMouseEnter={() => storeButtonHover(true)}

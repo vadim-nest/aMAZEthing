@@ -1,5 +1,5 @@
 const playerClass = 'player-color-svg';
-const playerClassShadow = 'neutralTowewefwegr';
+const playerClassShadow = 'player-color-shadow-svg';
 
 function Squirrel({ currentPlayer }: { currentPlayer: string }) {
   return (
@@ -87,7 +87,6 @@ function Badger({ currentPlayer }: { currentPlayer: string }) {
     >
       <g id='XMLID_58_'>
         <path
-          className={currentPlayer}
           d='M422.652,148.452c-8.79-3.69-18.54-6.66-28.38-7.52c-1.35-2.21-3.08-4.13-5.1-5.67
         c3.31-0.16,6.75-0.24,10.37-0.24C405.142,135.021,413.312,139.832,422.652,148.452z'
         />
@@ -247,7 +246,7 @@ function Deer({ currentPlayer }: { currentPlayer: string }) {
 			C57.96,280.761,61.9,284.511,66.2,288.801z'
       />
       <path
-        className={currentPlayer}
+        className={playerClassShadow}
         d='M66.2,288.801c3.64,3.641,6.33,7.76,8.07,12.33c-4.41,8.29-14.03,17.76-24.21,27.77
 			c-9.29,9.149-19.19,18.899-27.06,29.52v-7.809c4.06-4.21,12.48-13.75,19.6-26.92c8.32-15.41,12.28-31.07,11.81-46.28
 			C57.96,280.761,61.9,284.511,66.2,288.801z'
@@ -343,18 +342,17 @@ function Koala({ currentPlayer }: { currentPlayer: string }) {
     >
       <g id='XMLID_86_'>
         <path
-          className="neutralTower"
           d='M360.15,213.038c1.6,7.81,4.19,14.13,7.74,18.96c-18.33,11.97-46.01,18.1-70.22,16.02
 				c5.32-4.92,9.1-9.31,11.26-13.449c10.25-1.24,33.71-5.74,51.22-21.57C360.15,213.008,360.15,213.018,360.15,213.038z'
         />
         <path
-          className={currentPlayer}
+          className={playerClassShadow}
           d='M98.76,265.468c1.41,0.62,2.8,1.2,4.17,1.75c-8.98,13.771-24.96,25.271-39.19,35.5
 				c-14.57,10.471-26.68,19.19-30.5,29.32H19.89c-2.7,0-4.89-2.2-4.89-4.9c0-0.93,0.26-1.83,0.77-2.62l50.71-79.689
 				C73.84,252.418,84.64,259.338,98.76,265.468z'
         />
         <path
-          className={currentPlayer}
+          className={playerClassShadow}
           d='M345.99,257.949l26.43,66.09h-4.92c-15.52,0-47.87-36.36-55.38-60.69
 				C323.55,262.939,335.12,261.078,345.99,257.949z'
         />
@@ -413,7 +411,7 @@ function Koala({ currentPlayer }: { currentPlayer: string }) {
 				c0,2.7,2.19,4.9,4.89,4.9h13.35c3.82-10.13,15.93-18.85,30.5-29.32C77.97,292.489,93.95,280.989,102.93,267.218z'
         />
         <path
-          fill="#000000"
+          className={playerClassShadow}
           d='M420.5,181.498c5.52,0,10,4.48,10,10s-4.48,10-10,10s-10-4.48-10-10S414.98,181.498,420.5,181.498
 				z'
         />
@@ -434,13 +432,13 @@ function Bear({ currentPlayer }: { currentPlayer: string }) {
     >
       <g id='XMLID_89_'>
         <path
-          className={currentPlayer}
+          className={playerClassShadow}
           d='M207.339,275.357c-2.14,13.08-9.32,26.58-16.32,39.7c-6.229,11.66-12.159,22.79-14.239,33.3h-7.601
         c-3.699-1.739-7.63-3.63-10.29-4.96c-1.059-20.79-9.449-31.84-16.279-40.819c-3.091-4.07-5.79-7.641-7.431-11.59
         C157.959,276.708,179.599,275.368,207.339,275.357z'
         />
         <path
-          className={currentPlayer}
+          className={playerClassShadow}
           d='M401.569,348.357h-15.57l-30-22.5c-0.76-0.569-1.62-0.989-2.54-1.239
         c-32.17-8.69-42.57-50.101-42.67-50.5c-0.09-0.391-0.22-0.771-0.37-1.13c11.05-9.131,22.91-21.941,30.53-38.79
         c3.8-1.101,9.35-3.051,14.359-6.12c3.16,9.229,4.881,30.29,4.69,47.699c-0.02,1.771,0.59,3.49,1.72,4.86

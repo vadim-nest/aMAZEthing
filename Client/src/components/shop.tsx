@@ -29,9 +29,7 @@ export default function Shop({
             <h1 className='shop-just-text'>Speed</h1>
             <h1 className='shop-just-stats'>{squirrel.sortingSpeed}</h1>
           </div>
-          <div className='in-shop-svg-large'>
-            <Squirrel currentPlayer='neutralTower' />
-          </div>
+          <Squirrel currentPlayer='p1-color' />
         </div>
         <div className='buy-minion-button' onClick={() => addNewMinion(badger)}>
           <div className='shop-stats'>
@@ -49,7 +47,7 @@ export default function Shop({
             <h1 className='shop-just-text'>Speed</h1>
             <h1 className='shop-just-stats'>{badger.sortingSpeed}</h1>
           </div>
-          <Badger currentPlayer='neutralTower' />
+          <Badger currentPlayer='p1-color' />
         </div>
         <div className='buy-minion-button' onClick={() => addNewMinion(hare)}>
           <div className='shop-stats'>
@@ -67,9 +65,7 @@ export default function Shop({
             <h1 className='shop-just-text'>Speed</h1>
             <h1 className='shop-just-stats'>{hare.sortingSpeed}</h1>
           </div>
-          <div className='in-shop-svg-large'>
-            <Hare currentPlayer='neutralTower' />
-          </div>
+          <Hare currentPlayer='p1-color' />
         </div>
         <div className='buy-minion-button' onClick={() => addNewMinion(deer)}>
           <div className='shop-stats'>
@@ -87,7 +83,7 @@ export default function Shop({
             <h1 className='shop-just-text'>Speed</h1>
             <h1 className='shop-just-stats'>{deer.sortingSpeed}</h1>
           </div>
-          <Deer currentPlayer='neutralTower' />
+          <Deer currentPlayer='p1-color' />
         </div>
         <div className='buy-minion-button' onClick={() => addNewMinion(koala)}>
           <div className='shop-stats'>
@@ -105,7 +101,7 @@ export default function Shop({
             <h1 className='shop-just-text'>Speed</h1>
             <h1 className='shop-just-stats'>{koala.sortingSpeed}</h1>
           </div>
-          <Koala currentPlayer='neutralTower' />
+          <Koala currentPlayer='p1-color' />
         </div>
         <div className='buy-minion-button' onClick={() => addNewMinion(bear)}>
           <div className='shop-stats'>
@@ -123,7 +119,7 @@ export default function Shop({
             <h1 className='shop-just-text'>Speed</h1>
             <h1 className='shop-just-stats'>{bear.sortingSpeed}</h1>
           </div>
-          <Bear currentPlayer='neutralTower' />
+          <Bear currentPlayer='p1-color' />
         </div>
       </ul>
     </div>
