@@ -8,13 +8,13 @@ function DijkstraLesson() {
 
 
   let paragraphs = {
-    sortName: 'Depth First Search (DFS) algorithm',
+    sortName: 'Dijkstra algorithm',
     firstP:
-      'DFS starts at the root (top) node of a tree and goes as far as it can down a given branch (path), then backtracks until it finds an unexplored path, and then explores it.',
+      'This algorithm uses the weights of the edges to find the path that minimizes the total distance (weight) between the source node and all other nodes.',
   };
 
   useEffect(()=>{
-    if(triggerDisplay) (document.querySelector('.dfs .lesson-wrapper-2') as unknown as HTMLElement).style.borderColor = 'var(--main-green)'
+    if(triggerDisplay) (document.querySelector('.dijk .lesson-wrapper-2') as unknown as HTMLElement).style.borderColor = 'var(--main-green)'
   },[triggerDisplay])
 
   useEffect(() => {

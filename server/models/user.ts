@@ -68,16 +68,14 @@ const userSchema = new Schema({
     },
     draws: {
       type: Number,
-      default: 0,
-    },
+      default: 0
+    }
   },
-  avatar: {
+  avatar:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Avatar',
-    require: true,
-  },
-});
-
-const User = mongoose.model('User', userSchema);
+    require:true
+  }
+})
 
 export { User };

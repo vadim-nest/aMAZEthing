@@ -10,12 +10,7 @@ interface UserState{ //shape of the state inside inside of the slice
     },
     pathLessons:boolean[],
     sortLessons:boolean[],
-    avatar:{
-        data:{
-            data:number[]
-        },
-        contentType:string;
-    },
+    avatar:string,
 }
 
 const initialState: UserState = {
@@ -25,13 +20,7 @@ const initialState: UserState = {
     overallWins:{ wins:0, losses:0, draws:0},
     pathLessons:[false, false, false, false],
     sortLessons:[false, false, false, false, false, false],
-    avatar:{
-        data:{
-            data:[]
-        },
-        contentType: "monkey.png",
-        
-    }
+    avatar: "monkey.png",
 }
 
 const userSlice = createSlice({

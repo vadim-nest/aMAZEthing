@@ -8,7 +8,6 @@ import {
 
 const users = require('../controllers/user');
 const mazes = require('../controllers/maze')
-const avatars = require('../controllers/avatar');
 
 //public route
 userRouter.post('/createMaze', mazes.createMaze);
