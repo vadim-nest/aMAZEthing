@@ -11,7 +11,7 @@ import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 import TowerSVG from './svg/towerSVG';
 
-function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, minions, currentTower, setCurrentTower, gameStats}: {
+function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile, minions, currentTower, setCurrentTower, gameStats, towers, setZoomed}: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>,
   minBoxSize: number,
   maxBoxSize: number,
@@ -20,19 +20,23 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
   currentTower: null | TowerType,
   minions: {[key: number]: minionType},
   setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>
-  gameStats: {timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}
+  gameStats: {timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number},
+  towers: TowerType[],
+  setZoomed: React.Dispatch<React.SetStateAction<boolean>>
 }) {
 
   function zoomIn(amount: number) {
     setCurrentTower(null);
+    setZoomed(true);
     setBoxSize(oldBoxSize => {
       if (oldBoxSize + amount > maxBoxSize) return maxBoxSize;
       return oldBoxSize + amount;
     })
   }
-
+  
   function zoomOut(amount: number) {
     setCurrentTower(null);
+    setZoomed(true);
     setBoxSize(oldBoxSize => {
       if (oldBoxSize - amount < minBoxSize) return minBoxSize;
       return oldBoxSize - amount;
@@ -120,18 +124,18 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
         </div>}
 
         {currentTower !== null && <div>
-          {currentTower.alignment === 'none'
+          {towers.find(tower => tower.id === currentTower.id)!.alignment === 'none'
             ? <h1 className='current-minion-name-left-bar'>unsorted</h1>
-            : <h1 className='current-minion-name-left-bar'>{currentTower.alignment}'s tower</h1>
+            : <h1 className='current-minion-name-left-bar'>{currentTower && towers.find(tower => tower.id === currentTower.id)!.alignment}'s tower</h1>
           }
-          {currentTower.alignment === 'none'
+          {towers.find(tower => tower.id === currentTower.id)!.alignment === 'none'
             ? <h1 className='current-minion-svg-left-bar'>{<TowerSVG playerClass={'neutralTower'} playerClassShadow={'neutralTowerShadow'} />}</h1>
-            : <h1 className='current-minion-svg-left-bar'>{<TowerSVG playerClass={currentTower.alignment + '-color'} playerClassShadow={currentTower.alignment + '-color'} />}</h1>
+            : <h1 className='current-minion-svg-left-bar'>{<TowerSVG playerClass={towers.find(tower => tower.id === currentTower.id)!.alignment + '-color'} playerClassShadow={towers.find(tower => tower.id === currentTower.id)!.alignment + '-color'} />}</h1>
           }
           {/* <h1 className='current-tower-name-left-bar'>{currentTower.alignment}</h1> */}
 
-          <h1 className='left-bar-tower-array'>{currentTower.numbers.join(', ')}</h1>
-          {currentTower.minion !== null && <h1 className='left-just-text'>Tower contains minion {currentTower.minion}</h1>}
+          <h1 className='left-bar-tower-array'>{currentTower && towers.find(tower => tower.id === currentTower.id)!.numbers.join(', ')}</h1>
+          {currentTower.minion !== null && <h1 className='left-just-text'>Tower contains minion {currentTower && towers.find(tower => tower.id === currentTower.id)!.minion}</h1>}
         </div>}
       </div>
 

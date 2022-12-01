@@ -39,6 +39,7 @@ function Game() { // TODO: Extract logic to maze class
     p1MinionCount: 0,
     p2MinionCount: 0,
   });
+  const [zoomed, setZoomed] = useState(false);
   const array: MazeTileType[] = [];
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
@@ -50,12 +51,7 @@ function Game() { // TODO: Extract logic to maze class
       setGameStats(prevStats => {
         return {
           ...prevStats,
-          timeRemaining: counter - 1
-        }
-      })
-      setGameStats(prevStats => {
-        return {
-          ...prevStats,
+          timeRemaining: counter - 1,
           p1Coins: prevStats.p1Coins + 20*prevStats.p1Towers.length,
           p2Coins: prevStats.p2Coins + 20*prevStats.p2Towers.length,
         }
@@ -70,17 +66,6 @@ function Game() { // TODO: Extract logic to maze class
   const speed = 10;
   const minBoxSize = 20;
   const maxBoxSize = 100;
-
-  // useEffect(() => {
-  //   setTowers(prevTowers => {
-  //     return prevTowers.map(tower => {
-  //       return {
-  //         ...tower,
-  //         popupOpen: currentTower !== null && currentTower.id === tower.id
-  //       }
-  //     })
-  //   })
-  // }, [currentTower])
 
   function addNewMinion(type: animal) { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
@@ -98,7 +83,7 @@ function Game() { // TODO: Extract logic to maze class
             id: newId,
             name: uniqueNamesGenerator(customConfig),
             xPos: 0,
-            yPos: 0,
+            yPos: 3,
             rotation: 'minionR',
             path: [],
             alignment: 'p1',
@@ -122,7 +107,7 @@ function Game() { // TODO: Extract logic to maze class
             id: newId,
             name: uniqueNamesGenerator(customConfig),
             xPos: width-1,
-            yPos: height-1,
+            yPos: height-4,
             rotation: 'minionR',
             path: [],
             alignment: 'p2',
@@ -278,6 +263,7 @@ function Game() { // TODO: Extract logic to maze class
   }, [currentTile])
 
   async function enterTower(towerId: number, minionId: number) {
+    setZoomed(false);
     setTowersSorting(prevTowerSorting => {
       const newTowerSorting = {
         ...prevTowerSorting,
@@ -433,6 +419,8 @@ function Game() { // TODO: Extract logic to maze class
             currentTile={currentTile}
             minions={minions}
             gameStats={gameStats}
+            towers={towers}
+            setZoomed={setZoomed}
             />
           <Maze
             maze={maze}
@@ -453,6 +441,7 @@ function Game() { // TODO: Extract logic to maze class
             width={width}
             allTilesHidden={allTilesHidden}
             setAllTilesHidden={setAllTilesHidden}
+            zoomed={zoomed}
             />
           <RightBar
             addNewMinion={addNewMinion}

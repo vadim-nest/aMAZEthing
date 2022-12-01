@@ -4,6 +4,7 @@ import { animal, minionType } from '../utils/types';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 import { useState } from 'react';
 import Shop from './shop';
+import BackArrow from './svg/backArrow';
 
 function storeButtonHover(isOnHover: boolean) {
   document.querySelectorAll('.store-button-yellow').forEach((svgEl) => {
@@ -16,6 +17,15 @@ function storeButtonHover(isOnHover: boolean) {
       ? ((svgEl as unknown as HTMLElement).style.fill = `var(--yellow)`)
       : ((svgEl as unknown as HTMLElement).style.fill = `var(--red)`);
   });
+}
+
+function arrowButtonHover(isOnHover: boolean) {
+  isOnHover
+    ? (document.querySelector('.arrow-hover-top') as unknown as HTMLElement).style.fill = `#3B7D5B`
+    : (document.querySelector('.arrow-hover-top') as unknown as HTMLElement).style.fill = `var(--sort-green)`
+    isOnHover
+    ? (document.querySelector('.arrow-hover-bottom') as unknown as HTMLElement).style.fill = `#296646`
+    : (document.querySelector('.arrow-hover-bottom') as unknown as HTMLElement).style.fill = `var(--main-green)`
 }
 
 function whichAnimalSVG (minion: minionType) {
@@ -115,11 +125,15 @@ function RightBar({
           style={shopOpen ? {backgroundColor: 'var(--purple)'} : {backgroundColor: 'transparent'}}
           // onClick={() => addNewMinion('Hare')}
           onClick={() => {shopOpen ? setShopOpen(false) : setShopOpen(true)}}
-          onMouseEnter={() => storeButtonHover(true)}
-          onMouseLeave={() => storeButtonHover(false)}
+          onMouseEnter={() => {storeButtonHover(true); arrowButtonHover(true)}}
+          onMouseLeave={() => {storeButtonHover(false); arrowButtonHover(false)}}
         >
           <div className='shopSVG'>
-            <ShopSVG />
+            {shopOpen
+              ? <BackArrow />
+              : <ShopSVG />
+            }
+
           </div>
         </button>
       )}

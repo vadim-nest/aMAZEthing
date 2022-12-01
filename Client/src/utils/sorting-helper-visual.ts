@@ -180,7 +180,7 @@ export async function quickSortVisual(animations:any, DELAY_MS:number, width:num
       await delay(DELAY_MS)
         barOne.style.backgroundColor = colorRed;
         barTwo.style.backgroundColor = colorRed;
-      await delay(0)
+      await delay(DELAY_MS)
 
         barOne.style.backgroundColor = colorGreen;
         barTwo.style.backgroundColor = colorGreen;
@@ -193,7 +193,7 @@ export async function quickSortVisual(animations:any, DELAY_MS:number, width:num
       await delay(DELAY_MS)
       barOne.style.height = `${barTwoHeight*height}px`;
       barTwo.style.height= `${barOneHeight*height}px`;
-      await delay(0)
+      await delay(DELAY_MS)
       barOne.textContent = barTwoHeight
       barTwo.textContent = barOneHeight
   }

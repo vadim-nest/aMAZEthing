@@ -1,4 +1,3 @@
-import '../../css/TowerSVG.css';
 export default function ShopSVG() {
   return (
     <svg

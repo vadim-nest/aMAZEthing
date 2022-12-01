@@ -44,16 +44,42 @@ function addTowers(width:number, height:number, graph: Graph) {
   return towers;
 }
 
+function addBases(width: number, height: number, graph: Graph) {
+  graph.removeVertex(0);
+  graph.removeVertex(1);
+  graph.removeVertex(2);
+  graph.removeVertex(width);
+  graph.removeVertex(width + 1);
+  graph.removeVertex(width + 2);
+  graph.removeVertex(2 * width);
+  graph.removeVertex(2 * width + 1);
+  graph.removeVertex(2 * width + 2);
+  
+  let last = width*height - 1;
+
+  graph.removeVertex(last);
+  graph.removeVertex(last - 1);
+  graph.removeVertex(last - 2);
+  graph.removeVertex(last - width);
+  graph.removeVertex(last - width - 1);
+  graph.removeVertex(last - width - 2);
+  graph.removeVertex(last - 2 * width);
+  graph.removeVertex(last - 2 * width - 1);
+  graph.removeVertex(last - 2 * width - 2);
+
+}
+
 export function generateMaze(width: number, height: number, graph: Graph | false = false) {
   if (graph === false) {
     graph = generateConnectedGraph(width, height);
   }
   const nodeNum = width * height;
   const classes: {[key: value]: ('b'|'t'|'r'|'l')[]} = {};
-  const visited:value[] = [0];
-  const stack:value[] = [0];
+  const visited:value[] = [3*width];
+  const stack:value[] = [3*width];
   const edges: [value, value, number][] = [];
   const towers: number[] = addTowers(width, height, graph);
+  addBases(width, height, graph);
   while(stack.length) {
     let i = stack.pop() as number;
     let neighbors = graph.neighbors(i).filter(neighbor => !visited.includes(neighbor));

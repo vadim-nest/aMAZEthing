@@ -3,7 +3,7 @@ import TowerSVG from "./svg/towerSVG";
 import '../css/tower.css'
 import TowerPopup from "./towerPopup";
 
-function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMinion, width, height, towersSorting }: {
+function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMinion, width, height, towersSorting, zoomed }: {
   tower: TowerType,
   boxSize: number,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
@@ -11,7 +11,8 @@ function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMini
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   width: number,
   height: number,
-  towersSorting: {[key: number]: number}
+  towersSorting: {[key: number]: number},
+  zoomed: boolean
 } ) {
 
   function handleContextMenu() {
@@ -41,7 +42,7 @@ function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMini
                   tower.alignment === 'p2' ? 'p2TowerShadow' :
                   'neutralTowerShadow'}
       />
-      <TowerPopup towersSorting={towersSorting} boxSize={boxSize} tower={tower} width={width} height={height}/>
+      <TowerPopup zoomed={zoomed} towersSorting={towersSorting} boxSize={boxSize} tower={tower} width={width} height={height}/>
     </div>
   )
 }
