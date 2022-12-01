@@ -1,4 +1,3 @@
-import '../../css/flagSVG.css';
 export default function P1Home() {
   return (
     <svg
