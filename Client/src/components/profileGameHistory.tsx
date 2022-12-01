@@ -1,10 +1,8 @@
 import '../css/profileGameHistory.css';
-import { User } from '@auth0/auth0-react';
 import { useAppSelector } from '../features/hooks';
-import { useEffect, useState } from 'react';
-import coin from '../assets/profile/coin.png';
 import TowerSVG from './svg/towerSVG';
 import { Squirrel } from './svg/animalsSVG';
+import CoinSVG from './svg/coin';
 
 export default function ProfileGameHistory() {
   const user = useAppSelector((state) => state.user);
@@ -59,7 +57,7 @@ export default function ProfileGameHistory() {
                 <h3 className='gameStatsText'>{element.towersTaken} Towers</h3>
             </div>
             <div className="goldStats">
-                <img className='image-profile' src={coin}/>
+                <div className='image-profile'><CoinSVG/></div>
                 <h3 className='gameStatsText'>{element.goldAmount} Gold</h3>
             </div>
           </div>

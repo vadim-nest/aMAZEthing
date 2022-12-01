@@ -11,7 +11,7 @@
 }
 
 .p1-color {
-  fill: orange;
+  fill: var(--yellow);
 }
 
 .p2-color {
