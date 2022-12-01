@@ -12,14 +12,14 @@ export default function QuickLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 20
-  let MIN_VAL = 3
-  let MAX_VAL = 100
-  let NUM_BARS = 45
+  let WIDTH = 25
+  let MIN_VAL = 10
+  let MAX_VAL = 60
+  let NUM_BARS = 35
   let DELAY = 10
   let PADTOP = 5
   let MARGIN = 3
-  let HEIGHT = 4
+  let HEIGHT = 8
 
   let paragraphs = {
     sortName: 'Quick sort',
