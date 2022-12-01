@@ -15,7 +15,7 @@ export default function BubbleLesson() {
   console.log(user)
 
   let WIDTH = 35
-  let MIN_VAL = 3
+  let MIN_VAL = 7
   let MAX_VAL = 50
   let NUM_BARS = 20
   let DELAY = 100
