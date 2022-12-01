@@ -10,13 +10,14 @@ export default function InsertionLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 40
+  let WIDTH = 35
   let MIN_VAL = 3
-  let MAX_VAL = 20
-  let NUM_BARS = 12
-  let DELAY = 10
+  let MAX_VAL = 50
+  let NUM_BARS = 20
+  let DELAY = 150
   let PADTOP = 10
-  let MARGIN = 5
+  let MARGIN = 3
+  let HEIGHT = 5
 
   let paragraphs = {
     sortName: 'Insertion sort',
@@ -67,8 +68,13 @@ export default function InsertionLesson() {
               visualize
             </button>
           }
+           {!isSorted && clicked &&
+           <button 
+           className="button clickSort">
+             wait... </button>
+          }
         </div>
-        <Visualization width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual} setClicked={setClicked} setIsSorted={setIsSorted}/>
+        <Visualization   fontColor={'white'} width={WIDTH} delay={DELAY} margin={MARGIN} height={HEIGHT} paddingTop={PADTOP} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual} setClicked={setClicked} setIsSorted={setIsSorted}/>
       </div>
     </div>
   );

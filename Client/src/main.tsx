@@ -14,11 +14,11 @@ import InsertionLesson from './components/sortingLessons/insertionLesson';
 import { store } from './features/store';
 import SelectionLesson from './components/sortingLessons/selectionLesson';
 import MergeLesson from './components/sortingLessons/mergeSort';
-import HeapLesson from './components/sortingLessons/heapSort';
 import QuickLesson from './components/sortingLessons/quickSort';
 import DfsLesson from './components/pathfindingLessons/dfsLesson';
 import BfsLesson from './components/pathfindingLessons/bfsLesson';
 import DijkstraLesson from './components/pathfindingLessons/dijkstraLesson';
+import AllSortsPlay from './components/sortingLessons/allSortsPlay';
 
 const router = createBrowserRouter([
   {
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       { path: '/learning/insertionLesson', element: <InsertionLesson /> },
       { path: '/learning/selectionLesson', element: <SelectionLesson /> },
       { path: '/learning/mergeLesson', element: <MergeLesson /> },
-      { path: '/learning/heapLesson', element: <HeapLesson /> },
+      { path: '/learning/allSortsPlay', element: <AllSortsPlay /> },
       { path: '/learning/quickLesson', element: <QuickLesson />},
       { path: '/learning/dfsLesson', element: <DfsLesson />},
       { path: '/learning/bfsLesson', element: <BfsLesson />},

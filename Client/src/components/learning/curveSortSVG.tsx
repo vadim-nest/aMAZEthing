@@ -263,7 +263,7 @@ function CurveSort() {
 
         <circle
             className={user.sortLessons[5] ? "circles doneLesson" :  user.sortLessons[4] ? "circles" : "circles disabled" }
-            onClick={(e) => updateSVGHelper(e, 4, 5, '/learning/heapLesson')}
+            onClick={(e) => updateSVGHelper(e, 4, 5, '/learning/allSortsPlay')}
           cx="103.25"
           cy="34.5"
           r="3"
@@ -272,7 +272,7 @@ function CurveSort() {
           <NutSVG />
         </svg>{' '}
         <text x="99" y="30" className="lesson-name">
-          Heap sort
+          Customize 
         </text>
         <svg
           x="-2"

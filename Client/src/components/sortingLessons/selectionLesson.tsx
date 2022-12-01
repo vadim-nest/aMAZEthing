@@ -10,14 +10,14 @@ export default function SelectionLesson() {
   const [animations, setAnimations] = useState([[]] as number[][])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 5
+  let WIDTH = 35
   let MIN_VAL = 3
-  let MAX_VAL = 20
-  let NUM_BARS = 50
-  let DELAY = 10
+  let MAX_VAL = 50
+  let NUM_BARS = 20
+  let DELAY = 100
   let PADTOP = 10
   let MARGIN = 3
-  let HEIGHT = 10
+  let HEIGHT = 5
 
     let paragraphs = {
         sortName: "Selection sort",

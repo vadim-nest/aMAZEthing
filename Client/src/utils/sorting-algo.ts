@@ -267,3 +267,38 @@ function swap(arr:number[], i:number, j:number) {
   arr[i] = arr[j];
   arr[j] = temp;
 }
+
+
+
+// export default function bogoSortAlgo(arr:number[], arrLength:number) {
+//   let animations = []
+//   while(!isSorted(arr, arrLength)) {
+//     arr = shuffle(arr, arrLength)
+//   }
+//   return animations
+// }
+
+// function isSorted(arr:number[], arrLength:number) {
+//   for(let i = 0; i<arr.length; i++) {
+//     if(arr[i] > arr[i+1]) {
+//       return false
+//     }
+//   }
+
+//   return true
+// }
+
+// function shuffle(arr:number[], arrLength:number){
+//   let i, j=arrLength;
+//   for (i=0; i < arrLength; i++){
+//       const index = Math.floor(Math.random() * arrLength);
+//       swap(arr, j-i-1, index);
+//   }
+//   return arr;
+// }
+
+
+// const arr = [3,1, 6]
+// const length = arr.length
+
+// console.log(bogoSortAlgo(arr, length))

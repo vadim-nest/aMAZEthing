@@ -12,14 +12,14 @@ export default function QuickLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 25
+  let WIDTH = 20
   let MIN_VAL = 3
   let MAX_VAL = 100
-  let NUM_BARS = 40
-  let DELAY = 25
+  let NUM_BARS = 45
+  let DELAY = 10
   let PADTOP = 5
   let MARGIN = 3
-  let HEIGHT = 3
+  let HEIGHT = 4
 
   let paragraphs = {
     sortName: 'Quick sort',
@@ -70,9 +70,15 @@ export default function QuickLesson() {
               visualize
             </button>
           }
+
+{!isSorted && clicked &&
+           <button 
+           className="button clickSort">
+             wait... </button>
+          }
         </div>
         
-        <Visualization width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={quickSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
+        <Visualization   fontColor={'white'}  width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={quickSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
 
       </div>
     </div>

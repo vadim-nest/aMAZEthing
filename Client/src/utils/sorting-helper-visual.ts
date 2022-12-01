@@ -19,9 +19,9 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
 
         await delay(DELAY_MS);
         document.getElementById(`${indexOne}arrayColumn${tower}`)!.style.backgroundColor =
-          'var(--sort-green)';
+          'var(--dark-green)';
         document.getElementById(`${indexTwo}arrayColumn${tower}`)!.style.backgroundColor =
-          'var(--sort-green)';
+          'var(--dark-green)';
 
 
         let tempNode = document.getElementById(`${indexTwo}arrayColumn${tower}`);
@@ -35,7 +35,7 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
           'var(--red)';
         await delay(DELAY_MS);
         document.getElementById(`${indexOne}arrayColumn${tower}`)!.style.backgroundColor =
-          'var(--sort-green)';
+          'var(--dark-green)';
       }
     }
   //   for(let i = 0; i<arrayBars.length ; i++) {
@@ -176,7 +176,7 @@ export async function quickSortVisual(animations:any, DELAY_MS:number, width:num
       const barTwo = arrayBars[barTwoIdx] as HTMLElement;
       console.log(barTwoIdx, barTwo)
       const colorRed =  'var(--red)' 
-      const colorGreen = 'var(--sort-green)';
+      const colorGreen = 'var(--dark-green)';
       await delay(DELAY_MS)
         barOne.style.backgroundColor = colorRed;
         barTwo.style.backgroundColor = colorRed;
