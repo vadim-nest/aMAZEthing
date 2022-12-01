@@ -19,6 +19,7 @@ import DfsLesson from './components/pathfindingLessons/dfsLesson';
 import BfsLesson from './components/pathfindingLessons/bfsLesson';
 import DijkstraLesson from './components/pathfindingLessons/dijkstraLesson';
 import AllSortsPlay from './components/sortingLessons/allSortsPlay';
+import WaitingRoom from './components/waitingRoom';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/callback',
         element: <Welcome />,
+      },
+      {
+        path: '/waitingRoom',
+        element: <WaitingRoom />,
       },
       {
         path: '/game',
