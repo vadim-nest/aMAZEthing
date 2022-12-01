@@ -10,7 +10,6 @@ import GrassSVG from './learningGrass';
 import TreeFilledSVG from './treeFilled';
 import TreeWinterSVG from './treeWinter';
 import { useState, useEffect } from 'react';
-import { updateNonNullChain } from 'typescript';
 
 function CurveSort() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
@@ -29,7 +28,6 @@ function CurveSort() {
   
 }
   
-
   async function updateSortingPaths(e: any, num:number) {
     e.preventDefault();
     if (!isAuthenticated) return;
@@ -215,7 +213,7 @@ function CurveSort() {
         <svg className="nut" x="28" y="27.25">
           <NutSVG />
         </svg>
-        <text x="25" y="36" className="lesson-name">
+        <text x="24" y="36" className="lesson-name">
           insertion sort
         </text>
 
@@ -258,7 +256,7 @@ function CurveSort() {
         <svg className="nut" x="82.75" y="17.75">
           <NutSVG />
         </svg>{' '}
-        <text x="81" y="15" className="lesson-name">
+        <text x="80.5" y="15" className="lesson-name">
           Quick sort
         </text>
 

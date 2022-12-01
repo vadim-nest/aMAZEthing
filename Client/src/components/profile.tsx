@@ -11,6 +11,7 @@ import ProfileGameHistory from './profileGameHistory';
 import sort from '../assets/profile/sort.png'
 import path from '../assets/profile/path.png';
 import changeMe from '../assets/profile/changeMe.png';
+import { current } from '@reduxjs/toolkit';
 
 function Profile() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
@@ -21,8 +22,15 @@ function Profile() {
   const [inputOpen, setInputOpen] = useState(false);
 
   let currentSortProgress = 0
+  let currentPathProgress = 0
+
   for(let bool of user.sortLessons) {
     if (bool === true) currentSortProgress++
+    else break
+  }
+
+  for(let bool of user.pathLessons) {
+    if (bool === true) currentPathProgress++
     else break
   }
 
@@ -77,6 +85,7 @@ function Profile() {
                     name="username"
                     onChange={changeUsername}
                     className='input-body'
+                    maxLength= {15}
                     />
                   <button className='input-button' onClick={(e) => {
                     updateChanges(e);
@@ -91,10 +100,11 @@ function Profile() {
             <div className='progress'>
               <div className='sort-progress'>
                 <div><img className='sort-progress-img' src={sort}/></div><h3 className='algo-name'>Sorting Algorithms</h3><h3>{user.sortLessons}</h3>
-                <h3>{currentSortProgress}/6</h3>
+                <h3 className='progress-number'>{currentSortProgress}/6</h3>
               </div>
               <div className='path-progress'>
                 <div><img className='path-progress-img' src={path}/></div><h3 className='algo-name'>Path Finding Algorithms</h3><h3>{user.pathLessons}</h3>
+                <h3 className='progress-number'>{currentPathProgress}/4</h3>
               </div>
             </div>
           </div>
@@ -102,9 +112,10 @@ function Profile() {
       <div className="user-stats">
           <h1 className='achievements'>ACHIEVEMENTS</h1>
           <div className='circles'>
-            <div className='circle'></div>
-            <div className='circle'></div>
-            <div className='circle'></div>
+            <div className='circle' onClick={() => alert('are you circle?')}></div>
+            <div className='circle' onClick={() => alert('are you circle?')}></div>
+            <div className='circle' onClick={() => alert('are you circle?')}></div>
+            <div className='circle' onClick={() => alert('are you circle?')}></div>
           </div>
           <div className='stats-line'>
             <h4 className='stats-text'>

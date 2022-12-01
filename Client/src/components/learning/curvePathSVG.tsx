@@ -4,9 +4,51 @@ import NutSVG from './learningNut';
 import GrassSVG from './learningGrass';
 import TreeFilledSVG from './treeFilled';
 import TreeWinterSVG from './treeWinter';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../features/hooks';
+import apiService from '../../services/apiService';
+import { refreshPathLessons } from '../../features/user_slice';
 
 function CurvePath() {
   const navigate = useNavigate();
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.user);
+
+
+  function updateSVGHelper(e:any, numCheck:number, updateNum:number, navigateURL:string) {
+    if(user.pathLessons[numCheck] && !user.pathLessons[updateNum]) {
+      updatePathLessons(e, updateNum)
+    }
+    if(user.pathLessons[numCheck]) {
+    navigate(navigateURL)
+  }
+  }
+
+
+  async function updatePathLessons(e: any, num:number) {
+    e.preventDefault();
+    if (!isAuthenticated) return;
+    const pathArray = Array(4).fill(false)
+    for(let i = 0 ; i<pathArray.length; i++) {
+      if(i <= num) pathArray[i] = true
+      else break
+    }
+    try {
+      const accessToken = await getAccessTokenSilently();
+      const obj = await apiService.updatePathLearning(accessToken, {
+        email: user.email,
+        pathArr: pathArray
+      });
+      if (obj.user) dispatch(refreshPathLessons(obj.user));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
+
   return (
     <div className="curve">
       <svg viewBox="-10 4 140 24">
@@ -125,9 +167,14 @@ function CurvePath() {
             "
         />
         <circle
-          className="circles"
+          className={user.pathLessons[0] ? "circles doneLesson" : "circles"}
           id="circle-bubble-sort"
-          onClick={() => navigate('/learning/BFS')}
+          onClick={(e) =>{
+            if(!user.pathLessons[0]) {
+              updatePathLessons(e, 0)
+            }
+            navigate('/learning/BFS')
+           }}
           cx="10"
           cy="14.6"
           r="3"
@@ -138,9 +185,11 @@ function CurvePath() {
         <text x="8" y="10" className="lesson-name">
           BFS
         </text>
+
+
         <circle
-          className="circles"
-          onClick={() => navigate('/learning/DFS')}
+           className={user.pathLessons[1] ? "circles doneLesson" :  user.pathLessons[0] ? "circles" : "circles disabled" }
+           onClick={(e) => updateSVGHelper(e, 0, 1, '/learning/DFS')}
           cx="40"
           cy="0"
           r="3"
@@ -151,9 +200,11 @@ function CurvePath() {
         <text x="38" y="-5" className="lesson-name">
           DFS
         </text>
+
+        
         <circle
-          className="circles"
-          onClick={() => navigate('/learning/Dijkstra')}
+           className={user.pathLessons[2] ? "circles doneLesson" :  user.pathLessons[1] ? "circles" : "circles disabled" }
+           onClick={(e) => updateSVGHelper(e, 1, 2, '/learning/Dijkstra')}
           cx="65.2"
           cy="12.6"
           r="3"
@@ -165,8 +216,8 @@ function CurvePath() {
           Dijkstra
         </text>
         <circle
-          className="circles"
-          onClick={() => navigate('/learning/AStar')}
+          className={user.pathLessons[3] ? "circles doneLesson" :  user.pathLessons[2] ? "circles" : "circles disabled" }
+          onClick={(e) => updateSVGHelper(e, 2, 3, '/learning/AStar')}
           cx="102"
           cy="6"
           r="3"
@@ -178,8 +229,8 @@ function CurvePath() {
           A*
         </text>
         <svg
-          x="25"
-          y="-10"
+          x="10"
+          y="-7"
         ><TreeFilledSVG/></svg>
         <svg
           x="85"

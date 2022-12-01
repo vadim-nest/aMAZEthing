@@ -43,24 +43,24 @@ export default function ProfileGameHistory() {
               <div>
                 {element.winner === true ? <h1 className="result-win">{element.result}</h1> : <h1 className="result-loss">{element.result}</h1>}
               </div>
-              <div className="duration"><h3>TIME: {element.duration} min</h3></div>
-              <div className="date"><h3>DATE: {element.finishedAt}</h3></div>
+              <div className="duration"><h3 className='durationDate'>TIME: {element.duration} min</h3></div>
+              <div className="date"><h3 className='durationDate'>DATE: {element.finishedAt}</h3></div>
             </div>
             <div className="minionStats">
               <div className='image-profile'>
                 <Squirrel currentPlayer="p1-color"/>
               </div>
-                <h3>{element.amountMinions} Minions</h3>
+                <h3 className='gameStatsText'>{element.amountMinions} Minions</h3>
             </div>
             <div className="towerStats">
                 <div className='image-profile'>
                   <TowerSVG playerClass='neutralTower' playerClassShadow='p1TowerShadow'/>
                 </div>
-                <h3>{element.towersTaken} Towers</h3>
+                <h3 className='gameStatsText'>{element.towersTaken} Towers</h3>
             </div>
             <div className="goldStats">
                 <img className='image-profile' src={coin}/>
-                <h3>{element.goldAmount} Gold</h3>
+                <h3 className='gameStatsText'>{element.goldAmount} Gold</h3>
             </div>
           </div>
         );

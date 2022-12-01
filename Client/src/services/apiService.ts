@@ -60,4 +60,18 @@ apiService.updateSortLearning = function(accessToken:any,user:any){
 
 }
 
+apiService.updatePathLearning = function(accessToken:any,user:any){
+  return fetch(`${BASE_URL}/updatePathLearning`, {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    },
+    body: JSON.stringify(user), 
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+
+}
+
 export default apiService;

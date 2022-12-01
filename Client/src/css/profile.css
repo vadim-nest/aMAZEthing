@@ -25,10 +25,10 @@
 .user-dashboard {
     background-color: var(--main-green);
     min-height: 510px;
-    min-width: 800px;
+    min-width: 1111px;
     height: 50vh;
     width: 80vw;
-    margin: 10vh auto 0 auto;
+    margin: 5vh auto 0 auto;
     border-radius: 20px;
     display: flex;
 }
@@ -74,6 +74,7 @@
 
 .algo-name {
     text-align: center;
+    font-size: 20px !important;
 }
 
 .user-stats {
@@ -86,8 +87,8 @@
 }
 
 .circle {
-    height: 80px;
-    width: 80px;
+    height: 90px;
+    width: 90px;
     border-radius: 80px;
     background-color: var(--white-green);
 }
@@ -95,7 +96,7 @@
 .circles {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .stats-line {
@@ -110,7 +111,7 @@
 }
 
 .stats-text {
-    font-size: 25px !important;
+    font-size: 28px !important;
     font-weight: normal;
     display: flex;
     flex-direction: column;
@@ -160,6 +161,14 @@
     border: 0;
     padding: 0;
     outline: none;
+}
+
+.progress-number{
+    font-size: large !important;
+}
+
+.gameStatsText{
+    font-size: large !important;
 }
 
 *:focus {
