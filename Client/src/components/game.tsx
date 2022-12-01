@@ -196,9 +196,9 @@ function Game() { // TODO: Extract logic to maze class
           return;
         };
         if (!prevStep) prevStep = interval;
-        let nextThought = thoughtProcess.shift();
-        if (nextThought) {
-          showThoughtProcess.push(nextThought);
+        let nextThought = thoughtProcess.splice(0, 10);
+        if (nextThought.length) {
+          showThoughtProcess.push(...nextThought);
         } else {
           showPath.push(path.shift() as number);
         }
