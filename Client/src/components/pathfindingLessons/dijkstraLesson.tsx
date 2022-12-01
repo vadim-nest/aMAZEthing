@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef} from "react";
-import "../../css/bfs-lesson.css";
+import { useEffect, useState, useRef } from "react";
+import "../../css/dijkstra-lesson.css";
 import { Tree, Graph } from "../../utils/path-finding-learning-logic";
-function BfsLesson() {
+function DijkstraLesson() {
   const [graph,setGraph] = useState<Graph>()
   const ref:any = useRef(null);
   useEffect(() => {
@@ -13,30 +13,31 @@ function BfsLesson() {
       }
       t.bfs();
       t.calculateWidthDynamically(ref.current.offsetWidth);
-      t.createLines();
+      t.createLines(175,true);//true with weights
       t.getNodes();
-      let g = new Graph(t.getArrNodes(), t.getDepth(), t.getTotalLines());
+      console.log(t.getLineStructure())
+      let g = new Graph(t.getArrNodes(), t.getDepth(), t.getLineStructure());
       setGraph(g);
-     
     }
     TreeVisual();
   }, []);
-  
-  async function bfs(){
-    await graph?.printPath(await graph?.bfs());
+  async function dijkstra(){
+    await graph?.printPath(await graph?.dijkstra());
   }
+  
   function delay(time: number) {
     return new Promise((res) => setTimeout(res, time));
   }
 
   return (
-    <div className="whole-page-wrapper bfs">
+    <div  className="whole-page-wrapper dijk">
+      
       <div ref={ref} id="myCanvas"></div>
       <div className="but-options">
-        <button onClick={bfs}>BFS</button>
+        <button onClick={dijkstra}>Dijkstra</button>
       </div>
     </div>
   );
 }
 
-export default BfsLesson;
+export default DijkstraLesson;

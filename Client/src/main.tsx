@@ -18,6 +18,7 @@ import HeapLesson from './components/sortingLessons/heapSort';
 import QuickLesson from './components/sortingLessons/quickSort';
 import DfsLesson from './components/pathfindingLessons/dfsLesson';
 import BfsLesson from './components/pathfindingLessons/bfsLesson';
+import DijkstraLesson from './components/pathfindingLessons/dijkstraLesson';
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,8 @@ const router = createBrowserRouter([
       { path: '/learning/heapLesson', element: <HeapLesson /> },
       { path: '/learning/quickLesson', element: <QuickLesson />},
       { path: '/learning/dfsLesson', element: <DfsLesson />},
-      { path: '/learning/bfsLesson', element: <BfsLesson />}
+      { path: '/learning/bfsLesson', element: <BfsLesson />},
+      { path: '/learning/dijkstraLesson', element: <DijkstraLesson />},
 
     ],
   },

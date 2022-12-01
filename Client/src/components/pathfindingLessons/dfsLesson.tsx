@@ -3,7 +3,7 @@ import "../../css/dfs-lesson.css";
 import { Tree, Graph } from "../../utils/path-finding-learning-logic";
 function DfsLesson() {
   const [graph,setGraph] = useState<Graph>()
-  const ref = useRef(null);
+  const ref:any = useRef(null);
 
   useEffect(() => {
     async function TreeVisual() {
