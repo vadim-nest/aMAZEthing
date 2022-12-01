@@ -72,10 +72,11 @@ const userSchema = new Schema({
     }
   },
   avatar:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Avatar',
+    type: String,
+    default: 'monkey.png',
     require:true
   }
 })
+const User = mongoose.model('User', userSchema)
 
 export { User };
