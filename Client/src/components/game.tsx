@@ -396,8 +396,8 @@ function Game() { // TODO: Extract logic to maze class
     })
     setMovingMinions(prevMinions => [...prevMinions, currentMinion as number]);
     tower = towers.find(tower => tower.id === towerId) as TowerType;
-    if (minion.alignment === 'p1') moveMinion({xPos:0, yPos:0}, {xPos: tower.xPos, yPos:tower.yPos}, currentGraph as Graph, minion, false);
-    else moveMinion({xPos:width-1, yPos:height-1}, {xPos: tower.xPos, yPos:tower.yPos}, currentGraph as Graph, minion, false);
+    if (minion.alignment === 'p1') moveMinion({xPos:0, yPos:3}, {xPos: tower.xPos, yPos:tower.yPos}, currentGraph as Graph, minion, false);
+    else moveMinion({xPos:width-1, yPos:height-4}, {xPos: tower.xPos, yPos:tower.yPos}, currentGraph as Graph, minion, false);
   }
 
   useEffect(() => {
