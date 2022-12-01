@@ -32,7 +32,6 @@ export interface TowerType {
   minion: null | number;
   minionAlignment: null | 'p1' | 'p2';
   minionSortingSpeed: null | number;
-  popupOpen: boolean,
   alignment: 'none' | 'p1' | 'p2';
   animations: number[][];
   sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';

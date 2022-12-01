@@ -71,16 +71,16 @@ function Game() { // TODO: Extract logic to maze class
   const minBoxSize = 20;
   const maxBoxSize = 100;
 
-  useEffect(() => {
-    setTowers(prevTowers => {
-      return prevTowers.map(tower => {
-        return {
-          ...tower,
-          popupOpen: currentTower !== null && currentTower.id === tower.id
-        }
-      })
-    })
-  }, [currentTower])
+  // useEffect(() => {
+  //   setTowers(prevTowers => {
+  //     return prevTowers.map(tower => {
+  //       return {
+  //         ...tower,
+  //         popupOpen: currentTower !== null && currentTower.id === tower.id
+  //       }
+  //     })
+  //   })
+  // }, [currentTower])
 
   function addNewMinion(type: animal) { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
@@ -349,78 +349,6 @@ function Game() { // TODO: Extract logic to maze class
         })
         clearInterval(interval);
         resolve(true);
-
-        // const currentAnimation = animations.shift();
-        // if (animations.length === 0) {
-        //   clearInterval(interval);
-        //   resolve(true);
-        //   setTowers(prevTowers => {
-        //     return prevTowers.map(tower => {
-        //       if (tower.id !== towerId) return tower;
-        //       return {
-        //         ...tower,
-        //         numbers: [...array]
-        //       }
-        //     })
-        //   })
-        //   return;
-        // };
-        // if (currentAnimation && currentAnimation.length === 4) {
-        //   console.log('changing array')
-        //   let temp = array[currentAnimation[0]];
-        //   array[currentAnimation[0]] = array[currentAnimation[2]];
-        //   array[currentAnimation[2]] = temp;
-        // }
-        // setTowers(prevTowers => {
-        //   const newTowers = [...prevTowers];
-        //   return newTowers.map(tower => {
-        //     if (tower.id !== towerId) return tower;
-        //     if (tower.popupOpen) return tower;
-        //     console.log('hello');
-        //     if (currentAnimation && currentAnimation.length === 4) {
-        //       return {
-        //         ...tower,
-        //         animations,
-        //         numbers: [...array]
-        //       }
-        //     } else return {
-        //       ...tower,
-        //       animations: [...animations],
-        //     }
-        //   })
-
-        // })
-
-
-
-
-
-
-
-
-
-
-        // // if (!tower.popupOpen) {
-        // //   console.log('Popup is open')
-        // //   setTowers(prevTowers => {
-        // //     const newTowers = [...prevTowers];
-        // //     return newTowers.map(tower => {
-        // //       if (tower.id !== towerId) return tower;
-        // //       else {
-        // //         if (currentAnimation && currentAnimation.length === 4) {
-        // //           return {
-        // //             ...tower,
-        // //             animations,
-        // //             numbers: [...array]
-        // //           }
-        // //         } else return {
-        // //           ...tower,
-        // //           animations: [...animations],
-        // //         }
-        // //       }
-        // //     })
-        // //   });
-        // // }
       }, minion.sortingSpeed*2*(animations.length + 4));
     })
     exitTower(towerId, minionId);
@@ -485,22 +413,6 @@ function Game() { // TODO: Extract logic to maze class
     if (minion.alignment === 'p1') moveMinion({xPos:0, yPos:0}, {xPos: tower.xPos, yPos:tower.yPos}, currentGraph as Graph, minion, false);
     else moveMinion({xPos:width-1, yPos:height-1}, {xPos: tower.xPos, yPos:tower.yPos}, currentGraph as Graph, minion, false);
   }
-
-  useEffect(() => {
-    if (Object.keys(towersSorting).some(towerId=>{
-      if (currentTower === null || Number(towerId) !== currentTower.id) {
-        return towersSorting[Number(towerId)] > 0
-      }
-    })) {
-      setTowersSorting(prevTowersSorting => {
-        let newTowersSorting: {[key: number]: number} = {};
-        for (let key of Object.keys(prevTowersSorting)) {
-          if (currentTower === null || Number(key) !== currentTower.id) newTowersSorting[Number(key)] = 0;
-        }
-        return newTowersSorting;
-      });
-    }
-  }, [currentTower])
 
   useEffect(() => {
     console.log(towersSorting);

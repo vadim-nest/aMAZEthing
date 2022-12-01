@@ -6,7 +6,7 @@ import Visualization from './sortingLessons/visualization';
 
 
 function TowerPopup ({boxSize, tower, width, height, towersSorting}: {boxSize: number, tower: TowerType, width: number, height: number, towersSorting: {[key: number]: number}}) {
-  return <div style={tower.popupOpen ? {'opacity': 1} : {'opacity': 0}} className={`towerPopup ${
+  return <div style={tower.minion !== null ? {'opacity': 1} : {'opacity': 0}} className={`towerPopup ${
     tower.id/width < height/4 ? 'downPopup' :
     tower.id/width > 3*height/4 ? 'upPopup' :
     width - tower.id%width < width/3 ? 'leftPopup' : 
