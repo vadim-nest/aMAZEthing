@@ -1,42 +1,42 @@
-import { mongoose } from './index'
+import { mongoose } from './index';
 
 const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
   amountMinions: {
-    type: Number
+    type: Number,
   },
   result: {
-    type: String
+    type: String,
   },
   goldAmount: {
-    type: Number
+    type: Number,
   },
   opponentID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
   },
   towersTaken: {
-    type: Number
+    type: Number,
   },
-  winner:{
-    type: Boolean
+  winner: {
+    type: Boolean,
   },
-  startedAt:{
-    type: Date
+  startedAt: {
+    type: Date,
   },
-  finishedAt:{
-    type: Date
+  finishedAt: {
+    type: Date,
   },
-  duration:{
-    type:Date
-  }
-})
+  duration: {
+    type: Date,
+  },
+});
 
 const userSchema = new Schema({
-  id:{
+  id: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
@@ -44,42 +44,40 @@ const userSchema = new Schema({
   },
   username: {
     type: String,
-    default: " "
+    default: ' ',
   },
   sortLessons: {
     type: [Boolean],
   },
   totalGold: {
     type: Number,
-    default: 0
+    default: 0,
   },
-  pathLessons:  {
+  pathLessons: {
     type: [Boolean],
   },
-  games: [
-    gameSchema
-  ],
+  games: [gameSchema],
   overallWins: {
     wins: {
       type: Number,
-      default: 0
+      default: 0,
     },
     losses: {
       type: Number,
-      default: 0
+      default: 0,
     },
     draws: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
-  avatar:{
+  avatar: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Avatar',
-    require:true
-  }
-})
+    require: true,
+  },
+});
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema);
 
-export { User }
+export { User };
