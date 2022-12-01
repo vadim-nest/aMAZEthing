@@ -22,8 +22,8 @@ function CurvePath() {
       updatePathLessons(e, updateNum)
     }
     if(user.pathLessons[numCheck]) {
-    navigate(navigateURL)
-  }
+      navigate(navigateURL)
+    }
   }
 
 
@@ -173,7 +173,7 @@ function CurvePath() {
             if(!user.pathLessons[0]) {
               updatePathLessons(e, 0)
             }
-            navigate('/learning/BFS')
+            navigate('/learning/BfsLesson')
            }}
           cx="10"
           cy="14.6"
@@ -189,7 +189,7 @@ function CurvePath() {
 
         <circle
            className={user.pathLessons[1] ? "circles doneLesson" :  user.pathLessons[0] ? "circles" : "circles disabled" }
-           onClick={(e) => updateSVGHelper(e, 0, 1, '/learning/DFS')}
+           onClick={(e) => updateSVGHelper(e, 0, 1, '/learning/DfsLesson')}
           cx="40"
           cy="0"
           r="3"
@@ -204,7 +204,7 @@ function CurvePath() {
         
         <circle
            className={user.pathLessons[2] ? "circles doneLesson" :  user.pathLessons[1] ? "circles" : "circles disabled" }
-           onClick={(e) => updateSVGHelper(e, 1, 2, '/learning/Dijkstra')}
+           onClick={(e) => updateSVGHelper(e, 1, 2, '/learning/DijkstraLesson')}
           cx="65.2"
           cy="12.6"
           r="3"
@@ -217,7 +217,7 @@ function CurvePath() {
         </text>
         <circle
           className={user.pathLessons[3] ? "circles doneLesson" :  user.pathLessons[2] ? "circles" : "circles disabled" }
-          onClick={(e) => updateSVGHelper(e, 2, 3, '/learning/AStar')}
+          onClick={(e) => updateSVGHelper(e, 2, 3, '/learning/AStarLesson')}
           cx="102"
           cy="6"
           r="3"
