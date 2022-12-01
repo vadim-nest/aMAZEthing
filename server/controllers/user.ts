@@ -1,6 +1,6 @@
 import express from 'express'
 import { User } from '../models/user'
-import {Avatar} from '../models/avatar'
+
 
 
 async function getUserData(req: express.Request, res: express.Response) {
@@ -9,15 +9,13 @@ async function getUserData(req: express.Request, res: express.Response) {
         console.log('Request opened to retrieve information from: ',email)
         const user = await User.findOne({ email: email })
         if (user) {
-            const resUser = await User.findOne({ email: email }).populate('avatar');
+            const resUser = await User.findOne({ email: email })
             console.log(resUser)
             res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: resUser });
         } else {
             const username = email.substr(0,email.indexOf('@'));
-            const {id} = await Avatar.findOne({contentType: 'monkey.png'});
-            const newUser = await User.create({ id: sub, email: email, username: username, avatar:id });
-            const resUser = await User.findOne({email:newUser.email}).populate('avatar');
-            res.status(201).json({ "statusCode": 201, "message": "User created", user: resUser });
+            const newUser = await User.create({ id: sub, email: email, username: username, avatar:'monkey.png' });
+            res.status(201).json({ "statusCode": 201, "message": "User created", user: newUser });
         }
     } catch (error) {
         console.log(error);

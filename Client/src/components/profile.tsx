@@ -2,28 +2,28 @@ import '../css/profile.css';
 import { User } from '@auth0/auth0-react';
 import { useAppSelector } from '../features/hooks';
 import apiService from '../services/apiService';
-import { Buffer } from 'buffer';
+
 import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { refreshDataNoAvatar } from '../features/user_slice';
 import ProfileGameHistory from './profileGameHistory';
-import sort from '../assets/profile/sort.png'
+import sort from '../assets/profile/sort.png';
 import path from '../assets/profile/path.png';
 import changeMe from '../assets/profile/changeMe.png';
-import { current } from '@reduxjs/toolkit';
 
 function Profile() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const user = useAppSelector((state) => state.user);
-  const [img, setImg] = useState();
   const [inputOpen, setInputOpen] = useState(false);
-
+ 
   let currentSortProgress = 0
   let currentPathProgress = 0
 
+
+  
   for(let bool of user.sortLessons) {
     if (bool === true) currentSortProgress++
     else break
@@ -33,13 +33,6 @@ function Profile() {
     if (bool === true) currentPathProgress++
     else break
   }
-
-  useEffect(() => {
-    const base64String: any = Buffer.from(user.avatar.data.data).toString(
-      'base64'
-    );
-    setImg(base64String);
-  }, [user]);
 
   function changeUsername(e: any) {
     //TODO if type is Event value is not recognized
@@ -73,11 +66,11 @@ function Profile() {
       <div className="user-dashboard">
         <div className="user-info">
           <div className='user-part'>
-            <div className='icon'>
-              {img && <img className='icon' src={'data:image/jpeg;base64,' + img} />}
+            <div className='avatar'>
+              <img  className='avatar' src={`./src/assets/avatars/${user.avatar}`} alt={user.avatar} />
             </div>
             <div className='user-name'>
-              {inputOpen === false && <h1>HELLO {user.username ? (user as User).username : 'THERE'},<img className='changeMe' src={changeMe} onClick={toggleInput} /></h1>}
+               <h1>HELLO {inputOpen === false && user.username ? (user as User).username : 'THERE'},<img className='changeMe' src={changeMe} onClick={toggleInput} /></h1>
                 <form className={`open-${inputOpen}`}>
                   <input
                     type="text"
@@ -85,7 +78,7 @@ function Profile() {
                     name="username"
                     onChange={changeUsername}
                     className='input-body'
-                    maxLength= {15}
+                    maxLength= {10}
                     />
                   <button className='input-button' onClick={(e) => {
                     updateChanges(e);
@@ -120,10 +113,8 @@ function Profile() {
           <div className='stats-line'>
             <h4 className='stats-text'>
               MATCHES
-              <h4  className='stats-text'>14</h4></h4>
-            <h4 className='stats-text'>WINS
-            <h4 className='wins-yellow'>3</h4></h4>
-
+            <h4  className='stats-text'>14</h4></h4>
+            <h4 className='stats-text'>WINS<h4 className='wins-yellow'>3</h4></h4>
             <h4 className='stats-text'>LOSSES<h4 className='losses-red'>2</h4></h4>
             <h4 className='stats-text'>WIN RATE<h4  className='stats-text'>60%</h4></h4>
             <h4 className='stats-text'>GOLD EARNED<h4  className='stats-text'>200</h4></h4>

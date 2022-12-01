@@ -45,7 +45,7 @@ export interface animal {
 }
 
 export const squirrel: animal = {
-  pathFindingAlgo: 'bfs',
+  pathFindingAlgo: 'dfs',
   sortingAlgo: 'bubble',
   sortingSpeed: 300,
   type: 'Squirrel'

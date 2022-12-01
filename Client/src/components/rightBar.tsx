@@ -56,15 +56,17 @@ function RightBar({
   allTilesHidden,
   currentMinion,
   setCurrentMinion,
-  minions
+  minions,
+  currentPlayer
 }: {
-  addNewMinion: (type: animal) => void;
+  addNewMinion: (type: animal, player: 'p1' | 'p2') => void;
   allTilesHidden: boolean;
   currentMinion: null | number,
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   minions: {[key: number]: minionType},
+  currentPlayer: 'p1' | 'p2'
 }) {
-
+ 
   const [shopOpen, setShopOpen] = useState(false);
 
   let allP1Minions: Array<minionType> = [];
@@ -98,7 +100,7 @@ function RightBar({
     <div className='right-bar'>
 
       {shopOpen ? (
-        <Shop addNewMinion={addNewMinion} minions={minions}/>
+        <Shop addNewMinion={addNewMinion} minions={minions} currentPlayer = {currentPlayer}/>
       ) : <div className='your-minions'>
       {minions &&
         // Should be a name instead

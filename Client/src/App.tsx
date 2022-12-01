@@ -5,7 +5,6 @@ import socket from './services/socket';
 import Navbar from "./components/navbar";
 
 function App(props: any) {
-  socket.on('message', message => {console.log(message)});
   return (
       <Auth0ProviderWithHistory>
         <div>
