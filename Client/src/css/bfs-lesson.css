@@ -23,7 +23,7 @@
 }
 .bfs .lesson-wrapper-2 {
   background-color: var(--white);
-  border-color: white;
+  border-color: var(--white);
   border-radius: 20px;
   min-width: 70vw;
   width: 900px;
@@ -34,8 +34,8 @@
   align-items: center;
   flex-direction: column;
 }
-.yellow-line {
-  stroke: "yellow";
+.main-green-line {
+  stroke: "var(--main-green)";
 }
 .svg-circle {
   height: 100px;

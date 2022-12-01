@@ -24,14 +24,13 @@ export default function Connect(server: http.Server) {
       }
     })
     socket.on('play', () => {
-      playerSearch.push(socket.id);
-      socket.on('join', (id) => {
-        if (playerSearch.length === 1) {
-          playerSearch.pop();
-          socket.join(id);
-          io.to(id).emit('Game start');
-        }
-      })
+      if (playerSearch.length !== 0) {
+        const id = playerSearch.pop();
+        socket.join(id);
+        io.to(id).emit('Game start');
+      } else {
+        playerSearch.push(socket.id);
+      }
     })
   });
 }

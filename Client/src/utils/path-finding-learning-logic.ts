@@ -111,7 +111,7 @@ export class Tree {
     bfs() {
         const queue: any = [];
         document.getElementById("myCanvas")!.innerHTML += `<div ref1={ref1} id='tree-level${this.depth}' class='tree-level'></div>`;
-        document.getElementById(`tree-level${this.depth}`)!.innerHTML += `<svg class="svg-circle"><circle cx="50%" cy="50%" r="20" stroke="#1B432E" stroke-width="3" fill="#6EAC64"  id="${this.root.value}" ></circle></svg>`
+        document.getElementById(`tree-level${this.depth}`)!.innerHTML += `<svg class="svg-circle"><circle cx="50%" cy="50%" r="20" stroke="var(--main-green)" stroke-width="3" fill="var(--yellow)"  id="${this.root.value}" ></circle></svg>`
         this.root.children.forEach((el: any) => {
             queue.push(el);
         })
@@ -121,7 +121,7 @@ export class Tree {
             let newQ: any = [];
             document.getElementById("myCanvas")!.innerHTML += `<div id='tree-level${depth}' class='tree-level'></div>`;
             for (let node of queue) {
-                document.getElementById(`tree-level${depth}`)!.innerHTML += `<svg class="svg-circle"><circle cx="50%" cy="50%" r="20" stroke="#1B432E" stroke-width="3" fill="#6EAC64"  id="${node.value}" ></circle></svg>`
+                document.getElementById(`tree-level${depth}`)!.innerHTML += `<svg class="svg-circle"><circle cx="50%" cy="50%" r="20" stroke="var(--main-green)" stroke-width="3" fill="var(--yellow)"  id="${node.value}" ></circle></svg>`
                 // document.getElementById(`tree-level${depth}`)!.innerHTML += `<div class='dot' id="${node.value}" onClick={console.log(${node.value})}></div>`
                 node.children.forEach((child: any) => {
                     newQ.push(child);
@@ -177,7 +177,7 @@ export class Tree {
                             if (weight === 3 || weight === 5 || weight === 7) weight--;
                         }
                     }
-                    document.getElementById(`myCanvas`)!.innerHTML += `<svg class="svg-line"><line id="${lineID}" x1="${posx0}" y1="${posy0}" x2="${posx1}" y2="${posy1}"  style="stroke:black;stroke-width:${weight}" /></svg>`
+                    document.getElementById(`myCanvas`)!.innerHTML += `<svg class="svg-line"><line id="${lineID}" x1="${posx0}" y1="${posy0}" x2="${posx1}" y2="${posy1}"  style="stroke:var(--yellow);stroke-width:${weight}" /></svg>`
                     this.lineStructure.push({ id: lineID, weight: weight })
                     lineID++
                 }
@@ -306,14 +306,14 @@ export class Graph {
         }
     }
     async printPath(path: any) {
-        document.getElementById(`${path[0]['1'].id}`)!.style.fill = 'yellow';
+        document.getElementById(`${path[0]['1'].id}`)!.style.fill = 'var(--main-green)';
         path.shift()
 
         for (let el of path) {
             await delay(500);
-            document.getElementById(`${el['0'].id}`)!.style["stroke"] = 'beige';
+            document.getElementById(`${el['0'].id}`)!.style["stroke"] = 'var(--main-green)';
             await delay(500);
-            document.getElementById(`${el['1'].id}`)!.style.fill = 'yellow';
+            document.getElementById(`${el['1'].id}`)!.style.fill = 'var(--main-green)';
         }
     }
 
