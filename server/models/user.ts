@@ -3,29 +3,23 @@ import { mongoose } from './index';
 const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
-  amountMinions: {
+  minions: {
     type: Number,
   },
   result: {
     type: String,
   },
-  goldAmount: {
+  gold: {
     type: Number,
   },
   opponentID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  towersTaken: {
+  towers: {
     type: Number,
   },
-  winner: {
-    type: Boolean,
-  },
   startedAt: {
-    type: Date,
-  },
-  finishedAt: {
     type: Date,
   },
   duration: {
