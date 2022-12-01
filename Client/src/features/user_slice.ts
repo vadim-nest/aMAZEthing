@@ -23,7 +23,7 @@ const initialState: UserState = {
     username: '',
     games: [],
     overallWins:{ wins:0, losses:0, draws:0},
-    pathLessons:[],
+    pathLessons:[false, false, false, false],
     sortLessons:[false, false, false, false, false, false],
     avatar:{
         data:{
@@ -52,9 +52,12 @@ const userSlice = createSlice({
         },
         refreshSortingPath(state, action: PayloadAction<UserState>){
             state.sortLessons = action.payload.sortLessons
+        },
+        refreshPathLessons(state, action: PayloadAction<UserState>){
+            state.pathLessons = action.payload.pathLessons
         }
     }
 })
 
-export const{ refreshData, refreshDataNoAvatar, refreshSortingPath } = userSlice.actions;
+export const{ refreshData, refreshDataNoAvatar, refreshSortingPath, refreshPathLessons} = userSlice.actions;
 export default userSlice.reducer;

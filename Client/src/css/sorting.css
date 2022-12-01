@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 .whole-page-wrapper {
-  background-color: var(--white-green);
+  background-color: var(--white);
   height: 90vh;
   display: flex;
   flex-direction: column;

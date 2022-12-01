@@ -33,7 +33,7 @@ export default function SelectionLesson() {
       useEffect(() => {
         console.log(array)
         const copyArr = array.slice()
-        setAnimations(selectionSortAlgo(copyArr , true))
+        setAnimations(selectionSortAlgo(copyArr , false))
       }, [array])
     
       function initArr() {

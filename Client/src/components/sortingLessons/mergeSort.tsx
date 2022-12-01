@@ -4,7 +4,7 @@ import { mergeSortAlgo, generateArray } from '../../utils/sorting-algo';
 import Visualization from './visualization';
 import { mergeSortVisual} from '../../utils/sorting-helper-visual';
 
-export default function BubbleLesson() {
+export default function MergeLesson() {
   const [array, setArray] = useState([3,5,7]);
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[1]])
@@ -33,7 +33,7 @@ export default function BubbleLesson() {
   useEffect(() => {
     console.log(array)
     const copyArr = array.slice()
-    setAnimations(mergeSortAlgo(copyArr, false))
+    setAnimations(mergeSortAlgo(copyArr, true))
   }, [array])
 
   function initArr() {

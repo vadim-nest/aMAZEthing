@@ -51,9 +51,24 @@ async function updateSortLearning(req: express.Request, res: express.Response) {
     }
 }
 
+async function updatePathLearning(req: express.Request, res: express.Response) {
+    try {
+        const {email, pathArr} = req.body;
+        console.log(pathArr, 'controller learning update')
+        const user = await User.findOneAndUpdate({ email:email }, {pathLessons:pathArr}, {new:true});
+        console.log(user)
+        console.log('User increased learning Progress',user.username);
+        res.status(201).json({ "statusCode": 201, "message": "learning Progress has been stored", user});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ "statusCode": 500, "message": error });
+    }
+}
+
+
 
 
 
 // export { getUserData, updateLearning, updateUsername,updateGameStats };
 
-export {getUserData, updateUsername, updateSortLearning}
+export {getUserData, updateUsername, updateSortLearning, updatePathLearning}
