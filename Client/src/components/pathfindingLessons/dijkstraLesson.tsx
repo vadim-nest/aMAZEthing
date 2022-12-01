@@ -50,7 +50,7 @@ function DijkstraLesson() {
       </div>
       <div className="lesson-wrapper-2">
         <div className="but-options">
-          <button onClick={dijkstra}>Dijkstra</button>
+          <button className="button" onClick={dijkstra}>Dijkstra</button>
         </div>
         <div ref={ref} id="myCanvas"></div>
       </div>
