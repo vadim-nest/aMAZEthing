@@ -2,7 +2,7 @@ import '../css/game.css';
 import Maze from './maze';
 import RightBar from './rightBar';
 import LeftBar from './leftBar';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { animal, MazeTileType, minionType, TowerType } from '../utils/types';
 import { Graph, value } from '../utils/graph';
 import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../utils/path-finding-algo';
@@ -41,6 +41,7 @@ function Game() { // TODO: Extract logic to maze class
   });
   const [zoomed, setZoomed] = useState(false);
   const array: MazeTileType[] = [];
+  const pathShowRef = useRef<any>();
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
   }
@@ -62,7 +63,7 @@ function Game() { // TODO: Extract logic to maze class
     return () => clearInterval(timer as any);
   }, [counter]);
 
-  const [maze, setMaze] = useState(array);
+  const [maze, setMaze] = useState<{currentMinion: null | number, maze: MazeTileType[]}>({currentMinion: null, maze: array});
   const speed = 10;
   const minBoxSize = 20;
   const maxBoxSize = 100;
@@ -181,77 +182,113 @@ function Game() { // TODO: Extract logic to maze class
         [currentMinion as number]: minion as minionType
       }
     })
-    if (showPath) setPath(minion.path, minion.thoughtProcess);
-    let xAdd = 0;
-    let yAdd = 0;
-    let previousTimeStamp: undefined | number;
-    let previousDirection = minion.xPos + minion.yPos*width;
-    function step(timestamp: number) {
-      if (previousTimeStamp === undefined) {
-        previousTimeStamp = timestamp;
-      }
-      let updatedMinion = minion as minionType;
-      if ((previousTimeStamp as number) + speed < timestamp) {
-        previousTimeStamp = timestamp
-        const nextDirection = path.shift() as number;
-        const direction = getDirection(previousDirection as number, nextDirection as number, width);
-        xAdd += direction.xPos;
-        yAdd += direction.yPos;
-        previousDirection = nextDirection;
-        updatedMinion = {
-          ...(minion as minionType),
-          yPos: (minion as minionType).yPos + yAdd,
-          xPos: (minion as minionType).xPos + xAdd,
-          rotation: direction.rotation
+    if (showPath) setPath(minion.path, minion.thoughtProcess, minion.id);
+    showPathSlowly(path, visited, minion);
+    function showPathSlowly(path: number[], thoughtProcess: number[], minion: minionType) {
+      path = [...path];
+      thoughtProcess = [...thoughtProcess];
+      let prevStep: number;
+      let showThoughtProcess: number[] = [];
+      let showPath: number[] = [];
+      function step(interval: number) {
+        if (path.length === 0) {
+          applyMovement(minion as minionType);
+          return;
+        };
+        if (!prevStep) prevStep = interval;
+        let nextThought = thoughtProcess.shift();
+        if (nextThought) {
+          showThoughtProcess.push(nextThought);
+        } else {
+          showPath.push(path.shift() as number);
         }
-        setMinions(prevMinions => {
-          return {...prevMinions,
-          [(minion as minionType).id]: updatedMinion,}
-        })
+        console.log({currentMinion});
+        if (currentMinion === minion.id) setPath(showPath, showThoughtProcess, minion.id); // TODO: get current Minion
+        requestAnimationFrame(step);
       }
-      if (path.length) requestAnimationFrame(step);
-      else {
-        setMinions(prevMinions => {
-          return {...prevMinions,
-          [(minion as minionType).id]: {
-            ...updatedMinion,
-            rotation: ''
-          },}
-        })
-        setMovingMinions(prevMoving => prevMoving.filter(id => id !== (minion as minionType).id));
-        for (let tower of towers) {
-          if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
-            enterTower(tower.id, (minion as minionType).id);
+      requestAnimationFrame(step);
+    }
+    function applyMovement(minion: minionType) {
+      let xAdd = 0;
+      let yAdd = 0;
+      let previousTimeStamp: undefined | number;
+      let previousDirection = minion.xPos + minion.yPos*width;
+      function step(timestamp: number) {
+        if (previousTimeStamp === undefined) {
+          previousTimeStamp = timestamp;
+        }
+        let updatedMinion = minion as minionType;
+        if ((previousTimeStamp as number) + speed < timestamp) {
+          previousTimeStamp = timestamp
+          const nextDirection = path.shift() as number;
+          const direction = getDirection(previousDirection as number, nextDirection as number, width);
+          xAdd += direction.xPos;
+          yAdd += direction.yPos;
+          previousDirection = nextDirection;
+          updatedMinion = {
+            ...(minion as minionType),
+            yPos: (minion as minionType).yPos + yAdd,
+            xPos: (minion as minionType).xPos + xAdd,
+            rotation: direction.rotation
+          }
+          setMinions(prevMinions => {
+            return {...prevMinions,
+            [(minion as minionType).id]: updatedMinion,}
+          })
+        }
+        if (path.length) requestAnimationFrame(step);
+        else {
+          setMinions(prevMinions => {
+            return {...prevMinions,
+            [(minion as minionType).id]: {
+              ...updatedMinion,
+              rotation: ''
+            },}
+          })
+          setMovingMinions(prevMoving => prevMoving.filter(id => id !== (minion as minionType).id));
+          for (let tower of towers) {
+            if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
+              enterTower(tower.id, (minion as minionType).id);
+            }
           }
         }
       }
+      requestAnimationFrame(step);
     }
-    requestAnimationFrame(step);
   }
 
   useEffect(() => {
-    setPath([], []);
+    setPath([], [], null);
+    setMaze(prevMaze => {
+      return {
+        ...prevMaze,
+        currentMinion
+      }
+    })
     if (currentMinion !== null && !movingMinions.includes(currentMinion as number)) {
       setCurrentTile(null);
       setWaitingForTile(true);
     } else if (currentMinion !== null) {
       const minion = minions[currentMinion as number];
-      setPath(minion.path, minion.thoughtProcess);
+      setPath(minion.path, minion.thoughtProcess, minion.id);
     } else {
       setWaitingForTile(false);
     }
   }, [currentMinion])
 
-  function setPath(path: number[], visited: number[]) {
-    setMaze(prevMaze => {
-      const newMaze = [...prevMaze];
-      for (let i = 0; i < newMaze.length; i++) {
-        if (path.includes(i)) newMaze[i].path = 'PATH';
-        else if (visited.includes(i)) newMaze[i].path = 'THOUGHTPROCESS';
-        else newMaze[i].path = '';
-      }
-      return newMaze;
-    });
+  function setPath(path: number[], visited: number[], minionId: number | null) {
+    if (currentMinion === minionId) {
+      setMaze(prevMaze => {
+        if (minionId !== null && prevMaze.currentMinion !== minionId) return prevMaze;
+        const newMaze = [...prevMaze.maze];
+        for (let i = 0; i < newMaze.length; i++) {
+          if (path.includes(i)) newMaze[i].path = 'PATH';
+          else if (visited.includes(i)) newMaze[i].path = 'THOUGHTPROCESS';
+          else newMaze[i].path = '';
+        }
+        return {...prevMaze, maze: newMaze};
+      });
+    }
   }
 
   useEffect(() => { // TODO: Extract to a new file

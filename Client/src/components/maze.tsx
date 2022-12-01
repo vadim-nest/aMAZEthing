@@ -20,8 +20,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
   setCurrentGraph: React.Dispatch<React.SetStateAction<Graph | undefined>>,
   currentGraph: Graph | undefined,
-  maze: MazeTileType[],
-  setMaze: React.Dispatch<React.SetStateAction<MazeTileType[]>>
+  maze: {currentMinion: null | number, maze: MazeTileType[]},
+  setMaze: React.Dispatch<React.SetStateAction<{currentMinion: null | number, maze: MazeTileType[]}>>
   towers: TowerType[],
   setTowers: React.Dispatch<React.SetStateAction<TowerType[]>>,
   currentTower: null | TowerType,
@@ -75,14 +75,14 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
         setCurrentGraph(graph);
         setDisplayVisited(visited);
         setMaze(oldMaze => {
-          const newMaze = [...oldMaze];
+          const newMaze = [...oldMaze.maze];
           for (let value of visited) {
             newMaze[value as number] = {
               ...newMaze[value as number],
               classes: classes[value as value]
             }
           }
-          return newMaze;
+          return {...oldMaze, maze: newMaze};
         })
         
       }
@@ -119,7 +119,7 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
           <Home xPos={width - 3} yPos={height - 3} boxSize={boxSize} player='p2'/>
           {minions.map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower}/>)}
           {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} zoomed={zoomed} towersSorting={towersSorting} boxSize={boxSize} width={width} height={height} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower} setCurrentMinion={setCurrentMinion}/>)}
-          {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} setCurrentTower={setCurrentTower} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
+          {maze.maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} setCurrentTower={setCurrentTower} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>
       </div>
     </>
