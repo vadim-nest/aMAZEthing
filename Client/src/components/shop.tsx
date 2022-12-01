@@ -4,16 +4,18 @@ import { animal, badger, bear, deer, hare, koala, minionType, squirrel } from '.
 
 export default function Shop({
   addNewMinion,
-  minions
+  minions,
+  currentPlayer
 }: {
-  addNewMinion: (type: animal) => void;
-  minions: {[key: number]: minionType}
+  addNewMinion: (type: animal, player: 'p1' | 'p2') => void;
+  minions: {[key: number]: minionType},
+  currentPlayer: 'p1' | 'p2'
 }) {
   return (
     <div className='shop-page'>
       <h1 className='the-shop-sign'>Shop</h1>
       <ul className='shop-list'>
-        <div className='buy-minion-button' onClick={() => addNewMinion(squirrel)}>
+        <div className='buy-minion-button' onClick={() => addNewMinion(squirrel, currentPlayer)}>
           <div className='shop-stats'>
             <h1 className='shop-just-stats'>Squirrel</h1>
             <h1 className='shop-just-text'>Price</h1>
@@ -33,7 +35,7 @@ export default function Shop({
             <Squirrel currentPlayer='neutralTower' />
           </div>
         </div>
-        <div className='buy-minion-button' onClick={() => addNewMinion(badger)}>
+        <div className='buy-minion-button' onClick={() => addNewMinion(badger, currentPlayer)}>
           <div className='shop-stats'>
           <h1 className='shop-just-stats'>Badger</h1>
             <h1 className='shop-just-text'>Price</h1>
@@ -51,7 +53,7 @@ export default function Shop({
           </div>
           <Badger currentPlayer='neutralTower' />
         </div>
-        <div className='buy-minion-button' onClick={() => addNewMinion(hare)}>
+        <div className='buy-minion-button' onClick={() => addNewMinion(hare, currentPlayer)}>
           <div className='shop-stats'>
           <h1 className='shop-just-stats'>Hare</h1>
             <h1 className='shop-just-text'>Price</h1>
@@ -71,7 +73,7 @@ export default function Shop({
             <Hare currentPlayer='neutralTower' />
           </div>
         </div>
-        <div className='buy-minion-button' onClick={() => addNewMinion(deer)}>
+        <div className='buy-minion-button' onClick={() => addNewMinion(deer ,currentPlayer)}>
           <div className='shop-stats'>
             <h1 className='shop-just-stats'>Deer</h1>
             <h1 className='shop-just-text'>Price</h1>
@@ -89,7 +91,7 @@ export default function Shop({
           </div>
           <Deer currentPlayer='neutralTower' />
         </div>
-        <div className='buy-minion-button' onClick={() => addNewMinion(koala)}>
+        <div className='buy-minion-button' onClick={() => addNewMinion(koala, currentPlayer)}>
           <div className='shop-stats'>
             <h1 className='shop-just-stats'>Koala</h1>
             <h1 className='shop-just-text'>Price</h1>
@@ -107,7 +109,7 @@ export default function Shop({
           </div>
           <Koala currentPlayer='neutralTower' />
         </div>
-        <div className='buy-minion-button' onClick={() => addNewMinion(bear)}>
+        <div className='buy-minion-button' onClick={() => addNewMinion(bear ,currentPlayer)}>
           <div className='shop-stats'>
            <h1 className='shop-just-stats'>Bear</h1>
             <h1 className='shop-just-text'>Price</h1>

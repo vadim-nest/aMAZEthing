@@ -17,7 +17,7 @@ const customConfig: Config = {
   dictionaries: [names]
 }
 
-function Game() { // TODO: Extract logic to maze class
+function Game2() { // TODO: Extract logic to maze class
 
   const [boxSize, setBoxSize] = useState(20);
   const [mazeCompleted, setMazeCompleted] = useState(false);
@@ -45,7 +45,7 @@ function Game() { // TODO: Extract logic to maze class
   const [zoomed, setZoomed] = useState(false);
   const array: MazeTileType[] = [];
   const pathShowRef = useRef<any>();
-  const currentPlayer = 'p1'
+  const currentPlayer = 'p2'
 
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
@@ -56,7 +56,7 @@ function Game() { // TODO: Extract logic to maze class
       console.log(type)
       addNewMinion(type, currentPlayer === 'p1' ? 'p2' : 'p1');
     })
-  },[])
+  },[minions])
 
   useEffect(() => {
     socket.off('minion move');
@@ -550,4 +550,4 @@ function Game() { // TODO: Extract logic to maze class
   );
 }
 
-export default Game;
+export default Game2;
