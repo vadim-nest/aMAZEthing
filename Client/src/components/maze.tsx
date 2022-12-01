@@ -7,6 +7,7 @@ import { MazeTileType, minionType, TowerType } from "../utils/types";
 import MazeTile from "./mazeTile";
 import Minion from "./minion";
 import Tower from "./tower";
+import Home from './home'
 
 
 function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers, currentTower, setCurrentTower, allTilesHidden, setAllTilesHidden, towersSorting, zoomed}: {
@@ -114,6 +115,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
     <>
       <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
+          <Home xPos={0} yPos={0} boxSize={boxSize} player='p1'/>
+          <Home xPos={width - 3} yPos={height - 3} boxSize={boxSize} player='p2'/>
           {minions.map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower}/>)}
           {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} zoomed={zoomed} towersSorting={towersSorting} boxSize={boxSize} width={width} height={height} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower} setCurrentMinion={setCurrentMinion}/>)}
           {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} setCurrentTower={setCurrentTower} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
