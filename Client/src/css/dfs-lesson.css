@@ -10,12 +10,26 @@
   }
   .dfs #myCanvas{
     position: relative;
-    width:1000px;
+    width: 1000px;
     height:fit-content;
+    min-height: 700px;
     display: flex;
     align-items: center;
     flex-direction: column;
     transform: rotate(-90deg);
+  }
+  .dfs .lesson-wrapper-2 {
+    background-color: var(--white);
+    border-color: white;
+    border-radius: 20px;
+    min-width: 70vw;
+    width: 900px;
+    padding: 3vh 3vw;
+    margin: 5vh;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
   .but-options{
     height: fit-content;
