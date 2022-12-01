@@ -19,11 +19,10 @@ export default function Shop({
             <h1 className='shop-just-text'>Price</h1>
             <h1 className='shop-just-stats price'>3000</h1>
 
-            <h1 className='shop-just-text'>Sorting algorithm</h1>
+            <h1 className='shop-just-text'>Sorting</h1>
             <h1 className='shop-just-stats'>{squirrel.sortingAlgo}</h1>
 
             <h1 className='shop-just-text'>Path finding</h1>
-            <h1 className='shop-just-text'>algorithm</h1>
             <h1 className='shop-just-stats'>{squirrel.pathFindingAlgo}</h1>
 
             <h1 className='shop-just-text'>Speed</h1>
@@ -39,11 +38,10 @@ export default function Shop({
             <h1 className='shop-just-text'>Price</h1>
             <h1 className='shop-just-stats price'>3000</h1>
 
-            <h1 className='shop-just-text'>Sorting algorithm</h1>
+            <h1 className='shop-just-text'>Sorting</h1>
             <h1 className='shop-just-stats'>{badger.sortingAlgo}</h1>
 
             <h1 className='shop-just-text'>Path finding</h1>
-            <h1 className='shop-just-text'>algorithm</h1>
             <h1 className='shop-just-stats'>{badger.pathFindingAlgo}</h1>
 
             <h1 className='shop-just-text'>Speed</h1>
@@ -57,11 +55,10 @@ export default function Shop({
             <h1 className='shop-just-text'>Price</h1>
             <h1 className='shop-just-stats price'>3000</h1>
 
-            <h1 className='shop-just-text'>Sorting algorithm</h1>
+            <h1 className='shop-just-text'>Sorting</h1>
             <h1 className='shop-just-stats'>{hare.sortingAlgo}</h1>
 
             <h1 className='shop-just-text'>Path finding</h1>
-            <h1 className='shop-just-text'>algorithm</h1>
             <h1 className='shop-just-stats'>{hare.pathFindingAlgo}</h1>
 
             <h1 className='shop-just-text'>Speed</h1>
@@ -77,11 +74,10 @@ export default function Shop({
             <h1 className='shop-just-text'>Price</h1>
             <h1 className='shop-just-stats price'>3000</h1>
 
-            <h1 className='shop-just-text'>Sorting algorithm</h1>
+            <h1 className='shop-just-text'>Sorting</h1>
             <h1 className='shop-just-stats'>{deer.sortingAlgo}</h1>
 
             <h1 className='shop-just-text'>Path finding</h1>
-            <h1 className='shop-just-text'>algorithm</h1>
             <h1 className='shop-just-stats'>{deer.pathFindingAlgo}</h1>
 
             <h1 className='shop-just-text'>Speed</h1>
@@ -95,11 +91,10 @@ export default function Shop({
             <h1 className='shop-just-text'>Price</h1>
             <h1 className='shop-just-stats price'>3000</h1>
 
-            <h1 className='shop-just-text'>Sorting algorithm</h1>
+            <h1 className='shop-just-text'>Sorting</h1>
             <h1 className='shop-just-stats'>{koala.sortingAlgo}</h1>
 
             <h1 className='shop-just-text'>Path finding</h1>
-            <h1 className='shop-just-text'>algorithm</h1>
             <h1 className='shop-just-stats'>{koala.pathFindingAlgo}</h1>
 
             <h1 className='shop-just-text'>Speed</h1>
@@ -113,11 +108,10 @@ export default function Shop({
             <h1 className='shop-just-text'>Price</h1>
             <h1 className='shop-just-stats price'>3000</h1>
 
-            <h1 className='shop-just-text'>Sorting algorithm</h1>
+            <h1 className='shop-just-text'>Sorting</h1>
             <h1 className='shop-just-stats'>{bear.sortingAlgo}</h1>
 
             <h1 className='shop-just-text'>Path finding</h1>
-            <h1 className='shop-just-text'>algorithm</h1>
             <h1 className='shop-just-stats'>{bear.pathFindingAlgo}</h1>
 
             <h1 className='shop-just-text'>Speed</h1>

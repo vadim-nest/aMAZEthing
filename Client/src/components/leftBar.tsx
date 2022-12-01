@@ -33,7 +33,7 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
       return oldBoxSize + amount;
     })
   }
-  
+
   function zoomOut(amount: number) {
     setCurrentTower(null);
     setZoomed(true);
@@ -112,10 +112,10 @@ function LeftBar({setBoxSize, minBoxSize, maxBoxSize, currentMinion, currentTile
           <h1 className='left-just-text'>Alignment</h1>
           <h1 className='left-just-stats'>{minions[currentMinion].alignment}</h1>
 
-          <h1 className='left-just-text'>pathFindingAlgo</h1>
+          <h1 className='left-just-text'>Path finding</h1>
           <h1 className='left-just-stats'>{minions[currentMinion].pathFindingAlgo}</h1>
 
-          <h1 className='left-just-text'>sortingAlgo</h1>
+          <h1 className='left-just-text'>Sorting</h1>
           <h1 className='left-just-stats'>{minions[currentMinion].sortingAlgo}</h1>
 
           <h1 className='left-just-text'>{minions[currentMinion].sortingSpeed}</h1>
