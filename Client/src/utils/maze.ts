@@ -140,7 +140,7 @@ export function generateMaze(width: number, height: number, graph: Graph | false
     }
     return false;
   }
-  for (let j = 0; j < width; j++) {
+  for (let j = 0; j < 3*width; j++) {
     let i = Math.floor(Math.random()*nodeNum);
     while(conflictWithTowers(towers, i)) {
       i = Math.floor(Math.random()*nodeNum);

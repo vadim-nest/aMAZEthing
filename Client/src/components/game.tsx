@@ -182,7 +182,7 @@ function Game() { // TODO: Extract logic to maze class
         [currentMinion as number]: minion as minionType
       }
     })
-    if (showPath) setPath(minion.path, minion.thoughtProcess, minion.id);
+    // if (showPath) setPath(minion.path, minion.thoughtProcess, minion.id);
     showPathSlowly(path, visited, minion);
     function showPathSlowly(path: number[], thoughtProcess: number[], minion: minionType) {
       path = [...path];
@@ -196,7 +196,7 @@ function Game() { // TODO: Extract logic to maze class
           return;
         };
         if (!prevStep) prevStep = interval;
-        let nextThought = thoughtProcess.splice(0, 10);
+        let nextThought = thoughtProcess.splice(0, Math.ceil(thoughtProcess.length/10));
         if (nextThought.length) {
           showThoughtProcess.push(...nextThought);
         } else {
@@ -279,7 +279,10 @@ function Game() { // TODO: Extract logic to maze class
   function setPath(path: number[], visited: number[], minionId: number | null) {
     if (currentMinion === minionId) {
       setMaze(prevMaze => {
-        if (minionId !== null && prevMaze.currentMinion !== minionId) return prevMaze;
+        if (prevMaze.currentMinion !== minionId) {
+          path = [];
+          visited = [];
+        };
         const newMaze = [...prevMaze.maze];
         for (let i = 0; i < newMaze.length; i++) {
           if (path.includes(i)) newMaze[i].path = 'PATH';
