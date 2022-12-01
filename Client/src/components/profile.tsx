@@ -18,12 +18,13 @@ function Profile() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const user = useAppSelector((state) => state.user);
-  const [img, setImg] = useState();
   const [inputOpen, setInputOpen] = useState(false);
-
+ 
   let currentSortProgress = 0
   let currentPathProgress = 0
 
+
+  
   for(let bool of user.sortLessons) {
     if (bool === true) currentSortProgress++
     else break
@@ -33,13 +34,6 @@ function Profile() {
     if (bool === true) currentPathProgress++
     else break
   }
-
-  useEffect(() => {
-    const base64String: any = Buffer.from(user.avatar.data.data).toString(
-      'base64'
-    );
-    setImg(base64String);
-  }, [user]);
 
   function changeUsername(e: any) {
     //TODO if type is Event value is not recognized
@@ -74,7 +68,7 @@ function Profile() {
         <div className="user-info">
           <div className='user-part'>
             <div className='icon'>
-              {img && <img className='icon' src={'data:image/jpeg;base64,' + img} />}
+              <img  className='icon' src={`./src/assets/avatars/${user.avatar}`} alt={user.avatar} />
             </div>
             <div className='user-name'>
               {inputOpen === false && <h1>HELLO {user.username ? (user as User).username : 'THERE'},<img className='changeMe' src={changeMe} onClick={toggleInput} /></h1>}

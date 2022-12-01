@@ -74,9 +74,9 @@ const userSchema = new Schema({
     }
   },
   avatar:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Avatar',
-    require:true
+    type: String,
+    required: true,
+    default: 'monkey.png'
   }
 })
 

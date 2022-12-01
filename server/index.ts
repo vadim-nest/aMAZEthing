@@ -4,7 +4,6 @@ import express from 'express';
 import http from 'http';
 const helmet = require("helmet");
 const nocache = require("nocache");
-import { automateImages } from './utils/automateAvatars';
 import { userRouter } from './routers/userRouter';
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
@@ -51,8 +50,6 @@ app.use(errorHandler);
 app.use(notFoundHandler);
 
 
-//Upload Avatar images to collection
-automateImages();
 
 server.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);

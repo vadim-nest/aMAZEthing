@@ -69,7 +69,7 @@ function Navbar() {
               </button>
             )}
             {!isLoading && !user && (
-              <button className="button" onClick={() => loginWithRedirect()}>
+              <button id="login" className="button" onClick={() => loginWithRedirect()}>
                 LOGIN
               </button>
             )}
@@ -145,6 +145,7 @@ function Navbar() {
             )}
              {!user && (
               <button
+                id="login"
                 className="button"
                 onClick={() => {
                   loginWithRedirect();
