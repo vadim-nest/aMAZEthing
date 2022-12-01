@@ -177,7 +177,7 @@ export class Tree {
                             if (weight === 3 || weight === 5 || weight === 7) weight--;
                         }
                     }
-                    document.getElementById(`myCanvas`)!.innerHTML += `<svg class="svg-line"><line id="${lineID}" x1="${posx0}" y1="${posy0}" x2="${posx1}" y2="${posy1}"  style="stroke:var(--yellow);stroke-width:${weight}" /></svg>`
+                    document.getElementById(`myCanvas`)!.innerHTML += `<svg class="svg-line"><line id="${lineID}" x1="${posx0}" y1="${posy0}" x2="${posx1}" y2="${posy1}"  style="stroke:var(--yellow); stroke-width:${weight}"/></svg>`
                     this.lineStructure.push({ id: lineID, weight: weight })
                     lineID++
                 }

@@ -10,20 +10,18 @@ export default function BubbleLesson() {
   const [array, setArray] = useState([3, 5, 7]);
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[1]]);
-  const [isSorted, setIsSorted] = useState(false)
+  const [isSorted, setIsSorted] = useState(false);
 
-  console.log(user)
+  console.log(user);
 
-  let WIDTH = 35
-  let MIN_VAL = 7
-  let MAX_VAL = 50
-  let NUM_BARS = 20
-  let DELAY = 100
-  let PADTOP = 10
-  let MARGIN = 3
-  let HEIGHT = 5
-
-
+  let WIDTH = 35;
+  let MIN_VAL = 7;
+  let MAX_VAL = 50;
+  let NUM_BARS = 20;
+  let DELAY = 100;
+  let PADTOP = 10;
+  let MARGIN = 3;
+  let HEIGHT = 5;
 
   let paragraphs = {
     sortName: 'Bubble sort',
@@ -42,8 +40,8 @@ export default function BubbleLesson() {
 
   function initArr() {
     setClicked(false);
-    setIsSorted(false)
-    setArray((array) => (array = generateArray(NUM_BARS , MIN_VAL, MAX_VAL)));
+    setIsSorted(false);
+    setArray((array) => (array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL)));
   }
 
   return (
@@ -55,12 +53,13 @@ export default function BubbleLesson() {
 
       <div className="lesson-wrapper-2">
         <div>
-        {!clicked && 
-           < button className="button clickSort" onClick={() => initArr()}>
-            new array
-          </button>}
+          {!clicked && (
+            <button className="button clickSort" onClick={() => initArr()}>
+              new array
+            </button>
+          )}
 
-          {!clicked &&!isSorted && 
+          {!clicked && !isSorted && (
             <button
               className="button clickSort"
               onClick={() => {
@@ -69,13 +68,11 @@ export default function BubbleLesson() {
             >
               visualize
             </button>
-          }
+          )}
 
-{!isSorted && clicked &&
-           <button 
-           className="button clickSort">
-             wait... </button>
-          }
+          {!isSorted && clicked && (
+            <button className="button clickSort">wait... </button>
+          )}
         </div>
         <Visualization
           width={WIDTH}
@@ -90,7 +87,7 @@ export default function BubbleLesson() {
           clicked={clicked}
           sortingAlgo={bubbleSortVisual}
           setClicked={setClicked}
-          setIsSorted={ setIsSorted}
+          setIsSorted={setIsSorted}
         />
       </div>
     </div>

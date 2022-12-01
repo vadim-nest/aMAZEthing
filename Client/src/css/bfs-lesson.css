@@ -1,13 +1,13 @@
 .whole-page-wrapper {
-  padding-top: 10vh;
   background-color: var(--white);
   height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   overflow: scroll;
 }
+
 .bfs #myCanvas {
   position: relative;
   width: 700px;
@@ -16,32 +16,36 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* transform: rotate(-90deg); */
+  transform: rotate(-45deg);
 }
+
 .but-options {
   height: fit-content;
+  z-index: 2;
 }
+
 .bfs .lesson-wrapper-2 {
   background-color: var(--white);
   border-color: var(--white);
   border-radius: 20px;
   min-width: 70vw;
   width: 900px;
-  padding: 3vh 3vw;
-  margin: 5vh;
   color: var(--white);
   display: flex;
   align-items: center;
   flex-direction: column;
 }
+
 .main-green-line {
-  stroke: "var(--main-green)";
+  stroke: 'var(--main-green)';
 }
+
 .svg-circle {
   height: 100px;
   width: 100px;
   z-index: 2;
 }
+
 .svg-line {
   position: absolute;
   z-index: 1;
