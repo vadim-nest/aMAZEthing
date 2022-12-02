@@ -68,12 +68,13 @@ export default function Connect(server: http.Server) {
         io.to(socket.id).emit('set player 2');
         io.to(roomId).emit('Game start');
       } else {
-        const roomId = generateRoomId();
-        playerSearch.push(roomId);
+        // const roomId = generateRoomId();
+        playerSearch.push(socket.id);
         const maze = generateMaze(86, 40);
-        mazes[roomId] = maze;
-        socket.join(roomId);
-        io.to(socket.id).emit('receive room id', roomId);
+        io.to(socket.id).emit('set player 1');
+        mazes[socket.id] = maze;
+        socket.join(socket.id);
+        io.to(socket.id).emit('receive room id', socket.id);
       }
     });
 
@@ -88,9 +89,21 @@ export default function Connect(server: http.Server) {
         socket.to(roomID).emit('enterTower', towerId, minionId)
     })
 
-    socket.on('disconnect', ()=>{
+    socket.on('clear waiting', (socketId) => {
+      console.log(playerSearch)
+      if(playerSearch[0]=== socketId) {
         playerSearch.pop()
-         console.log('a user disconnected')
-        })
+      }
+      console.log(playerSearch)
+    })
+
+    socket.on('disconnect', ()=>{
+      console.log(playerSearch)
+      if(playerSearch[0] && playerSearch[0] === socket.id){
+          playerSearch.pop()
+      }
+      console.log(playerSearch)
+      console.log('a user disconnected')
+    })
   })
 }

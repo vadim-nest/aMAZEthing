@@ -6,7 +6,7 @@ import { User } from '../models/user'
 async function getUserData(req: express.Request, res: express.Response) {
     try {
         const {email,sub} = req.body;
-        console.log('Request opened to retrieve information from: ',email)
+        // console.log('Request opened to retrieve information from: ',email)
         const user = await User.findOne({ email: email })
         if (user) {
             const resUser = await User.findOne({ email: email })

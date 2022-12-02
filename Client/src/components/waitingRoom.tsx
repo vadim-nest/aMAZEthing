@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import socket from '../services/socket';
 import ProfileGameHistory from './profile/profileGameHistory';
+import { io } from 'socket.io-client';
 import { store } from '../features/store';
 import { useAppDispatch } from '../features/hooks';
 import { updatePlayer, updateRoomID } from '../features/game_slice';
+
 
 function WaitingRoom() {
   const navigate = useNavigate();
@@ -30,9 +32,13 @@ function WaitingRoom() {
     socket.on('set player 2', () => {
       dispatch(updatePlayer('p2'));
     })
+    socket.on('set player 1', () => {
+      dispatch(updatePlayer('p1'));
+    })
     return ()=>{ 
-      socket.disconnect(); 
-     }
+      socket.emit('clear waiting', socket.id)
+      setPlayClicked(false);
+     } 
   }, []);
 
   function hostRoom() {
@@ -82,7 +88,7 @@ function WaitingRoom() {
       setCreateClicked(false);
       play();
     } else {
-      socket.disconnect()
+      socket.emit('clear waiting', socket.id)
       setPlayClicked(false);
     }
   }
