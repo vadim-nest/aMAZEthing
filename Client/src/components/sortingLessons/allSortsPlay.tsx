@@ -28,7 +28,7 @@ export default function AllSortsPlay() {
 
   let delayRef = useRef(5 as any)
 
-  let WIDTH = `${1451.23/array.length}` ;
+  let WIDTH = Number(`${1451.23/array.length}`) ;
   let MIN_VAL = 10;
   let MAX_VAL = 150;
   let PADTOP = 10;

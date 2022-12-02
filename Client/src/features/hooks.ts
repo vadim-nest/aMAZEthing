@@ -7,20 +7,14 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 //adding types to functions
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-
-
-
-
-
-
-function useAlgo(algoName:string = 'bubble', array: any = [], reversed:boolean = false) {
+export function useAlgo(algoName:string = 'bubble', array: number[] = [], reversed:boolean = false) {
     
-    const [animation,setAnimation] = useState([])
+    const [animation,setAnimation] = useState<number[][]>([])
     
     useEffect(()=>{
         switch(algoName){
             case 'bubble':
-                setAnimation(bubbleSortAlgo(array,reversed) as any);
+                setAnimation(bubbleSortAlgo(array,reversed));
         }
     },[])
   

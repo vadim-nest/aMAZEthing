@@ -7,6 +7,8 @@ export default function Visualization(props: any) {
 
     let {array, animations, clicked, sortingAlgo, margin, fontColor, fontSize, paddingTop, width, delay, height, tower, setClicked,setIsSorted} = props
 
+
+
     if (!delay) delay = 100;
     if(!margin) margin = 5
     if (!height) height = 20;
@@ -19,6 +21,7 @@ export default function Visualization(props: any) {
 
     if(clicked) {
         sortingAlgo(animations, delay, width, margin, tower, height, () => {
+          if(!setClicked && !setIsSorted) return
           setClicked(false) 
           setIsSorted(true)})
     }

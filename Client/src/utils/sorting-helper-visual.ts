@@ -1,6 +1,5 @@
 
 export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number,  tower:'' = '', height:number, cb?: () => void) {
-  const arrayBars = document.getElementsByClassName('array-el');
     for (let i = 0; i < animations.length; i++) {
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
@@ -8,13 +7,9 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
         document.getElementById(`${indexOne}arrayColumn${tower}`)!.style.backgroundColor = 'var(--red)';
         document.getElementById(`${indexTwo}arrayColumn${tower}`)!.style.backgroundColor = 'var(--red)';
 
-        console.log(width, 'width', margin)
-
-
         document.getElementById(
           `${indexOne}arrayColumn${tower}`
         )!.style.transform += `translateX(${width+margin*2}px)`;
-        console.log('hi')
         document.getElementById(
           `${indexTwo}arrayColumn${tower}`
         )!.style.transform += `translateX(-${width+margin*2}px)`;
@@ -55,6 +50,7 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
   }
 
   export async function insertionSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number, tower: string = '',  height:number,cb?: () => void) {
+    console.log(typeof width)
     for (let i = 0; i < animations.length; i++) {
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
@@ -62,7 +58,8 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
         document.getElementById(`${indexOne}arrayColumn${tower}`)!.style.backgroundColor = 'var(--red)';
         document.getElementById(`${indexTwo}arrayColumn${tower}`)!.style.backgroundColor = 'var(--red)';
 
-        
+        console.log(typeof width)
+
         document.getElementById(
           `${indexOne}arrayColumn${tower}`
         )!.style.transform += `translateX(-${width+margin*2}px)`;
