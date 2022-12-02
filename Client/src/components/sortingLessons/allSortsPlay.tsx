@@ -26,12 +26,18 @@ export default function AllSortsPlay() {
   const [choiceOfAlgo, setChoiceOfAlgo] = useState(null as any)
   const [DELAY, setDELAY] = useState(5)
 
+  let delayRef = useRef(5 as any)
+
   let WIDTH = `${1451.23/array.length}` ;
   let MIN_VAL = 10;
   let MAX_VAL = 150;
   let PADTOP = 10;
   let MARGIN = 0.3;
   let HEIGHT = 3;
+
+  useEffect(() => {
+    setArray((array) => (array = generateArray(20, MIN_VAL, MAX_VAL)));
+  }, []);
 
   function algoChosen(choice:string) {
     const copyArr = array.slice()
@@ -57,12 +63,10 @@ export default function AllSortsPlay() {
   }, [choiceOfAlgo, array]);
 
   function initArr(NUM_BARS:number) {
-    console.log(NUM_BARS)
     setArray(generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
   }
 
   function initSpeed(NUM_DELAY:any) {
-    console.log(NUM_DELAY)
     setDELAY(NUM_DELAY)
   }
 
@@ -78,15 +82,18 @@ export default function AllSortsPlay() {
 
 
           <label>
-            Delay
-            <input type="range" name="speed" step="5" value={DELAY}  min="5" max="50" onChange={(e) => initSpeed(e.target.valueAsNumber)}/>
+            {delayRef.current.value}
+            <input ref={delayRef} type="range" name="speed" step="5" value={DELAY}  min="5" max="300" onChange={(e) => initSpeed(e.target.valueAsNumber)}/>
           </label>
 
 
           <label className="sorting-label">
             Sorting Algorithms
          
-          <select id="sorts"  placeholder="please select" onChange={(e) => setChoiceOfAlgo(e.target.value)}>
+          <select id="sorts" defaultValue={'SelectAValue'}  placeholder="please select" onChange={(e) => setChoiceOfAlgo(e.target.value)}>
+          <option value= 'SelectAValue' disabled >
+             Select A Value
+            </option >
              <option value= 'Bubble' >
               Bubble
             </option >
@@ -109,7 +116,7 @@ export default function AllSortsPlay() {
           </select>
           </label>
 
-          {!isSorted && (
+          {!clicked && (
             <button
               className="button clickSort"
               onClick={() => {
@@ -121,6 +128,7 @@ export default function AllSortsPlay() {
           )}
 
       </div>
+      <div className="visualize-container">
       <Visualization 
        width={WIDTH}
           delay={DELAY}
@@ -133,6 +141,8 @@ export default function AllSortsPlay() {
           fontSize={9}
           animations={animations}
           clicked={clicked}
+          setClicked={setClicked}
+          setIsSorted={setIsSorted}
           sortingAlgo={
             choiceOfAlgo === 'Bubble' ? bubbleSortVisual :
             choiceOfAlgo === 'Insertion' ? insertionSortVisual :
@@ -141,6 +151,7 @@ export default function AllSortsPlay() {
             quickSortVisual
           }
           />
+      </div>
     </div>
   );
 }

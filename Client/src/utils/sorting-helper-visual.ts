@@ -8,10 +8,13 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
         document.getElementById(`${indexOne}arrayColumn${tower}`)!.style.backgroundColor = 'var(--red)';
         document.getElementById(`${indexTwo}arrayColumn${tower}`)!.style.backgroundColor = 'var(--red)';
 
+        console.log(width, 'width', margin)
+
 
         document.getElementById(
           `${indexOne}arrayColumn${tower}`
         )!.style.transform += `translateX(${width+margin*2}px)`;
+        console.log('hi')
         document.getElementById(
           `${indexTwo}arrayColumn${tower}`
         )!.style.transform += `translateX(-${width+margin*2}px)`;
