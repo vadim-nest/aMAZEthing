@@ -14,7 +14,7 @@ export class Graph {
     return false;
   }
 
-  addEdge (valueX: value, valueY: value, directed = false, weight = 1) {
+  addEdge (valueX: value, valueY: value,  weight: number = 1, directed: boolean = false) {
     if (!this.vertices.includes(valueX) || !this.vertices.includes(valueY)) return false;
     if (this.edges.some(edge => edge[0] === valueX && edge[1] === valueY && edge[2] === weight)) return false;
     this.edges.push([valueX, valueY, weight]);

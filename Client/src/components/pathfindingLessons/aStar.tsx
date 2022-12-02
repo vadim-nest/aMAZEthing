@@ -1,12 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import "../../css/aStar-lesson.css";
 import { Tree } from "../../utils/path-finding-learning-logic";
-import { Graph } from "../../utils/graph";
+import { generateConnectedGraph } from "../../utils/maze";
 
 
 function AStarLesson() {
-  const [graph,setGraph] = useState<Graph>()
-  const [triggerDisplay,setTriggerDisplay] = useState(false)
   const ref:any = useRef(null);
 
   let paragraphs = {
@@ -14,10 +12,6 @@ function AStarLesson() {
     firstP:
       'A* assigns a weight to each open node equal to the weight of the edge to that node plus the approximate distance between that node and the finish. This approximate distance is found by the heuristic, and represents a minimum possible distance between that node and the end.',
   };
-
-  useEffect(()=>{
-    if(triggerDisplay) (document.querySelector('.aStar .lesson-wrapper-2') as unknown as HTMLElement).style.borderColor = 'var(--main-green)'
-  },[triggerDisplay])
 
   useEffect(() => {
     async function TreeVisual() {
@@ -30,6 +24,14 @@ function AStarLesson() {
       console.log(t.bfs())
       console.log(t.getRoot())
       t.calculateWidthDynamically(ref.current.offsetWidth);
+
+
+
+      console.log(generateConnectedGraph(4,4,true))
+
+
+
+
       // t.createLines(175,true);//true with weights
       // t.getNodes();
       // console.log(t.getLineStructure())
