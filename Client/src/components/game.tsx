@@ -58,6 +58,7 @@ function Game() { // TODO: Extract logic to maze class
   const array: MazeTileType[] = [];
   const pathShowRef = useRef<any>();
   const currentPlayer = store.getState().game.player;
+  const roomID = store.getState().game.roomId;
 
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
@@ -114,7 +115,7 @@ function Game() { // TODO: Extract logic to maze class
   function addNewMinion(type: animal, player: 'p1' | 'p2') { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
     if(currentPlayer === player) {
-      socket.emit('new minion', type);
+      socket.emit('new minion', type, roomID);
     }
 
     if (player === 'p1') {
@@ -281,7 +282,7 @@ function Game() { // TODO: Extract logic to maze class
           previousTimeStamp = timestamp
           const nextDirection = path.shift() as number;
           const direction = getDirection(previousDirection as number, nextDirection as number, width);
-          socket.emit('minion move', direction, minion.id);
+          socket.emit('minion move', direction, minion.id, roomID);
           xAdd += direction.xPos;
           yAdd += direction.yPos;
           previousDirection = nextDirection;

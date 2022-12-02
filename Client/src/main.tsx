@@ -20,7 +20,6 @@ import BfsLesson from './components/pathfindingLessons/bfsLesson';
 import DijkstraLesson from './components/pathfindingLessons/dijkstraLesson';
 import AllSortsPlay from './components/sortingLessons/allSortsPlay';
 import WaitingRoom from './components/waitingRoom';
-import Game2 from './components/game2';
 import AStarLesson from './components/pathfindingLessons/aStar';
 
 
@@ -45,10 +44,6 @@ const router = createBrowserRouter([
       {
         path: '/game',
         element: <Game />,
-      },
-      {
-        path:'/game2',
-        element: <Game2/>
       },
       {
         path: '/learning',

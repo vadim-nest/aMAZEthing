@@ -44,6 +44,11 @@ function WaitingRoom() {
     socket.emit('join', room);
   }
 
+  function play() {
+    console.log('play pressed');
+    socket.emit('play');
+  }
+
   function onCreateCLicked() {
     if (!createClicked) {
       // greyOutOtherButtons('Create');
@@ -70,8 +75,7 @@ function WaitingRoom() {
       setPlayClicked(true);
       setJoinClicked(false);
       setCreateClicked(false);
-      // navigate('/game');
-      setTimeout(() => navigate('/game'), 3000);
+      play();
     } else {
       setPlayClicked(false);
     }

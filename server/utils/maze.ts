@@ -201,3 +201,13 @@ export function generateMaze(
     towers,
   };
 }
+
+export interface MazeType {
+  graph: Graph;
+  visited: value[];
+  classes: {
+      [key: string]: ("b" | "t" | "r" | "l")[];
+      [key: number]: ("b" | "t" | "r" | "l")[];
+  };
+  towers: [number, number[]][];
+}
