@@ -10,7 +10,6 @@ async function getUserData(req: express.Request, res: express.Response) {
         const user = await User.findOne({ email: email })
         if (user) {
             const resUser = await User.findOne({ email: email })
-            console.log(resUser)
             res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: resUser });
         } else {
             const username = email.substr(0,email.indexOf('@'));
