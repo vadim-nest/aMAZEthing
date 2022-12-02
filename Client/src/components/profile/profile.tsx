@@ -70,7 +70,7 @@ function Profile() {
         <div className="user-info">
           <div className='user-part'>
             <div className='avatar'>
-              <img  className='avatar' src={`${user?.picture}`} alt={userRedux.avatar} />
+              {user && <img  className='avatar' src={`${user?.picture}`} />}
             </div>
             <div className='user-name'>
                <h1 id="username">HELLO {inputOpen === false && userRedux.username ? (userRedux as User).username : 'THERE'},<img id="changeMe-profile"className='changeMe' src={changeMe} onClick={toggleInput} /></h1>
