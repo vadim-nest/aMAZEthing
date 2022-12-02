@@ -5,7 +5,7 @@ export default function TreeFilledSVG() {
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 297 297"
-      enable-background="new 0 0 297 297"
+      enableBackground="new 0 0 297 297"
       height="10px"
       width="8px"
     >

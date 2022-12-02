@@ -7,7 +7,7 @@ export default function CloseCross() {
       x='0px'
       y='0px'
       viewBox='0 0 512 512'
-      enable-background='new 0 0 512 512'
+      enableBackground='new 0 0 512 512'
     >
       <path
         d='M494.933,251.733h-30.464L288,66.901c1.28-3.584,2.133-7.424,2.133-11.435c0-18.859-15.275-34.133-34.133-34.133

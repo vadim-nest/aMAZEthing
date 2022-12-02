@@ -7,7 +7,7 @@ export default function P1Home() {
       x='0px'
       y='0px'
       viewBox='0 0 512 512'
-      enable-background="new 0 0 512 512"
+      enableBackground="new 0 0 512 512"
     >
       <polygon
         className='neutralTower'

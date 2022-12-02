@@ -1,7 +1,7 @@
 export default function BackArrow() {
   return (
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-        viewBox="0 0 512 512" enable-background="new 0 0 512 512;" >
+        viewBox="0 0 512 512" enableBackground="new 0 0 512 512;" >
       <polygon className="arrow-hover-top" fill="var(--sort-green)" points="221.331,48.871 288.146,115.687 207.968,195.866 501.957,195.866 501.957,316.134
         207.968,316.134 288.146,396.313 221.331,463.129 14.202,256.001 "/>
       <polygon className="arrow-hover-bottom" fill="var(--main-green)" points="221.331,463.129 288.146,396.313 207.968,316.134 501.957,316.134 501.957,256.001

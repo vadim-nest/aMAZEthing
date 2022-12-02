@@ -7,7 +7,7 @@ export default function GrassSVG () {
       x="0px"
       y="0px"
       viewBox="0 0 19.712 19.712"
-      enable-background='new 0 0 19.712 19.712'
+      enableBackground='new 0 0 19.712 19.712'
     >
       <g>
         <g>
