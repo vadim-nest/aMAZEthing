@@ -16,17 +16,7 @@
 
 }
 
-.array{
-    width: 85%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.array-el{
-    border-radius: 25px;
-}
 
 .sorting-label{
     width: 125px;

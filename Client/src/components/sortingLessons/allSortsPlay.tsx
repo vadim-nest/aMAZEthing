@@ -19,9 +19,9 @@ import {
 import { useState, useEffect, useRef } from "react";
 
 export default function AllSortsPlay() {
-  const [array, setArray] = useState(generateArray(20,  10, 150))
+  const [array, setArray] = useState([0])
   const [clicked, setClicked] = useState(false);
-  const [animations, setAnimations] = useState(bubbleSortAlgo(array.slice, false));
+  const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
   const [choiceOfAlgo, setChoiceOfAlgo] = useState(null as any)
   const [DELAY, setDELAY] = useState(5)
@@ -76,7 +76,7 @@ export default function AllSortsPlay() {
          min="8" max="100" onChange={(e) => initArr(e.target.valueAsNumber)} />
           </label>
 
-          
+
           <label>
             Delay
             <input type="range" name="speed" step="5" value={DELAY}  min="5" max="50" onChange={(e) => initSpeed(e.target.valueAsNumber)}/>
@@ -86,7 +86,7 @@ export default function AllSortsPlay() {
           <label className="sorting-label">
             Sorting Algorithms
          
-          <select id="sorts" onChange={(e) => setChoiceOfAlgo(e.target.value)}>
+          <select id="sorts"  placeholder="please select" onChange={(e) => setChoiceOfAlgo(e.target.value)}>
              <option value= 'Bubble' >
               Bubble
             </option >
@@ -129,6 +129,7 @@ export default function AllSortsPlay() {
           array={array}
           height={HEIGHT}
           fontColor={'white'}
+          key={array}
           fontSize={9}
           animations={animations}
           clicked={clicked}
