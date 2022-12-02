@@ -3,6 +3,7 @@ import userReducer from './user_slice';
 import gameReducer from './game_slice';
 
 function saveToLocalStorage(store: any) {
+  console.log(store)
   try {
     const serializedStore = JSON.stringify(store);
     window.localStorage.setItem('store', serializedStore);

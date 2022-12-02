@@ -16,53 +16,77 @@ import {
   quickSortAlgo,
   generateArray
 } from "../../utils/sorting-algo";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 
 export default function AllSortsPlay() {
-  const [array, setArray] = useState([0])
+  const [array, setArray] = useState([] as number[])
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
   const [choiceOfAlgo, setChoiceOfAlgo] = useState(null as any)
   const [DELAY, setDELAY] = useState(5)
+  const [width, setWidth] = useState(0);
+  const [ascendTRUE, setAscendTRUE] = useState(true)
 
-  let delayRef = useRef(5 as any)
+  let delayRef = useRef<HTMLInputElement>(null)
+  let containerRef = useRef(null as any)
+  let arrayRef = useRef<HTMLInputElement>(null)
+  const selectRef = useRef<HTMLSelectElement>(null);
 
-  let WIDTH = Number(`${1451.23/array.length}`) ;
-  let MIN_VAL = 10;
-  let MAX_VAL = 150;
+  console.log(selectRef.current?.value )
+
+  useLayoutEffect(() => {
+    setWidth(containerRef.current.offsetWidth);
+  }, []);
+
+
+
+  let MIN_VAL = 20;
+  let MAX_VAL = 300;
   let PADTOP = 10;
-  let MARGIN = 0.3;
-  let HEIGHT = 3;
+  let MARGIN = 1;
+  let HEIGHT = 2;
+  let WIDTH = Number(`${(width/array.length)-(MARGIN*2)}`) ;
+  let FONTSIZE:number
+
+  if(array.length >= 40) {
+    FONTSIZE = 0.0000000001
+  } else {
+    FONTSIZE = Number(`${WIDTH/4}`)
+  }
 
   useEffect(() => {
-    setArray((array) => (array = generateArray(20, MIN_VAL, MAX_VAL)));
+    setArray(generateArray(20, MIN_VAL, MAX_VAL));
   }, []);
 
   function algoChosen(choice:string) {
     const copyArr = array.slice()
     if(choice === 'Bubble')  {
-      setAnimations(bubbleSortAlgo(copyArr, false));
+      setAnimations(bubbleSortAlgo(copyArr, ascendTRUE));
     }
     if(choice === 'Insertion')  {
-      setAnimations(insertionSortAlgo(copyArr, false));
+      setAnimations(insertionSortAlgo(copyArr, ascendTRUE));
     }
     if(choice === 'Selection')  {
-      setAnimations(selectionSortAlgo(copyArr, false));
+      setAnimations(selectionSortAlgo(copyArr, ascendTRUE));
     }
     if(choice === 'Merge')  {
-      setAnimations(mergeSortAlgo(copyArr, false));
+      setAnimations(mergeSortAlgo(copyArr, ascendTRUE));
     }
     if(choice === 'Quick')  {
-      setAnimations(quickSortAlgo(copyArr, false));
+      setAnimations(quickSortAlgo(copyArr, ascendTRUE));
     }
   }
 
   useEffect(() => {
     algoChosen(choiceOfAlgo)
-  }, [choiceOfAlgo, array]);
+
+    return(() => console.log('stop listening'))
+
+  }, [choiceOfAlgo, array, ascendTRUE]);
 
   function initArr(NUM_BARS:number) {
+    setIsSorted(false)
     setArray(generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
   }
 
@@ -74,23 +98,41 @@ export default function AllSortsPlay() {
   return (
     <div className="playContainer">
       <div className="formContainer">
-          <label>
-            Array Size
-            <input type="range"  name="array-size" value={array.length}
-         min="8" max="100" onChange={(e) => initArr(e.target.valueAsNumber)} />
-          </label>
-
-
-          <label>
-            {delayRef.current.value}
-            <input ref={delayRef} type="range" name="speed" step="5" value={DELAY}  min="5" max="300" onChange={(e) => initSpeed(e.target.valueAsNumber)}/>
+          <label className="sorting-label">
+            Array Size:{arrayRef.current?.value+ " "}
+            <input type="range" ref={arrayRef}  disabled={clicked ? true : false} name="array-size" value={array.length}
+         min="8" max="150" onChange={(e) => {
+          setIsSorted(false)
+          initArr(e.target.valueAsNumber)}} />
           </label>
 
 
           <label className="sorting-label">
-            Sorting Algorithms
-         
-          <select id="sorts" defaultValue={'SelectAValue'}  placeholder="please select" onChange={(e) => setChoiceOfAlgo(e.target.value)}>
+            Delay: {delayRef.current?.value+ " "}
+            <input ref={delayRef} type="range" name="speed" step="5" value={DELAY} disabled={clicked ? true : false} min="1" max="101" onChange={(e) => initSpeed(e.target.valueAsNumber)}/>
+          </label>
+
+          {!clicked ? 
+            <button
+            disabled={selectRef.current?.value === 'SelectAValue' ? true : isSorted ? true : false}
+            className={selectRef.current?.value === 'SelectAValue' ? "button disabled clickSort" : isSorted ? "button disabled clickSort" : "button clickSort visual"}
+              onClick={() => {
+                setClicked(true);
+              }}
+            >
+              visualize
+            </button>
+            :
+            <button className="button clickSort"> Hol up...</button>
+          }
+
+
+          <label className="sorting-label">
+            {'Algorithms: '}
+          <select id="sorts" className="nice-select" defaultValue={'SelectAValue'} ref={selectRef} disabled={clicked ? true : false} placeholder="please select" onChange={(e) => {
+            setChoiceOfAlgo(e.target.value)}
+          }
+            >
           <option value= 'SelectAValue' disabled >
              Select A Value
             </option >
@@ -116,19 +158,14 @@ export default function AllSortsPlay() {
           </select>
           </label>
 
-          {!clicked && (
-            <button
-              className="button clickSort"
-              onClick={() => {
-                setClicked(true);
-              }}
-            >
-              visualize
-            </button>
-          )}
+        
+
+          <button  className={ clicked && !isSorted ? "button disabled clickSort ASCEND" : "button clickSort ASCEND"}  disabled={clicked ? true : false} onClick={() => setAscendTRUE(!ascendTRUE)}>
+            {ascendTRUE ? 'DESCENDING' : 'ASCENDING  '}
+          </button>
 
       </div>
-      <div className="visualize-container">
+      <div className="visualize-container" ref={containerRef}>
       <Visualization 
        width={WIDTH}
           delay={DELAY}
@@ -138,11 +175,12 @@ export default function AllSortsPlay() {
           height={HEIGHT}
           fontColor={'white'}
           key={array}
-          fontSize={9}
+          fontSize={FONTSIZE}
           animations={animations}
           clicked={clicked}
           setClicked={setClicked}
           setIsSorted={setIsSorted}
+          isSorted={isSorted}
           sortingAlgo={
             choiceOfAlgo === 'Bubble' ? bubbleSortVisual :
             choiceOfAlgo === 'Insertion' ? insertionSortVisual :

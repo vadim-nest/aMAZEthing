@@ -1,4 +1,3 @@
-
 export function bubbleSortAlgo(arr: any, ASC_MODE:boolean) {
   const ArrayStates: number[][] = [];
   let animations: number[][] = [];
@@ -24,7 +23,7 @@ export function bubbleSortAlgo(arr: any, ASC_MODE:boolean) {
   }
     iterations++;
   }
-  return animations;
+  return animations ;
 }
 
 export function generateArray(NUM:number, MIN:number, MAX:number) {

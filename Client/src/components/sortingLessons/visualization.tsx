@@ -12,9 +12,10 @@ export default function Visualization(props: any) {
     if (!tower) tower = '';
     if (!setClicked) setClicked = () => {};
 
+  
+
     if(clicked) {
         sortingAlgo(animations, delay, width, margin, tower, height, () => {
-          if(!setClicked && !setIsSorted) return
           setClicked(false) 
           setIsSorted(true)})
     }
