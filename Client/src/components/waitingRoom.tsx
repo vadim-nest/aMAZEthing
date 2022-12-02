@@ -14,6 +14,7 @@ function WaitingRoom() {
   const [joinClicked, setJoinClicked] = useState(false);
   const [playClicked, setPlayClicked] = useState(false);
   const [id, setId] = useState('');
+  const [copyTextClicked, setCopyTextClicked] = useState(false);
 
   useEffect(() => {
     socket.on('Game start', () => {
@@ -111,8 +112,20 @@ function WaitingRoom() {
                   <p>Copy the code and send</p>
                   <p> to another player</p>
                 </div>
-                <input className='create-room-code'
-                  placeholder={id} onClick={() => navigator.clipboard.writeText(`${id}`)}></input>
+                {copyTextClicked
+                  ? (<input className='create-room-code'
+                  readOnly
+                    placeholder='text copied to clipboard' onClick={() => {
+                      navigator.clipboard.writeText(`${id}`);
+                      setCopyTextClicked(false);
+                      }}></input>)
+                  : (<input className='create-room-code'
+                  readOnly
+                    placeholder={id} onClick={() => {
+                      navigator.clipboard.writeText(`${id}`);
+                      setCopyTextClicked(true);
+                      }}></input>)}
+
               </>
             ) : (
               <button className="wr-main-button">
@@ -137,7 +150,6 @@ function WaitingRoom() {
                     id="fname"
                     name="fname"
                     placeholder="type the code here"
-                    required
                   />
                   <button className="submit-the-code-button">✓</button>
                 </div>

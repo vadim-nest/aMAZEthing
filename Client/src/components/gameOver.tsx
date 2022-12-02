@@ -3,12 +3,12 @@ import '../css/gameOver.css';
 
 function GameOver ({gameStats, currentPlayer} : {
   gameStats: {
-    timeRemaining: number, 
-    p1Coins: number, 
-    p2Coins: number, 
+    timeRemaining: number,
+    p1Coins: number,
+    p2Coins: number,
     p1Towers: number[],
-    p2Towers: number[], 
-    p1MinionCount: number, 
+    p2Towers: number[],
+    p1MinionCount: number,
     p2MinionCount: number
   },
   currentPlayer: 'p1' | 'p2'
@@ -17,7 +17,7 @@ function GameOver ({gameStats, currentPlayer} : {
   let win = gameStats.p1Towers.length > gameStats.p2Towers.length;
   if (gameStats.p1Towers.length === gameStats.p2Towers.length) win = gameStats.p1Coins > gameStats.p2Coins;
   if (currentPlayer === 'p2') win = !win;
-  
+
   const navigate = useNavigate();
 
   return (
@@ -65,7 +65,7 @@ function GameOver ({gameStats, currentPlayer} : {
             </h2>
           </div>
         </div>
-        <button onClick={() => navigate('/')}>Go Back</button>
+        <button className='game-over-button' onClick={() => navigate('/')}>Go Back</button>
       </div>
     </div>
   )

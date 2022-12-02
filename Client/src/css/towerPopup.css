@@ -1,6 +1,7 @@
 .towerPopup {
-  background-color: var(--yellow);
-  border-radius: 5px;
+  background-color: var(--white-green);
+  border-radius: 15px;
+  border: 2px solid var(--yellow);
   width: 200%;
   height: 200%;
   top: -50%;

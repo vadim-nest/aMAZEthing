@@ -110,6 +110,7 @@
   width: 80%;
   font-family: 'Staatliches', cursive;
   cursor: pointer;
+
 }
 
 .create-room-code::placeholder {

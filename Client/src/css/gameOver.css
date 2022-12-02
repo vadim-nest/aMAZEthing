@@ -20,9 +20,9 @@
   padding: 20px;
   width: 25vw;
   min-width: 300px;
-  background-color: var(--white);
-  border: 10px var(--winOrLose) solid;
-  border-radius: 10px;
+  background-color: var(--purple);
+  border: 8px var(--winOrLose) solid;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,6 +44,7 @@
 }
 
 .gameOverModal .player {
+  margin-top: 20px;
   width: 100%;
   border-top: 2px grey solid;
   display: flex;
@@ -63,9 +64,19 @@
 }
 
 .win {
-  color: var(--sort-green);
+  color: var(--yellow);
 }
 
 .loser {
   color: var(--red);
+}
+
+.game-over-button {
+  margin-top: 25px;
+  background-color: var(--purple);
+  border: 4px solid var(--yellow);
+  border-radius: 15px;
+  width: 7vw;
+  height: 5vh;
+  font-size: 21px;
 }
