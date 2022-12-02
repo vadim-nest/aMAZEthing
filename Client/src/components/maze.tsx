@@ -45,16 +45,16 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   const [mazeGenerated, setMazeGenerated] = useState(false);
   
   useEffect(() => {
-    // async function mazeInit(){
+    async function mazeInit(){
       const mazeTiles = document.getElementsByClassName('mazeTile');
       if (mazeGenerated === false) {
         setMazeGenerated(true);
-        const {graph, visited, classes, towers} = generateMaze(width,height)
+        // const {graph, visited, classes, towers} = generateMaze(width,height)
         
-        //const {graph, visited, classes, towers} = await apiService.createMaze(width,height)
-        // let graph = new Graph()
-        // graph.reAssign(graphBE)
-        // console.log({graph, visited, classes, towers});
+        const {graphBE, visited, classes, towers} = await apiService.createMaze(width,height)
+        let graph = new Graph()
+        graph.reAssign(graphBE)
+        console.log({graph, visited, classes, towers});
         
         setTowers(() => towers.map((tower:any) => {
           return {
@@ -107,8 +107,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
         }
         requestAnimationFrame(step);
       }
-    // }
-    // mazeInit();
+    }
+    mazeInit();
   },[maze]);
 
   return (

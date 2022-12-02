@@ -7,7 +7,7 @@ export class Graph {
   edges: [value, value, number][] = []; 
 
   reAssign(graph:Graph){
-    Object.assign(this,graph)
+    Object.assign(this, graph)
 
   }
   addVertex (value: value) {

@@ -27,7 +27,7 @@ function Game() { // TODO: Extract logic to maze class
   const [currentTower, setCurrentTower] = useState<null | TowerType>(null);
   const [waitingForTile, setWaitingForTile] = useState(false);
   const [currentGraph, setCurrentGraph] = useState<Graph>();
-  const [height, setHeight] = useState(40);
+  const [height, setHeight] = useState(40); // ! Change in server if change here
   const [width, setWidth] = useState(86);
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
   const [towers, setTowers] = useState<TowerType[]>([]);
@@ -92,7 +92,7 @@ function Game() { // TODO: Extract logic to maze class
   }, [counter]);
 
   const [maze, setMaze] = useState<{currentMinion: null | number, maze: MazeTileType[]}>({currentMinion: null, maze: array});
-  const speed = 10;
+  const speed = 300;
   const minBoxSize = 20;
   const maxBoxSize = 100;
 

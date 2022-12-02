@@ -92,7 +92,7 @@ function Game2() { // TODO: Extract logic to maze class
   }, [counter]);
 
   const [maze, setMaze] = useState<{currentMinion: null | number, maze: MazeTileType[]}>({currentMinion: null, maze: array});
-  const speed = 10;
+  const speed = 300;
   const minBoxSize = 20;
   const maxBoxSize = 100;
 

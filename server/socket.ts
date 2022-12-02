@@ -1,10 +1,26 @@
 import http from 'http';
 import { Server } from 'socket.io';
 
+export interface animal {
+  pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
+  sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
+  sortingSpeed: number;
+  type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear'
+}
+
 export default function Connect(server: http.Server) {
 
   let waiting: string[] = [];
   let playerSearch: string[] = [];
+  let activeGames: {
+    timeRemaining: number,
+    p1Coins: number,
+    p2Coins: number,
+    p1Towers: number[],
+    p2Towers: number[],
+    p1Minions: [number, animal][],
+    p2Minions: [number, animal][],
+  }[] = []
   const io = new Server(server, {
     cors: {
       origin: ['http://localhost:5173','http://localhost:5174'],
