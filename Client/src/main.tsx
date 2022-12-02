@@ -20,7 +20,9 @@ import BfsLesson from './components/pathfindingLessons/bfsLesson';
 import DijkstraLesson from './components/pathfindingLessons/dijkstraLesson';
 import AllSortsPlay from './components/sortingLessons/allSortsPlay';
 import WaitingRoom from './components/waitingRoom';
-import Game2 from './components/game2';
+import AStarLesson from './components/pathfindingLessons/aStar';
+
+
 
 const router = createBrowserRouter([
   {
@@ -44,10 +46,6 @@ const router = createBrowserRouter([
         element: <Game />,
       },
       {
-        path:'/game2',
-        element: <Game2/>
-      },
-      {
         path: '/learning',
         element: <Learning />,
       },
@@ -64,9 +62,7 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/learning/bubbleLesson',
-        element: <BubbleLesson />,
-      },
+        path: '/learning/bubbleLesson', element: <BubbleLesson />  },
       { path: '/learning/insertionLesson', element: <InsertionLesson /> },
       { path: '/learning/selectionLesson', element: <SelectionLesson /> },
       { path: '/learning/mergeLesson', element: <MergeLesson /> },
@@ -75,6 +71,7 @@ const router = createBrowserRouter([
       { path: '/learning/dfsLesson', element: <DfsLesson />},
       { path: '/learning/bfsLesson', element: <BfsLesson />},
       { path: '/learning/dijkstraLesson', element: <DijkstraLesson />},
+      { path: '/learning/aStarLesson', element:  <AStarLesson /> }
 
     ],
   },

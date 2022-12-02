@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import userReducer from './user_slice';
-
+import gameReducer from './game_slice';
 
 function saveToLocalStorage(store: any) {
   try {
@@ -27,6 +27,7 @@ const persistedState = loadFromLocalStorage();
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    game: gameReducer
   },
   preloadedState: persistedState,
 });

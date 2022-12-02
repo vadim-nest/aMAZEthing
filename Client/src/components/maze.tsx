@@ -52,7 +52,7 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
         setMazeGenerated(true);
         // const {graph, visited, classes, towers} = generateMaze(width,height)
         
-        const {graphBE, visited, classes, towers} = await apiService.createMaze(width,height)
+        const {graphBE, visited, classes, towers} = await apiService.createMaze()
         let graph = new Graph()
         graph.reAssign(graphBE)
         console.log({graph, visited, classes, towers});

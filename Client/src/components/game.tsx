@@ -10,6 +10,7 @@ import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, select
 import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 import socket from '../services/socket';
 import GameOver from './gameOver';
+import { store } from '../features/store';
 
 
 socket.on('message', message => {console.log(message)});
@@ -56,7 +57,8 @@ function Game() { // TODO: Extract logic to maze class
   const [zoomed, setZoomed] = useState(false);
   const array: MazeTileType[] = [];
   const pathShowRef = useRef<any>();
-  const currentPlayer = 'p1'
+  const currentPlayer = store.getState().game.player;
+  const roomID = store.getState().game.roomId;
 
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})
@@ -113,7 +115,7 @@ function Game() { // TODO: Extract logic to maze class
   function addNewMinion(type: animal, player: 'p1' | 'p2') { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
     if(currentPlayer === player) {
-      socket.emit('new minion', type);
+      socket.emit('new minion', type, roomID);
     }
 
     if (player === 'p1') {
@@ -280,7 +282,7 @@ function Game() { // TODO: Extract logic to maze class
           previousTimeStamp = timestamp
           const nextDirection = path.shift() as number;
           const direction = getDirection(previousDirection as number, nextDirection as number, width);
-          socket.emit('minion move', direction, minion.id);
+          socket.emit('minion move', direction, minion.id, roomID);
           xAdd += direction.xPos;
           yAdd += direction.yPos;
           previousDirection = nextDirection;
@@ -307,7 +309,7 @@ function Game() { // TODO: Extract logic to maze class
           setMovingMinions(prevMoving => prevMoving.filter(id => id !== (minion as minionType).id));
           for (let tower of towers) {     
             if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
-              socket.emit('enterTower', tower.id, minion.id);
+              socket.emit('enterTower', tower.id, minion.id, roomID);
               enterTower(tower.id, (minion as minionType).id);
             }
           }

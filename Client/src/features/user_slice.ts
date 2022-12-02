@@ -48,5 +48,5 @@ const userSlice = createSlice({
     }
 })
 
-export const{ refreshData, refreshDataNoAvatar, refreshSortingPath, refreshPathLessons} = userSlice.actions;
+export const { refreshData, refreshDataNoAvatar, refreshSortingPath, refreshPathLessons } = userSlice.actions;
 export default userSlice.reducer;
