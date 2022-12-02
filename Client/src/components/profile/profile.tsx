@@ -2,9 +2,8 @@ import '../../css/profile.css';
 import { User } from '@auth0/auth0-react';
 import { useAppSelector } from '../../features/hooks';
 import apiService from '../../services/apiService';
-
 import { useAuth0 } from '@auth0/auth0-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { refreshDataNoAvatar } from '../../features/user_slice';
 import ProfileGameHistory from './profileGameHistory';
@@ -18,6 +17,10 @@ function Profile() {
   const [username, setUsername] = useState('');
   const user = useAppSelector((state) => state.user);
   const [inputOpen, setInputOpen] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null as any)
+
+  
  
   let currentSortProgress = 0
   let currentPathProgress = 0
@@ -42,7 +45,6 @@ function Profile() {
 
   async function updateChanges(e: any) {
     e.preventDefault();
-    console.log('hi', username);
     if (!isAuthenticated) return;
     try {
       const accessToken = await getAccessTokenSilently();
@@ -54,6 +56,7 @@ function Profile() {
     } catch (err) {
       console.log(err);
     }
+    inputRef.current.value = ''
   }
 
   const toggleInput = () => {
@@ -73,6 +76,7 @@ function Profile() {
                <h1 id="username">HELLO {inputOpen === false && user.username ? (user as User).username : 'THERE'},<img id="changeMe-profile"className='changeMe' src={changeMe} onClick={toggleInput} /></h1>
                 <form className={`open-${inputOpen}`}>
                   <input
+                   ref={inputRef}
                     id="input-username-profile"
                     type="text"
                     placeholder="username"
