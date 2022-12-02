@@ -58,6 +58,11 @@
   max-width: 40%;
 }
 
+.waiting-page-join-button {
+  margin-left: 0;
+  /* align-self: flex-start; */
+}
+
 .right-side-selection {
   max-width: 40%;
   display: flex;
@@ -66,8 +71,8 @@
 }
 
 .wr-play-button {
-  margin-left: -40px;
-  margin-right: auto;
+  /* margin-left: -40px; */
+  /* margin-right: auto; */
 }
 
 .wr-play-button:hover {

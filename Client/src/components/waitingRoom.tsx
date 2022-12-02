@@ -91,7 +91,8 @@ function WaitingRoom() {
               //   {id}
               // </p>
               <>
-                <h3>Copy the code and send to another player</h3>
+                <h3>Copy the code and send</h3>
+                <h3> to another player</h3>
                 <input className='create-room-code'
                   placeholder={id} onClick={() => navigator.clipboard.writeText(`${id}`)}></input>
               </>
