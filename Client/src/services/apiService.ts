@@ -1,3 +1,5 @@
+import { store } from "../features/store";
+
 const BASE_URL = 'http://localhost:3000'; //TODO Add to .env
 
 type ApiService = {
@@ -35,14 +37,14 @@ apiService.updateUsername = function (accessToken:any,user:any) { //TODO solve t
     .catch((err) => console.log(err));
 }
 
-apiService.createMaze = function (width:number,height:number)
+apiService.createMaze = function ()
  { 
   return fetch(`${BASE_URL}/createMaze`, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({width,height}), 
+    body: JSON.stringify({roomId: store.getState().game.roomId}), 
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

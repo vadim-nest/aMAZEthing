@@ -17,11 +17,12 @@ function generateRoomId() {
   return roomId;
 }
 
+export let mazes: {[id: string]: MazeType} = {};
+
 export default function Connect(server: http.Server) {
 
   let waiting: string[] = [];
   let playerSearch: string[] = [];
-  let mazes: {[id: string]: MazeType} = {};
   let activeGames: {
     roomId: string,
     timeRemaining: number,
