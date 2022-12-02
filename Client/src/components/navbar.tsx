@@ -49,8 +49,8 @@ function Navbar() {
                 LEARN
               </button>
             )}
-            {!(location.pathname === '/')&& !(location.pathname === '/game') && (
-              <button className="button" onClick={() => navigate('/game')}>
+            {!(location.pathname === '/')&& !(location.pathname === '/game' || location.pathname === '/waitingRoom') && (
+              <button className="button" onClick={() => navigate('/waitingRoom')}>
                 PLAY
               </button>
             )}
@@ -119,11 +119,11 @@ function Navbar() {
                 LEARN
               </button>
             )}
-              {!(location.pathname === '/')&& !(location.pathname === '/game') && user && (
+              {!(location.pathname === '/')&& !(location.pathname === '/game' || location.pathname === '/waitingRoom') && user && (
               <button
                 className="button"
                 onClick={() => {
-                  navigate('/game');
+                  navigate('/waitingRoom');
                   toggleModal();
                   toggleNavbar();
                 }}
