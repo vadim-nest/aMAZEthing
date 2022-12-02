@@ -67,13 +67,13 @@ function WaitingRoom() {
 
   return (
     <div className="waiting-room">
-      <h3 className="explanation-text">
-        <span className="wait-r-yellow">Create</span> a private party or{' '}
+      <h3 className="wr-explanation-text">
+        <span className="wait-r-yellow">Create</span>/<span className="wait-r-yellow">Join</span> a private party or{' '}
         <span className="wait-r-red">search</span> for a game
       </h3>
       <div className="selection-panel">
         <div className="left-side-selection">
-          <form onSubmit={joinRoom}>
+          <form className='wr-form' onSubmit={joinRoom}>
             <button className="wr-main-button" type="button" onClick={hostRoom}>
               <h1
                 className={`waiting-page-create-button ${
@@ -91,8 +91,10 @@ function WaitingRoom() {
               //   {id}
               // </p>
               <>
-                <h3>Copy the code and send</h3>
-                <h3> to another player</h3>
+                <div className="wr-amazing-text wr-copy-text">
+                  <p>Copy the code and send</p>
+                  <p> to another player</p>
+                </div>
                 <input className='create-room-code'
                   placeholder={id} onClick={() => navigator.clipboard.writeText(`${id}`)}></input>
               </>
@@ -127,7 +129,6 @@ function WaitingRoom() {
             )}
           </form>
         </div>
-
         <div className="right-side-selection">
           <button className="wr-main-button" onClick={() => onPlayClicked()}>
             <h1
@@ -141,7 +142,7 @@ function WaitingRoom() {
           {playClicked ? (
             <>
               <h3 className="play-h3 wr-amazing-text">
-                Looking for <span className="wait-r-red">play</span>ers
+                <span className="wait-r-red">Search</span>ing for a game
               </h3>
               <div className="loading-animation" />
             </>

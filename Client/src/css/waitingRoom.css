@@ -3,7 +3,6 @@
   margin-left: auto;
   margin-right: auto;
   color: var(--white-green);
-  text-align: center;
 }
 
 .waiting-room span, .waiting-room p {
@@ -15,14 +14,14 @@
   text-align: left;
 }
 
-.explanation-text {
+.wr-explanation-text {
+  text-align: center;
   color: var(--white-green);
   font-size: 40px;
   padding-top: 13vh;
   padding-bottom: 4vh;
   font-weight: 100;
   cursor: default;
-
 }
 
 .wait-r-yellow {
@@ -37,6 +36,7 @@
   background-color: transparent;
   border: none;
   width: fit-content;
+  margin-left: auto;
 }
 
 .wr-amazing-text {
@@ -44,22 +44,32 @@
   font-size: 31px;
   margin-top: 30px;
   cursor: default;
-  margin-left: -2vw;
 }
 
 .selection-panel {
   display: flex;
   justify-content: space-around;
+  height: 45vh;
 }
 
 .left-side-selection {
   display: flex;
   flex-direction: column;
-  max-width: 40%;
+  width: 40%;
+}
+
+.wr-form {
+  padding: 0px;
+  margin: 0px;
+}
+
+.wr-copy-text {
+  width: 100%;
+  margin-left: auto;
 }
 
 .waiting-page-join-button {
-  margin-left: 0;
+  /* margin-left: 0; */
   /* align-self: flex-start; */
 }
 
@@ -97,7 +107,7 @@
   color: var(--yellow);
   font-size: 26px;
   text-align: center;
-  width: 70%;
+  width: 80%;
   font-family: 'Staatliches', cursive;
   cursor: pointer;
 }
@@ -112,15 +122,17 @@
 
 .join-code-input {
   display: flex;
-  width: 81%;
-  margin-left: auto;
-  margin-right: 16px;
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* margin-right: 16px; */
 }
 
 .join-room-code {
   padding: 0;
   margin-top: 0px;
   pointer-events: fill;
+  width: 63%;
+
 }
 
 .submit-the-code-button {
