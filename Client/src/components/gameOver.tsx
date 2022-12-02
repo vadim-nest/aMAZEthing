@@ -15,6 +15,7 @@ function GameOver ({gameStats, currentPlayer} : {
 }) {
 
   let win = gameStats.p1Towers.length > gameStats.p2Towers.length;
+  if (gameStats.p1Towers.length === gameStats.p2Towers.length) win = gameStats.p1Coins > gameStats.p2Coins;
   if (currentPlayer === 'p2') win = !win;
   
   const navigate = useNavigate();
