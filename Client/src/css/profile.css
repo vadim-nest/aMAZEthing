@@ -10,7 +10,7 @@
     overflow: auto;
 }
 
-.profile-page h1, h2 {
+.profile-page h1, .profile-page h2 {
     font-size: 2rem;
 }
 

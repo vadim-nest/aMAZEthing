@@ -9,6 +9,7 @@ import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../ut
 import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, selectionSortAlgo } from '../utils/sorting-algo';
 import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 import socket from '../services/socket';
+import GameOver from './gameOver';
 
 
 socket.on('message', message => {console.log(message)});
@@ -27,14 +28,14 @@ function Game2() { // TODO: Extract logic to maze class
   const [currentTower, setCurrentTower] = useState<null | TowerType>(null);
   const [waitingForTile, setWaitingForTile] = useState(false);
   const [currentGraph, setCurrentGraph] = useState<Graph>();
-  const [height, setHeight] = useState(40);
+  const [height, setHeight] = useState(40); // ! Change in server if change here
   const [width, setWidth] = useState(86);
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
   const [towers, setTowers] = useState<TowerType[]>([]);
   const [allTilesHidden, setAllTilesHidden] = useState(true);
   const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
   const [gameStats, setGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
-    timeRemaining: 300,
+    timeRemaining: 60,
     p1Coins: 0,
     p2Coins: 0,
     p1Towers: [],
@@ -42,6 +43,16 @@ function Game2() { // TODO: Extract logic to maze class
     p1MinionCount: 0,
     p2MinionCount: 0,
   });
+  const [finalGameStats, setFinalGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
+    timeRemaining: 60,
+    p1Coins: 0,
+    p2Coins: 0,
+    p1Towers: [],
+    p2Towers: [],
+    p1MinionCount: 0,
+    p2MinionCount: 0,
+  });
+  const [gameEnded, setGameEnded] = useState(false);
   const [zoomed, setZoomed] = useState(false);
   const array: MazeTileType[] = [];
   const pathShowRef = useRef<any>();
@@ -52,8 +63,11 @@ function Game2() { // TODO: Extract logic to maze class
   }
 
   useEffect(() => {
-    
-  },[])
+    if (gameStats.timeRemaining === 0 && !gameEnded) {
+      setFinalGameStats(gameStats);
+      setGameEnded(true);
+    }
+  },[gameStats])
 
   useEffect(() => {
     socket.off('minion move');
@@ -74,7 +88,7 @@ function Game2() { // TODO: Extract logic to maze class
   }, [minions, towers]);
 
 
-  const [counter, setCounter] = useState(300);
+  const [counter, setCounter] = useState(60);
   useEffect(() => {
     const timer = counter > 0 && setInterval(() => {
       setGameStats(prevStats => {
@@ -92,7 +106,7 @@ function Game2() { // TODO: Extract logic to maze class
   }, [counter]);
 
   const [maze, setMaze] = useState<{currentMinion: null | number, maze: MazeTileType[]}>({currentMinion: null, maze: array});
-  const speed = 10;
+  const speed = 300;
   const minBoxSize = 20;
   const maxBoxSize = 100;
 
@@ -151,8 +165,10 @@ function Game2() { // TODO: Extract logic to maze class
         }
       })
     }
-    setCurrentMinion(newId);
-    setCurrentTower(null);
+    if (currentPlayer === player) {
+      setCurrentMinion(newId);
+      setCurrentTower(null);
+    }
   }
 
   function addCoins(alignment: 'p1' | 'p2', amount: number) {
@@ -522,6 +538,7 @@ function Game2() { // TODO: Extract logic to maze class
             allTilesHidden={allTilesHidden}
             setAllTilesHidden={setAllTilesHidden}
             zoomed={zoomed}
+            currentPlayer={currentPlayer}
             />
           <RightBar
             addNewMinion={addNewMinion}
@@ -531,6 +548,7 @@ function Game2() { // TODO: Extract logic to maze class
             minions={minions}
             currentPlayer = {currentPlayer}
           />
+          {gameEnded && <GameOver gameStats={finalGameStats} currentPlayer={currentPlayer}/>}
         </div>
       </div>
     </>

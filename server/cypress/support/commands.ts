@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+require("dotenv").config();
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -36,23 +37,26 @@
 //   }
 // }
 
+
+
 Cypress.Commands.add('login', (overrides = {}) => {
-    Cypress.log({
-      name: 'loginViaAuth0',
-    });
-  
-    const options = {
-      method: 'POST',
-      url: Cypress.env('auth_url'),
-      body: {
-        grant_type: 'password',
-        username: Cypress.env('auth_username'),
-        password: Cypress.env('auth_password'),
-        audience: Cypress.env('auth_audience'),
-        scope: 'openid profile email',
-        client_id: Cypress.env('auth_client_id'),
-        client_secret: Cypress.env('auth_client_secret'),
-      },
-    };
-    cy.request(options);
+  Cypress.log({
+    name: 'loginViaAuth0',
   });
+
+  const options = {
+    method: 'POST',
+    url: 'https://dev-mujh303ammb4fy01.uk.auth0.com/oauth/token',
+    headers: {'content-type': 'application/x-www-form-urlencoded'},
+    body: {
+      grant_type: 'password',
+      username: 'test@gmail.com',
+      password: 'Test1234$',
+      audience: 'https://amaze-thing-dev.com',
+      scope: 'read:sample',
+      client_id: "O94ycBixGyrF1fRoyebadt9aJf7MzyRA",
+      client_secret: "H3febBUZXNSsGbUXguJpU4SAlafEBR3oxH_8niIcGKmUg6q78_ZqBvwTJRhvCDVZ",
+    },
+  };
+  cy.request(options);
+});

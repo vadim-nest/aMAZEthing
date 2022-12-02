@@ -10,7 +10,7 @@ import Tower from "./tower";
 import Home from './home'
 
 
-function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers, currentTower, setCurrentTower, allTilesHidden, setAllTilesHidden, towersSorting, zoomed}: {
+function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers, currentTower, setCurrentTower, allTilesHidden, setAllTilesHidden, towersSorting, zoomed, currentPlayer}: {
   boxSize:number,
   height: number,
   width: number,
@@ -29,7 +29,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   allTilesHidden: boolean,
   setAllTilesHidden: React.Dispatch<React.SetStateAction<boolean>>,
   towersSorting: {[key: number]: number},
-  zoomed: boolean
+  zoomed: boolean,
+  currentPlayer: 'p1' | 'p2'
 }) {
 
   // TODO: Set as state
@@ -45,23 +46,23 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
   const [mazeGenerated, setMazeGenerated] = useState(false);
   
   useEffect(() => {
-    // async function mazeInit(){
+    async function mazeInit(){
       const mazeTiles = document.getElementsByClassName('mazeTile');
       if (mazeGenerated === false) {
         setMazeGenerated(true);
-        const {graph, visited, classes, towers} = generateMaze(width,height)
+        // const {graph, visited, classes, towers} = generateMaze(width,height)
         
-        //const {graph, visited, classes, towers} = await apiService.createMaze(width,height)
-        // let graph = new Graph()
-        // graph.reAssign(graphBE)
-        // console.log({graph, visited, classes, towers});
+        const {graphBE, visited, classes, towers} = await apiService.createMaze(width,height)
+        let graph = new Graph()
+        graph.reAssign(graphBE)
+        console.log({graph, visited, classes, towers});
         
         setTowers(() => towers.map((tower:any) => {
           return {
-            id: tower,
-            xPos: tower%width,
-            yPos: Math.floor(tower/width),
-            numbers: [Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2],
+            id: tower[0],
+            xPos: tower[0]%width,
+            yPos: Math.floor(tower[0]/width),
+            numbers: tower[1],
             color: 'red',
             minion: null,
             minionAlignment: null,
@@ -107,8 +108,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
         }
         requestAnimationFrame(step);
       }
-    // }
-    // mazeInit();
+    }
+    mazeInit();
   },[maze]);
 
   return (
@@ -117,7 +118,7 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           <Home xPos={0} yPos={0} boxSize={boxSize} player='p1'/>
           <Home xPos={width - 3} yPos={height - 3} boxSize={boxSize} player='p2'/>
-          {minions.map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower}/>)}
+          {minions.map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} currentPlayer={currentPlayer} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower}/>)}
           {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} zoomed={zoomed} towersSorting={towersSorting} boxSize={boxSize} width={width} height={height} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower} setCurrentMinion={setCurrentMinion}/>)}
           {maze.maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} setCurrentTower={setCurrentTower} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>
