@@ -53,7 +53,7 @@ function BfsLesson() {
       </div>
       <div className="lesson-wrapper-2">
         <div className="but-options">
-          <button className="button" onClick={bfs}>BFS</button>
+          <button className="button" onClick={bfs}>Visualize</button>
         </div>
         <div ref={ref} id="myCanvas"></div>
       </div>
