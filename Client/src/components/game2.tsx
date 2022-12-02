@@ -9,6 +9,7 @@ import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../ut
 import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, selectionSortAlgo } from '../utils/sorting-algo';
 import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 import socket from '../services/socket';
+import GameOver from './gameOver';
 
 
 socket.on('message', message => {console.log(message)});
@@ -27,14 +28,14 @@ function Game2() { // TODO: Extract logic to maze class
   const [currentTower, setCurrentTower] = useState<null | TowerType>(null);
   const [waitingForTile, setWaitingForTile] = useState(false);
   const [currentGraph, setCurrentGraph] = useState<Graph>();
-  const [height, setHeight] = useState(40);
+  const [height, setHeight] = useState(40); // ! Change in server if change here
   const [width, setWidth] = useState(86);
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
   const [towers, setTowers] = useState<TowerType[]>([]);
   const [allTilesHidden, setAllTilesHidden] = useState(true);
   const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
   const [gameStats, setGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
-    timeRemaining: 300,
+    timeRemaining: 10,
     p1Coins: 0,
     p2Coins: 0,
     p1Towers: [],
@@ -74,7 +75,7 @@ function Game2() { // TODO: Extract logic to maze class
   }, [minions, towers]);
 
 
-  const [counter, setCounter] = useState(300);
+  const [counter, setCounter] = useState(10);
   useEffect(() => {
     const timer = counter > 0 && setInterval(() => {
       setGameStats(prevStats => {
@@ -534,6 +535,7 @@ function Game2() { // TODO: Extract logic to maze class
             minions={minions}
             currentPlayer = {currentPlayer}
           />
+          {gameStats.timeRemaining === 0 && <GameOver gameStats={gameStats} currentPlayer={currentPlayer}/>}
         </div>
       </div>
     </>

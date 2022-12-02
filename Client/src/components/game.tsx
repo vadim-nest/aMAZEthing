@@ -35,7 +35,7 @@ function Game() { // TODO: Extract logic to maze class
   const [allTilesHidden, setAllTilesHidden] = useState(true);
   const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
   const [gameStats, setGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
-    timeRemaining: 300,
+    timeRemaining: 10,
     p1Coins: 0,
     p2Coins: 0,
     p1Towers: [],
@@ -75,7 +75,7 @@ function Game() { // TODO: Extract logic to maze class
   }, [minions, towers]);
 
 
-  const [counter, setCounter] = useState(300);
+  const [counter, setCounter] = useState(10);
   useEffect(() => {
     const timer = counter > 0 && setInterval(() => {
       setGameStats(prevStats => {
@@ -535,7 +535,7 @@ function Game() { // TODO: Extract logic to maze class
             minions={minions}
             currentPlayer = {currentPlayer}
           />
-          <GameOver/>
+          {gameStats.timeRemaining === 0 && <GameOver gameStats={gameStats} currentPlayer={currentPlayer}/>}
         </div>
       </div>
     </>
