@@ -30,7 +30,9 @@ function WaitingRoom() {
     socket.on('set player 2', () => {
       dispatch(updatePlayer('p2'));
     })
-  
+    return ()=>{ 
+      socket.disconnect(); 
+     }
   }, []);
 
   function hostRoom() {
@@ -58,6 +60,7 @@ function WaitingRoom() {
       setJoinClicked(false);
       setPlayClicked(false);
     } else {
+      
       setCreateClicked(false);
     }
   }
@@ -79,6 +82,7 @@ function WaitingRoom() {
       setCreateClicked(false);
       play();
     } else {
+      socket.disconnect()
       setPlayClicked(false);
     }
   }
