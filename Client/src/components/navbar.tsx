@@ -64,7 +64,7 @@ function Navbar() {
               </button>
             )}
             {isAuthenticated && !(location.pathname === '/profile') && (
-              <button className="button" onClick={() => navigate('/profile')}>
+              <button id="profile" className="button" onClick={() => navigate('/profile')}>
                 PROFILE
               </button>
             )}
@@ -133,6 +133,7 @@ function Navbar() {
             )}
             {!(location.pathname === '/profile') && user && (
               <button
+                id="profile"
                 className="button"
                 onClick={() => {
                   navigate('/profile');

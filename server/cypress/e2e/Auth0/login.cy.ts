@@ -20,8 +20,19 @@ describe('login',
           }
         });
       })
-
+      cy.wait(500)
     cy.get('#login').click();
+    cy.wait(500)
+    cy.get('#profile').click();
+    cy.wait(500)
+    cy.get('#changeMe-profile').click();
+    cy.wait(500)
+    cy.get('#input-username-profile').type('test user');
+    cy.wait(500)
+    cy.get('#change-username-profile').click();
+    cy.wait(500)
+    cy.get('#username').contains('HELLO test user,');
+    cy.wait(500)
   });
 
 });

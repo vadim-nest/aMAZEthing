@@ -70,9 +70,10 @@ function Profile() {
               <img  className='avatar' src={`./src/assets/avatars/${user.avatar}`} alt={user.avatar} />
             </div>
             <div className='user-name'>
-               <h1>HELLO {inputOpen === false && user.username ? (user as User).username : 'THERE'},<img className='changeMe' src={changeMe} onClick={toggleInput} /></h1>
+               <h1 id="username">HELLO {inputOpen === false && user.username ? (user as User).username : 'THERE'},<img id="changeMe-profile"className='changeMe' src={changeMe} onClick={toggleInput} /></h1>
                 <form className={`open-${inputOpen}`}>
                   <input
+                    id="input-username-profile"
                     type="text"
                     placeholder="username"
                     name="username"
@@ -80,7 +81,7 @@ function Profile() {
                     className='input-body'
                     maxLength= {10}
                     />
-                  <button className='input-button' onClick={(e) => {
+                  <button id="change-username-profile" className='input-button' onClick={(e) => {
                     updateChanges(e);
                     setInputOpen(false)
                     }}>Save</button>
