@@ -13,7 +13,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 
 
-function useAlgo(algoName:string = 'bubble', array: any = [], reversed:boolean = false) {
+export function useAlgo(algoName:string = 'bubble', array: any = [], reversed:boolean = false) {
     
     const [animation,setAnimation] = useState([])
     
