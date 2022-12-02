@@ -33,11 +33,9 @@ export default function Connect(server: http.Server) {
       }
     });
     socket.on('new minion', type => {
-        console.log(type)
         socket.broadcast.emit('new minion', type); //TODO: change it to room
     });
     socket.on('minion move', (direction, minionId) => {
-        console.log({direction, minionId});
         socket.broadcast.emit('minion move', direction, minionId);
     });
 
