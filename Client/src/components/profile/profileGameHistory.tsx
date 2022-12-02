@@ -1,8 +1,8 @@
-import '../css/profileGameHistory.css';
-import { useAppSelector } from '../features/hooks';
-import TowerSVG from './svg/towerSVG';
-import { Squirrel } from './svg/animalsSVG';
-import CoinSVG from './svg/coin';
+import '../../css/profileGameHistory.css';
+import { useAppSelector } from '../../features/hooks';
+import TowerSVG from '../svg/towerSVG';
+import { Squirrel } from '../svg/animalsSVG';
+import CoinSVG from './coin';
 
 export default function ProfileGameHistory() {
   const user = useAppSelector((state) => state.user);

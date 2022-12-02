@@ -6,7 +6,7 @@ import Welcome from './components/welcome';
 import Game from './components/game';
 import Learning from './components/learning/learning';
 import Login from './components/login';
-import Profile from './components/profile';
+import Profile from './components/profile/profile';
 import About from './components/about';
 import BubbleLesson from './components/sortingLessons/bubbleLesson';
 import { Provider } from 'react-redux';
