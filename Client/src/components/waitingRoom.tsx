@@ -30,6 +30,7 @@ function WaitingRoom() {
     socket.on('set player 2', () => {
       dispatch(updatePlayer('p2'));
     })
+  
   }, []);
 
   function hostRoom() {
@@ -183,7 +184,6 @@ function WaitingRoom() {
         </div>
       </div>
       <div className='wr-game-history'>
-        <ProfileGameHistory />
 
       </div>
     </div>

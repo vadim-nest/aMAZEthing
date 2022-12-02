@@ -88,6 +88,9 @@ export default function Connect(server: http.Server) {
         socket.to(roomID).emit('enterTower', towerId, minionId)
     })
 
-    socket.on('disconnect', ()=> console.log('a user disconnected'))
+    socket.on('disconnect', ()=>{
+        playerSearch.pop()
+         console.log('a user disconnected')
+        })
   })
 }
