@@ -30,7 +30,7 @@ function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMini
   }
 
   return (
-    <div style={{width: `${boxSize*3}px`, top: `${(tower.yPos-2)*boxSize}px`, left: `${(tower.xPos-1)*boxSize}px`}} className='tower' onContextMenu={handleContextMenu} onClick={handleClick}>
+    <div id={`${tower.id}`} style={{width: `${boxSize*3}px`, top: `${(tower.yPos-2)*boxSize}px`, left: `${(tower.xPos-1)*boxSize}px`}} className='tower' onContextMenu={handleContextMenu} onClick={handleClick}>
       <TowerSVG playerClass={
                   tower.minion !== null? 'contestedTower' :
                   tower.alignment === 'p1' ? 'p1Tower' :

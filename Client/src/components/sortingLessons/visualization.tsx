@@ -13,6 +13,7 @@ export default function Visualization(props: any) {
     if(!fontColor) fontColor = 'var(--white-green)';
     if(!fontSize) fontSize = 15
     if (!tower) tower = '';
+    if (!setClicked) setClicked = () => {};
 
 
 

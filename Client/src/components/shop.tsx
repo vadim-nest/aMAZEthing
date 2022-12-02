@@ -15,7 +15,7 @@ export default function Shop({
     <div className='shop-page'>
       <h1 className='the-shop-sign'>Shop</h1>
       <ul className='shop-list'>
-        <div className='buy-minion-button' onClick={() => addNewMinion(squirrel, currentPlayer)}>
+        <div  className='buy-minion-button' onClick={() => addNewMinion(squirrel, currentPlayer)}>
           <div className='shop-stats'>
             <h1 className='shop-just-stats'>Squirrel</h1>
             <h1 className='shop-just-text'>Price</h1>
@@ -31,7 +31,7 @@ export default function Shop({
             <h1 className='shop-just-stats'>{squirrel.sortingSpeed}</h1>
           </div>
           <div className='in-shop-svg-large'>
-            <Squirrel currentPlayer='neutralTower' />
+            <Squirrel  currentPlayer='neutralTower' />
           </div>
         </div>
         <div className='buy-minion-button' onClick={() => addNewMinion(badger, currentPlayer)}>
@@ -104,7 +104,7 @@ export default function Shop({
           </div>
           <Koala currentPlayer='neutralTower' />
         </div>
-        <div className='buy-minion-button' onClick={() => addNewMinion(bear ,currentPlayer)}>
+        <div id="first-minion-buy" className='buy-minion-button' onClick={() => addNewMinion(bear ,currentPlayer)}>
           <div className='shop-stats'>
            <h1 className='shop-just-stats'>Bear</h1>
             <h1 className='shop-just-text'>Price</h1>

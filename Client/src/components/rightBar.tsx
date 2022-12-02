@@ -115,13 +115,14 @@ function RightBar({
 
       {!allTilesHidden && (
         <button
+          
           className='store-button'
           style={shopOpen ? {backgroundColor: 'var(--sand)'} : {backgroundColor: 'transparent'}}
           onClick={() => {shopOpen ? setShopOpen(false) : setShopOpen(true)}}
           onMouseEnter={() => {storeButtonHover(true); crossButtonHover(true)}}
           onMouseLeave={() => {storeButtonHover(false); crossButtonHover(false)}}
         >
-          <div className='shopSVG'>
+          <div id="store-button" className='shopSVG'>
             {shopOpen
               ? <div className='cross-size'><CloseCross /></div>
               : <ShopSVG />

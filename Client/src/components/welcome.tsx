@@ -1,9 +1,6 @@
 import '../css/welcome.css';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
 import MediaQuery from 'react-responsive';
-import apiService from '../services/apiService';
 
 function Welcome() {
 
