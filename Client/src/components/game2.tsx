@@ -35,7 +35,7 @@ function Game2() { // TODO: Extract logic to maze class
   const [allTilesHidden, setAllTilesHidden] = useState(true);
   const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
   const [gameStats, setGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
-    timeRemaining: 10,
+    timeRemaining: 60,
     p1Coins: 0,
     p2Coins: 0,
     p1Towers: [],
@@ -43,6 +43,16 @@ function Game2() { // TODO: Extract logic to maze class
     p1MinionCount: 0,
     p2MinionCount: 0,
   });
+  const [finalGameStats, setFinalGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
+    timeRemaining: 60,
+    p1Coins: 0,
+    p2Coins: 0,
+    p1Towers: [],
+    p2Towers: [],
+    p1MinionCount: 0,
+    p2MinionCount: 0,
+  });
+  const [gameEnded, setGameEnded] = useState(false);
   const [zoomed, setZoomed] = useState(false);
   const array: MazeTileType[] = [];
   const pathShowRef = useRef<any>();
@@ -53,8 +63,11 @@ function Game2() { // TODO: Extract logic to maze class
   }
 
   useEffect(() => {
-    
-  },[])
+    if (gameStats.timeRemaining === 0 && !gameEnded) {
+      setFinalGameStats(gameStats);
+      setGameEnded(true);
+    }
+  },[gameStats])
 
   useEffect(() => {
     socket.off('minion move');
@@ -75,7 +88,7 @@ function Game2() { // TODO: Extract logic to maze class
   }, [minions, towers]);
 
 
-  const [counter, setCounter] = useState(10);
+  const [counter, setCounter] = useState(60);
   useEffect(() => {
     const timer = counter > 0 && setInterval(() => {
       setGameStats(prevStats => {
@@ -535,7 +548,7 @@ function Game2() { // TODO: Extract logic to maze class
             minions={minions}
             currentPlayer = {currentPlayer}
           />
-          {gameStats.timeRemaining === 0 && <GameOver gameStats={gameStats} currentPlayer={currentPlayer}/>}
+          {gameEnded && <GameOver gameStats={finalGameStats} currentPlayer={currentPlayer}/>}
         </div>
       </div>
     </>

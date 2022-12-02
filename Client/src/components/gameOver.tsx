@@ -15,6 +15,7 @@ function GameOver ({gameStats, currentPlayer} : {
 }) {
 
   let win = gameStats.p1Towers.length > gameStats.p2Towers.length;
+  if (currentPlayer === 'p2') win = !win;
   
   const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ function GameOver ({gameStats, currentPlayer} : {
 
             <h2>Towers</h2>
             <h2 className="value">
-            {currentPlayer === 'p1' ? gameStats.p1Towers : gameStats.p2Towers}
+            {currentPlayer === 'p1' ? gameStats.p1Towers.length : gameStats.p2Towers.length}
             </h2>
           </div>
         </div>
@@ -59,7 +60,7 @@ function GameOver ({gameStats, currentPlayer} : {
 
             <h2>Towers</h2>
             <h2 className="value">
-            {currentPlayer === 'p2' ? gameStats.p1Towers : gameStats.p2Towers}
+            {currentPlayer === 'p2' ? gameStats.p1Towers.length : gameStats.p2Towers.length}
             </h2>
           </div>
         </div>
