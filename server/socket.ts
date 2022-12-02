@@ -83,8 +83,8 @@ export default function Connect(server: http.Server) {
         socket.to(roomId).emit('minion move', direction, minionId);
     });
 
-    socket.on('enterTower', (towerId, minionId) => {
-        socket.broadcast.emit('enterTower', towerId, minionId)
+    socket.on('enterTower', (towerId, minionId, roomID) => {
+        socket.to(roomID).emit('enterTower', towerId, minionId)
     })
 
     socket.on('disconnect', ()=> console.log('a user disconnected'))

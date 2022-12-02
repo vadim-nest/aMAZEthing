@@ -309,7 +309,7 @@ function Game() { // TODO: Extract logic to maze class
           setMovingMinions(prevMoving => prevMoving.filter(id => id !== (minion as minionType).id));
           for (let tower of towers) {     
             if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
-              socket.emit('enterTower', tower.id, minion.id);
+              socket.emit('enterTower', tower.id, minion.id, roomID);
               enterTower(tower.id, (minion as minionType).id);
             }
           }
