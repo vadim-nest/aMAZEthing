@@ -10,6 +10,7 @@ import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, select
 import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 import socket from '../services/socket';
 import GameOver from './gameOver';
+import { store } from '../features/store';
 
 
 socket.on('message', message => {console.log(message)});
@@ -56,7 +57,7 @@ function Game() { // TODO: Extract logic to maze class
   const [zoomed, setZoomed] = useState(false);
   const array: MazeTileType[] = [];
   const pathShowRef = useRef<any>();
-  const currentPlayer = 'p1'
+  const currentPlayer = store.getState().game.player;
 
   for (let i = 0; i < width*height; i++) {
     array.push({value: i, classes: [], path: ''})

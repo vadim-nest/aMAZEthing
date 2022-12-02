@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import socket from '../services/socket';
 import ProfileGameHistory from './profile/profileGameHistory';
+import { store } from '../features/store';
+import { useAppDispatch } from '../features/hooks';
+import { updatePlayer, updateRoomID } from '../features/game_slice';
 
 function WaitingRoom() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [createClicked, setCreateClicked] = useState(false);
   const [joinClicked, setJoinClicked] = useState(false);
   const [playClicked, setPlayClicked] = useState(false);
@@ -14,13 +18,21 @@ function WaitingRoom() {
   useEffect(() => {
     socket.on('Game start', () => {
       console.log('Game started');
+      console.log(store.getState().game)
+      navigate('/game');
     });
+    socket.on('receive room id', (roomId: string) => {
+      setId(roomId);
+      dispatch(updateRoomID(roomId));
+      console.log({roomId})
+    })
+    socket.on('set player 2', () => {
+      dispatch(updatePlayer('p2'));
+    })
   }, []);
 
   function hostRoom() {
-    socket.emit('host', socket.id);
-    console.log('socket.id', socket.id);
-    setId(socket.id);
+    socket.emit('host');
   }
 
   function joinRoom(e: React.FormEvent<HTMLFormElement>) {
