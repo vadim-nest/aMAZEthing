@@ -1,5 +1,5 @@
 .waiting-room {
-  max-width: 800px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   color: var(--white-green);
@@ -22,6 +22,7 @@
   padding-bottom: 4vh;
   font-weight: 100;
   cursor: default;
+
 }
 
 .wait-r-yellow {
@@ -36,7 +37,6 @@
   background-color: transparent;
   border: none;
   width: fit-content;
-
 }
 
 .wr-amazing-text {
@@ -55,11 +55,11 @@
 .left-side-selection {
   display: flex;
   flex-direction: column;
-  min-width: 400px;
+  max-width: 40%;
 }
 
 .right-side-selection {
-  min-width: 400px;
+  max-width: 40%;
   display: flex;
   flex-direction: column;
   padding-left: 3vw;
@@ -94,8 +94,7 @@
   text-align: center;
   width: 70%;
   font-family: 'Staatliches', cursive;
-
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .create-room-code::placeholder {
@@ -109,6 +108,8 @@
 .join-code-input {
   display: flex;
   width: 81%;
+  margin-left: auto;
+  margin-right: 16px;
 }
 
 .join-room-code {
@@ -161,5 +162,9 @@
 .waiting-page-create-button.playClicked, .waiting-page-create-button.joinClicked, .waiting-page-join-button.playClicked, .waiting-page-join-button.joinClicked, .wr-play-button.joinClicked, .wr-play-button.createClicked {
   color: var(--dark-green) !important;
   cursor: default;
+}
+
+.wr-game-history {
+  /* margin-left: -4vw; */
 }
 

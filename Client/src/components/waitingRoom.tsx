@@ -2,6 +2,7 @@ import '../css/waitingRoom.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import socket from '../services/socket';
+import ProfileGameHistory from './profileGameHistory';
 
 function WaitingRoom() {
   const navigate = useNavigate();
@@ -86,9 +87,14 @@ function WaitingRoom() {
               </h1>
             </button>
             {createClicked ? (
-              <p>
-                {id}
-              </p>
+              // <p>
+              //   {id}
+              // </p>
+              <>
+                <h3>Copy the code and send to another player</h3>
+                <input className='create-room-code'
+                  placeholder={id} onClick={() => navigator.clipboard.writeText(`${id}`)}></input>
+              </>
             ) : (
               <button className="wr-main-button">
                 <h1
@@ -128,7 +134,7 @@ function WaitingRoom() {
                 joinClicked && 'joinClicked'
               } ${createClicked && 'createClicked'}`}
             >
-              Play
+              Search
             </h1>
           </button>
           {playClicked ? (
@@ -145,6 +151,10 @@ function WaitingRoom() {
             </div>
           )}
         </div>
+      </div>
+      <div className='wr-game-history'>
+        <ProfileGameHistory />
+
       </div>
     </div>
   );
