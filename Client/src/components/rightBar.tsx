@@ -69,17 +69,17 @@ function RightBar({
  
   const [shopOpen, setShopOpen] = useState(false);
 
-  let allP1Minions: Array<minionType> = [];
+  let allPlayerMinions: Array<minionType> = [];
 
   [minions].forEach((allMinions) => {
     for (const minion in allMinions) {
-      if (allMinions[minion].alignment === 'p1') {
-        allP1Minions.push(allMinions[minion]);
+      if (allMinions[minion].alignment === currentPlayer) {
+        allPlayerMinions.push(allMinions[minion]);
       }
     }
   });
 
-  let minionsToRender = allP1Minions.map((p1minion) => {
+  let minionsToRender = allPlayerMinions.map((p1minion) => {
     return (
       <>
         <div className={`your-minion-button right-bar-selector-${p1minion.id}`} onClick={() => {

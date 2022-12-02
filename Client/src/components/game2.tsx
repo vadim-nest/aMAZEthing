@@ -151,8 +151,10 @@ function Game2() { // TODO: Extract logic to maze class
         }
       })
     }
-    setCurrentMinion(newId);
-    setCurrentTower(null);
+    if (currentPlayer === player) {
+      setCurrentMinion(newId);
+      setCurrentTower(null);
+    }
   }
 
   function addCoins(alignment: 'p1' | 'p2', amount: number) {
@@ -522,6 +524,7 @@ function Game2() { // TODO: Extract logic to maze class
             allTilesHidden={allTilesHidden}
             setAllTilesHidden={setAllTilesHidden}
             zoomed={zoomed}
+            currentPlayer={currentPlayer}
             />
           <RightBar
             addNewMinion={addNewMinion}

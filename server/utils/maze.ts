@@ -22,30 +22,34 @@ export function resetGraph(graph: Graph, edges: [value, value, number][]) {
   // TODO: reset
 }
 
+function generateRandomNumbers() {
+  return [Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2, Math.floor(Math.random()*8)+2]
+}
+
 function addTowers(width: number, height: number, graph: Graph) {
   const midW = Math.floor(width / 2);
   const midH = Math.floor(height / 2);
-  const towers: number[] = [midW + midH * width];
+  const towers: [number, number[]][] = [[midW + midH * width, generateRandomNumbers()]];
   const nTowers = 6;
   // let radius = Math.floor(Math.min(width, height)/3);
   for (let i = 0; i < nTowers; i++) {
     towers.push(
-      midW +
+      [midW +
         Math.floor((width / 3) * Math.sin((2 * i * Math.PI) / nTowers)) +
         width *
           (midH +
-            Math.floor((height / 3) * Math.cos((2 * i * Math.PI) / nTowers)))
+            Math.floor((height / 3) * Math.cos((2 * i * Math.PI) / nTowers))), generateRandomNumbers()]
     );
   }
   for (let tower of towers) {
-    graph.removeVertex(tower - 1);
-    graph.removeVertex(tower + 1);
-    graph.removeVertex(tower - width);
-    graph.removeVertex(tower - width - 1);
-    graph.removeVertex(tower - width + 1);
-    graph.removeVertex(tower - 2 * width);
-    graph.removeVertex(tower - 2 * width - 1);
-    graph.removeVertex(tower - 2 * width + 1);
+    graph.removeVertex(tower[0] - 1);
+    graph.removeVertex(tower[0] + 1);
+    graph.removeVertex(tower[0] - width);
+    graph.removeVertex(tower[0] - width - 1);
+    graph.removeVertex(tower[0] - width + 1);
+    graph.removeVertex(tower[0] - 2 * width);
+    graph.removeVertex(tower[0] - 2 * width - 1);
+    graph.removeVertex(tower[0] - 2 * width + 1);
   }
   return towers;
 }
@@ -87,7 +91,7 @@ export function generateMaze(
   const visited: value[] = [3 * width];
   const stack: value[] = [3 * width];
   const edges: [value, value, number][] = [];
-  const towers: number[] = addTowers(width, height, graph);
+  const towers: [number, number[]][] = addTowers(width, height, graph);
   addBases(width, height, graph);
   while (stack.length) {
     let i = stack.pop() as number;
@@ -135,8 +139,9 @@ export function generateMaze(
     }
   }
   graph.edges = edges;
-  function conflictWithTowers(towers: number[], num: number) {
-    for (let tower of towers) {
+  function conflictWithTowers(towers: [number, number[]][], num: number) {
+    for (let towerArr of towers) {
+      let tower = towerArr[0]
       if (num >= tower - 2 && num <= tower + 2) return true;
       if (num >= tower + width - 2 && num <= tower + width + 2) return true;
       if (num >= tower - width - 2 && num <= tower - width + 2) return true;

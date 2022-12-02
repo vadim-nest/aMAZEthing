@@ -13,6 +13,7 @@ export default function Connect(server: http.Server) {
   let waiting: string[] = [];
   let playerSearch: string[] = [];
   let activeGames: {
+    id: string,
     timeRemaining: number,
     p1Coins: number,
     p2Coins: number,
@@ -20,10 +21,11 @@ export default function Connect(server: http.Server) {
     p2Towers: number[],
     p1Minions: [number, animal][],
     p2Minions: [number, animal][],
-  }[] = []
+  }[] = [];
+
   const io = new Server(server, {
     cors: {
-      origin: ['http://localhost:5173','http://localhost:5174'],
+      origin: ['http://localhost:5173'],
       methods: ['GET', 'POST'],
       credentials: true,
     },

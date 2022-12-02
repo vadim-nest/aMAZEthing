@@ -9,6 +9,7 @@ import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../ut
 import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, selectionSortAlgo } from '../utils/sorting-algo';
 import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 import socket from '../services/socket';
+import GameOver from './gameOver';
 
 
 socket.on('message', message => {console.log(message)});
@@ -151,8 +152,10 @@ function Game() { // TODO: Extract logic to maze class
         }
       })
     }
-    setCurrentMinion(newId);
-    setCurrentTower(null);
+    if (currentPlayer === player) {
+      setCurrentMinion(newId);
+      setCurrentTower(null);
+    }
   }
 
   function addCoins(alignment: 'p1' | 'p2', amount: number) {
@@ -522,6 +525,7 @@ function Game() { // TODO: Extract logic to maze class
             allTilesHidden={allTilesHidden}
             setAllTilesHidden={setAllTilesHidden}
             zoomed={zoomed}
+            currentPlayer={currentPlayer}
             />
           <RightBar
             addNewMinion={addNewMinion}
@@ -531,6 +535,7 @@ function Game() { // TODO: Extract logic to maze class
             minions={minions}
             currentPlayer = {currentPlayer}
           />
+          <GameOver/>
         </div>
       </div>
     </>

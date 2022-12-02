@@ -3,18 +3,21 @@ import '../css/minion.css';
 import { minionType, TowerType } from '../utils/types';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 
-function Minion({boxSize, minion, setCurrentMinion, setCurrentTile, setCurrentTower}: {
+function Minion({boxSize, minion, setCurrentMinion, setCurrentTile, setCurrentTower, currentPlayer}: {
   boxSize: number,
   minion: minionType,
   setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
-  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>
+  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>,
+  currentPlayer: 'p1' | 'p2'
 }) {
 
   function handleClick() {
-    setCurrentTile(null);
-    setCurrentTower(null);
-    setCurrentMinion(minion.id);
+    if (minion.alignment === currentPlayer) {
+      setCurrentTile(null);
+      setCurrentTower(null);
+      setCurrentMinion(minion.id);
+    }
   }
 
   function handleContextMenu() {
