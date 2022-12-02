@@ -1,16 +1,16 @@
-import '../css/profile.css';
+import '../../css/profile.css';
 import { User } from '@auth0/auth0-react';
-import { useAppSelector } from '../features/hooks';
-import apiService from '../services/apiService';
+import { useAppSelector } from '../../features/hooks';
+import apiService from '../../services/apiService';
 
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { refreshDataNoAvatar } from '../features/user_slice';
+import { refreshDataNoAvatar } from '../../features/user_slice';
 import ProfileGameHistory from './profileGameHistory';
-import sort from '../assets/profile/sort.png';
-import path from '../assets/profile/path.png';
-import changeMe from '../assets/profile/changeMe.png';
+import sort from '../../assets/profile/sort.png';
+import path from '../../assets/profile/path.png';
+import changeMe from '../../assets/profile/changeMe.png';
 
 function Profile() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();

@@ -2,8 +2,10 @@ const BASE_URL = 'http://localhost:3000'; //TODO Add to .env
 
 type ApiService = {
   profile: Function,
-  updateProfile: Function,
+  updateUsername: Function,
   createMaze:Function,
+  updateSortLearning:Function,
+  updatePathLearning:Function
 }
 const apiService: any = {};
 

@@ -1,20 +1,23 @@
 import { useEffect, useState, useRef } from "react";
-import "../../css/dijkstra-lesson.css";
+import "../../css/aStar-lesson.css";
 import { Tree, Graph } from "../../utils/path-finding-learning-logic";
-function DijkstraLesson() {
+
+
+
+function AStarLesson() {
   const [graph,setGraph] = useState<Graph>()
   const [triggerDisplay,setTriggerDisplay] = useState(false)
   const ref:any = useRef(null);
 
 
   let paragraphs = {
-    sortName: 'Dijkstra algorithm',
+    sortName: 'aStar (A*) algorithm',
     firstP:
-      'This algorithm uses the weights of the edges to find the path that minimizes the total distance (weight) between the source node and all other nodes.',
+      'A* assigns a weight to each open node equal to the weight of the edge to that node plus the approximate distance between that node and the finish. This approximate distance is found by the heuristic, and represents a minimum possible distance between that node and the end.',
   };
 
   useEffect(()=>{
-    if(triggerDisplay) (document.querySelector('.dijk .lesson-wrapper-2') as unknown as HTMLElement).style.borderColor = 'var(--main-green)'
+    if(triggerDisplay) (document.querySelector('.aStar .lesson-wrapper-2') as unknown as HTMLElement).style.borderColor = 'var(--main-green)'
   },[triggerDisplay])
 
   useEffect(() => {
@@ -34,7 +37,7 @@ function DijkstraLesson() {
     }
     TreeVisual();
   }, []);
-  async function dijkstra(){
+  async function aStar(){
     await graph?.printPath(await graph?.dijkstra());
   }
   
@@ -43,14 +46,14 @@ function DijkstraLesson() {
   }
 
   return (
-    <div  className="whole-page-wrapper dijk">
+    <div  className="whole-page-wrapper aStar">
       <div className="lesson-wrapper">
         <h1>{paragraphs.sortName}</h1>
         <p>{paragraphs.firstP}</p>
       </div>
       <div className="lesson-wrapper-2">
         <div className="but-options">
-          <button className="button" onClick={dijkstra}>Visualize</button>
+          <button className="button" onClick={aStar}>aStar (A*)</button>
         </div>
         <div ref={ref} id="myCanvas"></div>
       </div>
@@ -58,4 +61,4 @@ function DijkstraLesson() {
   );
 }
 
-export default DijkstraLesson;
+export default AStarLesson;
