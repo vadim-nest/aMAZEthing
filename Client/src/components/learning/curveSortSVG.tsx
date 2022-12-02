@@ -1,15 +1,14 @@
 import '../../css/curveSortSVG.css';
 import { useNavigate } from 'react-router-dom';
-import { useAuth0, User } from '@auth0/auth0-react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../features/hooks';
-import user_slice, { refreshSortingPath, refreshData} from '../../features/user_slice';
+import { refreshSortingPath } from '../../features/user_slice';
 import NutSVG from './learningNut';
 import apiService from '../../services/apiService';
 import GrassSVG from './learningGrass';
 import TreeFilledSVG from './treeFilled';
 import TreeWinterSVG from './treeWinter';
-import { useState, useEffect } from 'react';
 
 function CurveSort() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
@@ -17,37 +16,67 @@ function CurveSort() {
   const user = useAppSelector((state) => state.user);
   const navigate = useNavigate();
 
-  function updateSVGHelper(e:any, numCheck:number, updateNum:number, navigateURL:string) {
-    if(user.sortLessons[numCheck] && !user.sortLessons[updateNum]) {
-      updateSortingPaths(e, updateNum)
+  function updateSVGHelper(
+    e: any,
+    numCheck: number,
+    updateNum: number,
+    navigateURL: string
+  ) {
+    if (
+      isAuthenticated &&
+      user.sortLessons[numCheck] &&
+      !user.sortLessons[updateNum]
+    ) {
+      updateSortingPaths(e, updateNum);
     }
-    if(user.sortLessons[numCheck]) {
-    navigate(navigateURL)
+    if (isAuthenticated && user.sortLessons[numCheck]) {
+      navigate(navigateURL);
+    }
+    if (
+      !isAuthenticated &&
+      JSON.parse(localStorage.getItem('sorting') as any)[numCheck] &&
+      !JSON.parse(localStorage.getItem('sorting') as any)[updateNum]
+    ) {
+      updateSortingPaths(e, updateNum);
+    }
+    if (
+      !isAuthenticated &&
+      JSON.parse(localStorage.getItem('sorting') as any)[numCheck]
+    ) {
+      navigate(navigateURL);
+    }
   }
 
-  
-}
-  
-  async function updateSortingPaths(e: any, num:number) {
-    e.preventDefault();
-    if (!isAuthenticated) return;
-    const sortArray = Array(6).fill(false)
-    for(let i = 0 ; i<sortArray.length; i++) {
-      if(i <= num) sortArray[i] = true
-      else break
+  function localArray(num: number) {
+    const sortArray = Array(6).fill(false);
+    for (let i = 0; i < sortArray.length; i++) {
+      if (i <= num) sortArray[i] = true;
+      else break;
     }
-    console.log(sortArray)
+    return sortArray;
+  }
+
+  async function updateSortingPaths(e: any, num: number) {
+    e.preventDefault();
+    const sortArray = localArray(num);
+    if (!isAuthenticated) {
+      window.localStorage.setItem('sorting', JSON.stringify(sortArray));
+    }
     try {
       const accessToken = await getAccessTokenSilently();
       const obj = await apiService.updateSortLearning(accessToken, {
         email: user.email,
-        sortArr: sortArray
+        sortArr: sortArray,
       });
-      console.log(obj.user.sortLessons, 'curve')
       if (obj.user) dispatch(refreshSortingPath(obj.user));
     } catch (err) {
       console.log(err);
     }
+  }
+
+  function helperCSS(updateNum: number) {
+    if (isAuthenticated) return user.sortLessons[updateNum];
+    else return JSON.parse(localStorage.getItem('sorting') as any)[updateNum];
   }
 
   return (
@@ -183,14 +212,14 @@ function CurveSort() {
             "
         />
         <circle
-        className={user.sortLessons[0] ? "circles doneLesson" : "circles"}
+          className={helperCSS(0) ? 'circles doneLesson' : 'circles'}
           id="circle-bubble-sort"
-           onClick={(e) =>{
-            if(!user.sortLessons[0]) {
-              updateSortingPaths(e, 0)
+          onClick={(e) => {
+            if (!helperCSS(0)) {
+              updateSortingPaths(e, 0);
             }
-            navigate('/learning/bubbleLesson')
-           }}
+            navigate('/learning/bubbleLesson');
+          }}
           cx="10"
           cy="14.6"
           r="3"
@@ -201,10 +230,14 @@ function CurveSort() {
         <text x="5" y="10" className="lesson-name">
           Bubble sort
         </text>
-
-
         <circle //INSERTION
-          className={user.sortLessons[1] ? "circles doneLesson" :  user.sortLessons[0] ? "circles" : "circles disabled" }
+          className={
+            helperCSS(1)
+              ? 'circles doneLesson'
+              : helperCSS(0)
+              ? 'circles'
+              : 'circles disabled'
+          }
           onClick={(e) => updateSVGHelper(e, 0, 1, '/learning/insertionLesson')}
           cx="30.2"
           cy="29.6"
@@ -216,11 +249,14 @@ function CurveSort() {
         <text x="24" y="36" className="lesson-name">
           insertion sort
         </text>
-
-
         <circle
-                   className={user.sortLessons[2] ? "circles doneLesson" :  user.sortLessons[1] ? "circles" : "circles disabled" }
-
+          className={
+            helperCSS(2)
+              ? 'circles doneLesson'
+              : helperCSS(1)
+              ? 'circles'
+              : 'circles disabled'
+          }
           onClick={(e) => updateSVGHelper(e, 1, 2, '/learning/selectionLesson')}
           cx="43"
           cy="6"
@@ -233,8 +269,13 @@ function CurveSort() {
           Selection sort
         </text>
         <circle
-                     className={user.sortLessons[3] ? "circles doneLesson" :  user.sortLessons[2] ? "circles" : "circles disabled" }
-
+          className={
+            helperCSS(3)
+              ? 'circles doneLesson'
+              : helperCSS(2)
+              ? 'circles'
+              : 'circles disabled'
+          }
           onClick={(e) => updateSVGHelper(e, 2, 3, '/learning/mergeLesson')}
           cx="65.2"
           cy="12.6"
@@ -247,7 +288,13 @@ function CurveSort() {
           Merge sort
         </text>
         <circle
-          className={user.sortLessons[4] ? "circles doneLesson" :  user.sortLessons[3] ? "circles" : "circles disabled" }
+          className={
+            helperCSS(4)
+              ? 'circles doneLesson'
+              : helperCSS(3)
+              ? 'circles'
+              : 'circles disabled'
+          }
           onClick={(e) => updateSVGHelper(e, 3, 4, '/learning/quickLesson')}
           cx="85"
           cy="20"
@@ -259,11 +306,15 @@ function CurveSort() {
         <text x="80.5" y="15" className="lesson-name">
           Quick sort
         </text>
-
-
         <circle
-            className={user.sortLessons[5] ? "circles doneLesson" :  user.sortLessons[4] ? "circles" : "circles disabled" }
-            onClick={(e) => updateSVGHelper(e, 4, 5, '/learning/allSortsPlay')}
+          className={
+            helperCSS(5)
+              ? 'circles doneLesson'
+              : helperCSS(4)
+              ? 'circles'
+              : 'circles disabled'
+          }
+          onClick={(e) => updateSVGHelper(e, 4, 5, '/learning/allSortsPlay')}
           cx="103.25"
           cy="34.5"
           r="3"
@@ -272,16 +323,14 @@ function CurveSort() {
           <NutSVG />
         </svg>{' '}
         <text x="99" y="30" className="lesson-name">
-          Customize 
+          Customize
         </text>
-        <svg
-          x="-2"
-          y="20"
-        ><TreeFilledSVG/></svg>
-        <svg
-          x="90"
-          y="0"
-        ><TreeFilledSVG/></svg>
+        <svg x="-2" y="20">
+          <TreeFilledSVG />
+        </svg>
+        <svg x="90" y="0">
+          <TreeFilledSVG />
+        </svg>
         <svg x="-6" y="36" height="4" width="4">
           <GrassSVG />
         </svg>
@@ -297,7 +346,7 @@ function CurveSort() {
         <svg x="60" y="40" height="4" width="4">
           <GrassSVG />
         </svg>
-        <svg x="20" y="0"  height="6" width="6">
+        <svg x="20" y="0" height="6" width="6">
           <TreeWinterSVG />
         </svg>
         <svg x="80" y="30" height="6" width="6">

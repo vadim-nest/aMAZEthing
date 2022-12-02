@@ -1,13 +1,8 @@
-import { useEffect, useState, useRef } from "react"
-import { defaultEqualityCheck } from "reselect";
 import '../../css/sorting.css';
-
 
 export default function Visualization(props: any) {
 
     let {array, animations, clicked, sortingAlgo, margin, fontColor, fontSize, paddingTop, width, delay, height, tower, setClicked,setIsSorted} = props
-
-
 
     if (!delay) delay = 100;
     if(!margin) margin = 5
@@ -16,8 +11,6 @@ export default function Visualization(props: any) {
     if(!fontSize) fontSize = 15
     if (!tower) tower = '';
     if (!setClicked) setClicked = () => {};
-
-
 
     if(clicked) {
         sortingAlgo(animations, delay, width, margin, tower, height, () => {
@@ -47,8 +40,7 @@ export default function Visualization(props: any) {
             >
               {element}
             </div>
-          )})}
-            
+          )})}        
         </div>
     )
 }

@@ -16,30 +16,57 @@ function CurvePath() {
   const dispatch = useDispatch();
   const user = useAppSelector((state) => state.user);
 
-
-  function updateSVGHelper(e:any, numCheck:number, updateNum:number, navigateURL:string) {
-    if(user.pathLessons[numCheck] && !user.pathLessons[updateNum]) {
-      updatePathLessons(e, updateNum)
+  function updateSVGHelper(
+    e: any,
+    numCheck: number,
+    updateNum: number,
+    navigateURL: string
+  ) {
+    if (
+      isAuthenticated &&
+      user.pathLessons[numCheck] &&
+      !user.pathLessons[updateNum]
+    ) {
+      updatePathLessons(e, updateNum);
     }
-    if(user.pathLessons[numCheck]) {
-      navigate(navigateURL)
+    if (isAuthenticated && user.pathLessons[numCheck]) {
+      navigate(navigateURL);
+    }
+    if (
+      !isAuthenticated &&
+      JSON.parse(localStorage.getItem('path') as any)[numCheck] &&
+      !JSON.parse(localStorage.getItem('path') as any)[updateNum]
+    ) {
+      updatePathLessons(e, updateNum);
+    }
+    if (
+      !isAuthenticated &&
+      JSON.parse(localStorage.getItem('path') as any)[numCheck]
+    ) {
+      navigate(navigateURL);
     }
   }
 
+  function localArray(num: number) {
+    const pathArray = Array(4).fill(false);
+    for (let i = 0; i < pathArray.length; i++) {
+      if (i <= num) pathArray[i] = true;
+      else break;
+    }
+    return pathArray;
+  }
 
-  async function updatePathLessons(e: any, num:number) {
+  async function updatePathLessons(e: any, num: number) {
     e.preventDefault();
-    if (!isAuthenticated) return;
-    const pathArray = Array(4).fill(false)
-    for(let i = 0 ; i<pathArray.length; i++) {
-      if(i <= num) pathArray[i] = true
-      else break
+    const pathArray = localArray(num);
+    if (!isAuthenticated) {
+      window.localStorage.setItem('path', JSON.stringify(pathArray));
     }
     try {
       const accessToken = await getAccessTokenSilently();
       const obj = await apiService.updatePathLearning(accessToken, {
         email: user.email,
-        pathArr: pathArray
+        pathArr: pathArray,
       });
       if (obj.user) dispatch(refreshPathLessons(obj.user));
     } catch (err) {
@@ -47,7 +74,10 @@ function CurvePath() {
     }
   }
 
-
+  function helperCSS(updateNum: number) {
+    if (isAuthenticated) return user.pathLessons[updateNum];
+    else return JSON.parse(localStorage.getItem('path') as any)[updateNum];
+  }
 
   return (
     <div className="curve">
@@ -167,14 +197,14 @@ function CurvePath() {
             "
         />
         <circle
-          className={user.pathLessons[0] ? "circles doneLesson" : "circles"}
+          className={helperCSS(0) ? 'circles doneLesson' : 'circles'}
           id="circle-bubble-sort"
-          onClick={(e) =>{
-            if(!user.pathLessons[0]) {
-              updatePathLessons(e, 0)
+          onClick={(e) => {
+            if (!helperCSS(0)) {
+              updatePathLessons(e, 0);
             }
-            navigate('/learning/BfsLesson')
-           }}
+            navigate('/learning/BfsLesson');
+          }}
           cx="10"
           cy="14.6"
           r="3"
@@ -185,11 +215,15 @@ function CurvePath() {
         <text x="8" y="10" className="lesson-name">
           BFS
         </text>
-
-
         <circle
-           className={user.pathLessons[1] ? "circles doneLesson" :  user.pathLessons[0] ? "circles" : "circles disabled" }
-           onClick={(e) => updateSVGHelper(e, 0, 1, '/learning/DfsLesson')}
+          className={
+            helperCSS(1)
+              ? 'circles doneLesson'
+              : helperCSS(0)
+              ? 'circles'
+              : 'circles disabled'
+          }
+          onClick={(e) => updateSVGHelper(e, 0, 1, '/learning/DfsLesson')}
           cx="40"
           cy="0"
           r="3"
@@ -200,11 +234,15 @@ function CurvePath() {
         <text x="38" y="-5" className="lesson-name">
           DFS
         </text>
-
-        
         <circle
-           className={user.pathLessons[2] ? "circles doneLesson" :  user.pathLessons[1] ? "circles" : "circles disabled" }
-           onClick={(e) => updateSVGHelper(e, 1, 2, '/learning/DijkstraLesson')}
+          className={
+            helperCSS(2)
+              ? 'circles doneLesson'
+              : helperCSS(1)
+              ? 'circles'
+              : 'circles disabled'
+          }
+          onClick={(e) => updateSVGHelper(e, 1, 2, '/learning/DijkstraLesson')}
           cx="65.2"
           cy="12.6"
           r="3"
@@ -216,7 +254,13 @@ function CurvePath() {
           Dijkstra
         </text>
         <circle
-          className={user.pathLessons[3] ? "circles doneLesson" :  user.pathLessons[2] ? "circles" : "circles disabled" }
+          className={
+            helperCSS(3)
+              ? 'circles doneLesson'
+              : helperCSS(2)
+              ? 'circles'
+              : 'circles disabled'
+          }
           onClick={(e) => updateSVGHelper(e, 2, 3, '/learning/AStarLesson')}
           cx="102"
           cy="6"
@@ -228,14 +272,12 @@ function CurvePath() {
         <text x="101" y="0" className="lesson-name">
           A*
         </text>
-        <svg
-          x="10"
-          y="-7"
-        ><TreeFilledSVG/></svg>
-        <svg
-          x="85"
-          y="10"
-        ><TreeFilledSVG/></svg>
+        <svg x="10" y="-7">
+          <TreeFilledSVG />
+        </svg>
+        <svg x="85" y="10">
+          <TreeFilledSVG />
+        </svg>
         <svg x="-6" y="26" height="4" width="4">
           <GrassSVG />
         </svg>
@@ -251,7 +293,7 @@ function CurvePath() {
         <svg x="40" y="15" height="4" width="4">
           <GrassSVG />
         </svg>
-        <svg x="20" y="20"  height="6" width="6">
+        <svg x="20" y="20" height="6" width="6">
           <TreeWinterSVG />
         </svg>
         <svg x="80" y="0" height="6" width="6">

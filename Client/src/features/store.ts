@@ -1,13 +1,37 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './user_slice';
 
- import userReducer from './user_slice'
 
+function saveToLocalStorage(store: any) {
+  try {
+    const serializedStore = JSON.stringify(store);
+    window.localStorage.setItem('store', serializedStore);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
- export const store = configureStore({
-    reducer: {
-        user: userReducer,
-    },
- });
+function loadFromLocalStorage() {
+  try {
+    const serializedStore = window.localStorage.getItem('store');
+    if (serializedStore === null) return undefined;
+    return JSON.parse(serializedStore);
+  } catch (e) {
+    console.log(e);
+    return undefined;
+  }
+}
 
- export type AppDispatch = typeof store.dispatch;
- export type RootState = ReturnType<typeof store.getState>;
+const persistedState = loadFromLocalStorage();
+
+export const store = configureStore({
+  reducer: {
+    user: userReducer,
+  },
+  preloadedState: persistedState,
+});
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
