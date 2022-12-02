@@ -12,10 +12,10 @@ import path from '../../assets/profile/path.png';
 import changeMe from '../../assets/profile/changeMe.png';
 
 function Profile() {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated, user  } = useAuth0();
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
-  const user = useAppSelector((state) => state.user);
+  const userRedux = useAppSelector((state) => state.user);
   const [inputOpen, setInputOpen] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null as any)
@@ -27,12 +27,12 @@ function Profile() {
 
 
   
-  for(let bool of user.sortLessons) {
+  for(let bool of userRedux.sortLessons) {
     if (bool === true) currentSortProgress++
     else break
   }
 
-  for(let bool of user.pathLessons) {
+  for(let bool of userRedux.pathLessons) {
     if (bool === true) currentPathProgress++
     else break
   }
@@ -49,7 +49,7 @@ function Profile() {
     try {
       const accessToken = await getAccessTokenSilently();
       const obj = await apiService.updateUsername(accessToken, {
-        email: user.email,
+        email: userRedux.email,
         username: username,
       });
       if (obj.user) dispatch(refreshDataNoAvatar(obj.user));
@@ -70,10 +70,10 @@ function Profile() {
         <div className="user-info">
           <div className='user-part'>
             <div className='avatar'>
-              <img  className='avatar' src={`./src/assets/avatars/${user.avatar}`} alt={user.avatar} />
+              <img  className='avatar' src={`${user?.picture}`} alt={userRedux.avatar} />
             </div>
             <div className='user-name'>
-               <h1 id="username">HELLO {inputOpen === false && user.username ? (user as User).username : 'THERE'},<img id="changeMe-profile"className='changeMe' src={changeMe} onClick={toggleInput} /></h1>
+               <h1 id="username">HELLO {inputOpen === false && userRedux.username ? (userRedux as User).username : 'THERE'},<img id="changeMe-profile"className='changeMe' src={changeMe} onClick={toggleInput} /></h1>
                 <form className={`open-${inputOpen}`}>
                   <input
                    ref={inputRef}
@@ -90,18 +90,18 @@ function Profile() {
                     setInputOpen(false)
                     }}>Save</button>
                 </form>
-              <h2>Email: {user.email}</h2>
+              <h2>Email: {userRedux.email}</h2>
             </div>
           </div>
           <div className='learning-progress'> 
             <h1 className='learning-progress'>Learning progress:</h1>
             <div className='progress'>
               <div className='sort-progress'>
-                <div><img className='sort-progress-img' src={sort}/></div><h3 className='algo-name'>Sorting Algorithms</h3><h3>{user.sortLessons}</h3>
+                <div><img className='sort-progress-img' src={sort}/></div><h3 className='algo-name'>Sorting Algorithms</h3><h3>{userRedux.sortLessons}</h3>
                 <h3 className='progress-number'>{currentSortProgress}/6</h3>
               </div>
               <div className='path-progress'>
-                <div><img className='path-progress-img' src={path}/></div><h3 className='algo-name'>Path Finding Algorithms</h3><h3>{user.pathLessons}</h3>
+                <div><img className='path-progress-img' src={path}/></div><h3 className='algo-name'>Path Finding Algorithms</h3><h3>{userRedux.pathLessons}</h3>
                 <h3 className='progress-number'>{currentPathProgress}/4</h3>
               </div>
             </div>

@@ -10,13 +10,13 @@
 
 .bfs #myCanvas {
   position: relative;
-  width: 700px;
   height: fit-content;
   min-height: 700px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  transform: rotate(-45deg);
+ 
+  transform: scale(0.6, 0.6);
 }
 
 .but-options {

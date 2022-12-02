@@ -27,9 +27,10 @@ export class Tree {
     numNodes: number;
     totalLines: number;
     lineStructure: any[];
-    xCoordinatesCode:any;
+    xCoordinatesCode: any;
     nodes: any;
-    constructor() {
+    minimumBrothers: number;
+    constructor(minBrothers: number) {
         this.root = null;
         this.depth = 0;
         this.numNodes = 0;
@@ -37,6 +38,7 @@ export class Tree {
         this.nodes = [];
         this.lineStructure = [];
         this.xCoordinatesCode = [];
+        this.minimumBrothers = minBrothers;
     }
     getLineStructure() {
         return this.lineStructure;
@@ -84,10 +86,11 @@ export class Tree {
             this.depth = 1;
         } else {
             let node = this.root
-            function evalChildren(node: Node, numNodes: number) {
+            function evalChildren(node: Node, numNodes: number, minBrothers: number) {
                 let trigger = false
-                if (node.children.length < 2) {
+                if (node.children.length < minBrothers) {
                     const newNode = new Node(numNodes + 1);
+                    if (node.children.length) newNode.children.push(node.children[node.children.length - 1])
                     node.children.push(newNode)
                     return true
                 } else {
@@ -95,55 +98,42 @@ export class Tree {
                         node.children.forEach((el: Node) => {
                             if (trigger) return true
                             if (Math.floor(Math.random() * 10) > 0) {//short number= longest display / long number = short display
-                                trigger = evalChildren(el, numNodes);
+                                trigger = evalChildren(el, numNodes, minBrothers);
                             }
                         })
                     }
 
                 }
-
                 return trigger
+            }
+            evalChildren(node, this.numNodes, this.minimumBrothers);
+            this.numNodes++
+            console.log(this.numNodes)
+        }
+    }
+    bfs(queue: Node[] = [this.root], depth: number = 0) {
+        let newQ: Node[] = [];
+        document.getElementById("myCanvas")!.innerHTML += `<div id='tree-level${depth}' class='tree-level'></div>`;
+        for (let node of queue) {
+            document.getElementById(`tree-level${depth}`)!.innerHTML += `<svg class="svg-circle"><circle cx="50%" cy="50%" r="7" stroke="var(--main-green)" stroke-width="3" fill="var(--yellow)"  id="${node.value}" ></circle></svg>`
+            node.children.forEach((child: Node) => {
+                newQ.push(child);
+            });
+        }
+        depth++;
+        if (newQ.length !== 0) depth = this.bfs(newQ, depth);
+        return depth
+    }
 
-            }
-            if (evalChildren(node, this.numNodes)) this.numNodes++
-        }
-    }
-    bfs() {
-        const queue: any = [];
-        document.getElementById("myCanvas")!.innerHTML += `<div ref1={ref1} id='tree-level${this.depth}' class='tree-level'></div>`;
-        document.getElementById(`tree-level${this.depth}`)!.innerHTML += `<svg class="svg-circle"><circle cx="50%" cy="50%" r="20" stroke="var(--main-green)" stroke-width="3" fill="var(--yellow)"  id="${this.root.value}" ></circle></svg>`
-        this.root.children.forEach((el: any) => {
-            queue.push(el);
-        })
-        this.depth++;
-        this.depth = bfsVisual(queue, this.depth) - 1;
-        function bfsVisual(queue: any, depth: any) {
-            let newQ: any = [];
-            document.getElementById("myCanvas")!.innerHTML += `<div id='tree-level${depth}' class='tree-level'></div>`;
-            for (let node of queue) {
-                document.getElementById(`tree-level${depth}`)!.innerHTML += `<svg class="svg-circle"><circle cx="50%" cy="50%" r="20" stroke="var(--main-green)" stroke-width="3" fill="var(--yellow)"  id="${node.value}" ></circle></svg>`
-                // document.getElementById(`tree-level${depth}`)!.innerHTML += `<div class='dot' id="${node.value}" onClick={console.log(${node.value})}></div>`
-                node.children.forEach((child: any) => {
-                    newQ.push(child);
-                });
-            }
-            depth++;
-            if (newQ.length !== 0) depth = bfsVisual(newQ, depth);
-            return depth
-        }
-    }
-    calculateWidthDynamically(width: number, depth: number = this.depth, numNodes: number = this.numNodes) {
+    calculateWidthDynamically(width: number, numNodes: number = this.numNodes) {
         let half = Math.floor(width / 2);
-        let maxAmountNodes = Math.floor(numNodes / 2);
-        
         let num = 1;
-        for (let i = 0; i < maxAmountNodes; i++) {
-
+        for (let i = 0; i < numNodes; i++) {
             if (num === 1) {
                 this.xCoordinatesCode.push([half]);
             } else {
                 let newArr = [];
-                if(num%2===1) newArr.push(half);
+                if (num % 2 === 1) newArr.push(half);
                 let iterations = 0;
                 while (iterations < ((num - 1) / 2)) {
                     num % 2 === 1 ? newArr.unshift(half - 100 - 100 * iterations) : newArr.unshift(half - 50 - 100 * iterations);
@@ -152,12 +142,11 @@ export class Tree {
                 }
                 this.xCoordinatesCode.push(newArr)
             }
-
             num++
         }
         console.log(this.xCoordinatesCode)
     }
-    createLines(refHeightTreeLevel:any =100,linesWithWeights:boolean = false ,currentDepth: number = 0, currentLevel: number = 1, lineID: number = 100) {
+    createLines(refHeightTreeLevel: any = 100, linesWithWeights: boolean = false, currentDepth: number = 0, currentLevel: number = 1, lineID: number = 100) {
 
         if (currentLevel < this.depth) {
             let collection = document.getElementById(`tree-level${currentLevel}`)!.children
@@ -169,21 +158,31 @@ export class Tree {
                     let posx1 = this.xCoordinatesCode[collectionBLW.length - 1][j];
                     let posy1 = ((currentLevel) * refHeightTreeLevel) + 50;
                     let weight = 2;
-                    if(linesWithWeights){
-                        let flag = false;
-                        while (!flag) {
-                            weight = Math.floor(Math.random() * 7);
-                            if (weight > 1) flag = true;
-                            if (weight === 3 || weight === 5 || weight === 7) weight--;
+                    let color = 'var(--yellow)'
+                    if (linesWithWeights) {
+                        weight = Math.floor(Math.random() * 3);
+                        switch (weight) {
+                            case 0:
+                                weight = 2;
+                                color = 'var(--yellow)'
+                                break;
+                            case 1:
+                                weight = 8;
+                                color = 'purple'
+                                break;
+                            case 2:
+                                weight = 14;
+                                color = 'red'
+                                break;
                         }
                     }
-                    document.getElementById(`myCanvas`)!.innerHTML += `<svg class="svg-line"><line id="${lineID}" x1="${posx0}" y1="${posy0}" x2="${posx1}" y2="${posy1}"  style="stroke:var(--yellow); stroke-width:${weight}"/></svg>`
+                    document.getElementById(`myCanvas`)!.innerHTML += `<svg class="svg-line"><line id="${lineID}" x1="${posx0}" y1="${posy0}" x2="${posx1}" y2="${posy1}"  style="stroke:${color}; stroke-width:${weight}"/></svg>`
                     this.lineStructure.push({ id: lineID, weight: weight })
                     lineID++
                 }
             }
             this.totalLines = lineID;
-            this.createLines(refHeightTreeLevel,linesWithWeights,currentDepth + 1, currentLevel + 1, lineID)
+            this.createLines(refHeightTreeLevel, linesWithWeights, currentDepth + 1, currentLevel + 1, lineID)
         }
     }
 }
@@ -310,9 +309,9 @@ export class Graph {
         path.shift()
 
         for (let el of path) {
-            await delay(500);
+            await delay(100);
             document.getElementById(`${el['0'].id}`)!.style["stroke"] = 'var(--main-green)';
-            await delay(500);
+            await delay(100);
             document.getElementById(`${el['1'].id}`)!.style.fill = 'var(--main-green)';
         }
     }
@@ -321,13 +320,24 @@ export class Graph {
         let q = [];
         let found = false;
         let count = 0
+        let emptyQueue = false;
+        let currentChilds = 0;
+        let numChildsVisited = 0;
         q.unshift({ '0': 0, '1': currentPos });
         while (q.length && !found && count < 100) {
+
             count++
             let node = q.pop();
+            emptyQueue = true;
             let neighbors: any = node['1'].adjacencies;
+            if (emptyQueue) {
+                currentChilds = neighbors.length;
+                numChildsVisited = 0;
+                emptyQueue = false;
+            }
             console.log(neighbors)
             for (let neighbor of neighbors) {
+                numChildsVisited++
                 let visitedFlag = false;
                 for (let visited of path) {
                     if (neighbor['1'].id === visited['1'].id) {
@@ -335,14 +345,16 @@ export class Graph {
                     }
                 }
                 if (visitedFlag === true) continue;
-                q.unshift(neighbor)
-                console.log('here')
                 path.push(neighbor)
+
+                if (numChildsVisited < currentChilds / 2) continue;
+                q.unshift(neighbor)
                 if (neighbor['1'].id === end.id) {
                     found = true;
                 }
             }
         }
+        console.log('FINAL PATH', path)
         return path;
     }
 
@@ -397,8 +409,7 @@ export class Graph {
         console.log('VISITED', visitedNodes)
         let length = Object.keys(visitedNodes).length;
         console.log('length', length);
-
-        let start = visitedNodes[Object.keys(visitedNodes).length];
+        let start = visitedNodes[end.id];
         let revPath: any = [];
         revPath.unshift(length)
 

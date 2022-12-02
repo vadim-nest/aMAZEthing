@@ -10,13 +10,14 @@
   
   .aStar #myCanvas {
     position: relative;
-    width: 700px;
+    height: fit-content;
     height: fit-content;
     min-height: 700px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    transform: rotate(-45deg);
+    /* transform: rotate(-45deg); */
+    transform: scale(0.5, 0.5);
   }
   
   .but-options {
@@ -29,7 +30,7 @@
     border-color: var(--white);
     border-radius: 20px;
     min-width: 70vw;
-    width: 900px;
+    width: 500px;
     color: var(--white);
     display: flex;
     align-items: center;
@@ -52,7 +53,7 @@
   }
   
   .aStar .tree-level {
-    height: 100px;
+    height: 175px;
     width: fit-content;
     display: flex;
     align-items: space-between;

@@ -1,14 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import "../../css/aStar-lesson.css";
-import { Tree, Graph } from "../../utils/path-finding-learning-logic";
-
+import { Tree } from "../../utils/path-finding-learning-logic";
+import { Graph } from "../../utils/graph";
 
 
 function AStarLesson() {
   const [graph,setGraph] = useState<Graph>()
   const [triggerDisplay,setTriggerDisplay] = useState(false)
   const ref:any = useRef(null);
-
 
   let paragraphs = {
     sortName: 'aStar (A*) algorithm',
@@ -22,23 +21,25 @@ function AStarLesson() {
 
   useEffect(() => {
     async function TreeVisual() {
-      const t = new Tree();
+      
+      const t = new Tree(2);
       await delay(1000);
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 5; i++) {
         t.add();
       }
-      t.bfs();
+      console.log(t.bfs())
+      console.log(t.getRoot())
       t.calculateWidthDynamically(ref.current.offsetWidth);
-      t.createLines(175,true);//true with weights
-      t.getNodes();
-      console.log(t.getLineStructure())
-      let g = new Graph(t.getArrNodes(), t.getDepth(), t.getLineStructure());
-      setGraph(g);
+      // t.createLines(175,true);//true with weights
+      // t.getNodes();
+      // console.log(t.getLineStructure())
+      // let g = new Graph(t.getArrNodes(), t.getDepth(), t.getLineStructure());
+      // setGraph(g);
     }
     TreeVisual();
   }, []);
   async function aStar(){
-    await graph?.printPath(await graph?.dijkstra());
+    // await graph?.printPath(await graph?.dijkstra());
   }
   
   function delay(time: number) {
