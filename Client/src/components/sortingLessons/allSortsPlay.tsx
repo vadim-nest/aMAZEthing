@@ -49,7 +49,7 @@ export default function AllSortsPlay() {
   let WIDTH = Number(`${(width/array.length)-(MARGIN*2)}`) ;
   let FONTSIZE:number
 
-  if(array.length >= 40) {
+  if(array.length >= 55) {
     FONTSIZE = 0.0000000001
   } else {
     FONTSIZE = Number(`${WIDTH/4}`)
@@ -161,7 +161,7 @@ export default function AllSortsPlay() {
         
 
           <button  className={ clicked && !isSorted ? "button disabled clickSort ASCEND" : "button clickSort ASCEND"}  disabled={clicked ? true : false} onClick={() => setAscendTRUE(!ascendTRUE)}>
-            {ascendTRUE ? 'DESCENDING' : 'ASCENDING  '}
+            {ascendTRUE ? 'DESCENDING?' : 'ASCENDING?'}
           </button>
 
       </div>

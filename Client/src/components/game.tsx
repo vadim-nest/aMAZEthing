@@ -19,6 +19,8 @@ const customConfig: Config = {
   dictionaries: [names]
 }
 
+interface GameStatsType {timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number};
+
 function Game() { // TODO: Extract logic to maze class
 
   const [boxSize, setBoxSize] = useState(20);
@@ -35,8 +37,8 @@ function Game() { // TODO: Extract logic to maze class
   const [towers, setTowers] = useState<TowerType[]>([]);
   const [allTilesHidden, setAllTilesHidden] = useState(true);
   const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
-  const [gameStats, setGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
-    timeRemaining: 60,
+  const [gameStats, setGameStats] = useState<GameStatsType>({
+    timeRemaining: 300,
     p1Coins: 0,
     p2Coins: 0,
     p1Towers: [],
@@ -44,8 +46,8 @@ function Game() { // TODO: Extract logic to maze class
     p1MinionCount: 0,
     p2MinionCount: 0,
   });
-  const [finalGameStats, setFinalGameStats] = useState<{timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number}>({
-    timeRemaining: 60,
+  const [finalGameStats, setFinalGameStats] = useState<GameStatsType>({
+    timeRemaining: 300,
     p1Coins: 0,
     p2Coins: 0,
     p1Towers: [],
@@ -65,11 +67,27 @@ function Game() { // TODO: Extract logic to maze class
   }
 
   useEffect(() => {
+    console.log('setting maze generated');
+    socket.off('maze generated');
+    socket.on('maze generated', () => {
+      console.log('all players ready to play')
+    })
+    socket.off('updateGameState');
+    socket.on('updateGameState', (newGameState: GameStatsType) => {
+      setGameStats(newGameState);
+    })
+  }, [])
+
+  useEffect(() => {
     if (gameStats.timeRemaining === 0 && !gameEnded) {
       setFinalGameStats(gameStats);
       setGameEnded(true);
     }
-  },[gameStats])
+  },[gameStats]);
+
+  useEffect(() => {
+    if (mazeCompleted) socket.emit('maze generated', roomID);
+  }, [mazeCompleted]);
 
   useEffect(() => {
     socket.off('minion move');
@@ -90,22 +108,22 @@ function Game() { // TODO: Extract logic to maze class
   }, [minions, towers]);
 
 
-  const [counter, setCounter] = useState(60);
-  useEffect(() => {
-    const timer = counter > 0 && setInterval(() => {
-      setGameStats(prevStats => {
-        return {
-          ...prevStats,
-          timeRemaining: counter - 1,
-          p1Coins: prevStats.p1Coins + 20*prevStats.p1Towers.length,
-          p2Coins: prevStats.p2Coins + 20*prevStats.p2Towers.length,
-        }
-      })
+  // const [counter, setCounter] = useState(60);
+  // useEffect(() => {
+  //   const timer = counter > 0 && setInterval(() => {
+  //     setGameStats(prevStats => {
+  //       return {
+  //         ...prevStats,
+  //         timeRemaining: counter - 1,
+  //         p1Coins: prevStats.p1Coins + 20*prevStats.p1Towers.length,
+  //         p2Coins: prevStats.p2Coins + 20*prevStats.p2Towers.length,
+  //       }
+  //     })
 
-      setCounter(counter - 1);
-    }, 1000);
-    return () => clearInterval(timer as any);
-  }, [counter]);
+  //     setCounter(counter - 1);
+  //   }, 1000);
+  //   return () => clearInterval(timer as any);
+  // }, [counter]);
 
   const [maze, setMaze] = useState<{currentMinion: null | number, maze: MazeTileType[]}>({currentMinion: null, maze: array});
   const speed = 300;
@@ -115,7 +133,7 @@ function Game() { // TODO: Extract logic to maze class
   function addNewMinion(type: animal, player: 'p1' | 'p2') { // TODO: Extract to minion class
     const newId = Object.keys(minions).length;
     if(currentPlayer === player) {
-      socket.emit('new minion', type, roomID);
+      socket.emit('new minion', type, roomID, player);
     }
 
     if (player === 'p1') {
@@ -309,7 +327,7 @@ function Game() { // TODO: Extract logic to maze class
           setMovingMinions(prevMoving => prevMoving.filter(id => id !== (minion as minionType).id));
           for (let tower of towers) {     
             if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
-              socket.emit('enterTower', tower.id, minion.id, roomID);
+              socket.emit('enterTower', tower.id, minion.id, roomID, currentPlayer);
               enterTower(tower.id, (minion as minionType).id);
             }
           }
@@ -445,7 +463,9 @@ function Game() { // TODO: Extract logic to maze class
     let minion = minions[minionId];
     let tower = towers.find(tower => tower.id === towerId) as TowerType;
     if (tower.alignment === 'none') {
-      addCoins(minion.alignment, 200);
+      socket.emit('conquerTower', roomID, towerId, true, currentPlayer);
+    } else {
+      socket.emit('conquerTower', roomID, towerId, false, currentPlayer);
     }
     setTowersSorting(prevTowerSorting => {
       const newTowerSorting = {

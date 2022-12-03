@@ -40,7 +40,7 @@ export default function InsertionLesson() {
     setIsSorted(false)
     setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
   }
-  
+
 
 
 
@@ -53,12 +53,12 @@ export default function InsertionLesson() {
 
       <div className="lesson-wrapper-2">
       <div>
-          {!clicked && 
+          {!clicked &&
            < button className="button clickSort" onClick={() => initArr()}>
             new array
           </button>}
 
-          {!clicked &&!isSorted && 
+          {!clicked &&!isSorted &&
             <button
               className="button clickSort"
               onClick={() => {
@@ -69,9 +69,9 @@ export default function InsertionLesson() {
             </button>
           }
            {!isSorted && clicked &&
-           <button 
-           className="button clickSort">
-             wait... </button>
+            <button
+            className="button clickSort">
+              wait... </button>
           }
         </div>
         <Visualization   fontColor={'white'} width={WIDTH} delay={DELAY} margin={MARGIN} height={HEIGHT} paddingTop={PADTOP} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual} setClicked={setClicked} setIsSorted={setIsSorted}/>

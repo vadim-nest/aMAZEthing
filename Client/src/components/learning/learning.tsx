@@ -1,9 +1,10 @@
-import '../../css/learning.css';
+import '../../css/learning/learning.css';
 import CurveSort from './curveSortSVG';
 import CurvePath from './curvePathSVG';
 import { useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useAppSelector } from '../../features/hooks';
+import MediaQuery from 'react-responsive';
 
 export default function LearningPage() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
@@ -11,11 +12,21 @@ export default function LearningPage() {
   const user = useAppSelector((state) => state.user);
 
   return (
-    <div className='disable-horizontal-scroll'>
+    <div className="disable-horizontal-scroll">
       <div className="initial-view">
         <div>
-          <h1>Welcome to the amazing learning experience.</h1>
-          <h1>Learn sorting and path finding algorithms.</h1>
+          <MediaQuery minWidth={601}>
+            <h1>Welcome to the amazing learning experience.</h1>
+            <h1>Learn sorting and path finding algorithms.</h1>
+          </MediaQuery>
+          <MediaQuery maxWidth={600}>
+            <h1 className="title-small">
+              Welcome to the amazing learning experience.
+            </h1>
+            <h1 className="title-small">
+              Learn sorting and path finding algorithms.
+            </h1>
+          </MediaQuery>
         </div>
         <button
           className="scroll-learning"
@@ -31,17 +42,26 @@ export default function LearningPage() {
             <div className="sorting-algo">
               <h3 className="explanation-title">Sorting algorithms</h3>
               <p className="explanation-text">
-                Sorting Algorithms are used to arrange elements in a list into a specific order, often either ascending or descending.
+                Sorting Algorithms are used to arrange elements in a list into a
+                specific order, often either ascending or descending.
               </p>
               <p className="explanation-text">
-              Sorts are most commonly used with numerical or a form of alphabetical elements.
+                Sorts are most commonly used with numerical or a form of
+                alphabetical elements.
               </p>
               <p className="explanation-text">
                 There are many sorting algorithms, but some are better than
                 others.
               </p>
             </div>
-            <CurveSort />
+            <MediaQuery minWidth={601}>
+              <CurveSort />
+            </MediaQuery>
+            <MediaQuery maxWidth={600}>
+              <div className='curve-small'>
+                <CurveSort/>
+              </div>
+            </MediaQuery>
             <div className="path-algo">
               <h3 className="explanation-title">Path finding algorithms</h3>
               <p className="explanation-text">
@@ -61,7 +81,14 @@ export default function LearningPage() {
           </div>
         </div>
         <div className="path-finding-algs">
-          <CurvePath />
+        <MediaQuery minWidth={601}>
+              <CurvePath />
+            </MediaQuery>
+            <MediaQuery maxWidth={600}>
+              <div className='curve-small'>
+                <CurvePath/>
+              </div>
+            </MediaQuery>
         </div>
       </div>
     </div>

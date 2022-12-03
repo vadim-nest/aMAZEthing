@@ -42,7 +42,7 @@ export default function MergeLesson() {
     setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
   }
 
- 
+
 
   return (
     <div className="whole-page-wrapper">
@@ -53,7 +53,7 @@ export default function MergeLesson() {
 
       <div className="lesson-wrapper-2">
         <div>
-        {!clicked && 
+        {!clicked &&
            < button className="button clickSort" onClick={() => initArr()}>
             new array
           </button>}
@@ -71,14 +71,14 @@ export default function MergeLesson() {
 
 
           {!isSorted && clicked &&
-           <button 
+           <button
            className="button clickSort">
              wait... </button>
           }
 
         </div>
-        
-        <Visualization   fontColor={'white'} width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={mergeSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
+
+        <Visualization fontColor={'white'} width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={mergeSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
 
       </div>
     </div>

@@ -14,7 +14,7 @@ export function generateConnectedGraph(width: number, height: number, weightedGr
       if (i%width > 0) connectedGraph.addEdge(i, i - 1);
       if (i%width < width - 1) connectedGraph.addEdge(i, i + 1);
     }
-  }else{
+  } else {
     let rand:number;
     for (let i = 0; i < nodeNum; i++) {
       rand = Math.floor(Math.random()*2);

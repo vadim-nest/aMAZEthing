@@ -44,7 +44,7 @@ export default function QuickLesson() {
     setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
   }
 
- 
+
 
   return (
     <div className="whole-page-wrapper">
@@ -55,12 +55,12 @@ export default function QuickLesson() {
 
       <div className="lesson-wrapper-2">
         <div>
-        {!clicked && 
+        {!clicked &&
            < button className="button clickSort" onClick={() => initArr()}>
             new array
           </button>}
 
-          {!clicked &&!isSorted && 
+          {!clicked &&!isSorted &&
             <button
               className="button clickSort"
               onClick={() => {
@@ -72,12 +72,12 @@ export default function QuickLesson() {
           }
 
 {!isSorted && clicked &&
-           <button 
-           className="button clickSort">
+           <button
+           className="button clickSort visualizing">
              wait... </button>
           }
         </div>
-        
+
         <Visualization   fontColor={'white'}  width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={quickSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
 
       </div>

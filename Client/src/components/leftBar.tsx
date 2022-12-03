@@ -113,22 +113,16 @@ function LeftBar({
             textReverse="text-reverse-yep"
           />
         </div>
-        {/* <h3 className='score-you'>3</h3>
-        <h3 className='score-opponent'>4</h3> */}
       </div>
 
-      <MediaQuery minWidth={951}>
-        <div className="money-time">
-          <h3 className="time-money-text">Time remaining</h3>
-          <h3 className="time-count">{gameStats.timeRemaining}</h3>
-          <h3 className="time-money-text">Money</h3>
-          <h3 className="money-count price">{gameStats.p1Coins}</h3>
-        </div>
-        <div className="scores"></div>
-      </MediaQuery>
+      <div className="money-time">
+        <h3 className="time-money-text">Time remaining</h3>
+        <h3 className="time-count">{gameStats.timeRemaining}</h3>
+        <h3 className="time-money-text">Money</h3>
+        <h3 className="money-count price">{gameStats.p1Coins}</h3>
+      </div>
+      <div className="scores"></div>
       <div className="selected-info">
-        {/* {currentMinion !== null && <h1 className='current-minion-name-left-bar'>{minions[currentMinion].id}</h1>} */}
-
         {currentMinion !== null && (
           <div className="current-minion-left-bar">
             <div className="left-just-top">
@@ -208,8 +202,6 @@ function LeftBar({
                 }
               </h1>
             )}
-            {/* <h1 className='current-tower-name-left-bar'>{currentTower.alignment}</h1> */}
-
             <h1 className="left-bar-tower-array">
               {currentTower &&
                 towers

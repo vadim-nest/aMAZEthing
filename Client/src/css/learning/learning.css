@@ -46,5 +46,12 @@
 
 .disable-horizontal-scroll {
   overflow: hidden;
+}
 
+.title-small {
+  font-size: 50px;
+}
+
+.curve-small {
+margin: -150px 0;
 }
