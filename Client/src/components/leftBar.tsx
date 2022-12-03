@@ -83,7 +83,12 @@ export default function LeftBar (
     currentTower,
     gameStats,
     towers,
-    currentPlayer
+    currentPlayer,
+    minBoxSize,
+    maxBoxSize,
+    setBoxSize,
+    setCurrentTower,
+    setZoomed,
   }: {
     currentMinion: null | number;
     currentTower: null | TowerType;
@@ -99,6 +104,11 @@ export default function LeftBar (
     };
     towers: TowerType[];
     currentPlayer: string;
+    minBoxSize: number;
+    maxBoxSize: number;
+    setBoxSize: React.Dispatch<React.SetStateAction<number>>;
+    setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
+    setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
   }
 ) {
 
@@ -236,7 +246,7 @@ export default function LeftBar (
           className="zoomInButton"
           onMouseEnter={() => zoomHover('in', 'var(--yellow)')}
           onMouseLeave={() => zoomHover('in', 'var(--white-green)')}
-          onClick={() => zoomIn(10)}
+          onClick={() => zoomIn({amount: 10, setBoxSize, maxBoxSize, setCurrentTower, setZoomed})}
         >
           <ZoomInSVG />
         </div>
@@ -244,7 +254,7 @@ export default function LeftBar (
           className="zoomOutButton"
           onMouseEnter={() => zoomHover('out', 'var(--yellow)')}
           onMouseLeave={() => zoomHover('out', 'var(--white-green)')}
-          onClick={() => zoomOut(10)}
+          onClick={() => zoomOut({amount: 10, setBoxSize, minBoxSize, setCurrentTower, setZoomed})}
         >
           <ZoomOutSVG />
         </div>

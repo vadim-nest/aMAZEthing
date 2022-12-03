@@ -536,7 +536,7 @@ function Game() { // TODO: Extract logic to maze class
             minBoxSize={minBoxSize}
             maxBoxSize={maxBoxSize}
             currentMinion={currentMinion}
-            currentTile={currentTile}
+            // currentTile={currentTile}
             minions={minions}
             gameStats={gameStats}
             towers={towers}
