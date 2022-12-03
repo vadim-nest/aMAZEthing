@@ -1,4 +1,4 @@
-import '../../css/learning.css';
+import '../../css/learning/learning.css';
 import CurveSort from './curveSortSVG';
 import CurvePath from './curvePathSVG';
 import { useDispatch } from 'react-redux';

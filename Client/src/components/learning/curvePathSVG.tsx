@@ -1,4 +1,4 @@
-import '../../css/curvePathSVG.css';
+import '../../css/learning/curvePathSVG.css';
 import { useNavigate } from 'react-router-dom';
 import NutSVG from './learningNut';
 import GrassSVG from './learningGrass';
