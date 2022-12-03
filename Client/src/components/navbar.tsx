@@ -11,7 +11,14 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
-  const { loginWithRedirect, logout, user, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const {
+    loginWithRedirect,
+    logout,
+    user,
+    isLoading,
+    isAuthenticated,
+    getAccessTokenSilently,
+  } = useAuth0();
   const dispatch = useAppDispatch();
 
   const toggleNavbar = () => {
@@ -21,17 +28,19 @@ function Navbar() {
   useEffect(() => {
     const getMessage = async () => {
       if (isAuthenticated === true) {
-        const accessToken = await getAccessTokenSilently();
-        console.log(user)
-        const data = await apiService.profile(accessToken,user);
-        console.log(data)
-        if(data.user) dispatch(refreshData(data.user));
+        try {
+          const accessToken = await getAccessTokenSilently();
+          const data = await apiService.profile(accessToken, user);
+          if (data.user) dispatch(refreshData(data.user));
+        } catch (error) {
+          console.error('error', error);
+        }
       }
     };
     getMessage();
   }, [user]);
 
-  function helperNavigate (navigateURL: string) {
+  function helperNavigate(navigateURL: string) {
     navigate(navigateURL);
     toggleNavbar();
   }
@@ -44,16 +53,27 @@ function Navbar() {
             aMAZEthing
           </button>
           <MediaQuery minWidth={951}>
-            {!(location.pathname === '/') && !(location.pathname === '/learning') && (
-              <button className="button" onClick={() => navigate('/learning')}>
-                LEARN
-              </button>
-            )}
-            {!(location.pathname === '/')&& !(location.pathname === '/game' || location.pathname === '/waitingRoom') && (
-              <button className="button" onClick={() => navigate('/waitingRoom')}>
-                PLAY
-              </button>
-            )}
+            {!(location.pathname === '/') &&
+              !(location.pathname === '/learning') && (
+                <button
+                  className="button"
+                  onClick={() => navigate('/learning')}
+                >
+                  LEARN
+                </button>
+              )}
+            {!(location.pathname === '/') &&
+              !(
+                location.pathname === '/game' ||
+                location.pathname === '/waitingRoom'
+              ) && (
+                <button
+                  className="button"
+                  onClick={() => navigate('/waitingRoom')}
+                >
+                  PLAY
+                </button>
+              )}
           </MediaQuery>
         </div>
         <div className="navbar-end">
@@ -64,12 +84,20 @@ function Navbar() {
               </button>
             )}
             {isAuthenticated && !(location.pathname === '/profile') && (
-              <button id="profile" className="button" onClick={() => navigate('/profile')}>
+              <button
+                id="profile"
+                className="button"
+                onClick={() => navigate('/profile')}
+              >
                 PROFILE
               </button>
             )}
             {!isLoading && !user && (
-              <button id="login" className="button" onClick={() => loginWithRedirect()}>
+              <button
+                id="login"
+                className="button"
+                onClick={() => loginWithRedirect()}
+              >
                 LOGIN
               </button>
             )}
@@ -104,26 +132,33 @@ function Navbar() {
                 ABOUT
               </button>
             )}
-            {!(location.pathname === '/') && !(location.pathname === '/learning') && user && (
-              <button
-                className="button"
-                onClick={() => {
-                  helperNavigate('/learning');
-                }}
-              >
-                LEARN
-              </button>
-            )}
-              {!(location.pathname === '/')&& !(location.pathname === '/game' || location.pathname === '/waitingRoom') && user && (
-              <button
-                className="button"
-                onClick={() => {
-                  helperNavigate('/waitingRoom');
-                }}
-              >
-                PLAY
-              </button>
-            )}
+            {!(location.pathname === '/') &&
+              !(location.pathname === '/learning') &&
+              user && (
+                <button
+                  className="button"
+                  onClick={() => {
+                    helperNavigate('/learning');
+                  }}
+                >
+                  LEARN
+                </button>
+              )}
+            {!(location.pathname === '/') &&
+              !(
+                location.pathname === '/game' ||
+                location.pathname === '/waitingRoom'
+              ) &&
+              user && (
+                <button
+                  className="button"
+                  onClick={() => {
+                    helperNavigate('/waitingRoom');
+                  }}
+                >
+                  PLAY
+                </button>
+              )}
             {!(location.pathname === '/profile') && user && (
               <button
                 id="profile"
@@ -135,7 +170,7 @@ function Navbar() {
                 PROFILE
               </button>
             )}
-             {!user && (
+            {!user && (
               <button
                 id="login"
                 className="button"

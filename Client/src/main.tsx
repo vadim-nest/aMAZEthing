@@ -5,7 +5,6 @@ import App from './App';
 import Welcome from './components/welcome';
 import Game from './components/game';
 import Learning from './components/learning/learning';
-import Login from './components/login';
 import Profile from './components/profile/profile';
 import About from './components/about';
 import BubbleLesson from './components/sortingLessons/bubbleLesson';
@@ -21,8 +20,6 @@ import DijkstraLesson from './components/pathfindingLessons/dijkstraLesson';
 import AllSortsPlay from './components/sortingLessons/allSortsPlay';
 import WaitingRoom from './components/waitingRoom';
 import AStarLesson from './components/pathfindingLessons/aStar';
-
-
 
 const router = createBrowserRouter([
   {
@@ -50,10 +47,6 @@ const router = createBrowserRouter([
         element: <Learning />,
       },
       {
-        path: '/login',
-        element: <Login />,
-      },
-      {
         path: '/profile',
         element: <Profile />,
       },
@@ -62,17 +55,18 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/learning/bubbleLesson', element: <BubbleLesson />  },
+        path: '/learning/bubbleLesson',
+        element: <BubbleLesson />,
+      },
       { path: '/learning/insertionLesson', element: <InsertionLesson /> },
       { path: '/learning/selectionLesson', element: <SelectionLesson /> },
       { path: '/learning/mergeLesson', element: <MergeLesson /> },
       { path: '/learning/allSortsPlay', element: <AllSortsPlay /> },
-      { path: '/learning/quickLesson', element: <QuickLesson />},
-      { path: '/learning/dfsLesson', element: <DfsLesson />},
-      { path: '/learning/bfsLesson', element: <BfsLesson />},
-      { path: '/learning/dijkstraLesson', element: <DijkstraLesson />},
-      { path: '/learning/aStarLesson', element:  <AStarLesson /> }
-
+      { path: '/learning/quickLesson', element: <QuickLesson /> },
+      { path: '/learning/dfsLesson', element: <DfsLesson /> },
+      { path: '/learning/bfsLesson', element: <BfsLesson /> },
+      { path: '/learning/dijkstraLesson', element: <DijkstraLesson /> },
+      { path: '/learning/aStarLesson', element: <AStarLesson /> },
     ],
   },
 ]);

@@ -12,29 +12,25 @@ import path from '../../assets/profile/path.png';
 import changeMe from '../../assets/profile/changeMe.png';
 
 function Profile() {
-  const { getAccessTokenSilently, isAuthenticated, user  } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const userRedux = useAppSelector((state) => state.user);
   const [inputOpen, setInputOpen] = useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null as any)
+  const inputRef = useRef<HTMLInputElement>(null as any);
 
-  
- 
-  let currentSortProgress = 0
-  let currentPathProgress = 0
+  let currentSortProgress = 0;
+  let currentPathProgress = 0;
 
-
-  
-  for(let bool of userRedux.sortLessons) {
-    if (bool === true) currentSortProgress++
-    else break
+  for (let bool of userRedux.sortLessons) {
+    if (bool === true) currentSortProgress++;
+    else break;
   }
 
-  for(let bool of userRedux.pathLessons) {
-    if (bool === true) currentPathProgress++
-    else break
+  for (let bool of userRedux.pathLessons) {
+    if (bool === true) currentPathProgress++;
+    else break;
   }
 
   function changeUsername(e: any) {
@@ -56,78 +52,127 @@ function Profile() {
     } catch (err) {
       console.log(err);
     }
-    inputRef.current.value = ''
+    inputRef.current.value = '';
   }
 
   const toggleInput = () => {
     setInputOpen(!inputOpen);
   };
 
-
   return (
-    <div className='profile-page'>
+    <div className="profile-page">
       <div className="user-dashboard">
         <div className="user-info">
-          <div className='user-part'>
-            <div className='avatar'>
-              {user && <img  className='avatar' src={`${user?.picture}`} />}
+          <div className="user-part">
+            <div className="avatar">
+              {user && <img className="avatar" src={`${user?.picture}`} />}
             </div>
-            <div className='user-name'>
-               <h1 id="username">HELLO {inputOpen === false && userRedux.username ? (userRedux as User).username : 'THERE'},<img id="changeMe-profile"className='changeMe' src={changeMe} onClick={toggleInput} /></h1>
-                <form className={`open-${inputOpen}`}>
-                  <input
-                   ref={inputRef}
-                    id="input-username-profile"
-                    type="text"
-                    placeholder="username"
-                    name="username"
-                    onChange={changeUsername}
-                    className='input-body'
-                    maxLength= {10}
-                    />
-                  <button id="change-username-profile" className='input-button' onClick={(e) => {
+            <div className="user-name">
+              <h1 id="username">
+                HELLO{' '}
+                {inputOpen === false && userRedux.username
+                  ? (userRedux as User).username
+                  : 'THERE'}
+                ,
+                <img
+                  id="changeMe-profile"
+                  className="changeMe"
+                  src={changeMe}
+                  onClick={toggleInput}
+                />
+              </h1>
+              <form className={`open-${inputOpen}`}>
+                <input
+                  ref={inputRef}
+                  id="input-username-profile"
+                  type="text"
+                  placeholder="username"
+                  name="username"
+                  onChange={changeUsername}
+                  className="input-body"
+                  maxLength={10}
+                />
+                <button
+                  id="change-username-profile"
+                  className="input-button"
+                  onClick={(e) => {
                     updateChanges(e);
-                    setInputOpen(false)
-                    }}>Save</button>
-                </form>
+                    setInputOpen(false);
+                  }}
+                >
+                  Save
+                </button>
+              </form>
               <h2>Email: {userRedux.email}</h2>
             </div>
           </div>
-          <div className='learning-progress'> 
-            <h1 className='learning-progress'>Learning progress:</h1>
-            <div className='progress'>
-              <div className='sort-progress'>
-                <div><img className='sort-progress-img' src={sort}/></div><h3 className='algo-name'>Sorting Algorithms</h3><h3>{userRedux.sortLessons}</h3>
-                <h3 className='progress-number'>{currentSortProgress}/6</h3>
+          <div className="learning-progress">
+            <h1 className="learning-progress">Learning progress:</h1>
+            <div className="progress">
+              <div className="sort-progress">
+                <div>
+                  <img className="sort-progress-img" src={sort} />
+                </div>
+                <h3 className="algo-name">Sorting Algorithms</h3>
+                <h3>{userRedux.sortLessons}</h3>
+                <h3 className="progress-number">{currentSortProgress}/6</h3>
               </div>
-              <div className='path-progress'>
-                <div><img className='path-progress-img' src={path}/></div><h3 className='algo-name'>Path Finding Algorithms</h3><h3>{userRedux.pathLessons}</h3>
-                <h3 className='progress-number'>{currentPathProgress}/4</h3>
+              <div className="path-progress">
+                <div>
+                  <img className="path-progress-img" src={path} />
+                </div>
+                <h3 className="algo-name">Path Finding Algorithms</h3>
+                <h3>{userRedux.pathLessons}</h3>
+                <h3 className="progress-number">{currentPathProgress}/4</h3>
               </div>
             </div>
           </div>
         </div>
-      <div className="user-stats">
-          <h1 className='achievements'>ACHIEVEMENTS</h1>
-          <div className='circles'>
-            <div className='circle' onClick={() => alert('are you circle?')}></div>
-            <div className='circle' onClick={() => alert('are you circle?')}></div>
-            <div className='circle' onClick={() => alert('are you circle?')}></div>
-            <div className='circle' onClick={() => alert('are you circle?')}></div>
+        <div className="user-stats">
+          <h1 className="achievements">ACHIEVEMENTS</h1>
+          <div className="circles">
+            <div
+              className="circle"
+              onClick={() => alert('are you circle?')}
+            ></div>
+            <div
+              className="circle"
+              onClick={() => alert('are you circle?')}
+            ></div>
+            <div
+              className="circle"
+              onClick={() => alert('are you circle?')}
+            ></div>
+            <div
+              className="circle"
+              onClick={() => alert('are you circle?')}
+            ></div>
           </div>
-          <div className='stats-line'>
-            <h4 className='stats-text'>
+          <div className="stats-line">
+            <h4 className="stats-text">
               MATCHES
-            <h4  className='stats-text'>14</h4></h4>
-            <h4 className='stats-text'>WINS<h4 className='wins-yellow'>3</h4></h4>
-            <h4 className='stats-text'>LOSSES<h4 className='losses-red'>2</h4></h4>
-            <h4 className='stats-text'>WIN RATE<h4  className='stats-text'>60%</h4></h4>
-            <h4 className='stats-text'>GOLD EARNED<h4  className='stats-text'>200</h4></h4>
+              <h4 className="stats-text">14</h4>
+            </h4>
+            <h4 className="stats-text">
+              WINS<h4 className="wins-yellow">3</h4>
+            </h4>
+            <h4 className="stats-text">
+              LOSSES<h4 className="losses-red">2</h4>
+            </h4>
+            <h4 className="stats-text">
+              WIN RATE<h4 className="stats-text">60%</h4>
+            </h4>
+            <h4 className="stats-text">
+              GOLD EARNED<h4 className="stats-text">200</h4>
+            </h4>
           </div>
-          <h3 className='created'>Account created {new Date().toLocaleDateString()}</h3> {/* get the date when the account was created */}
+          <h3 className="created">
+            Account created {new Date().toLocaleDateString()}
+          </h3>{' '}
+          {/* get the date when the account was created */}
         </div>
       </div>
-      <ProfileGameHistory/>
+      <ProfileGameHistory />
     </div>
   );
 }
