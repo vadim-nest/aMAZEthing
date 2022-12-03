@@ -21,7 +21,8 @@ export let mazes: {[id: string]: MazeType} = {};
 export default function Connect(server: http.Server) {
 
   let waiting: {socketId: string, roomId: string}[] = [];
-  let ready: {[roomId: string]: number} = {};
+  let ready: {[roomId: string]: string} = {};
+  let readyHost: {[roomId: string]: string} = {};
   let playerSearch: {socketId: string, roomId: string}[] = [];
   let activeGames: {
     roomId: string,
@@ -164,23 +165,26 @@ export default function Connect(server: http.Server) {
   io.on('connection', socket => {
     console.log('user connected');
     socket.on('host', () => {
+      console.log('hosting');
       const roomId = generateRoomId();
+      if (waiting.find(waitingRoom => waitingRoom.socketId === socket.id)) return;
       waiting.push({socketId: socket.id, roomId});
       createNewGame(roomId, socket.id)
       socket.join(socket.id);
       console.log('generated room id', roomId)
       socket.join(roomId);
-      io.emit('receiveRoomId', roomId, 'p1');
+      io.emit('receiveRoomId', roomId, 'p1', 'Host');
     })
 
     socket.on('join', (roomId) => {
+      console.log('joining');
       const found = waiting.find(room => room.roomId === roomId);
       if (found) {
         socket.join(roomId);
         const game = activeGames.find(game => game.roomId === roomId);
         game.p2Id = socket.id;
         addP2ToGame(roomId, socket.id);
-        io.to(socket.id).emit('receiveRoomId', roomId, 'p2');
+        io.to(socket.id).emit('receiveRoomId', roomId, 'p2', 'Join');
       }
     })
 
@@ -192,13 +196,13 @@ export default function Connect(server: http.Server) {
         const roomId = game.roomId;
         console.log('joining room', roomId);
         addP2ToGame(roomId, socket.id);
-        io.to(socket.id).emit('receiveRoomId', roomId, 'p2');
+        io.to(socket.id).emit('receiveRoomId', roomId, 'p2', 'Play');
         socket.join(roomId);
         // io.to(socket.id).emit('set player 2');
       } else {
         const roomId = generateRoomId();
         console.log({socket});
-        io.to(socket.id).emit('receiveRoomId', roomId, 'p1');
+        io.to(socket.id).emit('receiveRoomId', roomId, 'p1', 'Play');
         console.log('creating room', roomId);
         playerSearch.push({socketId: socket.id, roomId});
         createNewGame(roomId, socket.id);
@@ -211,13 +215,29 @@ export default function Connect(server: http.Server) {
       }
     });
 
-    socket.on('ready', (roomId) => {
-      console.log('roomId ready', roomId);
-      if (ready[roomId]) {
+    socket.on('readyPlay', (roomId) => {
+      console.log('roomId ready', roomId, socket.id);
+      console.log({ready})
+      if (ready[roomId] && ready[roomId] !== socket.id) {
         delete ready[roomId];
         io.to(roomId).emit('Game start');
       } else {
-        ready[roomId] = 1;
+        ready[roomId] = socket.id;
+      }
+    });
+
+    socket.on('readyHost', (roomId) => {
+      console.log('roomId readyHost', roomId, socket.id);
+      console.log({readyHost}) // TODO: prevent making more than one room
+      readyHost[roomId] = socket.id;
+    });
+
+    socket.on('readyJoin', (roomId) => {
+      console.log('roomId readyJoin', roomId, socket.id);
+      console.log({readyHost})
+      if (readyHost[roomId] && readyHost[roomId] !== socket.id) {
+        delete ready[roomId];
+        io.to(roomId).emit('Game start');
       }
     });
 
@@ -236,7 +256,6 @@ export default function Connect(server: http.Server) {
         intervals[roomId] = intervalId;
       }
     })
-
 
     socket.on('new minion', (type, roomId, player) => {
       console.log('new minion', type, roomId);

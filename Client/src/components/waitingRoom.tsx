@@ -20,13 +20,16 @@ function WaitingRoom() {
 
   useEffect(() => {
     socket.off('receiveRoomId');
+    socket.off('receiveRoomIdHost');
+    socket.off('receiveRoomIdJoin');
     socket.off('Game start');
-    socket.on('receiveRoomId', (roomId: string, player: 'p1' | 'p2') => {
+    socket.on('receiveRoomId', (roomId: string, player: 'p1' | 'p2', type: 'Host' | 'Join' | 'Play') => {
       console.log('Received room ID', {roomId})
       setId(roomId);
       dispatch(updateRoomID(roomId));
       dispatch(updatePlayer(player));
-      socket.emit('ready', roomId);
+      console.log('Emitting ready');
+      socket.emit(`ready${type}`, roomId);
     });
     socket.on('Game start', () => {
       const roomId = store.getState().game.roomId;
@@ -73,13 +76,14 @@ function WaitingRoom() {
       hostRoom();
     } else {
       console.log('clearing waiting');
-      socket.emit('clear waiting')
+      socket.emit('clear waiting', socket.id)
       
       setCreateClicked(false);
     }
   }
 
   function onJoinCLicked() {
+    console.log('joining');
     if (!joinClicked) {
       setJoinClicked(true);
       setCreateClicked(false);
@@ -118,14 +122,20 @@ function WaitingRoom() {
       <div className="selection-panel">
         <div className="left-side-selection">
           <form className='wr-form' onSubmit={joinRoom}>
-            <button className="wr-main-button" type="button">
+            <button className="wr-main-button" type="button" onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}>
               <h1
                 className={`waiting-page-create-button ${
                   createClicked && 'wait-r-yellow'
                 } ${playClicked && 'playClicked'} ${
                   joinClicked && 'joinClicked'
                 }`}
-                onClick={() => onCreateCLicked()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onCreateCLicked();
+                }}
               >
                 Create
               </h1>

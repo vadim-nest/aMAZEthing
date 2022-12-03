@@ -65,7 +65,7 @@ function GameOver ({gameStats, currentPlayer} : {
             </h2>
           </div>
         </div>
-        <button className='game-over-button' onClick={() => navigate('/waitingRoom', {replace:true})}>Go Back</button>
+        <button className='game-over-button' onClick={() => navigate('/waitingRoom')}>Go Back</button>
       </div>
     </div>
   )

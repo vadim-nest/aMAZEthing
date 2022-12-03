@@ -76,6 +76,10 @@ function Game() { // TODO: Extract logic to maze class
     socket.on('updateGameState', (newGameState: GameStatsType) => {
       setGameStats(newGameState);
     })
+    return ()=>{ 
+      console.log('clearing waiting');
+      socket.emit('clear waiting', store.getState().game.roomId) // TODO: Currently this prevents them from joining the game on game start
+    } 
   }, [])
 
   useEffect(() => {
