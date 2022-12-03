@@ -8,6 +8,7 @@ interface UserState{ //shape of the state inside inside of the slice
         losses:number,
         draws:number
     },
+    totalGold: number,
     pathLessons:boolean[],
     sortLessons:boolean[],
     avatar:string,
@@ -18,6 +19,7 @@ const initialState: UserState = {
     username: '',
     games: [],
     overallWins:{ wins:0, losses:0, draws:0},
+    totalGold: 0,
     pathLessons:[false, false, false, false],
     sortLessons:[false, false, false, false, false, false],
     avatar: "monkey.png",
@@ -34,6 +36,7 @@ const userSlice = createSlice({
             state.overallWins = action.payload.overallWins;
             state.sortLessons = action.payload.sortLessons;
             state.pathLessons = action.payload.pathLessons;
+            state.totalGold = action.payload.totalGold;
             state.avatar = action.payload.avatar;
         },
         refreshDataNoAvatar(state,action:PayloadAction<UserState>){

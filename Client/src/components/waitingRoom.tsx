@@ -5,13 +5,14 @@ import socket from '../services/socket';
 import ProfileGameHistory from './profile/profileGameHistory';
 import { io } from 'socket.io-client';
 import { store } from '../features/store';
-import { useAppDispatch } from '../features/hooks';
+import { useAppDispatch, useAppSelector } from '../features/hooks';
 import { updatePlayer, updateRoomID } from '../features/game_slice';
 
 
 function WaitingRoom() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const userRedux = useAppSelector((state) => state.user);
   const [createClicked, setCreateClicked] = useState(false);
   const [joinClicked, setJoinClicked] = useState(false);
   const [playClicked, setPlayClicked] = useState(false);
@@ -49,7 +50,7 @@ function WaitingRoom() {
   }, []);
 
   function hostRoom() {
-    socket.emit('host');
+    socket.emit('host', userRedux.email);
   }
 
   function joinRoom(e: React.FormEvent<HTMLFormElement>) {
@@ -58,12 +59,12 @@ function WaitingRoom() {
       fname: { value: string };
     };
     const room = target.fname.value;
-    socket.emit('join', room);
+    socket.emit('join', room, userRedux.email);
   }
 
   function play() {
     console.log('play pressed');
-    socket.emit('play');
+    socket.emit('play', userRedux.email);
   }
 
   function onCreateCLicked() {

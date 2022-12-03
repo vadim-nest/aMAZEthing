@@ -12,17 +12,13 @@ const gameSchema = new Schema({
   gold: {
     type: Number,
   },
-  opponentID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  opponentUsername: {
+    type: String,
   },
   towers: {
     type: Number,
   },
-  startedAt: {
-    type: Date,
-  },
-  duration: {
+  finishedAt: {
     type: Date,
   },
 });

@@ -151,19 +151,19 @@ function Profile() {
           <div className="stats-line">
             <h4 className="stats-text">
               MATCHES
-              <h4 className="stats-text">14</h4>
+              <h5 className="stats-text">{Object.values(userRedux.overallWins).reduce((acc, el) => acc + el)}</h5>
             </h4>
             <h4 className="stats-text">
-              WINS<h4 className="wins-yellow">3</h4>
+              WINS<h5 className="wins-yellow">{userRedux.overallWins.wins}</h5>
             </h4>
             <h4 className="stats-text">
-              LOSSES<h4 className="losses-red">2</h4>
+              LOSSES<h5 className="losses-red">{userRedux.overallWins.losses}</h5>
             </h4>
             <h4 className="stats-text">
-              WIN RATE<h4 className="stats-text">60%</h4>
+              WIN RATE<h5 className="stats-text">{Math.floor(userRedux.overallWins.wins*100/Object.values(userRedux.overallWins).reduce((acc, el) => acc + el))}%</h5>
             </h4>
             <h4 className="stats-text">
-              GOLD EARNED<h4 className="stats-text">200</h4>
+              GOLD EARNED<h5 className="stats-text">{userRedux.totalGold}</h5>
             </h4>
           </div>
           <h3 className="created">

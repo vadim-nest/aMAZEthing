@@ -2,6 +2,8 @@ import http from 'http';
 import { Server } from 'socket.io';
 import crypto from 'crypto';
 import { generateMaze, MazeType } from './utils/maze';
+import { User } from './models/user';
+import { Game } from './models/game';
 
 export interface animal {
   pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
@@ -27,7 +29,9 @@ export default function Connect(server: http.Server) {
   let activeGames: {
     roomId: string,
     p1Id: string,
+    p1Username: string,
     p2Id: string,
+    p2Username: string,
     timeRemaining: number,
     playersLoaded: number,
     p1Coins: number,
@@ -73,13 +77,15 @@ export default function Connect(server: http.Server) {
     activeGames = activeGames.filter(game => game.p1Id !== socket.id && game.p2Id !== socket.id);
   }
 
-  function createNewGame(roomId: string, p1Id: string) {
+  function createNewGame(roomId: string, p1Id: string, p1Username: string) {
     const maze = generateMaze(86, 40) // TODO: Generalize this;
     mazes[roomId] = maze;
     activeGames.push({
       roomId,
       p1Id,
+      p1Username,
       p2Id: '',
+      p2Username: '',
       playersLoaded: 0,
       timeRemaining: 300,
       p1Coins: 0,
@@ -91,10 +97,11 @@ export default function Connect(server: http.Server) {
     })
   };
 
-  function addP2ToGame(roomID: string, p2Id:string) {
+  function addP2ToGame(roomID: string, p2Id:string, p2Username: string) {
     const game = activeGames.find(game => game.roomId === roomID);
     if (!game) return false;
     game.p2Id = p2Id;
+    game.p2Username = p2Username;
   };
 
   function increaseLoadedGame(roomID: string) {
@@ -162,40 +169,84 @@ export default function Connect(server: http.Server) {
     }
   }
 
+  async function endGame(roomId) {
+    let finalState = activeGames.find(game => game.roomId === roomId);
+    activeGames = activeGames.filter(game => game.roomId !== roomId);
+    let user1 = await User.findOne({email: finalState.p1Username});
+    let user2 = await User.findOne({email: finalState.p2Username});
+    console.log({user1});
+    console.log({user2});
+    if (!user1 || !user2) return;
+
+    const result1 = finalState.p1Towers.length > finalState.p2Towers.length ? 'win' :
+                    finalState.p1Towers.length < finalState.p2Towers.length ? 'loss' : 'draw';
+    const result2 = finalState.p2Towers.length > finalState.p1Towers.length ? 'win' :
+                    finalState.p2Towers.length < finalState.p1Towers.length ? 'loss' : 'draw';
+
+    const p1State = {
+      minions: finalState.p1Minions.length,
+      result: result1,
+      gold: finalState.p1Coins,
+      opponentUsername: user2.username,
+      towers: finalState.p1Towers.length,
+      finishedAt: Date.now()
+    }
+    const p2State = {
+      minions: finalState.p2Minions.length,
+      result: result2,
+      gold: finalState.p2Coins,
+      opponentUsername: user1.username,
+      towers: finalState.p2Towers.length,
+      finishedAt: Date.now()
+    }
+
+    user1.games.push(p1State);
+    user1.overallWins[result1 === 'win' ? 'wins' : result1 === 'loss' ? 'losses' : 'draws']++;
+    user1.totalGold += p1State.gold;
+    user1.save();
+    
+    user2.games.push(p2State);
+    user2.overallWins[result2 === 'win' ? 'wins' : result2 === 'loss' ? 'losses' : 'draws']++;
+    user2.totalGold += p2State.gold;
+    user2.save();
+
+    Game.create({player1: user1.username, player2: user2.username, result: result1});
+  }
+
   io.on('connection', socket => {
     console.log('user connected');
-    socket.on('host', () => {
+    socket.on('host', (p1Username: string) => {
       console.log('hosting');
       const roomId = generateRoomId();
       if (waiting.find(waitingRoom => waitingRoom.socketId === socket.id)) return;
       waiting.push({socketId: socket.id, roomId});
-      createNewGame(roomId, socket.id)
+      createNewGame(roomId, socket.id, p1Username)
       socket.join(socket.id);
       console.log('generated room id', roomId)
       socket.join(roomId);
       io.emit('receiveRoomId', roomId, 'p1', 'Host');
     })
 
-    socket.on('join', (roomId) => {
+    socket.on('join', (roomId, p2Username) => {
       console.log('joining');
       const found = waiting.find(room => room.roomId === roomId);
       if (found) {
         socket.join(roomId);
         const game = activeGames.find(game => game.roomId === roomId);
         game.p2Id = socket.id;
-        addP2ToGame(roomId, socket.id);
+        addP2ToGame(roomId, socket.id, p2Username);
         io.to(socket.id).emit('receiveRoomId', roomId, 'p2', 'Join');
       }
     })
 
-    socket.on('play', () => {
+    socket.on('play', (username: string) => {
       console.log({playerSearch});
       if (playerSearch.length !== 0) {
         const game = playerSearch.pop();
         console.log(game);
         const roomId = game.roomId;
         console.log('joining room', roomId);
-        addP2ToGame(roomId, socket.id);
+        addP2ToGame(roomId, socket.id, username);
         io.to(socket.id).emit('receiveRoomId', roomId, 'p2', 'Play');
         socket.join(roomId);
         // io.to(socket.id).emit('set player 2');
@@ -205,7 +256,7 @@ export default function Connect(server: http.Server) {
         io.to(socket.id).emit('receiveRoomId', roomId, 'p1', 'Play');
         console.log('creating room', roomId);
         playerSearch.push({socketId: socket.id, roomId});
-        createNewGame(roomId, socket.id);
+        createNewGame(roomId, socket.id, username);
         console.log({mazes});
         // io.to(socket.id).emit('set player 1', 'p1');
         console.log('sending room id');
@@ -251,6 +302,7 @@ export default function Connect(server: http.Server) {
           if (newGameState.timeRemaining === 0) {
             clearInterval(intervalId);
             delete intervals[roomId];
+            endGame(roomId);
           }
         }, 1000);
         intervals[roomId] = intervalId;
