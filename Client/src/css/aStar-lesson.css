@@ -10,14 +10,9 @@
   
   .aStar #myCanvas {
     position: relative;
-    height: fit-content;
-    height: fit-content;
-    min-height: 700px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    /* transform: rotate(-45deg); */
-    transform: scale(0.5, 0.5);
+    display: grid;
+    place-items: start;
+    transform: rotate(-45deg) scale(0.5, 0.5);
   }
   
   .but-options {

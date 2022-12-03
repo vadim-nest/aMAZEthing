@@ -27,7 +27,6 @@ export function generateConnectedGraph(width: number, height: number, weightedGr
       if (i%width < width - 1) connectedGraph.addEdge(i, i + 1,rand);
     }
   }
-
   return connectedGraph;
 }
 

@@ -2,11 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import "../../css/aStar-lesson.css";
 import { Tree } from "../../utils/path-finding-learning-logic";
 import { generateConnectedGraph } from "../../utils/maze";
-
+import { Graph } from "../../utils/graph";
+import GraphVertex from "../graphVertex";
 
 function AStarLesson() {
   const ref:any = useRef(null);
-
+  const [graph,setGraph] = useState<Graph>();
   let paragraphs = {
     sortName: 'aStar (A*) algorithm',
     firstP:
@@ -16,19 +17,11 @@ function AStarLesson() {
   useEffect(() => {
     async function TreeVisual() {
       
-      const t = new Tree(2);
-      await delay(1000);
-      for (let i = 0; i < 5; i++) {
-        t.add();
-      }
-      console.log(t.bfs())
-      console.log(t.getRoot())
-      t.calculateWidthDynamically(ref.current.offsetWidth);
 
 
-
-      console.log(generateConnectedGraph(4,4,true))
-
+      const graph = generateConnectedGraph(3,3,true)
+      console.log(graph)
+      setGraph(graph);
 
 
 
@@ -55,10 +48,14 @@ function AStarLesson() {
         <p>{paragraphs.firstP}</p>
       </div>
       <div className="lesson-wrapper-2">
-        <div className="but-options">
-          <button className="button" onClick={aStar}>aStar (A*)</button>
+       
+        <div ref={ref} id="myCanvas" style={{gridTemplateColumns: `repeat(3, 1fr)`}}>
+        {graph && graph.vertices.map((vertex)=><GraphVertex vertex={vertex}/>)}
+
+
+
+
         </div>
-        <div ref={ref} id="myCanvas"></div>
       </div>
     </div>
   );

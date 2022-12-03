@@ -17,20 +17,20 @@ function DfsLesson() {
   },[triggerDisplay])
 
   useEffect(() => {
-    async function TreeVisual() {
-      const t = new Tree();
-      await delay(1000);
-      for (let i = 0; i < 40; i++) {
-        t.add();
-      }
-      t.bfs();
-      t.calculateWidthDynamically(ref.current.offsetWidth);
-      t.createLines();
-      t.getNodes();
-      let g = new Graph(t.getArrNodes(), t.getDepth(), t.getTotalLines());
-      setGraph(g);
-    }
-    TreeVisual();
+    // async function TreeVisual() {
+    //   const t = new Tree();
+    //   await delay(1000);
+    //   for (let i = 0; i < 40; i++) {
+    //     t.add();
+    //   }
+    //   t.bfs();
+    //   t.calculateWidthDynamically(ref.current.offsetWidth);
+    //   t.createLines();
+    //   t.getNodes();
+    //   let g = new Graph(t.getArrNodes(), t.getDepth(), t.getTotalLines());
+    //   setGraph(g);
+    // }
+    // TreeVisual();
   }, []);
   async function dfs(){
     await graph?.printPath(await graph?.dfs())

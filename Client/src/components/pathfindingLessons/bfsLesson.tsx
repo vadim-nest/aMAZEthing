@@ -20,22 +20,22 @@ function BfsLesson() {
 
 
   useEffect(() => {
-    async function TreeVisual() {
-      const t = new Tree();
-      await delay(1000);
-      for (let i = 0; i < 50; i++) {
-        t.add();
-      }
-      t.bfs();
-      t.calculateWidthDynamically(ref.current.offsetWidth);
-      t.createLines();
-      setTriggerDisplay(!triggerDisplay)
-      t.getNodes();
-      let g = new Graph(t.getArrNodes(), t.getDepth(), t.getTotalLines());
-      setGraph(g);
+    // async function TreeVisual() {
+    //   const t = new Tree();
+    //   await delay(1000);
+    //   for (let i = 0; i < 50; i++) {
+    //     t.add();
+    //   }
+    //   t.bfs();
+    //   t.calculateWidthDynamically(ref.current.offsetWidth);
+    //   t.createLines();
+    //   setTriggerDisplay(!triggerDisplay)
+    //   t.getNodes();
+    //   let g = new Graph(t.getArrNodes(), t.getDepth(), t.getTotalLines());
+    //   setGraph(g);
      
-    }
-    TreeVisual();
+    // }
+    // TreeVisual();
   }, []);
   
   async function bfs(){

@@ -18,21 +18,21 @@ function DijkstraLesson() {
   },[triggerDisplay])
 
   useEffect(() => {
-    async function TreeVisual() {
-      const t = new Tree();
-      await delay(1000);
-      for (let i = 0; i < 15; i++) {
-        t.add();
-      }
-      t.bfs();
-      t.calculateWidthDynamically(ref.current.offsetWidth);
-      t.createLines(175,true);//true with weights
-      t.getNodes();
-      console.log(t.getLineStructure())
-      let g = new Graph(t.getArrNodes(), t.getDepth(), t.getLineStructure());
-      setGraph(g);
-    }
-    TreeVisual();
+    // async function TreeVisual() {
+    //   const t = new Tree();
+    //   await delay(1000);
+    //   for (let i = 0; i < 15; i++) {
+    //     t.add();
+    //   }
+    //   t.bfs();
+    //   t.calculateWidthDynamically(ref.current.offsetWidth);
+    //   t.createLines(175,true);//true with weights
+    //   t.getNodes();
+    //   console.log(t.getLineStructure())
+    //   let g = new Graph(t.getArrNodes(), t.getDepth(), t.getLineStructure());
+    //   setGraph(g);
+    // }
+    // TreeVisual();
   }, []);
   async function dijkstra(){
     await graph?.printPath(await graph?.dijkstra());

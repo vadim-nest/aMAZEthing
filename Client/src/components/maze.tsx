@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import '../css/maze.css';
 import apiService from "../services/apiService";
 import { Graph, value } from "../utils/graph";
-import { generateMaze } from "../utils/maze";
 import { MazeTileType, minionType, TowerType } from "../utils/types";
 import MazeTile from "./mazeTile";
 import Minion from "./minion";
