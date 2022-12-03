@@ -153,7 +153,8 @@
 
 .zoom-buttons {
   display: flex;
-  margin: auto auto 20px auto
+  margin: auto auto 20px auto;
+  width: 80%;
 }
 
 .zoom-in-svg, .zoom-out-svg {
@@ -163,7 +164,6 @@
 
 .zoomInButton, .zoomOutButton {
   cursor: pointer;
-  width: 35px;
 }
 
 .zoomInButton {
