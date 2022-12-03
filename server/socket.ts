@@ -1,7 +1,6 @@
 import http from 'http';
 import { Server } from 'socket.io';
 import crypto from 'crypto';
-import { remove } from 'cypress/types/lodash';
 import { generateMaze, MazeType } from './utils/maze';
 
 export interface animal {
@@ -22,9 +21,12 @@ export let mazes: {[id: string]: MazeType} = {};
 export default function Connect(server: http.Server) {
 
   let waiting: {socketId: string, roomId: string}[] = [];
+  let ready: {[roomId: string]: number} = {};
   let playerSearch: {socketId: string, roomId: string}[] = [];
   let activeGames: {
     roomId: string,
+    p1Id: string,
+    p2Id: string,
     timeRemaining: number,
     p1Coins: number,
     p2Coins: number,
@@ -42,9 +44,28 @@ export default function Connect(server: http.Server) {
     },
   });
 
-  function clearRoomsBySocket(socketId) {
-    playerSearch = playerSearch.filter(room => room.socketId !== socketId);
-    waiting = waiting.filter(room => room.socketId !== socketId);
+  function clearRoomsBySocket(socket) {
+    console.log(socket.rooms);
+    for (let room of socket.rooms) {
+      socket.leave(room);
+      delete ready[room];
+    }
+    socket.join(socket.id);
+    playerSearch = playerSearch.filter(room => {
+      if (room.socketId === socket.id) {
+        socket.leave(room.roomId);
+        return false;
+      }
+      return true;
+    });
+    waiting = waiting.filter(room => {
+      if (room.socketId === socket.id) {
+        socket.leave(room.roomId);
+        return false;
+      }
+      return true;
+    });
+    activeGames = activeGames.filter(game => game.p1Id !== socket.id && game.p2Id !== socket.id);
   }
 
   io.on('connection', socket => {
@@ -54,38 +75,72 @@ export default function Connect(server: http.Server) {
       waiting.push({socketId: socket.id, roomId});
       const maze = generateMaze(86, 40) // TODO: Generalize this;
       mazes[roomId] = maze;
+      activeGames.push({
+        roomId,
+        p1Id: socket.id,
+        p2Id: '',
+        timeRemaining: 300,
+        p1Coins: 0,
+        p2Coins: 0,
+        p1Towers: [],
+        p2Towers: [],
+        p1Minions: [],
+        p2Minions: [],
+      })
+      console.log('generated room id', roomId)
+      io.to(socket.id).emit('receive room id', roomId, 'p1');
       socket.join(roomId);
-      io.to(socket.id).emit('receive room id', roomId);
     })
 
     socket.on('join', (roomId) => {
       const found = waiting.find(room => room.roomId === roomId);
       if (found) {
         socket.join(roomId);
-        io.to(socket.id).emit('receive room id', roomId);
-        io.to(socket.id).emit('set player 2');
-        io.to(roomId).emit('Game start');
+        const game = activeGames.find(game => game.roomId === roomId);
+        game.p2Id = socket.id;
+        io.to(socket.id).emit('receive room id', roomId, 'p2');
       }
     })
 
     socket.on('play', () => {
+      console.log({playerSearch});
       if (playerSearch.length !== 0) {
-        const roomId = playerSearch.pop().roomId;
+        const game = playerSearch.pop();
+        console.log(game);
+        const roomId = game.roomId;
+        console.log('joining room', roomId);
+        io.to(socket.id).emit('receiveRoomId', roomId, 'p2');
         socket.join(roomId);
-        io.to(socket.id).emit('receive room id', roomId);
-        io.to(socket.id).emit('set player 2');
-        io.to(roomId).emit('Game start');
+        // io.to(socket.id).emit('set player 2');
       } else {
         const roomId = generateRoomId();
+        console.log({socket});
+        io.to(socket.id).emit('receiveRoomId', roomId, 'p1');
+        console.log('creating room', roomId);
         playerSearch.push({socketId: socket.id, roomId});
         const maze = generateMaze(86, 40);
         mazes[roomId] = maze;
+        console.log({mazes});
+        // io.to(socket.id).emit('set player 1', 'p1');
+        console.log('sending room id');
+        console.log('room id sent');
         socket.join(roomId);
-        io.to(socket.id).emit('receive room id', roomId);
+        
       }
     });
 
+    socket.on('ready', (roomId) => {
+      console.log('roomId ready', roomId);
+      if (ready[roomId]) {
+        delete ready[roomId];
+        io.to(roomId).emit('Game start');
+      } else {
+        ready[roomId] = 1;
+      }
+    })
+
     socket.on('new minion', (type, roomId) => {
+      console.log('new minion', type, roomId);
         socket.to(roomId).emit('new minion', type);
     });
     socket.on('minion move', (direction, minionId, roomId) => {
@@ -97,11 +152,12 @@ export default function Connect(server: http.Server) {
     })
 
     socket.on('clear waiting', () => {
-      clearRoomsBySocket(socket.id);
+      console.log('clearing waiting');
+      clearRoomsBySocket(socket);
     })
 
     socket.on('disconnect', ()=>{
-      clearRoomsBySocket(socket.id);
+      clearRoomsBySocket(socket);
       console.log('a user disconnected')
     })
   })

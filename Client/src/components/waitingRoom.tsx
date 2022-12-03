@@ -19,24 +19,28 @@ function WaitingRoom() {
   const [copyTextClicked, setCopyTextClicked] = useState(false);
 
   useEffect(() => {
-    socket.on('Game start', () => {
-      console.log('Game started');
-      console.log(store.getState().game)
-      navigate('/game');
-    });
-    socket.on('receive room id', (roomId: string) => {
+    socket.off('receiveRoomId');
+    socket.off('Game start');
+    socket.on('receiveRoomId', (roomId: string, player: 'p1' | 'p2') => {
+      console.log('Received room ID', {roomId})
       setId(roomId);
       dispatch(updateRoomID(roomId));
-      console.log({roomId})
-    })
-    socket.on('set player 2', () => {
-      dispatch(updatePlayer('p2'));
-    })
-    socket.on('set player 1', () => {
-      dispatch(updatePlayer('p1'));
-    })
+      dispatch(updatePlayer(player));
+      socket.emit('ready', roomId);
+    });
+    socket.on('Game start', () => {
+      const roomId = store.getState().game.roomId;
+      if (roomId) {
+        console.log('Game started', store.getState().game.roomId);
+        console.log('Game state', store.getState().game)
+        navigate('/game');
+      } else {
+        socket.emit('retry game start');
+      }
+    });
     return ()=>{ 
-      socket.emit('clear waiting', socket.id)
+      // console.log('clearing waiting');
+      // socket.emit('clear waiting', store.getState().game.roomId) // TODO: Currently this prevents them from joining the game on game start
       setPlayClicked(false);
     } 
   }, []);
@@ -83,19 +87,24 @@ function WaitingRoom() {
 
   function onPlayClicked() {
     if (!playClicked) {
+      socket.emit('host');
       setPlayClicked(true);
       setJoinClicked(false);
       setCreateClicked(false);
       play();
     } else {
-      socket.emit('clear waiting', socket.id)
+      console.log('clearing waiting');
+      socket.emit('clear waiting')
       setPlayClicked(false);
     }
   }
 
-  useEffect(() => {
-    if (!(playClicked || joinClicked || createClicked)) socket.emit('clear waiting', socket.id)
-  }, [playClicked, joinClicked, createClicked]);
+  // useEffect(() => {
+  //   if (!(playClicked || joinClicked || createClicked)) {
+  //     socket.emit('clear waiting', socket.id);
+  //     dispatch(updateRoomID(''));
+  //   }
+  // }, [playClicked, joinClicked, createClicked]);
 
   return (
     <div className="waiting-room">
@@ -106,7 +115,7 @@ function WaitingRoom() {
       <div className="selection-panel">
         <div className="left-side-selection">
           <form className='wr-form' onSubmit={joinRoom}>
-            <button className="wr-main-button" type="button" onClick={hostRoom}>
+            <button className="wr-main-button" type="button">
               <h1
                 className={`waiting-page-create-button ${
                   createClicked && 'wait-r-yellow'

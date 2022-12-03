@@ -24,7 +24,7 @@ apiService.profile = function (accessToken:any,user:any) {
     .catch((err) => console.log(err));
 };
 
-apiService.updateUsername = function (accessToken:any,user:any) { //TODO solve type ->in redux userSlice
+apiService.updateUsername = function (accessToken:any,user:any) { //TODO solve type -> in redux userSlice
   return fetch(`${BASE_URL}/updateUsername`, {
     method: 'POST',
     headers: { 
@@ -37,8 +37,8 @@ apiService.updateUsername = function (accessToken:any,user:any) { //TODO solve t
     .catch((err) => console.log(err));
 }
 
-apiService.createMaze = function ()
- { 
+apiService.createMaze = function () { 
+  console.log('apiService roomId:', store.getState().game.roomId);
   return fetch(`${BASE_URL}/createMaze`, {
     method: 'POST',
     headers: { 
