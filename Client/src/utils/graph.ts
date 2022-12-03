@@ -1,4 +1,4 @@
-import { bFS, dFS, dFSShortest } from "./path-finding-algo";
+import { aStar, bFS, dFS, dFSShortest, distance, distanceConstruct, vBFS, vDFS, vDijk } from "./path-finding-algo";
 
 export type value = string | number;
 
@@ -18,6 +18,7 @@ export class Graph {
     }
     return false;
   }
+
   addEdge (valueX: value, valueY: value, weight:number = 1, directed = false) {
     if (!this.vertices.includes(valueX) || !this.vertices.includes(valueY)) return false;
     if (this.edges.some(edge => edge[0] === valueX && edge[1] === valueY && edge[2] === weight)) return false;
@@ -58,7 +59,11 @@ export class Graph {
     return out;
   }
 
-
+  removeUnweightedEdges(){
+    for(let edge of this.edges){
+      if(edge[2]===0) this.removeEdge(edge[0],edge[1]);
+    }
+  }
 
   isConnected () {
     for (let vertex1 of this.vertices) {
@@ -81,6 +86,18 @@ export class Graph {
       break;
     case 'dfsShort':
       path = dFSShortest(valueX, valueY, this);
+      break;
+    case 'vbfs':
+      path = vBFS(valueX,valueY,this);
+      break;
+    case 'vdfs':
+      path = vDFS(valueX,valueY,this);
+      break;
+    case 'vdijk':
+      path = vDijk(valueX as number,valueY as number,this)
+      break;
+    case 'aStar':
+      path = aStar(valueX as number,valueY as number,this, distanceConstruct(25), 10)
       break;
     default:
       path = dFS(valueX, valueY, this);

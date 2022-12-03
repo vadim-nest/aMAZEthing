@@ -17,13 +17,13 @@ export function generateConnectedGraph(width: number, height: number, weightedGr
   } else {
     let rand:number;
     for (let i = 0; i < nodeNum; i++) {
-      rand = Math.floor(Math.random()*2);
+      rand = Math.floor(Math.random()*4);
       if (i > width && !connectedGraph.getEdgeValue(i, i-width) && rand) connectedGraph.addEdge(i, i - width,rand);
-      rand = Math.floor(Math.random()*2);
+      rand = Math.floor(Math.random()*4);
       if (i < nodeNum - width && !connectedGraph.getEdgeValue(i, i+width) && rand) connectedGraph.addEdge(i, i + width,rand);
-      rand = Math.floor(Math.random()*2);
+      rand = Math.floor(Math.random()*4);
       if (i%width > 0 && !connectedGraph.getEdgeValue(i, i-1) && rand) connectedGraph.addEdge(i, i - 1,rand);
-      rand = Math.floor(Math.random()*2);
+      rand = Math.floor(Math.random()*4);
       if (i%width < width - 1 && !connectedGraph.getEdgeValue(i, i+1) && rand) connectedGraph.addEdge(i, i + 1,rand);
     }
   }

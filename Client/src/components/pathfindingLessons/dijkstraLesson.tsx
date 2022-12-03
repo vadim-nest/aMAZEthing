@@ -1,15 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import "../../css/dijkstra-lesson.css";
 import { generateConnectedGraph } from "../../utils/maze";
-import { Graph, value } from "../../utils/graph";
+import { value } from "../../utils/graph";
 import GraphVertex from "../graphVertex";
 
 
 function DijkstraLesson() {
   const ref:any = useRef(null);
-  const [graph,setGraph] = useState<Graph>();
-  const [path,setPath] = useState<any>();
-
+  const [graph,setGraph] = useState<any>();
+  const [width, setWidth] = useState(15);
+  const [end, setEnd] = useState<any>(width * width - 1);
 
   let paragraphs = {
     sortName: 'Dijkstra algorithm',
@@ -18,25 +18,41 @@ function DijkstraLesson() {
   };
 
   useEffect(() => {
-    const graph = generateConnectedGraph(5,5,true)
-    console.log(graph);
+    const graph = generateConnectedGraph(width, width, true);
     setGraph(graph);
-    setPath(graph.findPath(0,24));
 }, []);
 
+  function newGraph() {
+    setGraph([]);
+    const newgraph = generateConnectedGraph(width, width, true);
+    setGraph(newgraph);
+  }
+
   async function dijkstra(){
-    console.log('PATH',path);
-    for(let i =0;i<path.length;i++){
-      await delay(100);
-      document.getElementById(`${path[i]}`)!.style.backgroundColor = 'var(--main-green)';
-      await delay(100);
-      if(i+1!==path.length){
-        if(path[i]<path[i+1]) document.getElementById(`${path[i]},${path[i+1]}-${path[i+1]},${path[i]}`)!.style.backgroundColor = 'var(--main-green)';
-        else document.getElementById(`${path[i+1]},${path[i]}-${path[i]},${path[i+1]}`)!.style.backgroundColor = 'var(--main-green)';
-      }
+    const DIJKVisualpaths = graph.findPath(0, end, "vdijk");
+    console.log("PATH", DIJKVisualpaths);
+    if(DIJKVisualpaths){
+      let path: any = Array.from(DIJKVisualpaths.visited);
+      await showPath(path,true);
+      path = Array.from(DIJKVisualpaths.path);
+      await showPath(path);
     }
   }
   
+  async function showPath(path:number[],visited:boolean = false){
+    for (let i = 0; i < path.length; i++) {
+      await delay(10);
+      document.getElementById(`${path[i]}`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
+      await delay(10);
+      if (i + 1 !== path.length) {
+        if(document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`) || document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)){
+          if (path[i] < path[i + 1]) document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
+          else document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
+        }
+      }
+    }
+  }
+
   function delay(time: number) {
     return new Promise((res) => setTimeout(res, time));
   }
@@ -47,11 +63,12 @@ function DijkstraLesson() {
         <h1>{paragraphs.sortName}</h1>
         <p>{paragraphs.firstP}</p>
       </div>
-      <button  onClick={()=>dijkstra()}></button>
+      <button className="button" onClick={() => newGraph()}>NEW Graph </button>
+      <button className="button" onClick={()=>dijkstra()}>Visualize Dijkstra</button>
       <div className="dijk lesson-wrapper-2">
         <div ref={ref} id="dijk myCanvas" >
-          <div className="dijk graph-vertices" style={{gridTemplateColumns: `repeat(5, 1fr)`}}>
-          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={vertex} width={5} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} />)}
+          <div className="dijk graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={vertex} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} weightedGraph={true}/>)}
           </div>
         </div>
       </div>

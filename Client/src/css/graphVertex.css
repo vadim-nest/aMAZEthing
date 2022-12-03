@@ -1,39 +1,32 @@
-
-
 .vertex{
     position: relative;
     width:20px;
     height:20px;
     border-radius: 50%;
     background-color: aqua;
-    z-index:10;
+    z-index:20;
 }
 
-
-.edge-horizontal{
+.edge{
     position:absolute;
     width:15px;
     height: 5px;
+    border-radius: 3px;
     background-color: greenyellow;
-    z-index: 0;
+    
 }
-.edge-vertical{
+.vertical{
     position:absolute;
-    width:5px;
-    height: 15px;
+    transform: rotate(90deg);
     background-color: greenyellow;
-    z-index: 0;
 }
-
-
 
 .right-connection{
-    left:90%;
-    top:40%
+    left: 90%;
+    top: 40%
 }
 
-
 .bottom-connection{
-    left:40%;
-    top:90%;
+    left: 15%;
+    top: 110%;
 }

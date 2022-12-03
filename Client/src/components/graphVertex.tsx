@@ -1,30 +1,24 @@
 
 import { value } from "../utils/graph"
 import '../css/graphVertex.css'
-import { useEffect } from "react";
-
-
-function GraphVertex({vertex, edges, width}:{
+function GraphVertex({vertex, edges, width, setEnd, weightedGraph}:{
     vertex:value;
     edges:any;
     width:number;
+    setEnd:any;
+    weightedGraph:boolean;
 }){
 
-    useEffect(()=>{
-        console.log('EDGES',edges)
-    },[])
+    return(<div  id={`${vertex}`} className="vertex" onClick={()=>{setEnd(vertex) }}>
+            {edges && edges.map((edge:[number, number, number])=>{
 
-
-
-    return(<div  id={`${vertex}`} className={`vertex`}>
-            {edges.map((edge:[number, number, number])=>{
                 if(edge[2]!==0){
                     if(edge[1]===edge[0]+1){
                         //right
-                        if(document.getElementById(`${edge[0]},${edge[1]}-${edge[1]},${edge[0]}`) === null) return <div id={`${edge[0]},${edge[1]}-${edge[1]},${edge[0]}`} className={` edge-horizontal right-connection`}></div> 
+                        return <div key={`${edge[0]},${edge[1]}-${edge[1]},${edge[0]}`} id={`${edge[0]},${edge[1]}-${edge[1]},${edge[0]}`} className={`edge right-connection`} style={weightedGraph ? {"height":`${edge[2]*2}px`} : {}} ></div> 
                     }else if(edge[1]===edge[0]+width){
                         //bottom
-                        if(document.getElementById(`${edge[0]},${edge[1]}-${edge[1]},${edge[0]}`) === null) return  <div id={`${edge[0]},${edge[1]}-${edge[1]},${edge[0]}`} className={` edge-vertical bottom-connection`}></div>
+                        return  <div key={`${edge[0]},${edge[1]}-${edge[1]},${edge[0]}`} id={`${edge[0]},${edge[1]}-${edge[1]},${edge[0]}`} className={`edge vertical bottom-connection`} style={weightedGraph ? {"height":`${edge[2]*2}px`} : {}} ></div>
                     } 
                 } 
             })}
