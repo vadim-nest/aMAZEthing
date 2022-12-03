@@ -13,7 +13,7 @@ async function getUserData(req: express.Request, res: express.Response) {
             res.status(201).json({ "statusCode": 201, "message": "Retrieving information of the user", user: resUser });
         } else {
             const username = email.substr(0,email.indexOf('@'));
-            const newUser = await User.create({ id: sub, email: email, username: username, avatar:'monkey.png' });
+            const newUser = await User.create({ id: sub, email: email, username: username });
             res.status(201).json({ "statusCode": 201, "message": "User created", user: newUser });
         }
     } catch (error) {
