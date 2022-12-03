@@ -23,6 +23,7 @@ function LeftBar({
   gameStats,
   towers,
   setZoomed,
+  currentPlayer
 }: {
   setBoxSize: React.Dispatch<React.SetStateAction<number>>;
   minBoxSize: number;
@@ -43,6 +44,7 @@ function LeftBar({
   };
   towers: TowerType[];
   setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
+  currentPlayer: 'p1' | 'p2';
 }) {
   function zoomIn(amount: number) {
     setCurrentTower(null);
@@ -119,7 +121,7 @@ function LeftBar({
         <h3 className="time-money-text">Time remaining</h3>
         <h3 className="time-count">{gameStats.timeRemaining}</h3>
         <h3 className="time-money-text">Money</h3>
-        <h3 className="money-count price">{gameStats.p1Coins}</h3>
+        <h3 className="money-count price">{currentPlayer === 'p1' ? gameStats.p1Coins : gameStats.p2Coins}</h3>
       </div>
       <div className="scores"></div>
       <div className="selected-info">

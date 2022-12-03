@@ -191,21 +191,21 @@ function Game() { // TODO: Extract logic to maze class
     }
   }
 
-  function addCoins(alignment: 'p1' | 'p2', amount: number) {
-    setGameStats(prevStats => {
-      if (alignment === 'p1') {
-        return {
-          ...prevStats,
-          p1Coins: prevStats.p1Coins + amount
-        }
-      } else {
-        return {
-          ...prevStats,
-          p2Coins: prevStats.p2Coins + amount
-        }
-      }
-    })
-  }
+  // function addCoins(alignment: 'p1' | 'p2', amount: number) {
+  //   setGameStats(prevStats => {
+  //     if (alignment === 'p1') {
+  //       return {
+  //         ...prevStats,
+  //         p1Coins: prevStats.p1Coins + amount
+  //       }
+  //     } else {
+  //       return {
+  //         ...prevStats,
+  //         p2Coins: prevStats.p2Coins + amount
+  //       }
+  //     }
+  //   })
+  // }
 
   function opponentMovement(direction: {xPos: number, yPos: number, rotation: 'minionU' | 'minionR' | 'minionL' | 'minionD' | '' }, minionId: number) {
     setMinions(prevMinions => {
@@ -462,10 +462,12 @@ function Game() { // TODO: Extract logic to maze class
   function exitTower(towerId: number, minionId: number, movedAfter: boolean) {
     let minion = minions[minionId];
     let tower = towers.find(tower => tower.id === towerId) as TowerType;
-    if (tower.alignment === 'none') {
-      socket.emit('conquerTower', roomID, towerId, true, currentPlayer);
-    } else {
-      socket.emit('conquerTower', roomID, towerId, false, currentPlayer);
+    if (minion.alignment === currentPlayer) {
+      if (tower.alignment === 'none') {
+        socket.emit('conquerTower', roomID, towerId, true, currentPlayer);
+      } else {
+        socket.emit('conquerTower', roomID, towerId, false, currentPlayer);
+      }
     }
     setTowersSorting(prevTowerSorting => {
       const newTowerSorting = {
@@ -539,6 +541,7 @@ function Game() { // TODO: Extract logic to maze class
             gameStats={gameStats}
             towers={towers}
             setZoomed={setZoomed}
+            currentPlayer={currentPlayer}
             />
           <Maze
             maze={maze}

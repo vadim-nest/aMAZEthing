@@ -53,6 +53,7 @@ export default function Connect(server: http.Server) {
       socket.leave(room);
       delete ready[room];
     }
+    console.log({intervals});
     socket.join(socket.id);
     playerSearch = playerSearch.filter(room => {
       if (room.socketId === socket.id) {
@@ -133,7 +134,7 @@ export default function Connect(server: http.Server) {
     return game;
   }
 
-  function addTowerGame(roomID: string, towerID: number, player: 'p1' | 'p2') {
+  function addTowerGame(roomID: string, towerID: number, player: 'p1' | 'p2', firstCapture: boolean) {
     const game = activeGames.find(game => game.roomId === roomID);
     if (!game) return false;
     if (player === 'p1') {
@@ -143,6 +144,7 @@ export default function Connect(server: http.Server) {
       game.p2Towers.push(towerID);
       game.p1Towers = game.p1Towers.filter(tower => tower !== towerID);
     }
+    if (firstCapture) addCoinsGame(roomID, 200, player);
     return game;
   }
 
@@ -224,7 +226,12 @@ export default function Connect(server: http.Server) {
         io.to(roomId).emit('maze generated');
         const intervalId = setInterval(() => {
           const newGameState = decreaseGameTimer(roomId);
+          if (!newGameState) return;
           sendGameState(newGameState, roomId, io);
+          if (newGameState.timeRemaining === 0) {
+            clearInterval(intervalId);
+            delete intervals[roomId];
+          }
         }, 1000);
         intervals[roomId] = intervalId;
       }
@@ -246,8 +253,8 @@ export default function Connect(server: http.Server) {
     })
     
     socket.on('conquerTower', (roomID, towerId, firstCapture, player) => {
-      let newGameState = addTowerGame(roomID, towerId, player);
-      newGameState = addCoinsGame(roomID, 200, player);
+      let newGameState = addTowerGame(roomID, towerId, player, firstCapture);
+      console.log(newGameState);
       sendGameState(newGameState, roomID, io);
     })
 
