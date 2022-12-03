@@ -1,16 +1,4 @@
-.dfs .whole-page-wrapper {
-  background-color: var(--white);
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: scroll;
-}
-
 .dfs .lesson-wrapper-2 {
-  background-color: var(--white);
-  border-color: var(--white);
   border-radius: 20px;
   min-width: 70vw;
   width: 900px;

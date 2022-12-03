@@ -1,13 +1,3 @@
-.dijk .whole-page-wrapper {
-  background-color: var(--white);
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: scroll;
-}
-
 .dijk .lesson-wrapper-2 {
   background-color: var(--white);
   border-color: var(--white);

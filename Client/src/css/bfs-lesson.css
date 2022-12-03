@@ -1,16 +1,4 @@
-.bfs .whole-page-wrapper {
-  background-color: var(--white);
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: scroll;
-}
-
 .bfs .lesson-wrapper-2 {
-  background-color: var(--white);
-  border-color: var(--white);
   border-radius: 20px;
   min-width: 70vw;
   width: 900px;
@@ -35,10 +23,17 @@
   transform: rotate(0deg) scale(1, 1);
   z-index: 2;
 }
+
 .bfs .graph-edges{
   position:absolute;
   display: grid;
   gap:10px;
   place-items: start;
   z-index: 3;
+}
+
+.buttons-pos{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

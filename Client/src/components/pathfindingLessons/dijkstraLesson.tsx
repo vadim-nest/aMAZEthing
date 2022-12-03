@@ -58,13 +58,15 @@ function DijkstraLesson() {
   }
 
   return (
-    <div  className="dijk whole-page-wrapper">
-      <div className="dijk lesson-wrapper">
-        <h1>{paragraphs.sortName}</h1>
-        <p>{paragraphs.firstP}</p>
+    <div  className="whole-page-wrapper">
+      <div className="sorting-algo">
+        <h1 className="explanation-title">{paragraphs.sortName}</h1>
+        <p className="explanation-text">{paragraphs.firstP}</p>
       </div>
-      <button className="button" onClick={() => newGraph()}>NEW Graph </button>
-      <button className="button" onClick={()=>dijkstra()}>Visualize Dijkstra</button>
+      <div className="buttons-pos">
+        <button className="button" onClick={() => newGraph()}>NEW Graph </button>
+        <button className="button" onClick={()=>dijkstra()}>Visualize Dijkstra</button>
+      </div>
       <div className="dijk lesson-wrapper-2">
         <div ref={ref} id="dijk myCanvas" >
           <div className="dijk graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>

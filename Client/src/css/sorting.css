@@ -12,7 +12,6 @@
 }
 
 .lesson-wrapper, .lesson-wrapper-2 {
-  background-color: var(--main-green);
   border-radius: 20px;
   min-width: 70vw;
   width: 900px;
@@ -35,12 +34,7 @@
   color: var(--white);
 }
 
-.lesson-wrapper-2 {
-  background-color: transparent;
-  border: 5px solid var(--main-green);
-  margin-top: 20px;
-  /* min-width: fit-content; */
-}
+
 
 .array {
   display:flex;

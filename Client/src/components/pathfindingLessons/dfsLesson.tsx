@@ -60,12 +60,14 @@ function DfsLesson() {
 
   return (
     <div className="dfs whole-page-wrapper">
-      <div className="dfs lesson-wrapper">
-        <h1>{paragraphs.sortName}</h1>
-        <p>{paragraphs.firstP}</p>
+      <div className="sorting-algo">
+        <h1 className="explanation-title">{paragraphs.sortName}</h1>
+        <p className="explanation-text">{paragraphs.firstP}</p>
       </div>
-      <button className="button" onClick={()=>newGraph()}>NEW Graph</button>
-      <button className="button" onClick={()=>dfs()}>Visualize DFS</button>
+      <div className="buttons-pos">
+        <button className="button" onClick={()=>newGraph()}>NEW Graph</button>
+        <button className="button" onClick={()=>dfs()}>Visualize DFS</button>
+      </div>
       <div className="dfs lesson-wrapper-2">
         <div ref={ref} id="dfs myCanvas" >
           <div className="dfs graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>

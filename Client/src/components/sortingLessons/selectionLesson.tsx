@@ -43,9 +43,9 @@ export default function SelectionLesson() {
 
   return (
     <div className="whole-page-wrapper">
-      <div className="lesson-wrapper">
-        <h1>{paragraphs.sortName}</h1>
-        <p>{paragraphs.firstP}</p>
+      <div className="sorting-algo">
+        <h1 className="explanation-title">{paragraphs.sortName}</h1>
+        <p className="explanation-text">{paragraphs.firstP}</p>
       </div>
 
       <div className="lesson-wrapper-2">
