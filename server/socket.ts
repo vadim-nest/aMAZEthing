@@ -87,9 +87,10 @@ export default function Connect(server: http.Server) {
         p1Minions: [],
         p2Minions: [],
       })
+      socket.join(socket.id);
       console.log('generated room id', roomId)
-      io.to(socket.id).emit('receive room id', roomId, 'p1');
       socket.join(roomId);
+      io.emit('receiveRoomId', roomId, 'p1');
     })
 
     socket.on('join', (roomId) => {
@@ -98,7 +99,7 @@ export default function Connect(server: http.Server) {
         socket.join(roomId);
         const game = activeGames.find(game => game.roomId === roomId);
         game.p2Id = socket.id;
-        io.to(socket.id).emit('receive room id', roomId, 'p2');
+        io.to(socket.id).emit('receiveRoomId', roomId, 'p2');
       }
     })
 

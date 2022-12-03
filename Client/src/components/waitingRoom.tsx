@@ -66,10 +66,14 @@ function WaitingRoom() {
   function onCreateCLicked() {
     if (!createClicked) {
       // greyOutOtherButtons('Create');
+      console.log('playClicked');
       setCreateClicked(true);
       setJoinClicked(false);
       setPlayClicked(false);
+      hostRoom();
     } else {
+      console.log('clearing waiting');
+      socket.emit('clear waiting')
       
       setCreateClicked(false);
     }
@@ -87,15 +91,14 @@ function WaitingRoom() {
 
   function onPlayClicked() {
     if (!playClicked) {
-      socket.emit('host');
       setPlayClicked(true);
       setJoinClicked(false);
       setCreateClicked(false);
       play();
     } else {
+      setPlayClicked(false);
       console.log('clearing waiting');
       socket.emit('clear waiting')
-      setPlayClicked(false);
     }
   }
 
