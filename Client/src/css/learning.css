@@ -43,3 +43,8 @@
   font-weight: 700;
   padding-top: 0 !important;
 }
+
+.disable-horizontal-scroll {
+  overflow: hidden;
+
+}

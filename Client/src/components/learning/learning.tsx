@@ -11,7 +11,7 @@ export default function LearningPage() {
   const user = useAppSelector((state) => state.user);
 
   return (
-    <>
+    <div className='disable-horizontal-scroll'>
       <div className="initial-view">
         <div>
           <h1>Welcome to the amazing learning experience.</h1>
@@ -64,6 +64,6 @@ export default function LearningPage() {
           <CurvePath />
         </div>
       </div>
-    </>
+    </div>
   );
 }

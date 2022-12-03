@@ -122,7 +122,7 @@ function LeftBar({
           <h3 className="time-money-text">Time remaining</h3>
           <h3 className="time-count">{gameStats.timeRemaining}</h3>
           <h3 className="time-money-text">Money</h3>
-          <h3 className="money-count">{gameStats.p1Coins}</h3>
+          <h3 className="money-count price">{gameStats.p1Coins}</h3>
         </div>
         <div className="scores"></div>
       </MediaQuery>
