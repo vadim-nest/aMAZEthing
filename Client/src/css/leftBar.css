@@ -47,7 +47,7 @@
 
 .p2Name {
   top: 100px;
-  left: 65px;
+  left: 55px;
 }
 
 .score-you, .score-opponent {
@@ -153,8 +153,7 @@
 
 .zoom-buttons {
   display: flex;
-  margin: auto auto 20px auto;
-  width: 80%;
+  margin: auto auto 20px auto
 }
 
 .zoom-in-svg, .zoom-out-svg {
@@ -164,6 +163,7 @@
 
 .zoomInButton, .zoomOutButton {
   cursor: pointer;
+  width: 35px;
 }
 
 .zoomInButton {

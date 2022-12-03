@@ -3,97 +3,107 @@ import { minionType, TowerType } from '../utils/types';
 import FlagSVG from './svg/flagSVG';
 import MediaQuery from 'react-responsive';
 import { useAppSelector } from '../features/hooks';
-// import zoomInSVG from '../assets/game-different/search-3079.svg'
-// import zoomOutSVG from '../assets/game-different/search-3080.svg'
-import React, { useEffect } from 'react';
-// import ZoomInOutSVG from './zoomButtonsSVG';
+import React from 'react';
 import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
 import TowerSVG from './svg/towerSVG';
+import LeftBarSmall from './leftBarSmall';
 
-function LeftBar({
+export function zoomIn({
+  amount,
   setBoxSize,
-  minBoxSize,
   maxBoxSize,
-  currentMinion,
-  currentTile,
-  minions,
-  currentTower,
   setCurrentTower,
-  gameStats,
-  towers,
   setZoomed,
-  currentPlayer
 }: {
+  amount: number;
   setBoxSize: React.Dispatch<React.SetStateAction<number>>;
-  minBoxSize: number;
   maxBoxSize: number;
-  currentMinion: null | number;
-  currentTile: null | { xPos: number; yPos: number };
-  currentTower: null | TowerType;
-  minions: { [key: number]: minionType };
   setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
-  gameStats: {
-    timeRemaining: number;
-    p1Coins: number;
-    p2Coins: number;
-    p1Towers: number[];
-    p2Towers: number[];
-    p1MinionCount: number;
-    p2MinionCount: number;
-  };
-  towers: TowerType[];
   setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
-  currentPlayer: 'p1' | 'p2';
 }) {
-  function zoomIn(amount: number) {
-    setCurrentTower(null);
-    setZoomed(true);
-    setBoxSize((oldBoxSize) => {
-      if (oldBoxSize + amount > maxBoxSize) return maxBoxSize;
-      return oldBoxSize + amount;
-    });
-  }
+  setCurrentTower(null);
+  setZoomed(true);
+  setBoxSize((oldBoxSize) => {
+    if (oldBoxSize + amount > maxBoxSize) return maxBoxSize;
+    return oldBoxSize + amount;
+  });
+}
 
-  function zoomOut(amount: number) {
-    setCurrentTower(null);
-    setZoomed(true);
-    setBoxSize((oldBoxSize) => {
-      if (oldBoxSize - amount < minBoxSize) return minBoxSize;
-      return oldBoxSize - amount;
-    });
-  }
+export function zoomOut({
+  amount,
+  minBoxSize,
+  setBoxSize,
+  setCurrentTower,
+  setZoomed,
+}: {
+  amount: number;
+  minBoxSize: number;
+  setBoxSize: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
+  setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  setCurrentTower(null);
+  setZoomed(true);
+  setBoxSize((oldBoxSize) => {
+    if (oldBoxSize - amount < minBoxSize) return minBoxSize;
+    return oldBoxSize - amount;
+  });
+}
 
-  function zoomHover(zoomInOrOut: string, color: string) {
-    document.querySelectorAll(`.zoom-${zoomInOrOut}-svg`).forEach((svgEl) => {
-      (svgEl as unknown as HTMLElement).style.fill = `${color}`;
-      (svgEl as unknown as HTMLElement).style.stroke = `${color}`;
-    });
-  }
+export function zoomHover(zoomInOrOut: string, color: string) {
+  document.querySelectorAll(`.zoom-${zoomInOrOut}-svg`).forEach((svgEl) => {
+    (svgEl as unknown as HTMLElement).style.fill = `${color}`;
+    (svgEl as unknown as HTMLElement).style.stroke = `${color}`;
+  });
+}
 
-  function whichAnimalSVG(minion: minionType) {
-    return minion.type === 'Squirrel' ? (
-      <Squirrel currentPlayer={`${minion.alignment}-color`} />
-    ) : minion.type === 'Badger' ? (
-      <Badger currentPlayer={`${minion.alignment}-color`} />
-    ) : minion.type === 'Hare' ? (
-      <Hare currentPlayer={`${minion.alignment}-color`} />
-    ) : minion.type === 'Deer' ? (
-      <Deer currentPlayer={`${minion.alignment}-color`} />
-    ) : minion.type === 'Koala' ? (
-      <Koala currentPlayer={`${minion.alignment}-color`} />
-    ) : (
-      minion.type === 'Bear' && (
-        <Bear currentPlayer={`${minion.alignment}-color`} />
-      )
-    );
-  }
+export function whichAnimalSVG(minion: minionType) {
+  return minion.type === 'Squirrel' ? (
+    <Squirrel currentPlayer={`${minion.alignment}-color`} />
+  ) : minion.type === 'Badger' ? (
+    <Badger currentPlayer={`${minion.alignment}-color`} />
+  ) : minion.type === 'Hare' ? (
+    <Hare currentPlayer={`${minion.alignment}-color`} />
+  ) : minion.type === 'Deer' ? (
+    <Deer currentPlayer={`${minion.alignment}-color`} />
+  ) : minion.type === 'Koala' ? (
+    <Koala currentPlayer={`${minion.alignment}-color`} />
+  ) : (
+    minion.type === 'Bear' && (
+      <Bear currentPlayer={`${minion.alignment}-color`} />
+    )
+  );
+}
 
-  // Working, where do I put it?
-  // (document.getElementById('text-reverse-yep') as unknown as HTMLElement).textContent = `${gameStats.p2Towers.length}`;
+export default function LeftBar (
+  {
+    currentMinion,
+    minions,
+    currentTower,
+    gameStats,
+    towers,
+    currentPlayer
+  }: {
+    currentMinion: null | number;
+    currentTower: null | TowerType;
+    minions: { [key: number]: minionType };
+    gameStats: {
+      timeRemaining: number;
+      p1Coins: number;
+      p2Coins: number;
+      p1Towers: number[];
+      p2Towers: number[];
+      p1MinionCount: number;
+      p2MinionCount: number;
+    };
+    towers: TowerType[];
+    currentPlayer: string;
+  }
+) {
 
   const user = useAppSelector((state) => state.user);
-
+  
   return (
     <div className="leftBarContainer">
       <div className="flags">
@@ -106,7 +116,7 @@ function LeftBar({
             textReverse="text-reverse-nope"
           />
         </div>
-        <h1 className="p2Name">Isaac</h1>
+        <h1 className="p2Name">Opponent</h1>
         <div className="p2Flag">
           <FlagSVG
             playerName="Isaac"
@@ -239,8 +249,16 @@ function LeftBar({
           <ZoomOutSVG />
         </div>
       </div>
+      {/* <MediaQuery maxWidth={950}>
+        <div>
+          <LeftBarSmall
+            currentTower={currentTower}
+            currentMinion={currentMinion}
+            minions={minions}
+            gameStats={gameStats}
+            towers={towers} />
+        </div>
+      </MediaQuery> */}
     </div>
   );
 }
-
-export default LeftBar;
