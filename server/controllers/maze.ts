@@ -5,7 +5,6 @@ async function createMaze(req: express.Request, res: express.Response) {
     try {
         const {roomId} = req.body;
         const {graph,visited,classes,towers} = mazes[roomId];
-        console.log(classes);
         res.status(201).json({graphBE:graph,visited,classes,towers});
     } catch (error) {
         console.log(error);

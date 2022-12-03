@@ -38,7 +38,7 @@ function WaitingRoom() {
     return ()=>{ 
       socket.emit('clear waiting', socket.id)
       setPlayClicked(false);
-     } 
+    } 
   }, []);
 
   function hostRoom() {
@@ -92,6 +92,10 @@ function WaitingRoom() {
       setPlayClicked(false);
     }
   }
+
+  useEffect(() => {
+    if (!(playClicked || joinClicked || createClicked)) socket.emit('clear waiting', socket.id)
+  }, [playClicked, joinClicked, createClicked]);
 
   return (
     <div className="waiting-room">

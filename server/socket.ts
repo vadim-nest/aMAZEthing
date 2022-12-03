@@ -21,8 +21,8 @@ export let mazes: {[id: string]: MazeType} = {};
 
 export default function Connect(server: http.Server) {
 
-  let waiting: string[] = [];
-  let playerSearch: string[] = [];
+  let waiting: {socketId: string, roomId: string}[] = [];
+  let playerSearch: {socketId: string, roomId: string}[] = [];
   let activeGames: {
     roomId: string,
     timeRemaining: number,
@@ -41,11 +41,17 @@ export default function Connect(server: http.Server) {
       credentials: true,
     },
   });
+
+  function clearRoomsBySocket(socketId) {
+    playerSearch = playerSearch.filter(room => room.socketId !== socketId);
+    waiting = waiting.filter(room => room.socketId !== socketId);
+  }
+
   io.on('connection', socket => {
     console.log('user connected');
     socket.on('host', () => {
       const roomId = generateRoomId();
-      waiting.push(roomId);
+      waiting.push({socketId: socket.id, roomId});
       const maze = generateMaze(86, 40) // TODO: Generalize this;
       mazes[roomId] = maze;
       socket.join(roomId);
@@ -53,28 +59,29 @@ export default function Connect(server: http.Server) {
     })
 
     socket.on('join', (roomId) => {
-      if (waiting.includes(roomId)) {
+      const found = waiting.find(room => room.roomId === roomId);
+      if (found) {
         socket.join(roomId);
         io.to(socket.id).emit('receive room id', roomId);
         io.to(socket.id).emit('set player 2');
         io.to(roomId).emit('Game start');
       }
     })
+
     socket.on('play', () => {
       if (playerSearch.length !== 0) {
-        const roomId = playerSearch.pop() as string;
+        const roomId = playerSearch.pop().roomId;
         socket.join(roomId);
         io.to(socket.id).emit('receive room id', roomId);
         io.to(socket.id).emit('set player 2');
         io.to(roomId).emit('Game start');
       } else {
-        // const roomId = generateRoomId();
-        playerSearch.push(socket.id);
+        const roomId = generateRoomId();
+        playerSearch.push({socketId: socket.id, roomId});
         const maze = generateMaze(86, 40);
-        io.to(socket.id).emit('set player 1');
-        mazes[socket.id] = maze;
-        socket.join(socket.id);
-        io.to(socket.id).emit('receive room id', socket.id);
+        mazes[roomId] = maze;
+        socket.join(roomId);
+        io.to(socket.id).emit('receive room id', roomId);
       }
     });
 
@@ -89,21 +96,14 @@ export default function Connect(server: http.Server) {
         socket.to(roomID).emit('enterTower', towerId, minionId)
     })
 
-    socket.on('clear waiting', (socketId) => {
-      console.log(playerSearch)
-      if(playerSearch[0]=== socketId) {
-        playerSearch.pop()
-      }
-      console.log(playerSearch)
+    socket.on('clear waiting', () => {
+      clearRoomsBySocket(socket.id);
     })
 
     socket.on('disconnect', ()=>{
-      console.log(playerSearch)
-      if(playerSearch[0] && playerSearch[0] === socket.id){
-          playerSearch.pop()
-      }
-      console.log(playerSearch)
+      clearRoomsBySocket(socket.id);
       console.log('a user disconnected')
     })
   })
 }
+
