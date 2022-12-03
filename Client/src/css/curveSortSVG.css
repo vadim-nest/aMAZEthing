@@ -53,14 +53,6 @@ svg {
 
 }
 
-/* .circles-after {
-  fill: var(--dark-brown);
-}
-
-.nut-after {
-  fill: var(--yellow);
-} */
-
 .lesson-name {
   fill: var(--dark-brown);
   stroke: var(--dark-brown);
