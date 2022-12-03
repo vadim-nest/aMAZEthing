@@ -66,7 +66,7 @@ export default function SelectionLesson() {
             </button>
           }
            {!isSorted && clicked &&
-           <button className="button clickSort visualizing">visualizing</button>
+           <button className="button clickSort visualizing">wait...</button>
           }
         </div>
         <Visualization

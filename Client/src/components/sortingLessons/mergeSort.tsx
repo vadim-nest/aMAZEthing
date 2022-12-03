@@ -10,7 +10,7 @@ export default function MergeLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 28
+  let WIDTH = 35
   let MIN_VAL = 10
   let MAX_VAL = 100
   let NUM_BARS = 25
@@ -51,7 +51,7 @@ export default function MergeLesson() {
         <p>{paragraphs.firstP}</p>
       </div>
 
-      <div className="lesson-wrapper-2  merge-visual-height">
+      <div className="lesson-wrapper-2">
         <div>
         {!clicked &&
            < button className="button clickSort" onClick={() => initArr()}>
@@ -72,8 +72,8 @@ export default function MergeLesson() {
 
           {!isSorted && clicked &&
            <button
-           className="button clickSort visualizing">
-             visualizing </button>
+           className="button clickSort">
+             wait... </button>
           }
 
         </div>

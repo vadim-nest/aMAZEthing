@@ -69,7 +69,9 @@ export default function InsertionLesson() {
             </button>
           }
            {!isSorted && clicked &&
-           <button className="button clickSort visualizing">visualizing</button>
+            <button
+            className="button clickSort">
+              wait... </button>
           }
         </div>
         <Visualization   fontColor={'white'} width={WIDTH} delay={DELAY} margin={MARGIN} height={HEIGHT} paddingTop={PADTOP} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={insertionSortVisual} setClicked={setClicked} setIsSorted={setIsSorted}/>

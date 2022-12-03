@@ -10,7 +10,6 @@ import ProfileGameHistory from './profileGameHistory';
 import sort from '../../assets/profile/sort.png';
 import path from '../../assets/profile/path.png';
 import changeMe from '../../assets/profile/changeMe.png';
-import TowerSVG from '../svg/towerSVG';
 
 function Profile() {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();

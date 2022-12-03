@@ -19,7 +19,7 @@ export default function QuickLesson() {
   let DELAY = 10
   let PADTOP = 5
   let MARGIN = 3
-  let HEIGHT = 5
+  let HEIGHT = 8
 
   let paragraphs = {
     sortName: 'Quick sort',
@@ -53,7 +53,7 @@ export default function QuickLesson() {
         <p>{paragraphs.firstP}</p>
       </div>
 
-      <div className="lesson-wrapper-2 quick-sort-visual-height">
+      <div className="lesson-wrapper-2">
         <div>
         {!clicked &&
            < button className="button clickSort" onClick={() => initArr()}>
@@ -74,7 +74,7 @@ export default function QuickLesson() {
 {!isSorted && clicked &&
            <button
            className="button clickSort visualizing">
-             visualizing </button>
+             wait... </button>
           }
         </div>
 
