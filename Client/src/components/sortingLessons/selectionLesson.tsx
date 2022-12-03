@@ -55,8 +55,7 @@ export default function SelectionLesson() {
               new array
             </button>
           )}
-
-          {!clicked && !isSorted && (
+          {!clicked &&!isSorted &&
             <button
               className="button clickSort"
               onClick={() => {
@@ -65,7 +64,10 @@ export default function SelectionLesson() {
             >
               visualize
             </button>
-          )}
+          }
+           {!isSorted && clicked &&
+           <button className="button clickSort visualizing">visualizing</button>
+          }
         </div>
         <Visualization
           fontColor={'white'}

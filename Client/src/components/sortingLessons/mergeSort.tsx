@@ -10,7 +10,7 @@ export default function MergeLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 35
+  let WIDTH = 28
   let MIN_VAL = 10
   let MAX_VAL = 100
   let NUM_BARS = 25
@@ -42,7 +42,7 @@ export default function MergeLesson() {
     setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
   }
 
- 
+
 
   return (
     <div className="whole-page-wrapper">
@@ -51,9 +51,9 @@ export default function MergeLesson() {
         <p>{paragraphs.firstP}</p>
       </div>
 
-      <div className="lesson-wrapper-2">
+      <div className="lesson-wrapper-2  merge-visual-height">
         <div>
-        {!clicked && 
+        {!clicked &&
            < button className="button clickSort" onClick={() => initArr()}>
             new array
           </button>}
@@ -71,14 +71,14 @@ export default function MergeLesson() {
 
 
           {!isSorted && clicked &&
-           <button 
-           className="button clickSort">
-             wait... </button>
+           <button
+           className="button clickSort visualizing">
+             visualizing </button>
           }
 
         </div>
-        
-        <Visualization   fontColor={'white'} width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={mergeSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
+
+        <Visualization fontColor={'white'} width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={mergeSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
 
       </div>
     </div>
