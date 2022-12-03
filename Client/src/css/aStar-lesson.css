@@ -1,57 +1,41 @@
-.whole-page-wrapper {
-    background-color: var(--white);
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    overflow: scroll;
-  }
-  
-  .aStar #myCanvas {
-    position: relative;
-    display: grid;
-    place-items: start;
-    transform: rotate(-45deg) scale(0.5, 0.5);
-  }
-  
-  .but-options {
-    height: fit-content;
-    z-index: 2;
-  }
-  
-  .aStar .lesson-wrapper-2 {
-    background-color: var(--white);
-    border-color: var(--white);
-    border-radius: 20px;
-    min-width: 70vw;
-    width: 500px;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .main-green-line {
-    stroke: 'var(--main-green)';
-  }
-  
-  .svg-circle {
-    height: 100px;
-    width: 100px;
-    z-index: 2;
-  }
-  
-  .svg-line {
-    position: absolute;
-    z-index: 1;
-  }
-  
-  .aStar .tree-level {
-    height: 175px;
-    width: fit-content;
-    display: flex;
-    align-items: space-between;
-    justify-content: center;
-  }
-  
+.aStar .whole-page-wrapper {
+  background-color: var(--white);
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: scroll;
+}
+.aStar .lesson-wrapper-2 {
+  background-color: var(--white);
+  border-color: var(--white);
+  border-radius: 20px;
+  min-width: 70vw;
+  width: 900px;
+  height: 900px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aStar #myCanvas {
+  position: relative;
+}
+.aStar .graph-vertices {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  /* grid-auto-flow: column; */
+  place-items: start;
+  transform: rotate(0deg) scale(2, 2);
+  z-index: 2;
+}
+.aStar .graph-edges {
+  position: absolute;
+  display: grid;
+  gap: 10px;
+  place-items: start;
+  z-index: 3;
+}

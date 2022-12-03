@@ -1,30 +1,43 @@
-.dfs #myCanvas {
-  position: relative;
-  width: 1000px;
-  height: fit-content;
-  min-height: 700px;
+.dfs .whole-page-wrapper {
+  background-color: var(--white);
+  height: 90vh;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  transform: rotate(-45deg);
-}
-.main-green-line {
-  stroke: 'var(--main-green)';
-}
-.svg-circle {
-  height: 100px;
-  width: 100px;
-  z-index: 2;
-}
-.svg-line {
-  position: absolute;
-  z-index: 1;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: scroll;
 }
 
-.dfs .tree-level {
-  height: 100px;
-  width: fit-content;
+.dfs .lesson-wrapper-2 {
+  background-color: var(--white);
+  border-color: var(--white);
+  border-radius: 20px;
+  min-width: 70vw;
+  width: 900px;
+  height:900px;
+  color: var(--white);
   display: flex;
-  align-items: space-between;
+  align-items: center;
   justify-content: center;
+}
+
+.dfs #myCanvas {
+  position: relative;
+}
+
+.dfs .graph-vertices{
+  position: relative;
+  display: grid;
+  gap:10px;
+  /* grid-auto-flow: column; */
+  place-items: start;
+  transform: rotate(0deg) scale(0.8, 0.8);
+  z-index: 2;
+}
+.dfs .graph-edges{
+  position:absolute;
+  display: grid;
+  gap:10px;
+  place-items: start;
+  z-index: 3;
 }

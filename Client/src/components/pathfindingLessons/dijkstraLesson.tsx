@@ -1,10 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import "../../css/dijkstra-lesson.css";
-import { Tree, Graph } from "../../utils/path-finding-learning-logic";
+import { generateConnectedGraph } from "../../utils/maze";
+import { Graph, value } from "../../utils/graph";
+import GraphVertex from "../graphVertex";
+
+
 function DijkstraLesson() {
-  const [graph,setGraph] = useState<Graph>()
-  const [triggerDisplay,setTriggerDisplay] = useState(false)
   const ref:any = useRef(null);
+  const [graph,setGraph] = useState<Graph>();
+  const [path,setPath] = useState<any>();
 
 
   let paragraphs = {
@@ -13,29 +17,24 @@ function DijkstraLesson() {
       'This algorithm uses the weights of the edges to find the path that minimizes the total distance (weight) between the source node and all other nodes.',
   };
 
-  useEffect(()=>{
-    if(triggerDisplay) (document.querySelector('.dijk .lesson-wrapper-2') as unknown as HTMLElement).style.borderColor = 'var(--main-green)'
-  },[triggerDisplay])
-
   useEffect(() => {
-    // async function TreeVisual() {
-    //   const t = new Tree();
-    //   await delay(1000);
-    //   for (let i = 0; i < 15; i++) {
-    //     t.add();
-    //   }
-    //   t.bfs();
-    //   t.calculateWidthDynamically(ref.current.offsetWidth);
-    //   t.createLines(175,true);//true with weights
-    //   t.getNodes();
-    //   console.log(t.getLineStructure())
-    //   let g = new Graph(t.getArrNodes(), t.getDepth(), t.getLineStructure());
-    //   setGraph(g);
-    // }
-    // TreeVisual();
-  }, []);
+    const graph = generateConnectedGraph(5,5,true)
+    console.log(graph);
+    setGraph(graph);
+    setPath(graph.findPath(0,24));
+}, []);
+
   async function dijkstra(){
-    await graph?.printPath(await graph?.dijkstra());
+    console.log('PATH',path);
+    for(let i =0;i<path.length;i++){
+      await delay(100);
+      document.getElementById(`${path[i]}`)!.style.backgroundColor = 'var(--main-green)';
+      await delay(100);
+      if(i+1!==path.length){
+        if(path[i]<path[i+1]) document.getElementById(`${path[i]},${path[i+1]}-${path[i+1]},${path[i]}`)!.style.backgroundColor = 'var(--main-green)';
+        else document.getElementById(`${path[i+1]},${path[i]}-${path[i]},${path[i+1]}`)!.style.backgroundColor = 'var(--main-green)';
+      }
+    }
   }
   
   function delay(time: number) {
@@ -43,16 +42,18 @@ function DijkstraLesson() {
   }
 
   return (
-    <div  className="whole-page-wrapper dijk">
-      <div className="lesson-wrapper">
+    <div  className="dijk whole-page-wrapper">
+      <div className="dijk lesson-wrapper">
         <h1>{paragraphs.sortName}</h1>
         <p>{paragraphs.firstP}</p>
       </div>
-      <div className="lesson-wrapper-2">
-        <div className="but-options">
-          <button className="button" onClick={dijkstra}>Visualize</button>
+      <button  onClick={()=>dijkstra()}></button>
+      <div className="dijk lesson-wrapper-2">
+        <div ref={ref} id="dijk myCanvas" >
+          <div className="dijk graph-vertices" style={{gridTemplateColumns: `repeat(5, 1fr)`}}>
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={vertex} width={5} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} />)}
+          </div>
         </div>
-        <div ref={ref} id="myCanvas"></div>
       </div>
     </div>
   );

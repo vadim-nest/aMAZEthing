@@ -30,7 +30,15 @@ export function dFSShortest (valueX: value, valueY: value, graph: Graph, path = 
 export function dFS (valueX: value, valueY: value, graph: Graph, path = [valueX]): (false | value[]) {
   let neighbors = graph.neighbors(valueX);
   if (neighbors.includes(valueY)) return path.concat([valueY]);
-  for (let neighbor of neighbors) {
+  let shuffledNeighbors = Array(neighbors.length).fill(null);
+  for (let i = 0; i < shuffledNeighbors.length; i++) {
+      let index = Math.floor(Math.random() * shuffledNeighbors.length);
+      while (shuffledNeighbors[index] !== null) {
+          index = Math.floor(Math.random() * shuffledNeighbors.length);
+      }
+      shuffledNeighbors[index] = neighbors[i];
+  }
+  for (let neighbor of shuffledNeighbors) {
     if (path.includes(neighbor)) continue;
     let search = dFS(neighbor, valueY, graph, path.concat(neighbor));
     if (search) return search;
