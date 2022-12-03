@@ -26,8 +26,6 @@ function crossButtonHover(isOnHover: boolean) {
       : ((svgEl as unknown as HTMLElement).style.fill = `var(--white-green)`)
 
   });
-
-
 }
 
 function whichAnimalSVG (minion: minionType) {

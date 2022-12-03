@@ -11,16 +11,11 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
   const { loginWithRedirect, logout, user, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const dispatch = useAppDispatch();
 
   const toggleNavbar = () => {
     setToggle(!toggle);
-  };
-
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
   };
 
   useEffect(() => {
@@ -35,6 +30,11 @@ function Navbar() {
     };
     getMessage();
   }, [user]);
+
+  function helperNavigate (navigateURL: string) {
+    navigate(navigateURL);
+    toggleNavbar();
+  }
 
   return (
     <>
@@ -84,7 +84,6 @@ function Navbar() {
               className="container"
               onClick={() => {
                 toggleNavbar();
-                toggleModal();
               }}
             >
               <div className={`bar1 ${toggle && 'active'}`} />
@@ -94,14 +93,12 @@ function Navbar() {
           </MediaQuery>
         </div>
         <MediaQuery maxWidth={950}>
-          <div className={`modal-body open-${modalOpen}`}>
+          <div className={`modal-body open-${toggle}`}>
             {location.pathname === '/' && (
               <button
                 className="button"
                 onClick={() => {
-                  navigate('/about');
-                  toggleModal();
-                  toggleNavbar();
+                  helperNavigate('/about');
                 }}
               >
                 ABOUT
@@ -111,9 +108,7 @@ function Navbar() {
               <button
                 className="button"
                 onClick={() => {
-                  navigate('/learning');
-                  toggleModal();
-                  toggleNavbar();
+                  helperNavigate('/learning');
                 }}
               >
                 LEARN
@@ -123,9 +118,7 @@ function Navbar() {
               <button
                 className="button"
                 onClick={() => {
-                  navigate('/waitingRoom');
-                  toggleModal();
-                  toggleNavbar();
+                  helperNavigate('/waitingRoom');
                 }}
               >
                 PLAY
@@ -136,9 +129,7 @@ function Navbar() {
                 id="profile"
                 className="button"
                 onClick={() => {
-                  navigate('/profile');
-                  toggleModal();
-                  toggleNavbar();
+                  helperNavigate('/profile');
                 }}
               >
                 PROFILE
@@ -150,7 +141,6 @@ function Navbar() {
                 className="button"
                 onClick={() => {
                   loginWithRedirect();
-                  toggleModal();
                   toggleNavbar();
                 }}
               >
@@ -162,7 +152,6 @@ function Navbar() {
                 className="button"
                 onClick={() => {
                   logout();
-                  toggleModal();
                   toggleNavbar();
                 }}
               >
