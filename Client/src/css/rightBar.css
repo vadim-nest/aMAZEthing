@@ -8,11 +8,11 @@
   height: max-content;
   flex-direction: column;
   margin-top: -1.5vh;
+  min-width: 150px;
 }
 
 .store-button {
   width: 94%;
-  /* margin-top: 100%; */
   background-color: transparent;
   border: none;
   border-radius: 0 0 15px 15px;
