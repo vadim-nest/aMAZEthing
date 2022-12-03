@@ -19,7 +19,7 @@ export default function QuickLesson() {
   let DELAY = 10
   let PADTOP = 5
   let MARGIN = 3
-  let HEIGHT = 8
+  let HEIGHT = 5
 
   let paragraphs = {
     sortName: 'Quick sort',
@@ -44,7 +44,7 @@ export default function QuickLesson() {
     setArray(array => array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL));
   }
 
- 
+
 
   return (
     <div className="whole-page-wrapper">
@@ -53,14 +53,14 @@ export default function QuickLesson() {
         <p>{paragraphs.firstP}</p>
       </div>
 
-      <div className="lesson-wrapper-2">
+      <div className="lesson-wrapper-2 quick-sort-visual-height">
         <div>
-        {!clicked && 
+        {!clicked &&
            < button className="button clickSort" onClick={() => initArr()}>
             new array
           </button>}
 
-          {!clicked &&!isSorted && 
+          {!clicked &&!isSorted &&
             <button
               className="button clickSort"
               onClick={() => {
@@ -72,12 +72,12 @@ export default function QuickLesson() {
           }
 
 {!isSorted && clicked &&
-           <button 
-           className="button clickSort">
-             wait... </button>
+           <button
+           className="button clickSort visualizing">
+             visualizing </button>
           }
         </div>
-        
+
         <Visualization   fontColor={'white'}  width={WIDTH} delay={DELAY} margin={MARGIN} paddingTop={PADTOP} height={HEIGHT} array={array} key={array} animations ={animations} clicked={clicked} sortingAlgo={quickSortVisual}  setClicked={setClicked}   setIsSorted={ setIsSorted}  />
 
       </div>
