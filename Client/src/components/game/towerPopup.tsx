@@ -6,9 +6,9 @@ import { minionType, TowerType } from '../../utils/types';
 import Visualization from '../sortingLessons/visualization';
 
 
-function TowerPopup ({boxSize, tower, width, height, towersSorting}: {boxSize: number, tower: TowerType, width: number, height: number, towersSorting: {[key: number]: number}}) {
+function TowerPopup ({boxSize, tower, width, height}: {boxSize: number, tower: TowerType, width: number, height: number}) {
 
-  const {zoomed} = useAppSelector(state => state.game);
+  const {zoomed, towersSorting} = useAppSelector(state => state.game);
 
   return <div style={tower.minion !== null && !zoomed ? {'opacity': 1} : {'opacity': 0}} className={`towerPopup ${
     tower.id/width < height/4 ? 'downPopup' :
@@ -31,7 +31,7 @@ function TowerPopup ({boxSize, tower, width, height, towersSorting}: {boxSize: n
         quickSortVisual
       } 
       key={tower.numbers} 
-      clicked={tower.minion !== null && !towersSorting[tower.id]++} 
+      clicked={tower.minion !== null && !towersSorting[tower.id]} 
       delay={tower.minionSortingSpeed} 
       tower={tower.id}/>
   </div>

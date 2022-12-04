@@ -5,12 +5,11 @@ import TowerPopup from "./towerPopup";
 import { useAppDispatch } from "../../features/hooks";
 import { updateCurrentMinion, updateCurrentTile, updateCurrentTower } from "../../features/game_slice";
 
-function Tower({ tower, boxSize, width, height, towersSorting }: {
+function Tower({ tower, boxSize, width, height }: {
   tower: TowerType,
   boxSize: number,
   width: number,
   height: number,
-  towersSorting: {[key: number]: number},
 } ) {
 
   const dispatch = useAppDispatch();
@@ -45,7 +44,7 @@ function Tower({ tower, boxSize, width, height, towersSorting }: {
                   tower.alignment === 'p2' ? 'p2TowerShadow' :
                   'neutralTowerShadow'}
       />
-      <TowerPopup towersSorting={towersSorting} boxSize={boxSize} tower={tower} width={width} height={height}/>
+      <TowerPopup boxSize={boxSize} tower={tower} width={width} height={height}/>
     </div>
   )
 }

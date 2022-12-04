@@ -12,7 +12,7 @@ import socket from '../../services/socket';
 import GameOver from './gameOver';
 import { store } from '../../features/store';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';
-import { addMovingMinion, addNewMinionState, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMinion, updateZoomed } from '../../features/game_slice';
+import { addMovingMinion, addNewMinionState, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMazePath, updateMinion, updateTowerNumbers, updateZoomed } from '../../features/game_slice';
 
 
 socket.on('message', message => {console.log(message)});
@@ -21,12 +21,11 @@ export interface GameStatsType {timeRemaining: number, p1Coins: number, p2Coins:
 
 function Game() { // TODO: Extract logic to maze class
 
-  const {currentPlayer, roomId, mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, currentTower, gameStats, gameEnded, minions, currentTile, movingMinions} = useAppSelector(state => state.game);
+  const {currentPlayer, roomId, mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, currentTower, gameStats, gameEnded, minions, currentTile, movingMinions, towers} = useAppSelector(state => state.game);
 
   const dispatch = useAppDispatch();
 
-  const [towers, setTowers] = useState<TowerType[]>([]);
-  const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
+
   const array: MazeTileType[] = [];
 
   for (let i = 0; i < width*height; i++) {
@@ -78,7 +77,7 @@ function Game() { // TODO: Extract logic to maze class
     })
   }, [minions, towers]);
 
-  const [maze, setMaze] = useState<{currentMinion: null | number, maze: MazeTileType[]}>({currentMinion: null, maze: array});
+  // const [maze, setMaze] = useState<{currentMinion: null | number, maze: MazeTileType[]}>({currentMinion: null, maze: array});
   const speed = 300; // TODO: Give each animal a different speed
 
   function addNewMinion(type: animal, player: 'p1' | 'p2') { // TODO: Extract to minion class
@@ -200,12 +199,12 @@ function Game() { // TODO: Extract logic to maze class
 
   useEffect(() => {
     setPath([], [], null);
-    setMaze(prevMaze => {
-      return {
-        ...prevMaze,
-        currentMinion
-      }
-    })
+    // setMaze(prevMaze => {
+    //   return {
+    //     ...prevMaze,
+    //     currentMinion
+    //   }
+    // })
     if (currentMinion !== null && !movingMinions.includes(currentMinion as number)) {
       dispatch(updateCurrentTile(null));
       dispatch(setWaitingForTile(true));
@@ -219,19 +218,20 @@ function Game() { // TODO: Extract logic to maze class
 
   function setPath(path: number[], visited: number[], minionId: number | null) {
     if (currentMinion === minionId) {
-      setMaze(prevMaze => {
-        if (prevMaze.currentMinion !== minionId) {
-          path = [];
-          visited = [];
-        };
-        const newMaze = [...prevMaze.maze];
-        for (let i = 0; i < newMaze.length; i++) {
-          if (path.includes(i)) newMaze[i].path = 'PATH';
-          else if (visited.includes(i)) newMaze[i].path = 'THOUGHTPROCESS';
-          else newMaze[i].path = '';
-        }
-        return {...prevMaze, maze: newMaze};
-      });
+      // setMaze(prevMaze => {
+      //   if (prevMaze.currentMinion !== minionId) {
+      //     path = [];
+      //     visited = [];
+      //   };
+      //   const newMaze = [...prevMaze.maze];
+      //   for (let i = 0; i < newMaze.length; i++) {
+      //     if (path.includes(i)) newMaze[i].path = 'PATH';
+      //     else if (visited.includes(i)) newMaze[i].path = 'THOUGHTPROCESS';
+      //     else newMaze[i].path = '';
+      //   }
+      //   return {...prevMaze, maze: newMaze};
+      // });
+      dispatch(updateMazePath({path, visited, minionId}));
     }
   }
 
@@ -244,38 +244,6 @@ function Game() { // TODO: Extract logic to maze class
   }, [currentTile])
 
   async function enterTower(towerId: number, minionId: number, movedAfter = true) {
-    dispatch(updateZoomed(false));
-    setTowersSorting(prevTowerSorting => {
-      const newTowerSorting = {
-        ...prevTowerSorting,
-        [towerId]: 0
-      }
-      return newTowerSorting;
-    })
-    setTowers(prevTowers => {
-      const minion = minions[minionId];
-      const newTowers = [...prevTowers];
-      return newTowers.map(tower => {
-        if (towerId !== tower.id) return tower;
-        else {
-          let animations = (
-            minion.sortingAlgo === 'bubble' ? bubbleSortAlgo([...tower.numbers], minion.alignment === 'p1') :
-            minion.sortingAlgo === 'insertion' ? insertionSortAlgo([...tower.numbers], minion.alignment === 'p1') :
-            minion.sortingAlgo === 'selection' ? selectionSortAlgo([...tower.numbers], minion.alignment === 'p1') :
-            minion.sortingAlgo === 'merge' ? mergeSortAlgo([...tower.numbers], minion.alignment === 'p1') :
-            quickSortAlgo([...tower.numbers], minion.alignment === 'p1')
-          )
-          return {
-          ...tower,
-          minion: minion.id,
-          minionAlignment: minion.alignment,
-          minionSortingSpeed: minion.sortingSpeed,
-          sortingAlgo: minion.sortingAlgo,
-          animations: [...animations],
-          }
-        }
-      })
-    })
 
     dispatch(minionEnterTower({minionId, towerId}));
     if (currentMinion === minionId) {
@@ -295,15 +263,7 @@ function Game() { // TODO: Extract logic to maze class
       const interval = setInterval(()=>{
         if (minion.alignment === 'p2') array.sort((a, b) => a - b);
         else array.sort((a,b) => b - a);
-        setTowers(prevTowers => {
-          return prevTowers.map(tower => {
-            if (tower.id !== towerId) return tower;
-            return {
-              ...tower,
-              numbers: [...array]
-            }
-          })
-        })
+        dispatch(updateTowerNumbers({towerId, newNumbers: array}));
         clearInterval(interval);
         resolve(true);
       }, minion.sortingSpeed*2*(animations.length + 4));
@@ -321,26 +281,7 @@ function Game() { // TODO: Extract logic to maze class
         socket.emit('conquerTower', roomId, towerId, false, currentPlayer);
       }
     }
-    setTowersSorting(prevTowerSorting => {
-      const newTowerSorting = {
-        ...prevTowerSorting,
-        [towerId]: 0
-      }
-      return newTowerSorting;
-    })
-
-    setTowers(prevTowers => {
-      const newTowers = [...prevTowers];
-      return newTowers.map(tower => {
-        if (towerId !== tower.id) return tower;
-        else return {
-          ...tower,
-          minion: null,
-          alignment: minion.alignment
-        }
-      })
-    })
-    dispatch(minionExitTower(minionId));
+    dispatch(minionExitTower({minionId, towerId}));
     dispatch(addMovingMinion(currentMinion as number));
     tower = towers.find(tower => tower.id === towerId) as TowerType;
     if (movedAfter) {
@@ -362,11 +303,7 @@ function Game() { // TODO: Extract logic to maze class
             currentPlayer={currentPlayer}
             />
           <Maze
-            maze={maze}
-            setMaze={setMaze}
             towers={towers}
-            towersSorting={towersSorting}
-            setTowers={setTowers}
             currentPlayer={currentPlayer}
             />
           <RightBar
