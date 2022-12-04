@@ -18,7 +18,6 @@ function DfsLesson() {
   };
 
   useEffect(() => {
-    setGraph([]);
     const graph = generateConnectedGraph(width, width, true);
     graph.removeUnweightedEdges();
     setGraph(graph);
@@ -71,7 +70,7 @@ function DfsLesson() {
       <div className="dfs lesson-wrapper-2">
         <div ref={ref} id="dfs myCanvas" >
           <div className="dfs graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={vertex} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} weightedGraph={false}/>)}
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={graph.edges.filter((edge:any)=>edge[0]===vertex)} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} weightedGraph={false}/>)}
           </div>
         </div>
       </div>
