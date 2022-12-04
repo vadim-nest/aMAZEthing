@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import '../css/gameOver.css';
+import '../../css/gameOver.css';
 
 function GameOver ({gameStats, currentPlayer} : {
   gameStats: {

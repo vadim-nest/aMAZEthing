@@ -1,8 +1,8 @@
-import '../css/towerPopup.css';
-import { bubbleSortAlgo } from '../utils/sorting-algo';
-import { bubbleSortVisual, insertionSortVisual, mergeSortVisual, quickSortVisual, selectionSortVisual } from '../utils/sorting-helper-visual';
-import { minionType, TowerType } from '../utils/types';
-import Visualization from './sortingLessons/visualization';
+import '../../css/towerPopup.css';
+import { bubbleSortAlgo } from '../../utils/sorting-algo';
+import { bubbleSortVisual, insertionSortVisual, mergeSortVisual, quickSortVisual, selectionSortVisual } from '../../utils/sorting-helper-visual';
+import { minionType, TowerType } from '../../utils/types';
+import Visualization from '../sortingLessons/visualization';
 
 
 function TowerPopup ({boxSize, tower, width, height, towersSorting, zoomed}: {boxSize: number, tower: TowerType, width: number, height: number, towersSorting: {[key: number]: number}, zoomed: boolean}) {

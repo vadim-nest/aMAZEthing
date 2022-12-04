@@ -1,6 +1,6 @@
-import P1Home from "./svg/p1Home";
-import P2Home from "./svg/p2Home";
-import '../css/home.css';
+import P1Home from "../svg/p1Home";
+import P2Home from "../svg/p2Home";
+import '../../css/home.css';
 
 function home({ xPos, yPos, boxSize, player }: { xPos: number, yPos: number, boxSize: number, player: 'p1' | 'p2' }) {
   return (

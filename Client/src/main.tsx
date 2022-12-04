@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import Welcome from './components/welcome';
-import Game from './components/game';
+import Game from './components/game/game';
 import Learning from './components/learning/learning';
 import Profile from './components/profile/profile';
 import About from './components/about';

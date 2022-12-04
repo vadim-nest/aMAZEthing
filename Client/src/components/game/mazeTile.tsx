@@ -1,5 +1,5 @@
-import '../css/mazeTile.css';
-import { TowerType } from '../utils/types';
+import '../../css/mazeTile.css';
+import { TowerType } from '../../utils/types';
 import Path from './path';
 
 function MazeTile({value, classes, path, boxSize, generated, setCurrentTileHelper, setCurrentTile, setCurrentMinion, setCurrentTower}: {

@@ -1,16 +1,16 @@
-import '../css/game.css';
+import '../../css/game.css';
 import Maze from './maze';
 import RightBar from './rightBar';
 import LeftBar from './leftBar';
 import { useEffect, useRef, useState } from 'react';
-import { animal, MazeTileType, minionType, TowerType } from '../utils/types';
-import { Graph, value } from '../utils/graph';
-import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../utils/path-finding-algo';
-import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, selectionSortAlgo } from '../utils/sorting-algo';
+import { animal, MazeTileType, minionType, TowerType } from '../../utils/types';
+import { Graph, value } from '../../utils/graph';
+import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../../utils/path-finding-algo';
+import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, selectionSortAlgo } from '../../utils/sorting-algo';
 import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
-import socket from '../services/socket';
+import socket from '../../services/socket';
 import GameOver from './gameOver';
-import { store } from '../features/store';
+import { store } from '../../features/store';
 
 
 socket.on('message', message => {console.log(message)});

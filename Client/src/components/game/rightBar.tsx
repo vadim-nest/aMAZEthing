@@ -1,10 +1,10 @@
-import '../css/rightBar.css';
-import ShopSVG from './svg/ShopSVG';
-import { animal, minionType } from '../utils/types';
-import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
+import '../../css/rightBar.css';
+import ShopSVG from '../svg/ShopSVG';
+import { animal, minionType } from '../../utils/types';
+import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import { useState } from 'react';
 import Shop from './shop';
-import CloseCross from './svg/closeCross';
+import CloseCross from '../svg/closeCross';
 
 function storeButtonHover(isOnHover: boolean) {
   document.querySelectorAll('.store-button-yellow').forEach((svgEl) => {

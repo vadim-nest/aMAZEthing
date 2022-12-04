@@ -1,12 +1,12 @@
-import '../css/leftBar.css';
-import { minionType, TowerType } from '../utils/types';
-import FlagSVG from './svg/flagSVG';
+import '../../css/leftBar.css';
+import { minionType, TowerType } from '../../utils/types';
+import FlagSVG from '../svg/flagSVG';
 import MediaQuery from 'react-responsive';
-import { useAppSelector } from '../features/hooks';
+import { useAppSelector } from '../../features/hooks';
 import React from 'react';
-import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG';
-import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
-import TowerSVG from './svg/towerSVG';
+import { ZoomInSVG, ZoomOutSVG } from '../svg/zoomButtonsSVG';
+import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
+import TowerSVG from '../svg/towerSVG';
 import LeftBarSmall from './leftBarSmall';
 
 export function zoomIn({

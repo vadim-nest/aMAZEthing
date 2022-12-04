@@ -1,6 +1,6 @@
-import { TowerType } from "../utils/types";
-import TowerSVG from "./svg/towerSVG";
-import '../css/tower.css'
+import { TowerType } from "../../utils/types";
+import TowerSVG from "../svg/towerSVG";
+import '../../css/tower.css'
 import TowerPopup from "./towerPopup";
 
 function Tower({ tower, boxSize, setCurrentTile, setCurrentTower, setCurrentMinion, width, height, towersSorting, zoomed }: {

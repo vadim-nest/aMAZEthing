@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import '../css/maze.css';
-import apiService from "../services/apiService";
-import { Graph, value } from "../utils/graph";
-import { MazeTileType, minionType, TowerType } from "../utils/types";
+import '../../css/maze.css';
+import apiService from "../../services/apiService";
+import { Graph, value } from "../../utils/graph";
+import { MazeTileType, minionType, TowerType } from "../../utils/types";
 import MazeTile from "./mazeTile";
 import Minion from "./minion";
 import Tower from "./tower";
 import Home from './home'
-
 
 function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers, currentTower, setCurrentTower, allTilesHidden, setAllTilesHidden, towersSorting, zoomed, currentPlayer}: {
   boxSize:number,
