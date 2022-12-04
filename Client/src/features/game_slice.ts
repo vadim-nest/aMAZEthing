@@ -224,6 +224,9 @@ const gameSlice = createSlice({
     },
     increaseTowersSorting(state, action: PayloadAction<number>) {
       state.towersSorting[action.payload]++;
+    },
+    updateMazeGenerated(state, action: PayloadAction<boolean>) {
+      state.mazeGenerated = action.payload;
     }
   }
 })
@@ -258,6 +261,7 @@ export const {
   updateMazePath,
   updateMazeClasses,
   updateDisplayVisited,
-  increaseTowersSorting
+  increaseTowersSorting,
+  updateMazeGenerated
 } = gameSlice.actions;
 export default gameSlice.reducer;

@@ -5,7 +5,7 @@ import FlagSVG from '../svg/flagSVG';
 import { useAppSelector } from '../../features/hooks';
 import { ZoomInSVG, ZoomOutSVG } from '../svg/zoomButtonsSVG';
 import TowerSVG from '../svg/towerSVG';
-import { zoomIn, zoomOut, zoomHover, whichAnimalSVG } from './leftBar';
+import { zoomHover, whichAnimalSVG } from './leftBar'; // zoomIn, zoomOut now dispatch
 import MediaQuery from 'react-responsive';
 
 export default function LeftBarSmall({

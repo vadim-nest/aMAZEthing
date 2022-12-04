@@ -8,7 +8,7 @@ import Minion from "./minion";
 import Tower from "./tower";
 import Home from './home'
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { mazeComplete, newTowers, setAllTilesHidden, setCurrentGraph, updateCurrentTile, updateDisplayVisited, updateMazeClasses } from "../../features/game_slice";
+import { mazeComplete, newTowers, setAllTilesHidden, setCurrentGraph, updateCurrentTile, updateDisplayVisited, updateMazeClasses, updateMazeGenerated } from "../../features/game_slice";
 
 function Maze({ towers, currentPlayer}: {
   towers: TowerType[],
@@ -16,53 +16,22 @@ function Maze({ towers, currentPlayer}: {
 }) {
 
   // TODO: Set as state
-  const {boxSize, height, width, currentGraph, allTilesHidden, minions, maze, displayVisited} = useAppSelector(state => state.game);
+  const {boxSize, height, width, currentGraph, allTilesHidden, minions, maze, displayVisited, mazeGenerated} = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
-
-  const [mazeGenerated, setMazeGenerated] = useState(false);
   
   useEffect(() => {
     async function mazeInit(){
       const mazeTiles = document.getElementsByClassName('mazeTile');
       if (mazeGenerated === false) {
-        setMazeGenerated(true);
-        // const {graph, visited, classes, towers} = generateMaze(width,height)
+        dispatch(updateMazeGenerated(true));
         
         const {graphBE, visited, classes, towers} = await apiService.createMaze()
         let graph = new Graph()
         graph.reAssign(graphBE)
-        console.log({graph, visited, classes, towers});
-        
-        // setTowers(() => towers.map((tower:any) => {
-        //   return {
-        //     id: tower[0],
-        //     xPos: tower[0]%width,
-        //     yPos: Math.floor(tower[0]/width),
-        //     numbers: tower[1],
-        //     color: 'red',
-        //     minion: null,
-        //     minionAlignment: null,
-        //     alignment: 'none',
-        //     animations: [],
-        //     minionSortingSpeed: null,
-        //     sortingAlgo: 'bubble'
-        //   }
-        // })
-        // )
         dispatch(newTowers(towers));
         dispatch(setCurrentGraph(graph));
         dispatch(updateDisplayVisited(visited));
-        // setMaze(oldMaze => {
-        //   const newMaze = [...oldMaze.maze];
-        //   for (let value of visited) {
-        //     newMaze[value as number] = {
-        //       ...newMaze[value as number],
-        //       classes: classes[value as value]
-        //     }
-        //   }
-        //   return {...oldMaze, maze: newMaze};
-        // })
         dispatch(updateMazeClasses({classes, visited}));
       }
       else if (allTilesHidden && currentGraph) {

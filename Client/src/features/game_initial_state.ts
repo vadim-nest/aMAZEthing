@@ -26,7 +26,8 @@ export interface GameState{ //shape of the state inside inside of the slice
   maze: MazeTileType[],
   maxBoxSize: number,
   minBoxSize: number,
-  displayVisited: value[]
+  displayVisited: value[],
+  mazeGenerated: boolean
 }
 const width = 86;
 const height = 40;
@@ -76,5 +77,6 @@ export const initialGameState: GameState = {
   maze: array,
   minBoxSize: 20,
   maxBoxSize: 100,
-  displayVisited: []
+  displayVisited: [],
+  mazeGenerated: false
 }

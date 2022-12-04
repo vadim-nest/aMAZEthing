@@ -26,11 +26,6 @@ function Game() { // TODO: Extract logic to maze class
   const dispatch = useAppDispatch();
 
 
-  const array: MazeTileType[] = [];
-
-  for (let i = 0; i < width*height; i++) {
-    array.push({value: i, classes: [], path: ''})
-  }
 
   useEffect(() => {
     console.log('setting maze generated');
@@ -77,7 +72,6 @@ function Game() { // TODO: Extract logic to maze class
     })
   }, [minions, towers]);
 
-  // const [maze, setMaze] = useState<{currentMinion: null | number, maze: MazeTileType[]}>({currentMinion: null, maze: array});
   const speed = 300; // TODO: Give each animal a different speed
 
   function addNewMinion(type: animal, player: 'p1' | 'p2') { // TODO: Extract to minion class
@@ -199,12 +193,6 @@ function Game() { // TODO: Extract logic to maze class
 
   useEffect(() => {
     setPath([], [], null);
-    // setMaze(prevMaze => {
-    //   return {
-    //     ...prevMaze,
-    //     currentMinion
-    //   }
-    // })
     if (currentMinion !== null && !movingMinions.includes(currentMinion as number)) {
       dispatch(updateCurrentTile(null));
       dispatch(setWaitingForTile(true));
@@ -218,19 +206,6 @@ function Game() { // TODO: Extract logic to maze class
 
   function setPath(path: number[], visited: number[], minionId: number | null) {
     if (currentMinion === minionId) {
-      // setMaze(prevMaze => {
-      //   if (prevMaze.currentMinion !== minionId) {
-      //     path = [];
-      //     visited = [];
-      //   };
-      //   const newMaze = [...prevMaze.maze];
-      //   for (let i = 0; i < newMaze.length; i++) {
-      //     if (path.includes(i)) newMaze[i].path = 'PATH';
-      //     else if (visited.includes(i)) newMaze[i].path = 'THOUGHTPROCESS';
-      //     else newMaze[i].path = '';
-      //   }
-      //   return {...prevMaze, maze: newMaze};
-      // });
       dispatch(updateMazePath({path, visited, minionId}));
     }
   }
