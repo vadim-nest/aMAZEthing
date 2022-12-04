@@ -53,8 +53,10 @@ export default function Connect(server: http.Server) {
 
   function clearRoomsBySocket(socket) {
     console.log(socket.rooms);
+    console.log({intervals});
     for (let room of socket.rooms) {
-      if (intervals[room]) clearInterval(intervals[room]);
+      console.log(room);
+      if (intervals[room]) {clearInterval(intervals[room]); delete intervals[room]};
       socket.leave(room);
       delete ready[room];
     }
