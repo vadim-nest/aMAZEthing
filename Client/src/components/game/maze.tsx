@@ -7,31 +7,24 @@ import MazeTile from "./mazeTile";
 import Minion from "./minion";
 import Tower from "./tower";
 import Home from './home'
+import { useAppDispatch, useAppSelector } from "../../features/hooks";
+import { mazeComplete, setAllTilesHidden, setCurrentGraph } from "../../features/game_slice";
 
-function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentTile, currentGraph, setCurrentGraph, height, width, maze, setMaze, towers, setTowers, currentTower, setCurrentTower, allTilesHidden, setAllTilesHidden, towersSorting, zoomed, currentPlayer}: {
-  boxSize:number,
-  height: number,
-  width: number,
-  setMazeCompleted: () => void,
+function Maze({minions, setCurrentTile, maze, setMaze, towers, setTowers, towersSorting, zoomed, currentPlayer}: {
   minions: minionType[],
-  setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
-  setCurrentGraph: React.Dispatch<React.SetStateAction<Graph | undefined>>,
-  currentGraph: Graph | undefined,
   maze: {currentMinion: null | number, maze: MazeTileType[]},
   setMaze: React.Dispatch<React.SetStateAction<{currentMinion: null | number, maze: MazeTileType[]}>>
   towers: TowerType[],
   setTowers: React.Dispatch<React.SetStateAction<TowerType[]>>,
-  currentTower: null | TowerType,
-  setCurrentTower: React.Dispatch<React.SetStateAction<null|TowerType>>
-  allTilesHidden: boolean,
-  setAllTilesHidden: React.Dispatch<React.SetStateAction<boolean>>,
   towersSorting: {[key: number]: number},
   zoomed: boolean,
   currentPlayer: 'p1' | 'p2'
 }) {
 
   // TODO: Set as state
+  const {boxSize, height, width, currentGraph, allTilesHidden} = useAppSelector(state => state.game);
+  const dispatch = useAppDispatch();
 
   function setCurrentTileHelper(value: number) {
     setCurrentTile({
@@ -71,7 +64,7 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
           }
         })
         )
-        setCurrentGraph(graph);
+        dispatch(setCurrentGraph(graph));
         setDisplayVisited(visited);
         setMaze(oldMaze => {
           const newMaze = [...oldMaze.maze];
@@ -100,8 +93,8 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
 
           if (index < displayVisited.length) requestAnimationFrame(step)
           else {
-            setAllTilesHidden(false);
-            setMazeCompleted();
+            dispatch(setAllTilesHidden(false));
+            dispatch(mazeComplete());
           };
         }
         requestAnimationFrame(step);
@@ -116,9 +109,9 @@ function Maze({boxSize, setMazeCompleted, setCurrentMinion, minions, setCurrentT
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           <Home xPos={0} yPos={0} boxSize={boxSize} player='p1'/>
           <Home xPos={width - 3} yPos={height - 3} boxSize={boxSize} player='p2'/>
-          {minions.map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} currentPlayer={currentPlayer} setCurrentMinion={setCurrentMinion} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower}/>)}
-          {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} zoomed={zoomed} towersSorting={towersSorting} boxSize={boxSize} width={width} height={height} setCurrentTile={setCurrentTile} setCurrentTower={setCurrentTower} setCurrentMinion={setCurrentMinion}/>)}
-          {maze.maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} setCurrentTower={setCurrentTower} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentMinion={setCurrentMinion} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
+          {minions.map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} currentPlayer={currentPlayer} setCurrentTile={setCurrentTile}/>)}
+          {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} zoomed={zoomed} towersSorting={towersSorting} boxSize={boxSize} width={width} height={height} setCurrentTile={setCurrentTile}/>)}
+          {maze.maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>
       </div>
     </>

@@ -6,7 +6,7 @@ import ProfileGameHistory from './profile/profileGameHistory';
 import { io } from 'socket.io-client';
 import { store } from '../features/store';
 import { useAppDispatch, useAppSelector } from '../features/hooks';
-import { updatePlayer, updateRoomID } from '../features/game_slice';
+import { defaultState, updatePlayer, updateRoomID } from '../features/game_slice';
 
 
 function WaitingRoom() {
@@ -20,6 +20,7 @@ function WaitingRoom() {
   const [copyTextClicked, setCopyTextClicked] = useState(false);
 
   useEffect(() => {
+    dispatch(defaultState());
     socket.off('receiveRoomId');
     socket.off('receiveRoomIdHost');
     socket.off('receiveRoomIdJoin');

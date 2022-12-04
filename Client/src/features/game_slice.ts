@@ -1,27 +1,67 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { Graph } from '../utils/graph';
+import { TowerType } from '../utils/types';
+import { initialGameState } from './game_initial_state';
 
-interface GameState{ //shape of the state inside inside of the slice
-  roomId: string,
-  player: 'p1' | 'p2'
-}
 
-const initialState: GameState = {
-  roomId: '',
-  player: 'p1',
-}
 
 const gameSlice = createSlice({
   name: 'game',
-  initialState,
+  initialState: initialGameState,
   reducers: {
+    defaultState(state) {
+      return initialGameState;
+    },
     updateRoomID(state, action: PayloadAction<string>) {
       state.roomId = action.payload;
     },
     updatePlayer(state, action: PayloadAction<'p1' | 'p2'>) {
       state.player = action.payload;
+    },
+    zoomIn(state, action: PayloadAction<number>) {
+      state.currentTower = null;
+      state.zoomed = true;
+      if (state.boxSize + action.payload > state.maxBoxSize) state.boxSize = state.maxBoxSize;
+      else state.boxSize += action.payload;
+    },
+    zoomOut(state, action: PayloadAction<number>) {
+      state.currentTower = null;
+      state.zoomed = true;
+      if (state.boxSize - action.payload < state.minBoxSize) state.boxSize = state.minBoxSize;
+      else state.boxSize -= action.payload;
+    },
+    mazeComplete(state) {
+      state.mazeCompleted = true;
+    },
+    setWaitingForTile(state, action: PayloadAction<boolean>) {
+      state.waitingForTile = action.payload;
+    },
+    setCurrentGraph(state, action: PayloadAction<Graph>) {
+      state.currentGraph = action.payload;
+    },
+    setAllTilesHidden(state, action: PayloadAction<boolean>) {
+      state.allTilesHidden = action.payload;
+    },
+    updateCurrentMinion(state, action: PayloadAction<null | number>) {
+      state.currentMinion = action.payload;
+    },
+    updateCurrentTower(state, action: PayloadAction<null | TowerType>) {
+      state.currentTower = action.payload;
     }
   }
 })
 
-export const { updateRoomID, updatePlayer } = gameSlice.actions;
+export const { 
+  defaultState, 
+  updateRoomID, 
+  updatePlayer, 
+  zoomIn, 
+  zoomOut, 
+  mazeComplete,
+  setWaitingForTile,
+  setCurrentGraph,
+  setAllTilesHidden,
+  updateCurrentMinion,
+  updateCurrentTower
+} = gameSlice.actions;
 export default gameSlice.reducer;

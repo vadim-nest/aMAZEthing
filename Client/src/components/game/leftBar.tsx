@@ -2,54 +2,13 @@ import '../../css/leftBar.css';
 import { minionType, TowerType } from '../../utils/types';
 import FlagSVG from '../svg/flagSVG';
 import MediaQuery from 'react-responsive';
-import { useAppSelector } from '../../features/hooks';
+import { useAppDispatch, useAppSelector } from '../../features/hooks';
 import React from 'react';
 import { ZoomInSVG, ZoomOutSVG } from '../svg/zoomButtonsSVG';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import TowerSVG from '../svg/towerSVG';
 import LeftBarSmall from './leftBarSmall';
-
-export function zoomIn({
-  amount,
-  setBoxSize,
-  maxBoxSize,
-  setCurrentTower,
-  setZoomed,
-}: {
-  amount: number;
-  setBoxSize: React.Dispatch<React.SetStateAction<number>>;
-  maxBoxSize: number;
-  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
-  setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  setCurrentTower(null);
-  setZoomed(true);
-  setBoxSize((oldBoxSize) => {
-    if (oldBoxSize + amount > maxBoxSize) return maxBoxSize;
-    return oldBoxSize + amount;
-  });
-}
-
-export function zoomOut({
-  amount,
-  minBoxSize,
-  setBoxSize,
-  setCurrentTower,
-  setZoomed,
-}: {
-  amount: number;
-  minBoxSize: number;
-  setBoxSize: React.Dispatch<React.SetStateAction<number>>;
-  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
-  setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  setCurrentTower(null);
-  setZoomed(true);
-  setBoxSize((oldBoxSize) => {
-    if (oldBoxSize - amount < minBoxSize) return minBoxSize;
-    return oldBoxSize - amount;
-  });
-}
+import { zoomIn, zoomOut } from '../../features/game_slice';
 
 export function zoomHover(zoomInOrOut: string, color: string) {
   document.querySelectorAll(`.zoom-${zoomInOrOut}-svg`).forEach((svgEl) => {
@@ -84,11 +43,6 @@ export default function LeftBar (
     gameStats,
     towers,
     currentPlayer,
-    minBoxSize,
-    maxBoxSize,
-    setBoxSize,
-    setCurrentTower,
-    setZoomed,
   }: {
     currentMinion: null | number;
     currentTower: null | TowerType;
@@ -104,15 +58,11 @@ export default function LeftBar (
     };
     towers: TowerType[];
     currentPlayer: string;
-    minBoxSize: number;
-    maxBoxSize: number;
-    setBoxSize: React.Dispatch<React.SetStateAction<number>>;
-    setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
-    setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
   }
 ) {
 
   const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
   
   return (
     <div className="leftBarContainer">
@@ -246,7 +196,7 @@ export default function LeftBar (
           className="zoomInButton"
           onMouseEnter={() => zoomHover('in', 'var(--yellow)')}
           onMouseLeave={() => zoomHover('in', 'var(--white-green)')}
-          onClick={() => zoomIn({amount: 10, setBoxSize, maxBoxSize, setCurrentTower, setZoomed})}
+          onClick={() => dispatch(zoomIn(10))}
         >
           <ZoomInSVG />
         </div>
@@ -254,7 +204,7 @@ export default function LeftBar (
           className="zoomOutButton"
           onMouseEnter={() => zoomHover('out', 'var(--yellow)')}
           onMouseLeave={() => zoomHover('out', 'var(--white-green)')}
-          onClick={() => zoomOut({amount: 10, setBoxSize, minBoxSize, setCurrentTower, setZoomed})}
+          onClick={() => dispatch(zoomOut(10))}
         >
           <ZoomOutSVG />
         </div>

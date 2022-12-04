@@ -5,6 +5,8 @@ import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import { useState } from 'react';
 import Shop from './shop';
 import CloseCross from '../svg/closeCross';
+import { useAppDispatch, useAppSelector } from '../../features/hooks';
+import { updateCurrentMinion } from '../../features/game_slice';
 
 function storeButtonHover(isOnHover: boolean) {
   document.querySelectorAll('.store-button-yellow').forEach((svgEl) => {
@@ -51,21 +53,19 @@ function styleCurrentMinionBorder(currentMinId: number) {
 
 function RightBar({
   addNewMinion,
-  allTilesHidden,
   currentMinion,
-  setCurrentMinion,
   minions,
   currentPlayer
 }: {
   addNewMinion: (type: animal, player: 'p1' | 'p2') => void;
-  allTilesHidden: boolean;
   currentMinion: null | number,
-  setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   minions: {[key: number]: minionType},
   currentPlayer: 'p1' | 'p2'
 }) {
  
   const [shopOpen, setShopOpen] = useState(false);
+  const {allTilesHidden} = useAppSelector(state => state.game);
+  const dispatch = useAppDispatch();
 
   let allPlayerMinions: Array<minionType> = [];
 
@@ -81,7 +81,7 @@ function RightBar({
     return (
       <>
         <div className={`your-minion-button right-bar-selector-${p1minion.id}`} onClick={() => {
-            setCurrentMinion(p1minion.id);
+            dispatch(updateCurrentMinion(p1minion.id));
             styleCurrentMinionBorder(p1minion.id);
 
           }}>

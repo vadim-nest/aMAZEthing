@@ -1,8 +1,10 @@
 import '../../css/mazeTile.css';
+import { updateCurrentMinion, updateCurrentTower } from '../../features/game_slice';
+import { useAppDispatch } from '../../features/hooks';
 import { TowerType } from '../../utils/types';
 import Path from './path';
 
-function MazeTile({value, classes, path, boxSize, generated, setCurrentTileHelper, setCurrentTile, setCurrentMinion, setCurrentTower}: {
+function MazeTile({value, classes, path, boxSize, generated, setCurrentTileHelper, setCurrentTile}: {
   value: string, 
   classes: string[], 
   boxSize: number, 
@@ -10,15 +12,16 @@ function MazeTile({value, classes, path, boxSize, generated, setCurrentTileHelpe
   path: '' | 'THOUGHTPROCESS' | 'PATH'
   setCurrentTileHelper: (value:number) => void,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
-  setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
-  setCurrentTower: React.Dispatch<React.SetStateAction<TowerType | null>>,
 }) {
+
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <div onContextMenu={() => setCurrentTileHelper(Number(value))} onClick={() => {
-        setCurrentMinion(null);
+        dispatch(updateCurrentMinion(null));
         setCurrentTile(null);
-        setCurrentTower(null);
+        dispatch(updateCurrentTower(null));
       }} className={`mazeTile ${classes.join(' ')} ${value} ${generated && 'showNone'}`} style={{height: `${boxSize}px`, width: `${boxSize}px`}}>
         {path && <Path thoughtProcess={path}/>}
       </div>

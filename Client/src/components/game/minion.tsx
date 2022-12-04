@@ -1,22 +1,24 @@
 import React from 'react';
 import '../../css/minion.css';
+import { updateCurrentMinion, updateCurrentTower } from '../../features/game_slice';
+import { useAppDispatch } from '../../features/hooks';
 import { minionType, TowerType } from '../../utils/types';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 
-function Minion({boxSize, minion, setCurrentMinion, setCurrentTile, setCurrentTower, currentPlayer}: {
+function Minion({boxSize, minion, setCurrentTile, currentPlayer}: {
   boxSize: number,
   minion: minionType,
-  setCurrentMinion: React.Dispatch<React.SetStateAction<number | null>>,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
-  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>,
   currentPlayer: 'p1' | 'p2'
 }) {
+
+  const dispatch = useAppDispatch();
 
   function handleClick() {
     if (minion.alignment === currentPlayer) {
       setCurrentTile(null);
-      setCurrentTower(null);
-      setCurrentMinion(minion.id);
+      dispatch(updateCurrentTower(null));
+      dispatch(updateCurrentMinion(minion.id));
     }
   }
 
