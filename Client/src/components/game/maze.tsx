@@ -10,8 +10,7 @@ import Home from './home'
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { mazeComplete, setAllTilesHidden, setCurrentGraph } from "../../features/game_slice";
 
-function Maze({minions, setCurrentTile, maze, setMaze, towers, setTowers, towersSorting, currentPlayer}: {
-  minions: minionType[],
+function Maze({ setCurrentTile, maze, setMaze, towers, setTowers, towersSorting, currentPlayer}: {
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
   maze: {currentMinion: null | number, maze: MazeTileType[]},
   setMaze: React.Dispatch<React.SetStateAction<{currentMinion: null | number, maze: MazeTileType[]}>>
@@ -22,7 +21,7 @@ function Maze({minions, setCurrentTile, maze, setMaze, towers, setTowers, towers
 }) {
 
   // TODO: Set as state
-  const {boxSize, height, width, currentGraph, allTilesHidden} = useAppSelector(state => state.game);
+  const {boxSize, height, width, currentGraph, allTilesHidden, minions} = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
   function setCurrentTileHelper(value: number) {
@@ -108,7 +107,7 @@ function Maze({minions, setCurrentTile, maze, setMaze, towers, setTowers, towers
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           <Home xPos={0} yPos={0} boxSize={boxSize} player='p1'/>
           <Home xPos={width - 3} yPos={height - 3} boxSize={boxSize} player='p2'/>
-          {minions.map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} currentPlayer={currentPlayer} setCurrentTile={setCurrentTile}/>)}
+          {Object.values(minions).map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} currentPlayer={currentPlayer} setCurrentTile={setCurrentTile}/>)}
           {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} towersSorting={towersSorting} boxSize={boxSize} width={width} height={height} setCurrentTile={setCurrentTile}/>)}
           {maze.maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>

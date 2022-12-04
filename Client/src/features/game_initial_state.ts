@@ -4,7 +4,7 @@ import { MazeTileType, minionType, TowerType } from "../utils/types";
 
 export interface GameState{ //shape of the state inside inside of the slice
   roomId: string,
-  player: 'p1' | 'p2',
+  currentPlayer: 'p1' | 'p2',
   boxSize: number,
   mazeCompleted: boolean,
   minions: {[key: number]: minionType},
@@ -38,7 +38,7 @@ for (let i = 0; i < width*height; i++) {
 
 export const initialGameState: GameState = {
   roomId: '',
-  player: 'p1',
+  currentPlayer: 'p1',
   boxSize: 20,
   mazeCompleted: false,
   minions: {},

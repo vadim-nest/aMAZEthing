@@ -1,23 +1,27 @@
-import { createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { Config, names, uniqueNamesGenerator } from 'unique-names-generator';
 import { GameStatsType } from '../components/game/game';
 import { Graph } from '../utils/graph';
-import { TowerType } from '../utils/types';
+import { animal, minionType, TowerType } from '../utils/types';
 import { initialGameState } from './game_initial_state';
 
+const customConfig: Config = {
+  dictionaries: [names]
+}
 
 
 const gameSlice = createSlice({
   name: 'game',
   initialState: initialGameState,
   reducers: {
-    defaultState(state) {
+    defaultState() {
       return initialGameState;
     },
     updateRoomID(state, action: PayloadAction<string>) {
       state.roomId = action.payload;
     },
     updatePlayer(state, action: PayloadAction<'p1' | 'p2'>) {
-      state.player = action.payload;
+      state.currentPlayer = action.payload;
     },
     zoomIn(state, action: PayloadAction<number>) {
       state.currentTower = null;
@@ -57,7 +61,59 @@ const gameSlice = createSlice({
     },
     updateZoomed(state, action: PayloadAction<boolean>) {
       state.zoomed = action.payload;
-    }
+    },
+    updateGameEnded(state) {
+      state.gameEnded = true;
+    },
+    addNewMinionState(state, action: PayloadAction<{type: animal, player: 'p1' | 'p2'}>) {
+      const newId = Object.keys(state.minions).length;
+      const {type, player} = action.payload;
+      let playerSpecific = {
+        xPos: 0,
+        yPos: 3,
+        alignment: 'p1' as 'p1' | 'p2'
+      };
+      if (player ===  'p2') {
+        playerSpecific = {
+          xPos: state.width - 1,
+          yPos: state.height - 4,
+          alignment: 'p2'
+        }
+      }
+      state.minions[newId] = {
+        id: newId,
+        name: uniqueNamesGenerator(customConfig),
+        rotation: 'minionR',
+        path: [],
+        thoughtProcess: [],
+        inTower: false,
+        ...playerSpecific,
+        ...type
+      }
+    },
+    opponentMinionMovement(state, action: PayloadAction<{direction: {xPos: number, yPos: number, rotation: 'minionU' | 'minionR' | 'minionL' | 'minionD' | '' }, minionId: number}>) {
+      const {direction, minionId} = action.payload;
+      const minionToUpdate = state.minions[minionId];
+      minionToUpdate.xPos = minionToUpdate.xPos + direction.xPos,
+      minionToUpdate.yPos = minionToUpdate.yPos + direction.yPos,
+      minionToUpdate.rotation = direction.rotation
+      state.minions[minionId] = minionToUpdate;
+    },
+    updateMinion(state, action: PayloadAction<{minionId: number, updatedMinion: minionType}>) {
+      const {minionId, updatedMinion} = action.payload;
+      state.minions[minionId] = updatedMinion;
+    },
+    minionEnterTower(state, action: PayloadAction<{minionId: number, towerId: number}>) {
+      const {minionId, towerId} = action.payload;
+      state.minions[minionId].yPos--;
+      state.minions[minionId].inTower = towerId;
+    },
+    minionExitTower(state, action: PayloadAction<number>) {
+      const minionId = action.payload;
+      state.minions[minionId].yPos++;
+      state.minions[minionId].inTower = false;
+      state.minions[minionId].rotation = 'minionR';
+    },
   }
 })
 
@@ -75,6 +131,12 @@ export const {
   updateCurrentTower,
   updateGameStats,
   finalGameStats,
-  updateZoomed
+  updateZoomed,
+  updateGameEnded,
+  addNewMinionState,
+  opponentMinionMovement,
+  updateMinion,
+  minionEnterTower,
+  minionExitTower,
 } = gameSlice.actions;
 export default gameSlice.reducer;
