@@ -26,7 +26,7 @@ export default function BubbleLesson() {
   let paragraphs = {
     sortName: 'Bubble sort',
     firstP:
-      'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. Starting on one side, compares adjacent items and keep “bubbling” the larger one to the other side. Worst time complexity O(N^2).',
+      'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. Starting on one side, it compares adjacent items and keep “bubbling” the larger one to the other side.',
   };
 
   useEffect(() => {
@@ -49,6 +49,22 @@ export default function BubbleLesson() {
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
         <p className="explanation-text">{paragraphs.firstP}</p>
+
+      <div className="lesson-wrapper-pseudo">
+        <div className="pseudoBlock">
+        <h1 className='lesson-h1'>{paragraphs.sortName}</h1>
+          <code>
+          <span className='code indent0 '> bubbleSort(array) </span> <br />
+          <span className='code indent1'> for i &gt;= indexOfLastUnsortedElement-1 </span> <br />
+          <span className='code indent2'> if leftElement &gt; rightElement </span> <br />
+          <span className='code indent3'> swap leftElement and rightElement</span> <br />
+          <span className='code '>end bubbleSort </span>
+          </code>
+        </div>
+        <div className="pseudoExplain">
+
+        </div>
+        
       </div>
 
       <div className="lesson-wrapper-2">
@@ -91,5 +107,6 @@ export default function BubbleLesson() {
         />
       </div>
     </div>
+  </div>
   );
 }
