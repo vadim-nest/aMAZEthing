@@ -5,14 +5,13 @@ import TowerPopup from "./towerPopup";
 import { useAppDispatch } from "../../features/hooks";
 import { updateCurrentMinion, updateCurrentTower } from "../../features/game_slice";
 
-function Tower({ tower, boxSize, setCurrentTile, width, height, towersSorting, zoomed }: {
+function Tower({ tower, boxSize, setCurrentTile, width, height, towersSorting }: {
   tower: TowerType,
   boxSize: number,
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
   width: number,
   height: number,
   towersSorting: {[key: number]: number},
-  zoomed: boolean
 } ) {
 
   const dispatch = useAppDispatch();
@@ -45,7 +44,7 @@ function Tower({ tower, boxSize, setCurrentTile, width, height, towersSorting, z
                   tower.alignment === 'p2' ? 'p2TowerShadow' :
                   'neutralTowerShadow'}
       />
-      <TowerPopup zoomed={zoomed} towersSorting={towersSorting} boxSize={boxSize} tower={tower} width={width} height={height}/>
+      <TowerPopup towersSorting={towersSorting} boxSize={boxSize} tower={tower} width={width} height={height}/>
     </div>
   )
 }

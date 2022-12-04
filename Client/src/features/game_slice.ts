@@ -54,6 +54,9 @@ const gameSlice = createSlice({
     },
     finalGameStats(state) {
       state.finalGameStats = state.gameStats;
+    },
+    updateZoomed(state, action: PayloadAction<boolean>) {
+      state.zoomed = action.payload;
     }
   }
 })
@@ -72,5 +75,6 @@ export const {
   updateCurrentTower,
   updateGameStats,
   finalGameStats,
+  updateZoomed
 } = gameSlice.actions;
 export default gameSlice.reducer;

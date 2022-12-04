@@ -10,7 +10,7 @@ import Home from './home'
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { mazeComplete, setAllTilesHidden, setCurrentGraph } from "../../features/game_slice";
 
-function Maze({minions, setCurrentTile, maze, setMaze, towers, setTowers, towersSorting, zoomed, currentPlayer}: {
+function Maze({minions, setCurrentTile, maze, setMaze, towers, setTowers, towersSorting, currentPlayer}: {
   minions: minionType[],
   setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
   maze: {currentMinion: null | number, maze: MazeTileType[]},
@@ -18,7 +18,6 @@ function Maze({minions, setCurrentTile, maze, setMaze, towers, setTowers, towers
   towers: TowerType[],
   setTowers: React.Dispatch<React.SetStateAction<TowerType[]>>,
   towersSorting: {[key: number]: number},
-  zoomed: boolean,
   currentPlayer: 'p1' | 'p2'
 }) {
 
@@ -110,7 +109,7 @@ function Maze({minions, setCurrentTile, maze, setMaze, towers, setTowers, towers
           <Home xPos={0} yPos={0} boxSize={boxSize} player='p1'/>
           <Home xPos={width - 3} yPos={height - 3} boxSize={boxSize} player='p2'/>
           {minions.map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} currentPlayer={currentPlayer} setCurrentTile={setCurrentTile}/>)}
-          {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} zoomed={zoomed} towersSorting={towersSorting} boxSize={boxSize} width={width} height={height} setCurrentTile={setCurrentTile}/>)}
+          {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} towersSorting={towersSorting} boxSize={boxSize} width={width} height={height} setCurrentTile={setCurrentTile}/>)}
           {maze.maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize} setCurrentTileHelper={setCurrentTileHelper} setCurrentTile={setCurrentTile}/>)}
         </div>
       </div>
