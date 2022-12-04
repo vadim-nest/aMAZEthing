@@ -12,7 +12,7 @@ import socket from '../../services/socket';
 import GameOver from './gameOver';
 import { store } from '../../features/store';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';
-import { addNewMinionState, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, setWaitingForTile, updateCurrentMinion, updateCurrentTower, updateGameEnded, updateGameStats, updateMinion, updateZoomed } from '../../features/game_slice';
+import { addNewMinionState, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMinion, updateZoomed } from '../../features/game_slice';
 
 
 socket.on('message', message => {console.log(message)});
@@ -21,10 +21,10 @@ export interface GameStatsType {timeRemaining: number, p1Coins: number, p2Coins:
 
 function Game() { // TODO: Extract logic to maze class
 
-  const {currentPlayer, roomId, mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, currentTower, gameStats, gameEnded, minions} = useAppSelector(state => state.game);
-  
+  const {currentPlayer, roomId, mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, currentTower, gameStats, gameEnded, minions, currentTile} = useAppSelector(state => state.game);
+
   const dispatch = useAppDispatch();
-  const [currentTile, setCurrentTile] = useState<null | {xPos:number, yPos:number}>(null);
+  // const [currentTile, setCurrentTile] = useState<null | {xPos:number, yPos:number}>(null);
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
   const [towers, setTowers] = useState<TowerType[]>([]);
   const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
@@ -208,7 +208,7 @@ function Game() { // TODO: Extract logic to maze class
       }
     })
     if (currentMinion !== null && !movingMinions.includes(currentMinion as number)) {
-      setCurrentTile(null);
+      dispatch(updateCurrentTile(null));
       dispatch(setWaitingForTile(true));
     } else if (currentMinion !== null) {
       const minion = minions[currentMinion as number];
@@ -368,7 +368,6 @@ function Game() { // TODO: Extract logic to maze class
             towers={towers}
             towersSorting={towersSorting}
             setTowers={setTowers}
-            setCurrentTile={setCurrentTile}
             currentPlayer={currentPlayer}
             />
           <RightBar

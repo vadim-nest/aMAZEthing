@@ -3,12 +3,11 @@ import TowerSVG from "../svg/towerSVG";
 import '../../css/tower.css'
 import TowerPopup from "./towerPopup";
 import { useAppDispatch } from "../../features/hooks";
-import { updateCurrentMinion, updateCurrentTower } from "../../features/game_slice";
+import { updateCurrentMinion, updateCurrentTile, updateCurrentTower } from "../../features/game_slice";
 
-function Tower({ tower, boxSize, setCurrentTile, width, height, towersSorting }: {
+function Tower({ tower, boxSize, width, height, towersSorting }: {
   tower: TowerType,
   boxSize: number,
-  setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
   width: number,
   height: number,
   towersSorting: {[key: number]: number},
@@ -18,12 +17,14 @@ function Tower({ tower, boxSize, setCurrentTile, width, height, towersSorting }:
 
   function handleContextMenu() {
     if (tower.minion === null) {
-      setCurrentTile({
+      dispatch(updateCurrentTile({
         xPos: tower.xPos,
         yPos: tower.yPos
-      })
+      }))
     }
   }
+
+  
 
   function handleClick() {
     dispatch(updateCurrentTower(tower));

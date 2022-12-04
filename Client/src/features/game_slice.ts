@@ -114,6 +114,9 @@ const gameSlice = createSlice({
       state.minions[minionId].inTower = false;
       state.minions[minionId].rotation = 'minionR';
     },
+    updateCurrentTile(state, action: PayloadAction<null | {xPos: number, yPos: number}>) {
+      state.currentTile = action.payload;
+    }
   }
 })
 
@@ -138,5 +141,6 @@ export const {
   updateMinion,
   minionEnterTower,
   minionExitTower,
+  updateCurrentTile
 } = gameSlice.actions;
 export default gameSlice.reducer;
