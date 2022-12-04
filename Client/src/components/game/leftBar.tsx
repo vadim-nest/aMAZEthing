@@ -40,28 +40,19 @@ export default function LeftBar (
     currentMinion,
     minions,
     currentTower,
-    gameStats,
     towers,
     currentPlayer,
   }: {
     currentMinion: null | number;
     currentTower: null | TowerType;
     minions: { [key: number]: minionType };
-    gameStats: {
-      timeRemaining: number;
-      p1Coins: number;
-      p2Coins: number;
-      p1Towers: number[];
-      p2Towers: number[];
-      p1MinionCount: number;
-      p2MinionCount: number;
-    };
     towers: TowerType[];
     currentPlayer: string;
   }
 ) {
 
   const user = useAppSelector((state) => state.user);
+  const {gameStats} = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
   
   return (

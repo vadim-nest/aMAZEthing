@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { GameStatsType } from '../components/game/game';
 import { Graph } from '../utils/graph';
 import { TowerType } from '../utils/types';
 import { initialGameState } from './game_initial_state';
@@ -47,6 +48,12 @@ const gameSlice = createSlice({
     },
     updateCurrentTower(state, action: PayloadAction<null | TowerType>) {
       state.currentTower = action.payload;
+    },
+    updateGameStats(state, action: PayloadAction<GameStatsType>) {
+      state.gameStats = action.payload;
+    },
+    finalGameStats(state) {
+      state.finalGameStats = state.gameStats;
     }
   }
 })
@@ -62,6 +69,8 @@ export const {
   setCurrentGraph,
   setAllTilesHidden,
   updateCurrentMinion,
-  updateCurrentTower
+  updateCurrentTower,
+  updateGameStats,
+  finalGameStats,
 } = gameSlice.actions;
 export default gameSlice.reducer;

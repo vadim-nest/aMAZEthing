@@ -12,7 +12,7 @@ import socket from '../../services/socket';
 import GameOver from './gameOver';
 import { store } from '../../features/store';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';
-import { setWaitingForTile, updateCurrentMinion, updateCurrentTower } from '../../features/game_slice';
+import { finalGameStats, setWaitingForTile, updateCurrentMinion, updateCurrentTower, updateGameStats } from '../../features/game_slice';
 
 
 socket.on('message', message => {console.log(message)});
@@ -25,33 +25,23 @@ export interface GameStatsType {timeRemaining: number, p1Coins: number, p2Coins:
 
 function Game() { // TODO: Extract logic to maze class
 
-  const {mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, currentTower} = useAppSelector(state => state.game);
+  const {mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, currentTower, gameStats} = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
   const [minions, setMinions] = useState<{[key: number]: minionType}>({});
   const [currentTile, setCurrentTile] = useState<null | {xPos:number, yPos:number}>(null);
-  // const [currentTower, setCurrentTower] = useState<null | TowerType>(null);
   const [movingMinions, setMovingMinions] = useState<number[]>([]);
   const [towers, setTowers] = useState<TowerType[]>([]);
   const [towersSorting, setTowersSorting] = useState<{[key: number]: number}>({});
-  const [gameStats, setGameStats] = useState<GameStatsType>({
-    timeRemaining: 300,
-    p1Coins: 0,
-    p2Coins: 0,
-    p1Towers: [],
-    p2Towers: [],
-    p1MinionCount: 0,
-    p2MinionCount: 0,
-  });
-  const [finalGameStats, setFinalGameStats] = useState<GameStatsType>({
-    timeRemaining: 300,
-    p1Coins: 0,
-    p2Coins: 0,
-    p1Towers: [],
-    p2Towers: [],
-    p1MinionCount: 0,
-    p2MinionCount: 0,
-  });
+  // const [finalGameStats, setFinalGameStats] = useState<GameStatsType>({
+  //   timeRemaining: 300,
+  //   p1Coins: 0,
+  //   p2Coins: 0,
+  //   p1Towers: [],
+  //   p2Towers: [],
+  //   p1MinionCount: 0,
+  //   p2MinionCount: 0,
+  // });
   const [gameEnded, setGameEnded] = useState(false);
   const [zoomed, setZoomed] = useState(false);
   const array: MazeTileType[] = [];
@@ -70,7 +60,8 @@ function Game() { // TODO: Extract logic to maze class
     })
     socket.off('updateGameState');
     socket.on('updateGameState', (newGameState: GameStatsType) => {
-      setGameStats(newGameState);
+      // setGameStats(newGameState);
+      dispatch(updateGameStats(newGameState));
     })
     return ()=>{ 
       console.log('clearing waiting');
@@ -80,7 +71,7 @@ function Game() { // TODO: Extract logic to maze class
 
   useEffect(() => {
     if (gameStats.timeRemaining === 0 && !gameEnded) {
-      setFinalGameStats(gameStats);
+      dispatch(finalGameStats());
       setGameEnded(true);
     }
   },[gameStats]);
@@ -119,12 +110,12 @@ function Game() { // TODO: Extract logic to maze class
     }
 
     if (player === 'p1') {
-      setGameStats(prevStats => {
-        return {
-          ...prevStats,
-          p1MinionCount: prevStats.p1MinionCount + 1
-        }
-      })
+      // setGameStats(prevStats => {
+      //   return {
+      //     ...prevStats,
+      //     p1MinionCount: prevStats.p1MinionCount + 1
+      //   }
+      // })
       setMinions(prevMinions => {
         return {
           ...prevMinions,
@@ -143,12 +134,12 @@ function Game() { // TODO: Extract logic to maze class
         }
       })
     } else {
-      setGameStats(prevStats => {
-        return {
-          ...prevStats,
-          p2MinionCount: prevStats.p2MinionCount + 1
-        }
-      })
+      // setGameStats(prevStats => {
+      //   return {
+      //     ...prevStats,
+      //     p2MinionCount: prevStats.p2MinionCount + 1
+      //   }
+      // })
       setMinions(prevMinions => {
         return {
           ...prevMinions,
@@ -465,22 +456,6 @@ function Game() { // TODO: Extract logic to maze class
         }
       }
     })
-    setGameStats(prevStats => {
-      if (minion.alignment === 'p1') {
-        return {
-          ...prevStats,
-          p2Towers: prevStats.p2Towers.filter(tower => tower !== towerId),
-          p1Towers: [towerId, ...prevStats.p1Towers]
-        }
-      } else {
-        return {
-          ...prevStats,
-          p1Towers: prevStats.p1Towers.filter(tower => tower !== towerId),
-          p2Towers: [towerId, ...prevStats.p2Towers]
-        }
-      }
-
-    })
     setMovingMinions(prevMinions => [...prevMinions, currentMinion as number]);
     tower = towers.find(tower => tower.id === towerId) as TowerType;
     if (movedAfter) {
@@ -499,7 +474,6 @@ function Game() { // TODO: Extract logic to maze class
             currentTower={currentTower}
             currentMinion={currentMinion}
             minions={minions}
-            gameStats={gameStats}
             towers={towers}
             currentPlayer={currentPlayer}
             />
@@ -520,7 +494,7 @@ function Game() { // TODO: Extract logic to maze class
             minions={minions}
             currentPlayer = {currentPlayer}
           />
-          {gameEnded && <GameOver gameStats={finalGameStats} currentPlayer={currentPlayer}/>}
+          {gameEnded && <GameOver currentPlayer={currentPlayer}/>}
         </div>
       </div>
     </>

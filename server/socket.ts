@@ -87,7 +87,7 @@ export default function Connect(server: http.Server) {
       p2Id: '',
       p2Username: '',
       playersLoaded: 0,
-      timeRemaining: 300,
+      timeRemaining: 30,
       p1Coins: 0,
       p2Coins: 0,
       p1Towers: [],

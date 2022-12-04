@@ -1,21 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import '../../css/gameOver.css';
+import { useAppSelector } from '../../features/hooks';
 
-function GameOver ({gameStats, currentPlayer} : {
-  gameStats: {
-    timeRemaining: number,
-    p1Coins: number,
-    p2Coins: number,
-    p1Towers: number[],
-    p2Towers: number[],
-    p1MinionCount: number,
-    p2MinionCount: number
-  },
+function GameOver ({currentPlayer} : {
   currentPlayer: 'p1' | 'p2'
 }) {
 
-  let win = gameStats.p1Towers.length > gameStats.p2Towers.length;
-  if (gameStats.p1Towers.length === gameStats.p2Towers.length) win = gameStats.p1Coins > gameStats.p2Coins;
+  const {finalGameStats} = useAppSelector(state => state.game);
+
+  let win = finalGameStats.p1Towers.length > finalGameStats.p2Towers.length;
+  if (finalGameStats.p1Towers.length === finalGameStats.p2Towers.length) win = finalGameStats.p1Coins > finalGameStats.p2Coins;
   if (currentPlayer === 'p2') win = !win;
 
   const navigate = useNavigate();
@@ -32,17 +26,17 @@ function GameOver ({gameStats, currentPlayer} : {
           <div className="stats">
             <h2>Minions</h2>
             <h2 className="value">
-              {currentPlayer === 'p1' ? gameStats.p1MinionCount : gameStats.p2MinionCount}
+              {currentPlayer === 'p1' ? finalGameStats.p1MinionCount : finalGameStats.p2MinionCount}
             </h2>
 
             <h2>GOLD</h2>
             <h2 className="value">
-              {currentPlayer === 'p1' ? gameStats.p1Coins : gameStats.p2Coins}
+              {currentPlayer === 'p1' ? finalGameStats.p1Coins : finalGameStats.p2Coins}
             </h2>
 
             <h2>Towers</h2>
             <h2 className="value">
-            {currentPlayer === 'p1' ? gameStats.p1Towers.length : gameStats.p2Towers.length}
+            {currentPlayer === 'p1' ? finalGameStats.p1Towers.length : finalGameStats.p2Towers.length}
             </h2>
           </div>
         </div>
@@ -51,17 +45,17 @@ function GameOver ({gameStats, currentPlayer} : {
           <div className="stats">
             <h2>Minions</h2>
             <h2 className="value">
-              {currentPlayer === 'p2' ? gameStats.p1MinionCount : gameStats.p2MinionCount}
+              {currentPlayer === 'p2' ? finalGameStats.p1MinionCount : finalGameStats.p2MinionCount}
             </h2>
 
             <h2>GOLD</h2>
             <h2 className="value">
-              {currentPlayer === 'p2' ? gameStats.p1Coins : gameStats.p2Coins}
+              {currentPlayer === 'p2' ? finalGameStats.p1Coins : finalGameStats.p2Coins}
             </h2>
 
             <h2>Towers</h2>
             <h2 className="value">
-            {currentPlayer === 'p2' ? gameStats.p1Towers.length : gameStats.p2Towers.length}
+            {currentPlayer === 'p2' ? finalGameStats.p1Towers.length : finalGameStats.p2Towers.length}
             </h2>
           </div>
         </div>
