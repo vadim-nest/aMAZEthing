@@ -25,7 +25,6 @@
 }
 
 .user-dashboard {
-    background-color: var(--main-green);
     min-height: 510px;
     height: 50vh;
     width: 80vw;
@@ -89,10 +88,15 @@
 }
 
 .circle {
+    position: relative;
     height: 90px;
     width: 90px;
     border-radius: 80px;
     background-color: var(--white-green);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .circles {

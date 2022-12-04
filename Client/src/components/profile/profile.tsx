@@ -1,20 +1,20 @@
-import '../../css/profile.css';
-import { User } from '@auth0/auth0-react';
-import { useAppSelector } from '../../features/hooks';
-import apiService from '../../services/apiService';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { refreshDataNoAvatar } from '../../features/user_slice';
-import ProfileGameHistory from './profileGameHistory';
-import sort from '../../assets/profile/sort.png';
-import path from '../../assets/profile/path.png';
-import changeMe from '../../assets/profile/changeMe.png';
+import "../../css/profile.css";
+import { User } from "@auth0/auth0-react";
+import { useAppSelector } from "../../features/hooks";
+import apiService from "../../services/apiService";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { refreshUsername } from "../../features/user_slice";
+import ProfileGameHistory from "./profileGameHistory";
+import sort from "../../assets/profile/sort.png";
+import path from "../../assets/profile/path.png";
+import changeMe from "../../assets/profile/changeMe.png";
 
 function Profile() {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
   const userRedux = useAppSelector((state) => state.user);
   const [inputOpen, setInputOpen] = useState(false);
 
@@ -48,11 +48,11 @@ function Profile() {
         email: userRedux.email,
         username: username,
       });
-      if (obj.user) dispatch(refreshDataNoAvatar(obj.user));
+      if (obj.user) dispatch(refreshUsername(obj.user));
     } catch (err) {
       console.log(err);
     }
-    inputRef.current.value = '';
+    inputRef.current.value = "";
   }
 
   const toggleInput = () => {
@@ -69,10 +69,10 @@ function Profile() {
             </div>
             <div className="user-name">
               <h1 id="username">
-                HELLO{' '}
+                HELLO{" "}
                 {inputOpen === false && userRedux.username
                   ? (userRedux as User).username
-                  : 'THERE'}
+                  : "THERE"}
                 ,
                 <img
                   id="changeMe-profile"
@@ -131,36 +131,48 @@ function Profile() {
         <div className="user-stats">
           <h1 className="achievements">ACHIEVEMENTS</h1>
           <div className="circles">
+            <div className="circle" onClick={() => alert("are you circle?")}>
+            </div>
             <div
               className="circle"
-              onClick={() => alert('are you circle?')}
+              onClick={() => alert("are you circle?")}
             ></div>
             <div
               className="circle"
-              onClick={() => alert('are you circle?')}
+              onClick={() => alert("are you circle?")}
             ></div>
             <div
               className="circle"
-              onClick={() => alert('are you circle?')}
-            ></div>
-            <div
-              className="circle"
-              onClick={() => alert('are you circle?')}
+              onClick={() => alert("are you circle?")}
             ></div>
           </div>
           <div className="stats-line">
             <h4 className="stats-text">
               MATCHES
-              <h5 className="stats-text">{Object.values(userRedux.overallWins).reduce((acc, el) => acc + el)}</h5>
+              <h5 className="stats-text">
+                {Object.values(userRedux.overallWins).reduce(
+                  (acc, el) => acc + el
+                )}
+              </h5>
             </h4>
             <h4 className="stats-text">
               WINS<h5 className="wins-yellow">{userRedux.overallWins.wins}</h5>
             </h4>
             <h4 className="stats-text">
-              LOSSES<h5 className="losses-red">{userRedux.overallWins.losses}</h5>
+              LOSSES
+              <h5 className="losses-red">{userRedux.overallWins.losses}</h5>
             </h4>
             <h4 className="stats-text">
-              WIN RATE<h5 className="stats-text">{Math.floor(userRedux.overallWins.wins*100/Object.values(userRedux.overallWins).reduce((acc, el) => acc + el))}%</h5>
+              WIN RATE
+              <h5 className="stats-text">
+                {Math.floor(
+                  (userRedux.overallWins.wins * 100) /
+                    Object.values(userRedux.overallWins).reduce(
+                      (acc, el) => acc + el
+                    )
+                )}
+                %
+              </h5>
             </h4>
             <h4 className="stats-text">
               GOLD EARNED<h5 className="stats-text">{userRedux.totalGold}</h5>
@@ -168,7 +180,7 @@ function Profile() {
           </div>
           <h3 className="created">
             Account created {new Date().toLocaleDateString()}
-          </h3>{' '}
+          </h3>{" "}
           {/* get the date when the account was created */}
         </div>
       </div>

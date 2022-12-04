@@ -11,7 +11,6 @@ interface UserState{ //shape of the state inside inside of the slice
     totalGold: number,
     pathLessons:boolean[],
     sortLessons:boolean[],
-    avatar:string,
 }
 
 const initialState: UserState = {
@@ -22,7 +21,6 @@ const initialState: UserState = {
     totalGold: 0,
     pathLessons:[false, false, false, false],
     sortLessons:[false, false, false, false, false, false],
-    avatar: "monkey.png",
 }
 
 const userSlice = createSlice({
@@ -37,9 +35,8 @@ const userSlice = createSlice({
             state.sortLessons = action.payload.sortLessons;
             state.pathLessons = action.payload.pathLessons;
             state.totalGold = action.payload.totalGold;
-            state.avatar = action.payload.avatar;
         },
-        refreshDataNoAvatar(state,action:PayloadAction<UserState>){
+        refreshUsername(state,action:PayloadAction<UserState>){
             state.username = action.payload.username;
         },
         refreshSortingPath(state, action: PayloadAction<UserState>){
@@ -51,5 +48,5 @@ const userSlice = createSlice({
     }
 })
 
-export const { refreshData, refreshDataNoAvatar, refreshSortingPath, refreshPathLessons } = userSlice.actions;
+export const { refreshData, refreshUsername, refreshSortingPath, refreshPathLessons } = userSlice.actions;
 export default userSlice.reducer;
