@@ -90,7 +90,7 @@ function Profile() {
                   name="username"
                   onChange={changeUsername}
                   className="input-body"
-                  maxLength={10}
+                  maxLength={15}
                 />
                 <button
                   id="change-username-profile"

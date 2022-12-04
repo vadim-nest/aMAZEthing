@@ -38,21 +38,19 @@ export function whichAnimalSVG(minion: minionType) {
 export default function LeftBar (
   {
     currentMinion,
-    minions,
     currentTower,
     towers,
     currentPlayer,
   }: {
     currentMinion: null | number;
     currentTower: null | TowerType;
-    minions: { [key: number]: minionType };
     towers: TowerType[];
     currentPlayer: string;
   }
 ) {
 
   const user = useAppSelector((state) => state.user);
-  const {gameStats} = useAppSelector(state => state.game);
+  const {gameStats, minions} = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
   
   return (
@@ -86,7 +84,7 @@ export default function LeftBar (
       </div>
       <div className="scores"></div>
       <div className="selected-info">
-        {currentMinion !== null && (
+        {currentMinion !== null && minions[currentMinion] && (
           <div className="current-minion-left-bar">
             <div className="left-just-top">
               <h1 className="current-minion-name-left-bar">

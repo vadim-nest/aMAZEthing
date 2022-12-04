@@ -27,7 +27,7 @@ function DfsLesson() {
   function newGraph(){
     const newgraph = generateConnectedGraph(width, width, true);
     newgraph.removeUnweightedEdges()
-    setGraph(newgraph);
+    setGraph(newgraph)
   }
 
   async function dfs(){
@@ -64,7 +64,8 @@ function DfsLesson() {
         <p className="explanation-text">{paragraphs.firstP}</p>
       </div>
       <div className="buttons-pos">
-        <button className="button" onClick={()=>newGraph()}>NEW Graph</button>
+        <button className="button" onClick={()=> {
+          newGraph()}}>NEW Graph</button>
         <button className="button" onClick={()=>dfs()}>Visualize DFS</button>
       </div>
       <div className="dfs lesson-wrapper-2">

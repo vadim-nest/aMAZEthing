@@ -1,11 +1,15 @@
 import '../../css/towerPopup.css';
+import { useAppSelector } from '../../features/hooks';
 import { bubbleSortAlgo } from '../../utils/sorting-algo';
 import { bubbleSortVisual, insertionSortVisual, mergeSortVisual, quickSortVisual, selectionSortVisual } from '../../utils/sorting-helper-visual';
 import { minionType, TowerType } from '../../utils/types';
 import Visualization from '../sortingLessons/visualization';
 
 
-function TowerPopup ({boxSize, tower, width, height, towersSorting, zoomed}: {boxSize: number, tower: TowerType, width: number, height: number, towersSorting: {[key: number]: number}, zoomed: boolean}) {
+function TowerPopup ({boxSize, tower, width, height}: {boxSize: number, tower: TowerType, width: number, height: number}) {
+
+  const {zoomed, towersSorting} = useAppSelector(state => state.game);
+
   return <div style={tower.minion !== null && !zoomed ? {'opacity': 1} : {'opacity': 0}} className={`towerPopup ${
     tower.id/width < height/4 ? 'downPopup' :
     tower.id/width > 3*height/4 ? 'upPopup' :
@@ -27,7 +31,7 @@ function TowerPopup ({boxSize, tower, width, height, towersSorting, zoomed}: {bo
         quickSortVisual
       } 
       key={tower.numbers} 
-      clicked={tower.minion !== null && !towersSorting[tower.id]++} 
+      clicked={tower.minion !== null && !towersSorting[tower.id]} 
       delay={tower.minionSortingSpeed} 
       tower={tower.id}/>
   </div>

@@ -193,11 +193,6 @@ export async function quickSortVisual(animations:any, DELAY_MS:number, width:num
   }
 }
 
-//   for(let i = 0; i<arrayBars.length ; i++) {
-//     const bar = arrayBars[i] as HTMLElement 
-//     await delay(DELAY_MS*1.5)
-//     bar.style.background = 'var(--dark-green)'
-// }
 if (cb) cb()
 
 }

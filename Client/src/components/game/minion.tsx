@@ -1,14 +1,13 @@
 import React from 'react';
 import '../../css/minion.css';
-import { updateCurrentMinion, updateCurrentTower } from '../../features/game_slice';
+import { updateCurrentMinion, updateCurrentTile, updateCurrentTower } from '../../features/game_slice';
 import { useAppDispatch } from '../../features/hooks';
 import { minionType, TowerType } from '../../utils/types';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 
-function Minion({boxSize, minion, setCurrentTile, currentPlayer}: {
+function Minion({boxSize, minion, currentPlayer}: {
   boxSize: number,
   minion: minionType,
-  setCurrentTile: React.Dispatch<React.SetStateAction<null | {xPos:number, yPos:number}>>,
   currentPlayer: 'p1' | 'p2'
 }) {
 
@@ -16,17 +15,17 @@ function Minion({boxSize, minion, setCurrentTile, currentPlayer}: {
 
   function handleClick() {
     if (minion.alignment === currentPlayer) {
-      setCurrentTile(null);
+      dispatch(updateCurrentTile(null));
       dispatch(updateCurrentTower(null));
       dispatch(updateCurrentMinion(minion.id));
     }
   }
 
   function handleContextMenu() {
-    setCurrentTile({
+    dispatch(updateCurrentTile({
       xPos: minion.xPos,
       yPos: minion.yPos
-    })
+    }));
   }
 
   return (

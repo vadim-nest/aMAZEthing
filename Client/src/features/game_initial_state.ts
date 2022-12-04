@@ -1,10 +1,10 @@
 import { GameStatsType } from "../components/game/game";
-import { Graph } from "../utils/graph";
+import { Graph, value } from "../utils/graph";
 import { MazeTileType, minionType, TowerType } from "../utils/types";
 
 export interface GameState{ //shape of the state inside inside of the slice
   roomId: string,
-  player: 'p1' | 'p2',
+  currentPlayer: 'p1' | 'p2',
   boxSize: number,
   mazeCompleted: boolean,
   minions: {[key: number]: minionType},
@@ -23,10 +23,11 @@ export interface GameState{ //shape of the state inside inside of the slice
   finalGameStats: GameStatsType,
   gameEnded: boolean,
   zoomed: boolean,
-  maze: {currentMinion: null | number, maze: MazeTileType[]},
+  maze: MazeTileType[],
   maxBoxSize: number,
   minBoxSize: number,
-
+  displayVisited: value[],
+  mazeGenerated: boolean
 }
 const width = 86;
 const height = 40;
@@ -38,7 +39,7 @@ for (let i = 0; i < width*height; i++) {
 
 export const initialGameState: GameState = {
   roomId: '',
-  player: 'p1',
+  currentPlayer: 'p1',
   boxSize: 20,
   mazeCompleted: false,
   minions: {},
@@ -73,7 +74,9 @@ export const initialGameState: GameState = {
   },
   gameEnded: false,
   zoomed: false,
-  maze: {currentMinion: null, maze: array},
+  maze: array,
   minBoxSize: 20,
-  maxBoxSize: 100
+  maxBoxSize: 100,
+  displayVisited: [],
+  mazeGenerated: false
 }
