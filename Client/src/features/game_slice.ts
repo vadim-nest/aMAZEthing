@@ -116,6 +116,14 @@ const gameSlice = createSlice({
     },
     updateCurrentTile(state, action: PayloadAction<null | {xPos: number, yPos: number}>) {
       state.currentTile = action.payload;
+    },
+    removeMovingMinion(state, action: PayloadAction<number>) {
+      const minionId = action.payload;
+      state.movingMinions = state.movingMinions.filter(id => id !== minionId);
+    },
+    addMovingMinion(state, action: PayloadAction<number>) {
+      const minionId = action.payload;
+      state.movingMinions = [...state.movingMinions, minionId];
     }
   }
 })
@@ -141,6 +149,8 @@ export const {
   updateMinion,
   minionEnterTower,
   minionExitTower,
-  updateCurrentTile
+  updateCurrentTile,
+  removeMovingMinion,
+  addMovingMinion
 } = gameSlice.actions;
 export default gameSlice.reducer;
