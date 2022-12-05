@@ -5,7 +5,7 @@ import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import { useState } from 'react';
 import Shop from './shop';
 import CloseCross from '../svg/closeCross';
-import { useAppDispatch, useAppSelector } from '../../features/hooks';
+import { useAppDispatch, useAppSelector, whichAnimalSVG } from '../../features/hooks';
 import { updateCurrentMinion } from '../../features/game_slice';
 
 function storeButtonHover(isOnHover: boolean) {
@@ -28,17 +28,6 @@ function crossButtonHover(isOnHover: boolean) {
       : ((svgEl as unknown as HTMLElement).style.fill = `var(--white-green)`)
 
   });
-}
-
-function whichAnimalSVG (minion: minionType) {
-  return (
-    minion.type === 'Squirrel' ? <Squirrel currentPlayer={`${minion.alignment}-color`} /> :
-    minion.type === 'Badger' ? <Badger currentPlayer={`${minion.alignment}-color`} /> :
-    minion.type === 'Hare' ? <Hare currentPlayer={`${minion.alignment}-color`} /> :
-    minion.type === 'Deer' ? <Deer currentPlayer={`${minion.alignment}-color`} /> :
-    minion.type === 'Koala' ? <Koala currentPlayer={`${minion.alignment}-color`} /> :
-    minion.type === 'Bear' && <Bear currentPlayer={`${minion.alignment}-color`} />
-  )
 }
 
 function styleCurrentMinionBorder(currentMinId: number) {
