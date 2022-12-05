@@ -17,6 +17,7 @@ import {
   generateArray,
 } from "../../utils/sorting-algo";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useAlgo } from "../../features/hooks";
 
 export default function AllSortsPlay() {
   const [array, setArray] = useState([] as number[]);
@@ -58,22 +59,9 @@ export default function AllSortsPlay() {
   }, []);
 
   function algoChosen(choice: string) {
+    choice = choice?.toLowerCase()
     const copyArr = array.slice();
-    if (choice === "Bubble") {
-      setAnimations(bubbleSortAlgo(copyArr, ascendTRUE));
-    }
-    if (choice === "Insertion") {
-      setAnimations(insertionSortAlgo(copyArr, ascendTRUE));
-    }
-    if (choice === "Selection") {
-      setAnimations(selectionSortAlgo(copyArr, ascendTRUE));
-    }
-    if (choice === "Merge") {
-      setAnimations(mergeSortAlgo(copyArr, ascendTRUE));
-    }
-    if (choice === "Quick") {
-      setAnimations(quickSortAlgo(copyArr, ascendTRUE));
-    }
+    setAnimations(useAlgo(choice, copyArr, ascendTRUE))
   }
 
   useEffect(() => {

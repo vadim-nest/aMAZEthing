@@ -81,7 +81,6 @@
 .array {
   display:flex;
   align-items: flex-end;
-  height: 250px;
   max-width: fit-content;
 }
 

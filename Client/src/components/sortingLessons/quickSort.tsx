@@ -5,6 +5,7 @@ import { generateArray } from '../../utils/sorting-algo';
 import Visualization from './visualization';
 import { quickSortVisual} from '../../utils/sorting-helper-visual';
 import { quickSortAlgo } from '../../utils/sorting-algo';
+import { useAlgo } from '../../features/hooks';
 
 export default function QuickLesson() {
   const [array, setArray] = useState([3,5,7]);
@@ -35,7 +36,7 @@ export default function QuickLesson() {
   useEffect(() => {
     console.log(array)
     const copyArr = array.slice()
-    setAnimations(quickSortAlgo(copyArr, false))
+    setAnimations(useAlgo("quick", copyArr, false))
   }, [array])
 
   function initArr() {

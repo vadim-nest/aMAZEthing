@@ -2,6 +2,7 @@ import '../../css/sorting.css';
 import { useState, useEffect } from 'react';
 import { insertionSortAlgo, generateArray } from '../../utils/sorting-algo';
 import Visualization from './visualization';
+import { useAlgo } from '../../features/hooks';
 import { insertionSortVisual } from '../../utils/sorting-helper-visual';
 
 export default function InsertionLesson() {
@@ -32,7 +33,7 @@ export default function InsertionLesson() {
   useEffect(() => {
     console.log(array)
     const copyArr = array.slice()
-    setAnimations(insertionSortAlgo(copyArr, true))
+    setAnimations(useAlgo("insertion", copyArr, false))
   }, [array])
 
   function initArr() {

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { mergeSortAlgo, generateArray } from '../../utils/sorting-algo';
 import Visualization from './visualization';
 import { mergeSortVisual} from '../../utils/sorting-helper-visual';
+import { useAlgo } from '../../features/hooks';
+
 
 export default function MergeLesson() {
   const [array, setArray] = useState([3,5,7]);
@@ -33,7 +35,7 @@ export default function MergeLesson() {
   useEffect(() => {
     console.log(array)
     const copyArr = array.slice()
-    setAnimations(mergeSortAlgo(copyArr, true))
+    setAnimations(useAlgo("merge", copyArr, false))
   }, [array])
 
   function initArr() {
