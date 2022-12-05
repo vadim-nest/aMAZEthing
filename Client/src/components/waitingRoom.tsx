@@ -131,9 +131,6 @@ function WaitingRoom() {
               </h1>
             </button>
             {createClicked ? (
-              // <p>
-              //   {id}
-              // </p>
               <>
                 <div className="wr-amazing-text wr-copy-text">
                   <p>Copy the code and send</p>
