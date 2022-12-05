@@ -46,7 +46,6 @@ function Game() { // TODO: Extract logic to maze class
 
   useEffect(() => {
     if (gameStats.timeRemaining === 0 && !gameEnded) {
-      dispatch(finalGameStats());
       dispatch(updateGameEnded());
     }
   },[gameStats]);
@@ -57,8 +56,8 @@ function Game() { // TODO: Extract logic to maze class
 
   useEffect(() => {
     socket.off('minion move');
-    socket.on('minion move', (direction: {xPos: number, yPos: number, rotation: 'minionU' | 'minionR' | 'minionL' | 'minionD' | ''}, minionID: number) => {
-      opponentMovement(direction, minionID)
+    socket.on('minion move', (direction: {xPos: number, yPos: number, rotation: 'minionU' | 'minionR' | 'minionL' | 'minionD' | ''}, minionId: number) => {
+      dispatch(opponentMinionMovement({direction, minionId}));
     })
     socket.off('new minion');
     socket.on('new minion', type => {
@@ -87,9 +86,6 @@ function Game() { // TODO: Extract logic to maze class
     }
   }
 
-  function opponentMovement(direction: {xPos: number, yPos: number, rotation: 'minionU' | 'minionR' | 'minionL' | 'minionD' | '' }, minionId: number) {
-    dispatch(opponentMinionMovement({direction, minionId}));
-  }
 
   async function moveMinion(goTo: {xPos: number, yPos: number}, comeFrom: {xPos: number, yPos: number}, currentGraph: Graph, minion: false | minionType = false, showPath = true) {
     if (!minion) minion = minions[currentMinion as number] as minionType;

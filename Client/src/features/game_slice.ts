@@ -72,6 +72,9 @@ const gameSlice = createSlice({
     setAllTilesHidden(state, action: PayloadAction<boolean>) {
       state.allTilesHidden = action.payload;
     },
+    updateCurrentTile(state, action: PayloadAction<null | {xPos: number, yPos: number}>) {
+      state.currentTile = action.payload;
+    },
     updateCurrentMinion(state, action: PayloadAction<null | number>) {
       state.currentMinion = action.payload;
     },
@@ -89,6 +92,7 @@ const gameSlice = createSlice({
     },
     updateGameEnded(state) {
       state.gameEnded = true;
+      state.finalGameStats = state.gameStats;
     },
     addNewMinionState(state, action: PayloadAction<{type: animal, player: 'p1' | 'p2'}>) {
       const newId = Object.keys(state.minions).length;
@@ -171,9 +175,6 @@ const gameSlice = createSlice({
         }
       })
       state.towersSorting[towerId] = 0;
-    },
-    updateCurrentTile(state, action: PayloadAction<null | {xPos: number, yPos: number}>) {
-      state.currentTile = action.payload;
     },
     removeMovingMinion(state, action: PayloadAction<number>) {
       const minionId = action.payload;
