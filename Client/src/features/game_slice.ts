@@ -251,6 +251,11 @@ const gameSlice = createSlice({
     },
     updateMazeGenerated(state, action: PayloadAction<boolean>) {
       state.mazeGenerated = action.payload;
+    },
+    receiveRoomId(state, action: PayloadAction<{roomId: string, player: 'p1' | 'p2'}>) {
+      const { roomId, player } = action.payload;
+      state.roomId = roomId;
+      state.currentPlayer = player;
     }
   }
 })
@@ -286,6 +291,7 @@ export const {
   updateMazeClasses,
   updateDisplayVisited,
   increaseTowersSorting,
-  updateMazeGenerated
+  updateMazeGenerated,
+  receiveRoomId
 } = gameSlice.actions;
 export default gameSlice.reducer;

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import socket from '../services/socket';
 import { store } from '../features/store';
 import { useAppDispatch, useAppSelector } from '../features/hooks';
-import { defaultState, updatePlayer, updateRoomID } from '../features/game_slice';
+import { defaultState, receiveRoomId, updatePlayer, updateRoomID } from '../features/game_slice';
 
 
 function WaitingRoom() {
@@ -19,15 +19,10 @@ function WaitingRoom() {
 
   useEffect(() => {
     dispatch(defaultState());
-    socket.off('receiveRoomId');
-    socket.off('receiveRoomIdHost');
-    socket.off('receiveRoomIdJoin');
-    socket.off('Game start');
     socket.on('receiveRoomId', (roomId: string, player: 'p1' | 'p2', type: 'Host' | 'Join' | 'Play') => {
       console.log('Received room ID', {roomId})
       setId(roomId);
-      dispatch(updateRoomID(roomId));
-      dispatch(updatePlayer(player));
+      dispatch(receiveRoomId({roomId, player}));
       console.log('Emitting ready');
       socket.emit(`ready${type}`, roomId);
     });
@@ -44,6 +39,10 @@ function WaitingRoom() {
     return ()=>{ 
       // console.log('clearing waiting');
       // socket.emit('clear waiting', store.getState().game.roomId) // TODO: Currently this prevents them from joining the game on game start
+      socket.off('receiveRoomId');
+      socket.off('receiveRoomIdHost');
+      socket.off('receiveRoomIdJoin');
+      socket.off('Game start');
       setPlayClicked(false);
     } 
   }, []);
