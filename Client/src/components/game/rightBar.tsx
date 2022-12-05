@@ -51,7 +51,7 @@ function styleCurrentMinionBorder(currentMinId: number) {
   (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).style.backgroundColor = 'var(--purple)';
 }
 
-function RightBar({addNewMinion}: (type: animal, player: 'p1' | 'p2') => void) {
+function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | 'p2') => void}) {
 
   const [shopOpen, setShopOpen] = useState(false);
   const { allTilesHidden, currentPlayer, minions } = useAppSelector(state => state.game);
