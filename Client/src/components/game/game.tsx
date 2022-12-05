@@ -46,7 +46,6 @@ function Game() { // TODO: Extract logic to maze class
 
   useEffect(() => {
     if (gameStats.timeRemaining === 0 && !gameEnded) {
-      dispatch(finalGameStats());
       dispatch(updateGameEnded());
     }
   },[gameStats]);
