@@ -7,7 +7,8 @@ import { delay } from "../../utils/functionalities";
 
 function DijkstraLesson() {
   const [graph, setGraph] = useState<any>();
-  const [width, setWidth] = useState(15);
+  const [clicked, setClicked] = useState(false);
+  const [width] = useState(15);
   const [end, setEnd] = useState<any>(width * width - 1);
 
   let paragraphs = {
@@ -15,7 +16,7 @@ function DijkstraLesson() {
     firstP:
       "This algorithm uses the weights of the edges to find the path that minimizes the total distance (weight) between the source node and all other nodes.",
     secondP:
-    "(weighted): the father of pathfinding algorithms; guarantees the shortest path"
+      "(weighted) the father of pathfinding algorithms; guarantees the shortest path"
   };
 
   useEffect(() => {
@@ -80,10 +81,22 @@ function DijkstraLesson() {
         <p className="explanation-text centered-text">{paragraphs.secondP}</p>
       </div>
       <div className="buttons-pos">
-        <button className="button" onClick={() => newGraph()}>
+        <button 
+        className="button" 
+        onClick={() => {
+          setClicked(true);
+          newGraph()
+          setClicked(false);
+          }}>
           NEW Graph{" "}
         </button>
-        <button className="button" onClick={() => dijkstra()}>
+        <button 
+        className="button" 
+        onClick={() => {
+          setClicked(true);
+          dijkstra()
+          setClicked(false);
+          }}>
           Visualize Dijkstra
         </button>
       </div>

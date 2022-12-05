@@ -26,7 +26,11 @@
 }
 
 .sorting-algo, .path-algo {
-  margin: 5vh 15vw;
+  margin: 2vh 10vw;
+  display: flex;
+  justify-content: flex-start;
+
+  flex-direction: column;
   text-align: left;
 }
 

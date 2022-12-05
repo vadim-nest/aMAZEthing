@@ -7,6 +7,7 @@ import { delay } from "../../utils/functionalities";
 
 function AStarLesson() {
   const [graph, setGraph] = useState<any>();
+  const [clicked, setClicked] = useState(false);
   const [width] = useState(25);
   const [end, setEnd] = useState<any>(width * width - 1);
 
@@ -15,13 +16,11 @@ function AStarLesson() {
     firstP:
       "A* assigns a weight to each open node equal to the weight of the edge to that node plus the approximate distance between that node and the finish. This approximate distance is found by the heuristic, and represents a minimum possible distance between that node and the end.",
     secondP:
-      "(weighted): arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm"
+      "(weighted) arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm"
   };
 
   useEffect(() => {
-    const graph = generateConnectedGraph(width, width, true);
-    graph.removeUnweightedEdges();
-    setGraph(graph);
+    newGraph();
   }, []);
 
   function newGraph() {
@@ -91,10 +90,22 @@ function AStarLesson() {
         <p className="explanation-text centered-text">{paragraphs.secondP}</p>
       </div>
       <div className="buttons-pos">
-        <button className="button" onClick={() => newGraph()}>
+        <button 
+        className="button" 
+        onClick={() =>{
+          setClicked(true);
+          newGraph();
+          setClicked(false);
+          }}>
           NEW Graph
         </button>
-        <button className="button" onClick={() => aStar()}>
+        <button 
+        className="button"
+        onClick={() => {
+          setClicked(true);
+          aStar()
+          setClicked(false);
+          }}>
           Visualize A*
         </button>
       </div>

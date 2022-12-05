@@ -7,16 +7,9 @@ import { delay } from "../../utils/functionalities";
 
 function BfsLesson() {
   const [graph, setGraph] = useState<any>();
+  const [clicked, setClicked] = useState(false);
   const [width] = useState(15);
   const [end, setEnd] = useState<any>(width * width - 1);
-
-  let paragraphs = {
-    sortName: "Breath First Search (BFS) algorithm",
-    firstP:
-      "Investigates all nodes at the current depth level (neighbours) before moving on to nodes at the next depth level.",
-    secondP:
-      "(unweighted) a great algorithm; guarantees the shortest path"
-  };
 
   useEffect(() => {
     const graph = generateConnectedGraph(width, width, true);
@@ -77,15 +70,27 @@ function BfsLesson() {
   return (
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
-        <h1 className="explanation-title">{paragraphs.sortName}</h1>
-        <p className="explanation-text">{paragraphs.firstP}</p>
-        <p className="explanation-text centered-text">{paragraphs.secondP}</p>
+        <h1 className="explanation-title">Breath First Search (BFS) algorithm</h1>
+        <p className="explanation-text">Investigates all nodes at the current depth level (neighbours) before moving on to nodes at the next depth level.</p>
+        <p className="explanation-text centered-text">(unweighted) guarantees the shortest path</p>
       </div>
       <div className="buttons-pos">
-        <button className="button" onClick={() => newGraph()}>
+        <button 
+        className="button" 
+        onClick={() => {
+          setClicked(true);
+          newGraph();
+          setClicked(false);
+          }}>
           NEW Graph
         </button>
-        <button className="button" onClick={() => bfs()}>
+        <button 
+          className="button" 
+          onClick={() => {
+            setClicked(true);
+            bfs();
+            setClicked(false);
+            }}>
           Visualize bfs
         </button>
       </div>

@@ -1,16 +1,3 @@
-.lesson-wrapper-2 {
-  background-color: var(--white);
-  border-color: var(--white);
-  border-radius: 20px;
-  min-width: 70vw;
-  width: 900px;
-  height: 900px;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 #myCanvas {
   position: relative;
 }

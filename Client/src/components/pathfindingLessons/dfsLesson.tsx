@@ -7,7 +7,8 @@ import { delay } from "../../utils/functionalities";
 
 function DfsLesson() {
   const [graph, setGraph] = useState<any>();
-  const [width, setWidth] = useState(15);
+  const [clicked, setClicked] = useState(false);
+  const [width] = useState(15);
   const [end, setEnd] = useState<any>(width * width - 1);
 
   let paragraphs = {
@@ -15,13 +16,11 @@ function DfsLesson() {
     firstP:
       "DFS starts at the root (top) node of a tree and goes as far as it can down a given branch (path), then backtracks until it finds an unexplored path, and then explores it.",
     secondP:
-    "(unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path"
+    "(unweighted) a very bad algorithm for pathfinding; does not guarantee the shortest path"
   };
 
   useEffect(() => {
-    const graph = generateConnectedGraph(width, width, true);
-    graph.removeUnweightedEdges();
-    setGraph(graph);
+    newGraph();
   }, []);
 
   function newGraph() {
@@ -39,6 +38,7 @@ function DfsLesson() {
       path = Array.from(DFSVisualpaths.path);
       await showPath(path);
     }
+    
   }
   async function showPath(path: number[], visited: boolean = false) {
     for (let i = 0; i < path.length; i++) {
@@ -81,17 +81,29 @@ function DfsLesson() {
         <p className="explanation-text centered-text">{paragraphs.secondP}</p>
       </div>
       <div className="buttons-pos">
-        <button
-          className="button"
-          onClick={() => {
+        
+          <button
+          className={clicked ? "button ": "button"}
+          disabled={clicked}
+          onClick={() =>{ 
+            setClicked(true);
             newGraph();
-          }}
-        >
+            setClicked(false);
+            }}>
           NEW Graph
         </button>
-        <button className="button" onClick={() => dfs()}>
+        
+          <button 
+          className={clicked ? "button ": "button"} 
+          disabled={clicked}
+          onClick={() => {
+            setClicked(true);
+            dfs();
+            setClicked(false);
+            }}>
           Visualize DFS
         </button>
+        
       </div>
       <div className="lesson-wrapper-2">
         <div id="myCanvas">
