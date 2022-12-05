@@ -20,7 +20,7 @@ export interface GameStatsType {timeRemaining: number, p1Coins: number, p2Coins:
 
 function Game() { // TODO: Extract logic to maze class
 
-  const {currentPlayer, roomId, mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, intervals, gameStats, gameEnded, minions, currentTile, movingMinions, towers, weightPositions} = useAppSelector(state => state.game);
+  const {currentPlayer, roomId, mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, mazeGenerated, gameStats, gameEnded, minions, currentTile, movingMinions, towers, weightPositions} = useAppSelector(state => state.game);
 
   const dispatch = useAppDispatch();
 
