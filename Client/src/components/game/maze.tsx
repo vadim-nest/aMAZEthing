@@ -71,10 +71,10 @@ function Maze({ towers, currentPlayer}: {
   },[maze]);
 
   useEffect(() => {
-    if (currentPlayer === 'p2') {
-      mazeOuterRef.current!.scrollTo({top: mazeInnerRef.current!.clientHeight, left: mazeInnerRef.current!.clientWidth, behavior: 'auto'})
+    if (currentPlayer === 'p2' && allTilesHidden === false) {
+      mazeOuterRef.current!.scrollTo({top: mazeInnerRef.current!.clientHeight, left: mazeInnerRef.current!.clientWidth * 2, behavior: 'auto'})
     }
-  }, [mazeGenerated])
+  }, [allTilesHidden])
 
   return (
       <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()} ref={mazeOuterRef}>
