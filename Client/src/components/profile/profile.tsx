@@ -23,13 +23,13 @@ function Profile() {
   let currentSortProgress = 0;
   let currentPathProgress = 0;
 
-  for (let bool of userRedux.sortLessons) {
-    if (bool === true) currentSortProgress++;
+  for (let isLessonComplete of userRedux.sortLessons) {
+    if (isLessonComplete === true) currentSortProgress++;
     else break;
   }
 
-  for (let bool of userRedux.pathLessons) {
-    if (bool === true) currentPathProgress++;
+  for (let isLessonComplete of userRedux.pathLessons) {
+    if (isLessonComplete === true) currentPathProgress++;
     else break;
   }
 
