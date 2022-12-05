@@ -16,13 +16,12 @@ function Maze({ towers, currentPlayer}: {
 }) {
 
   // TODO: Set as state
-  const {boxSize, height, width, currentGraph, allTilesHidden, minions, maze, displayVisited, mazeGenerated} = useAppSelector(state => state.game);
+  const { height, width, currentGraph, allTilesHidden, minions, maze, displayVisited, mazeGenerated } = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
 
   useEffect(() => {
     async function mazeInit(){
-      const mazeTiles = document.getElementsByClassName('mazeTile');
       if (mazeGenerated === false) {
         dispatch(updateMazeGenerated(true));
 
