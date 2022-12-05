@@ -30,6 +30,7 @@ export const store = configureStore({
     user: userReducer,
     game: gameReducer
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false})
   // preloadedState: persistedState,
 });
 
