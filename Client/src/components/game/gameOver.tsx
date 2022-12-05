@@ -8,21 +8,21 @@ function GameOver ({currentPlayer} : {
 
   const {finalGameStats} = useAppSelector(state => state.game);
 
-  let win = finalGameStats.p1Towers.length > finalGameStats.p2Towers.length;
-  if (finalGameStats.p1Towers.length === finalGameStats.p2Towers.length) win = finalGameStats.p1Coins > finalGameStats.p2Coins;
-  if (currentPlayer === 'p2') win = !win;
+  let win = finalGameStats.p1Towers.length > finalGameStats.p2Towers.length ? 'p1' : 'draw';
+  if (win === 'draw' && finalGameStats.p1Towers.length < finalGameStats.p2Towers.length) win = 'p2';
 
   const navigate = useNavigate();
 
   return (
-    <div className={`gameOver ${win ? '' : 'lose'}`}>
+    <div className={`gameOver ${win !== currentPlayer ? '' : 'lose'}`}>
       <div className='gameOverModal'>
         <div className="header">
-          <h1>{win ? 'VICTORY' : 'LOSE'}</h1>
+          <h1>{win === currentPlayer ? 'VICTORY' : 
+            win === 'draw' ? 'DRAW' : 'LOSE'}</h1>
           <h2>GAME STATS</h2>
         </div>
         <div className="player">
-          <h2 className={win ? 'win' : 'loser'}>You</h2>
+          <h2 className={win === currentPlayer ? 'win' : 'loser'}>You</h2>
           <div className="stats">
             <h2>Minions</h2>
             <h2 className="value">
@@ -41,7 +41,7 @@ function GameOver ({currentPlayer} : {
           </div>
         </div>
         <div className="player">
-          <h2 className={win ? 'loser' : 'win'}>Opponent</h2>
+          <h2 className={win !== currentPlayer ? 'loser' : 'win'}>Opponent</h2>
           <div className="stats">
             <h2>Minions</h2>
             <h2 className="value">
