@@ -72,7 +72,7 @@ function BfsLesson() {
           <div className="bfs graph-vertices" style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}>
             {graph && graph.vertices.map((vertex: value) => (
                 <GraphVertex
-                  key={Math.random()*Math.random()}
+                  key={Math.random()}
                   width={width}
                   vertex={vertex}
                   edges={graph.edges.filter((edge: any) => edge[0] === vertex)}

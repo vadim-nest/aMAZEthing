@@ -71,7 +71,7 @@ function DfsLesson() {
       <div className="dfs lesson-wrapper-2">
         <div ref={ref} id="dfs myCanvas" >
           <div className="dfs graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()*Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} end={end} setEnd={setEnd} weightedGraph={false}/>)}
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} end={end} setEnd={setEnd} weightedGraph={false}/>)}
           </div>
         </div>
       </div>
