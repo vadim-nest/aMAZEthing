@@ -76,7 +76,7 @@ export class Graph {
     return true;
   }
 
-  findPath (valueX: value, valueY: value, method = 'dfs') {
+  findPath (valueX: value, valueY: value, method = 'dfs', width:any =10, heuristicValue:number = 10) {
     if (!this.vertices.includes(valueX) || !this.vertices.includes(valueY)) return false;
     let path;
     if (valueX === valueY) return true;
@@ -97,7 +97,7 @@ export class Graph {
       path = vDijk(valueX as number,valueY as number,this)
       break;
     case 'aStar':
-      path = aStar(valueX as number,valueY as number,this, distanceConstruct(25), 10)
+      path = aStar(valueX as number,valueY as number,this, distanceConstruct(width), heuristicValue)
       break;
     default:
       path = dFS(valueX, valueY, this);

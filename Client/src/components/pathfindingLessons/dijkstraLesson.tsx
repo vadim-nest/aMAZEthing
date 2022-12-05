@@ -6,7 +6,6 @@ import GraphVertex from "./graphVertex";
 
 
 function DijkstraLesson() {
-  const ref:any = useRef(null);
   const [graph,setGraph] = useState<any>();
   const [width, setWidth] = useState(15);
   const [end, setEnd] = useState<any>(width * width - 1);
@@ -67,7 +66,7 @@ function DijkstraLesson() {
         <button className="button" onClick={()=>dijkstra()}>Visualize Dijkstra</button>
       </div>
       <div className="dijk lesson-wrapper-2">
-        <div ref={ref} id="dijk myCanvas" >
+        <div id="dijk myCanvas" >
           <div className="dijk graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
           </div>

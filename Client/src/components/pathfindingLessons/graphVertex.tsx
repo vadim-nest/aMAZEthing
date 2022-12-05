@@ -1,4 +1,3 @@
-
 import { value } from "../../utils/graph"
 import '../../css/graphVertex.css'
 function GraphVertex({vertex, edges, width, setEnd, end, weightedGraph}:{

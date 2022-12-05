@@ -2,13 +2,9 @@ import '../../css/learning/learning.css';
 import CurveSort from './curveSortSVG';
 import CurvePath from './curvePathSVG';
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../features/hooks';
 import MediaQuery from 'react-responsive';
 
 export default function LearningPage() {
-  const dispatch = useDispatch();
-  const user = useAppSelector((state) => state.user);
   const scrollTo = useRef<any>(null);
 
   return (

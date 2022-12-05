@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import "../../css/aStar-lesson.css";
 import { generateConnectedGraph } from "../../utils/maze";
-import { Graph, value } from "../../utils/graph";
+import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 
 
 function AStarLesson() {
-  const ref:any = useRef(null);
   const [graph,setGraph] = useState<any>();
   const [width, setWidth] = useState(25);
   const [end,setEnd] = useState<any>(width*width-1);
@@ -30,7 +29,7 @@ function AStarLesson() {
   }
 
   async function aStar(){
-    const aStarVisualpaths = graph.findPath(0, end?end:width*width, "aStar");
+    const aStarVisualpaths = graph.findPath(0, end?end:width*width, "aStar",width,10);//TODO - ADD heuristic value as slider
     if(aStarVisualpaths){
       let path: any = Array.from(aStarVisualpaths.visited);
       console.log("PATH", path);
@@ -70,7 +69,7 @@ function AStarLesson() {
         <button className="button" onClick={()=>aStar()}>Visualize A*</button>
       </div>
       <div className="aStar lesson-wrapper-2">
-        <div ref={ref} id="aStar myCanvas" >
+        <div id="aStar myCanvas" >
           <div className="aStar graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
           </div>

@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef} from "react";
 import { generateConnectedGraph } from "../../utils/maze";
 import "../../css/dfs-lesson.css";
-import { Graph, value } from "../../utils/graph";
+import {  value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 
 
 function DfsLesson() {
-  const ref:any = useRef(null);
   const [graph,setGraph] = useState<any>();
   const [width, setWidth] = useState(15);
   const [end,setEnd] = useState<any>(width*width-1);
@@ -69,7 +68,7 @@ function DfsLesson() {
         <button className="button" onClick={()=>dfs()}>Visualize DFS</button>
       </div>
       <div className="dfs lesson-wrapper-2">
-        <div ref={ref} id="dfs myCanvas" >
+        <div id="dfs myCanvas" >
           <div className="dfs graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} end={end} setEnd={setEnd} weightedGraph={false}/>)}
           </div>

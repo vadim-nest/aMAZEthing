@@ -5,7 +5,6 @@ import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 
 function BfsLesson() {
-  const ref: any = useRef(null);
   const [graph, setGraph] = useState<any>();
   const [width, setWidth] = useState(15);
   const [end, setEnd] = useState<any>(width * width - 1);
@@ -68,7 +67,7 @@ function BfsLesson() {
         <button className="button" onClick={() => bfs()}>Visualize bfs</button>
       </div>
       <div className="bfs lesson-wrapper-2">
-        <div ref={ref} id="bfs myCanvas">
+        <div id="bfs myCanvas">
           <div className="bfs graph-vertices" style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}>
             {graph && graph.vertices.map((vertex: value) => (
                 <GraphVertex
