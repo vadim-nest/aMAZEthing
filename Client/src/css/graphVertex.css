@@ -3,12 +3,12 @@
     width:20px;
     height:20px;
     border-radius: 50%;
-    background-color: aqua;
+    background-color: var(--main-green);
     z-index:20;
 }
 
 .selectedEndVertex{
-    background-color: darkred;
+    background-color: var(--red);
 }
 
 .edge{
@@ -16,13 +16,13 @@
     width:15px;
     height: 5px;
     border-radius: 3px;
-    background-color: greenyellow;
+    background-color: var(--sand);
     
 }
 .vertical{
     position:absolute;
     transform: rotate(90deg);
-    background-color: greenyellow;
+    background-color: var(--sand);
 }
 
 .right-connection{

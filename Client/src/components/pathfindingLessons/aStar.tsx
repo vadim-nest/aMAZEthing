@@ -8,7 +8,7 @@ import {delay} from '../../utils/functionalities'
 
 function AStarLesson() {
   const [graph,setGraph] = useState<any>();
-  const [width, setWidth] = useState(25);
+  const [width] = useState(25);
   const [end,setEnd] = useState<any>(width*width-1);
 
   let paragraphs = {
@@ -41,15 +41,15 @@ function AStarLesson() {
   } 
 
   async function showPath(path:number[],visited:boolean = false){
-    document.getElementById(`0`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
+    document.getElementById(`0`)!.style.backgroundColor = visited ? "var(--sand)" : "var(--yellow)";
     for (let i = 0; i < path.length; i++) {
-      await delay(10);
-      document.getElementById(`${path[i]}`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
-      await delay(10);
+      await delay(100);
+      document.getElementById(`${path[i]}`)!.style.backgroundColor = visited ? "var(--sand)" : "var(--yellow)";
+      await delay(100);
       if (i + 1 !== path.length) {
         if(document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`) || document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)){
-          if (path[i] < path[i + 1]) document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`)!.style.backgroundColor = visited ? "yellow" : "var(--main-green)" ;
-          else document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)!.style.backgroundColor = visited ? "yellow" : "var(--main-green)" ;
+          if (path[i] < path[i + 1]) document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`)!.style.backgroundColor = visited ? "var(--sand)" : "var(--yellow)" ;
+          else document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)!.style.backgroundColor = visited ? "var(--sand)" : "var(--yellow)" ;
         }
       }
     }

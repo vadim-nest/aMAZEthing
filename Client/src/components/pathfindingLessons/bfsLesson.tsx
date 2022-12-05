@@ -7,7 +7,7 @@ import {delay} from '../../utils/functionalities'
 
 function BfsLesson() {
   const [graph, setGraph] = useState<any>();
-  const [width, setWidth] = useState(15);
+  const [width] = useState(15);
   const [end, setEnd] = useState<any>(width * width - 1);
 
   let paragraphs = {
@@ -42,12 +42,12 @@ function BfsLesson() {
   async function showPath(path:number[],visited:boolean = false){
     for (let i = 0; i < path.length; i++) {
       await delay(10);
-      document.getElementById(`${path[i]}`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
+      document.getElementById(`${path[i]}`)!.style.backgroundColor = visited?"var(--sand)" :"var(--yellow)";
       await delay(10);
       if (i + 1 !== path.length) {
         if(document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`) || document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)){
-          if (path[i] < path[i + 1]) document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
-          else document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
+          if (path[i] < path[i + 1]) document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`)!.style.backgroundColor = visited ? "var(--sand)" : "var(--yellow)";
+          else document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)!.style.backgroundColor = visited ? "var(--sand)" : "var(--yellow)";
         }
       }
     }
