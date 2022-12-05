@@ -60,3 +60,34 @@
 .curve-small {
 margin: -150px 0;
 }
+
+
+.page-layout{
+  width: 100vw;
+  height: 90vh;
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pagination-left{
+
+  height: 90vh;
+  min-width: 10vw;
+  width:10vw;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pagination-right{
+  height: 90vh;
+  min-width: 10vw;
+  width:10vw;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

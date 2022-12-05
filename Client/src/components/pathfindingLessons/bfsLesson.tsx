@@ -4,6 +4,7 @@ import "../../css/pathFinding.css";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 import { delay } from "../../utils/functionalities";
+import Pagination from "../learning/pagination";
 
 function BfsLesson() {
   const [graph, setGraph] = useState<any>();
@@ -68,6 +69,7 @@ function BfsLesson() {
   }
 
   return (
+    <Pagination leftName={'Learning'} rightName={'Dfs'} leftLink={'learning'} rightLink={'learning/dfsLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">Breath First Search (BFS) algorithm</h1>
@@ -118,6 +120,7 @@ function BfsLesson() {
         </div>
       </div>
     </div>
+    </Pagination>
   );
 }
 

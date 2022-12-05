@@ -4,6 +4,7 @@ import { generateConnectedGraph } from "../../utils/maze";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 import { delay } from "../../utils/functionalities";
+import Pagination from "../learning/pagination";
 
 function AStarLesson() {
   const [graph, setGraph] = useState<any>();
@@ -83,6 +84,7 @@ function AStarLesson() {
   }
 
   return (
+    <Pagination leftName={'Dijkstra'} rightName={'Learning'} leftLink={'learning/dijkstraLesson'} rightLink={'learning'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
@@ -133,6 +135,7 @@ function AStarLesson() {
         </div>
       </div>
     </div>
+    </Pagination>
   );
 }
 

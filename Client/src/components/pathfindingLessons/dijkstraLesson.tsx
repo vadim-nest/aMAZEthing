@@ -4,6 +4,7 @@ import { generateConnectedGraph } from "../../utils/maze";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 import { delay } from "../../utils/functionalities";
+import Pagination from "../learning/pagination";
 
 function DijkstraLesson() {
   const [graph, setGraph] = useState<any>();
@@ -74,6 +75,7 @@ function DijkstraLesson() {
   }
 
   return (
+    <Pagination leftName={'Dfs'} rightName={'aStar'} leftLink={'learning/dfsLesson'} rightLink={'learning/aStarLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
@@ -124,6 +126,7 @@ function DijkstraLesson() {
         </div>
       </div>
     </div>
+    </Pagination>
   );
 }
 

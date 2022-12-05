@@ -4,6 +4,7 @@ import "../../css/pathFinding.css";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 import { delay } from "../../utils/functionalities";
+import Pagination from "../learning/pagination";
 
 function DfsLesson() {
   const [graph, setGraph] = useState<any>();
@@ -74,6 +75,7 @@ function DfsLesson() {
   }
 
   return (
+    <Pagination leftName={'Bfs'} rightName={'Dijkstra'} leftLink={'learning/bfsLesson'} rightLink={'learning/dijkstraLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
@@ -126,6 +128,7 @@ function DfsLesson() {
         </div>
       </div>
     </div>
+    </Pagination>
   );
 }
 
