@@ -1,4 +1,4 @@
-import '../../css/game.css';
+import '../../css/game/game.css';
 import Maze from './maze';
 import RightBar from './rightBar';
 import LeftBar from './leftBar';

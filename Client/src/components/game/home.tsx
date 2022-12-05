@@ -1,6 +1,6 @@
 import P1Home from "../svg/p1Home";
 import P2Home from "../svg/p2Home";
-import '../../css/home.css';
+import '../../css/game/home.css';
 import { useAppSelector } from "../../features/hooks";
 
 function home({ xPos, yPos, player }: { xPos: number, yPos: number, player: 'p1' | 'p2' }) {

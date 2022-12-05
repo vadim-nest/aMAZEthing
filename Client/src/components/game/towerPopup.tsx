@@ -1,4 +1,4 @@
-import '../../css/towerPopup.css';
+import '../../css/game/towerPopup.css';
 import { useAppSelector } from '../../features/hooks';
 import { bubbleSortAlgo } from '../../utils/sorting-algo';
 import { bubbleSortVisual, insertionSortVisual, mergeSortVisual, quickSortVisual, selectionSortVisual } from '../../utils/sorting-helper-visual';

@@ -1,10 +1,9 @@
 .initial-view {
-  flex: 1;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   background-color: var(--main-green);
-  height: 90vh;
   text-align: center;
   font-size: 30px;
   color: var(--white-green);
@@ -33,7 +32,7 @@
 
 .explanation-title {
   font-size: 50px;
-  margin: 5vh 0;
+  margin: 1vh 0;
   color: var(--purple);
 }
 
@@ -42,6 +41,9 @@
   font-size: 24px !important;
   font-weight: 700;
   padding-top: 0 !important;
+}
+.centered-text {
+  text-align: center;
 }
 
 .disable-horizontal-scroll {

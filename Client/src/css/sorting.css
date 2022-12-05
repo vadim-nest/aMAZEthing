@@ -1,11 +1,6 @@
 *{
   box-sizing: border-box;
 }
-/* 
-.lesson-h1, .lesson-p{
-  color: black !important;
-} */
-
 
 .code{
   display: inline-block;
@@ -127,8 +122,6 @@
 @media only screen and (max-width: 949px) {
   .lesson-wrapper-2 {
     width: 99%;
-    /* margin-left: 200px;
-    margin-right: 200px; */
   }
 
    /* TODO started here. didn't finish  */

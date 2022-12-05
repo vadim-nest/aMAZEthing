@@ -21,7 +21,7 @@ export default function LearningPage() {
         </div>
         <button
           className="scroll-learning"
-          onClick={() => scrollTo.current?.scrollIntoView()}
+          onClick={() => {scrollTo.current?.scrollIntoView()}} //TODO THis is not taking care of the navbar - Either we add an offset of 10VH or we take out the navbar after certain files
         >
           <h3>Scroll to learn more.</h3>
           <h3>↓</h3>
@@ -51,17 +51,13 @@ export default function LearningPage() {
             <div className="path-algo">
               <h3 className="explanation-title">Path finding algorithms</h3>
               <p className="explanation-text">
-                Takes a start point (also known as a node) and a goal and
-                attempts to make the shortest path between the two given
-                possible obstacles blocking the way.
+              At its core, a pathfinding algorithm seeks to find the shortest path between two points. This application visualizes various pathfinding algorithms in action.
               </p>
               <p className="explanation-text">
-                The simplest example of path finding is a 2D grid in a game,
-                that can be used to find a path from A to B on any type of
-                graph.
+              All of the algorithms on this application are adapted for a 2D grid, where 90 degree turns have a "cost" of 1 and movements from a node to another have a "cost" of 1.
               </p>
               <p className="explanation-text">
-                What you will soon see used here!
+              Note that some algorithms are unweighted, while others are weighted. Unweighted algorithms do not take turns or weight nodes into account, whereas weighted ones do. Additionally, not all algorithms guarantee the shortest path.
               </p>
             </div>
           </div>
