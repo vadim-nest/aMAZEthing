@@ -53,6 +53,12 @@
   border-radius: 15px;
 }
 
+.open-shop-arrow {
+  /* justify-content: end; */
+  margin-top: 65vh;
+  /* margin-bottom: auto; */
+}
+
 .cross-size {
   width: 80%;
   margin-left: auto;

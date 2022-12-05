@@ -85,7 +85,7 @@ export default function Connect(server: http.Server) {
       p2Id: '',
       p2Username: '',
       playersLoaded: 0,
-      timeRemaining: 60,
+      timeRemaining: 600,
       p1Coins: 0,
       p2Coins: 0,
       p1Towers: [],
@@ -157,12 +157,12 @@ export default function Connect(server: http.Server) {
   function sendGameState(newGameState, roomId, io) {
     if (newGameState) {
       io.to(roomId).emit('updateGameState', {
-        timeRemaining: newGameState.timeRemaining, 
-        p1Coins: newGameState.p1Coins, 
-        p2Coins: newGameState.p2Coins, 
-        p1Towers: newGameState.p1Towers, 
-        p2Towers: newGameState.p2Towers, 
-        p1MinionCount: newGameState.p1Minions.length, 
+        timeRemaining: newGameState.timeRemaining,
+        p1Coins: newGameState.p1Coins,
+        p2Coins: newGameState.p2Coins,
+        p1Towers: newGameState.p1Towers,
+        p2Towers: newGameState.p2Towers,
+        p1MinionCount: newGameState.p1Minions.length,
         p2MinionCount: newGameState.p1Minions.length});
     }
   }
@@ -200,7 +200,7 @@ export default function Connect(server: http.Server) {
     user1.overallWins[result1 === 'win' ? 'wins' : result1 === 'loss' ? 'losses' : 'draws']++;
     user1.totalGold += p1State.gold;
     user1.save();
-    
+
     user2.games.push(p2State);
     user2.overallWins[result2 === 'win' ? 'wins' : result2 === 'loss' ? 'losses' : 'draws']++;
     user2.totalGold += p2State.gold;
@@ -244,7 +244,7 @@ export default function Connect(server: http.Server) {
         playerSearch.push({socketId: socket.id, roomId});
         createNewGame(roomId, socket.id, username);
         socket.join(roomId);
-        
+
       }
     });
 
@@ -295,9 +295,9 @@ export default function Connect(server: http.Server) {
 
     socket.on('enterTower', (towerId, minionId, roomID, player) => {
       socket.to(roomID).emit('enterTower', towerId, minionId);
-      
+
     })
-    
+
     socket.on('conquerTower', (roomID, towerId, firstCapture, player) => {
       let newGameState = addTowerGame(roomID, towerId, player, firstCapture);
       sendGameState(newGameState, roomID, io);
