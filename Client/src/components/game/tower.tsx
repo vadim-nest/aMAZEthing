@@ -2,17 +2,15 @@ import { TowerType } from "../../utils/types";
 import TowerSVG from "../svg/towerSVG";
 import '../../css/game/tower.css'
 import TowerPopup from "./towerPopup";
-import { useAppDispatch } from "../../features/hooks";
+import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { updateCurrentMinion, updateCurrentTile, updateCurrentTower } from "../../features/game_slice";
 
-function Tower({ tower, boxSize, width, height }: {
-  tower: TowerType,
-  boxSize: number,
-  width: number,
-  height: number,
+function Tower({ tower }: {
+  tower: TowerType
 } ) {
 
   const dispatch = useAppDispatch();
+  const { boxSize, width, height } = useAppSelector(state => state.game);
 
   function handleContextMenu() {
     if (tower.minion === null) {
@@ -23,7 +21,7 @@ function Tower({ tower, boxSize, width, height }: {
     }
   }
 
-  
+
 
   function handleClick() {
     dispatch(updateCurrentTower(tower));
