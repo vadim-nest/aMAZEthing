@@ -278,7 +278,7 @@ function Game() { // TODO: Extract logic to maze class
             currentPlayer={currentPlayer}
             />
           <RightBar />
-          {gameEnded && <GameOver currentPlayer={currentPlayer}/>}
+          {gameEnded && <GameOver />}
         </div>
       </div>
     </>

@@ -19,13 +19,13 @@ function Maze({ towers, currentPlayer}: {
   const {boxSize, height, width, currentGraph, allTilesHidden, minions, maze, displayVisited, mazeGenerated} = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
-  
+
   useEffect(() => {
     async function mazeInit(){
       const mazeTiles = document.getElementsByClassName('mazeTile');
       if (mazeGenerated === false) {
         dispatch(updateMazeGenerated(true));
-        
+
         const {graphBE, visited, classes, towers} = await apiService.createMaze()
         let graph = new Graph()
         graph.reAssign(graphBE)
@@ -61,8 +61,8 @@ function Maze({ towers, currentPlayer}: {
   return (
       <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          <Home xPos={0} yPos={0} boxSize={boxSize} player='p1'/>
-          <Home xPos={width - 3} yPos={height - 3} boxSize={boxSize} player='p2'/>
+          <Home xPos={0} yPos={0} player='p1'/>
+          <Home xPos={width - 3} yPos={height - 3} player='p2'/>
           {Object.values(minions).map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} currentPlayer={currentPlayer}/>)}
           {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} boxSize={boxSize} width={width} height={height}/>)}
           {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize}/>)}
