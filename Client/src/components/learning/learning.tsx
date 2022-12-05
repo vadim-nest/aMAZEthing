@@ -2,27 +2,24 @@ import '../../css/learning/learning.css';
 import CurveSort from './curveSortSVG';
 import CurvePath from './curvePathSVG';
 import { useRef } from 'react';
-import MediaQuery from 'react-responsive';
+import { useMediaQuery } from 'react-responsive';
 
 export default function LearningPage() {
   const scrollTo = useRef<any>(null);
+  const isPhone = useMediaQuery({
+    query: '(max-width: 600)',
+  });
 
   return (
     <div className="disable-horizontal-scroll">
       <div className="initial-view">
         <div>
-          <MediaQuery minWidth={601}>
-            <h1>Welcome to the amazing learning experience.</h1>
-            <h1>Learn sorting and path finding algorithms.</h1>
-          </MediaQuery>
-          <MediaQuery maxWidth={600}>
-            <h1 className="title-small">
-              Welcome to the amazing learning experience.
-            </h1>
-            <h1 className="title-small">
-              Learn sorting and path finding algorithms.
-            </h1>
-          </MediaQuery>
+          <h1 className={!isPhone ? 'title-small' : ''}>
+            Welcome to the amazing learning experience.
+          </h1>
+          <h1 className={!isPhone ? 'title-small' : ''}>
+            Learn sorting and path finding algorithms.
+          </h1>
         </div>
         <button
           className="scroll-learning"
@@ -50,14 +47,9 @@ export default function LearningPage() {
                 others.
               </p>
             </div>
-            <MediaQuery minWidth={601}>
+            <div className={!isPhone ? 'title-small' : ''}>
               <CurveSort />
-            </MediaQuery>
-            <MediaQuery maxWidth={600}>
-              <div className='curve-small'>
-                <CurveSort/>
-              </div>
-            </MediaQuery>
+            </div>
             <div className="path-algo">
               <h3 className="explanation-title">Path finding algorithms</h3>
               <p className="explanation-text">
@@ -75,16 +67,9 @@ export default function LearningPage() {
               </p>
             </div>
           </div>
-        </div>
-        <div className="path-finding-algs">
-        <MediaQuery minWidth={601}>
-              <CurvePath />
-            </MediaQuery>
-            <MediaQuery maxWidth={600}>
-              <div className='curve-small'>
-                <CurvePath/>
-              </div>
-            </MediaQuery>
+          <div className={!isPhone ? 'title-small' : ''}>
+            <CurvePath />
+          </div>
         </div>
       </div>
     </div>

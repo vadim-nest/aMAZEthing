@@ -35,20 +35,10 @@ export function whichAnimalSVG(minion: minionType) {
   );
 }
 
-export default function LeftBar (
-  {
-    currentMinion,
-    currentTower,
-    towers,
-  }: {
-    currentMinion: null | number;
-    currentTower: null | TowerType;
-    towers: TowerType[];
-  }
-) {
+export default function LeftBar () {
 
   const user = useAppSelector((state) => state.user);
-  const {gameStats, minions, currentPlayer} = useAppSelector(state => state.game);
+  const {gameStats, minions, currentPlayer, currentMinion, currentTower, towers} = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
   return (

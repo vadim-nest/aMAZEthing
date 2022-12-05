@@ -42,7 +42,6 @@
 }
 
 .shop-just-text {
-  /* font-size: 20px; */
   color: var(--main-green);
   font-size: 16px;
   width: 30%;
@@ -50,8 +49,6 @@
   margin-bottom: 0px;
   padding-bottom: 0px;
   white-space: nowrap;
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
 }
 
 .shop-just-stats {
