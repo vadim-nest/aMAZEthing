@@ -30,9 +30,9 @@ function TowerPopup ({boxSize, tower, width, height}: {boxSize: number, tower: T
         tower.sortingAlgo === 'merge' ? mergeSortVisual :
         quickSortVisual
       } 
-      key={tower.numbers} 
+      key={tower.numbers as any} 
       clicked={tower.minion !== null && !towersSorting[tower.id]} 
-      delay={tower.minionSortingSpeed} 
+      delay={tower.minionSortingSpeed as number} 
       tower={tower.id}/>
   </div>
 }

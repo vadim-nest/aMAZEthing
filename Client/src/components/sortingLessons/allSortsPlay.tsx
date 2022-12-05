@@ -187,25 +187,22 @@ export default function AllSortsPlay() {
           array={array}
           height={HEIGHT}
           fontColor={"white"}
-          key={array}
+          key={array as any}
           fontSize={FONTSIZE}
           animations={animations}
           clicked={clicked}
           setClicked={setClicked}
           setIsSorted={setIsSorted}
           isSorted={isSorted}
-          sortingAlgo={
-            choiceOfAlgo === "Bubble"
-              ? bubbleSortVisual
-              : choiceOfAlgo === "Insertion"
+          sortingAlgo={choiceOfAlgo === "Bubble"
+            ? bubbleSortVisual
+            : choiceOfAlgo === "Insertion"
               ? insertionSortVisual
               : choiceOfAlgo === "Selection"
-              ? selectionSortVisual
-              : choiceOfAlgo === "Merge"
-              ? mergeSortVisual
-              : quickSortVisual
-          }
-        />
+                ? selectionSortVisual
+                : choiceOfAlgo === "Merge"
+                  ? mergeSortVisual
+                  : quickSortVisual} tower={undefined}        />
       </div>
     </div>
   );

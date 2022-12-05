@@ -2,32 +2,66 @@ import '../../css/sorting.css';
 import { increaseTowersSorting } from '../../features/game_slice';
 import { useAppDispatch } from '../../features/hooks';
 
-export default function Visualization(props: any) {
+interface visualProps {
+  array: number[];
+  key?: any;
+  animations: number[][];
+  sortingAlgo:any;
+  clicked?:boolean;
+  margin?:number;
+  fontColor?: string;
+  fontSize?: number;
+  paddingTop?: number;
+  width: number;
+  delay?: number;
+  height?: number;
+  tower?: string|any;
+  isSorted:boolean;
+  setClicked: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+  setIsSorted:(value: boolean | ((prevVar: boolean) => boolean)) => void;
+}
 
-    let {
-      array, 
-      animations, 
-      clicked, 
-      sortingAlgo, 
-      margin = 5, 
-      fontColor = 'var(--white-green)', 
-      fontSize = 15, 
-      paddingTop,
-      width, 
-      delay = 100, 
-      height = 20, 
-      tower = '', 
-      setClicked = () => {},
-      setIsSorted
-    } = props;
-    
+export default function Visualization({
+  array, 
+  animations, 
+  clicked, 
+  sortingAlgo, 
+  margin = 5, 
+  fontColor = 'var(--white-green)', 
+  fontSize = 15, 
+  paddingTop,
+  width, 
+  delay = 100, 
+  height = 20, 
+  tower = '', 
+  setClicked = () => {},
+  setIsSorted
+}:{
+  array: number[],
+  animations: number[][],
+  sortingAlgo:any,
+  clicked:boolean,
+  margin:number,
+  fontColor?: string,
+  fontSize?: number,
+  paddingTop?: number,
+  width: number,
+  delay: number,
+  height: number,
+  tower: string|any,
+  isSorted?:boolean,
+  setClicked?: (value: boolean | ((prevVar: boolean) => boolean)) => void,
+  setIsSorted?:(value: boolean | ((prevVar: boolean) => boolean)) => void,
+}
+) {
+
     const dispatch = useAppDispatch();  
 
     if(clicked) {
       if (tower) dispatch(increaseTowersSorting(tower));
         sortingAlgo(animations, delay, width, margin, tower, height, () => {
           setClicked(false) 
-          setIsSorted(true)})
+          setIsSorted?.(true)})
     }
 
     return(

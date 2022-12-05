@@ -85,13 +85,12 @@ export default function SelectionLesson() {
           margin={MARGIN}
           paddingTop={PADTOP}
           array={array}
-          key={array}
+          key={array as any}
           animations={animations}
           clicked={clicked}
           sortingAlgo={selectionSortVisual}
           setClicked={setClicked}
-          setIsSorted={setIsSorted}
-        />
+          setIsSorted={setIsSorted} tower={undefined} isSorted={false}        />
       </div>
     </div>
   );

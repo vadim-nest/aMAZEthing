@@ -110,7 +110,7 @@ export default function BubbleLesson() {
             array={array}
             height={HEIGHT}
             fontColor={"white"}
-            key={array}
+            key={array as any}
             animations={animations}
             clicked={clicked}
             sortingAlgo={bubbleSortVisual}
