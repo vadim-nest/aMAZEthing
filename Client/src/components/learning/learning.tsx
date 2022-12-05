@@ -1,15 +1,15 @@
 import '../../css/learning/learning.css';
 import CurveSort from './curveSortSVG';
 import CurvePath from './curvePathSVG';
+import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useAppSelector } from '../../features/hooks';
 import MediaQuery from 'react-responsive';
 
 export default function LearningPage() {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   const user = useAppSelector((state) => state.user);
+  const scrollTo = useRef<any>(null);
 
   return (
     <div className="disable-horizontal-scroll">
@@ -30,13 +30,13 @@ export default function LearningPage() {
         </div>
         <button
           className="scroll-learning"
-          onClick={() => window.scrollBy(0, window.innerHeight * 0.9)}
+          onClick={() => scrollTo.current?.scrollIntoView()}
         >
           <h3>Scroll to learn more.</h3>
           <h3>↓</h3>
         </button>
       </div>
-      <div className="all-algs">
+      <div className="all-algs" ref={scrollTo}>
         <div className="sorting-algs">
           <div className="explanation">
             <div className="sorting-algo">
