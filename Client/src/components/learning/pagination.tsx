@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import "../../css/learning/learning.css";
+import { useNavigate } from 'react-router-dom';
+import '../../css/learning/learning.css';
 
 function Pagination({
   leftName,
-  rightName,  
+  rightName,
   leftLink,
   rightLink,
   children,
 }: {
-    leftName:string;
-    rightName:string;
+  leftName: string;
+  rightName: string;
   leftLink: string;
   rightLink: string;
   children: any;
@@ -22,8 +22,8 @@ function Pagination({
           className="scroll-learning"
           onClick={() => navigate(`/${leftLink}`)}
         >
-          <h3> ← </h3>
-          <h4>Go to {leftName} </h4>
+          <h3 className='bounce bounce-left'>↓</h3>
+          <h4>{leftName} </h4>
         </button>
       </div>
       {children}
@@ -34,8 +34,8 @@ function Pagination({
             navigate(`/${rightLink}`);
           }}
         >
-          <h3> → </h3>
-          <h4>Go to {rightName} </h4>
+          <h3 className='bounce bounce-right'>↓</h3>
+          <h4>{rightName}</h4>
         </button>
       </div>
     </div>
