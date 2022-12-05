@@ -40,23 +40,21 @@ export default function LeftBar (
     currentMinion,
     currentTower,
     towers,
-    currentPlayer,
   }: {
     currentMinion: null | number;
     currentTower: null | TowerType;
     towers: TowerType[];
-    currentPlayer: string;
   }
 ) {
 
   const user = useAppSelector((state) => state.user);
-  const {gameStats, minions} = useAppSelector(state => state.game);
+  const {gameStats, minions, currentPlayer} = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
-  
+
   return (
     <div className="leftBarContainer">
       <div className="flags">
-        <h3 className="p1Name">{user.username ? user.username : 'You'}</h3>
+        <h3 className="p1Name">{(currentPlayer === 'p1') ? user.username : 'Opponent'}</h3>
         <div className="p1Flag">
           <FlagSVG
             playerName="you"
@@ -65,7 +63,7 @@ export default function LeftBar (
             textReverse="text-reverse-nope"
           />
         </div>
-        <h1 className="p2Name">Opponent</h1>
+        <h1 className="p2Name">{(currentPlayer === 'p2') ? user.username : 'Opponent'}</h1>
         <div className="p2Flag">
           <FlagSVG
             playerName="Isaac"

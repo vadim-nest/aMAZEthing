@@ -38,10 +38,10 @@ function Game() { // TODO: Extract logic to maze class
     socket.on('updateGameState', (newGameState: GameStatsType) => {
       dispatch(updateGameStats(newGameState));
     })
-    return ()=>{ 
+    return ()=>{
       console.log('clearing waiting');
       socket.emit('clear waiting', socket.id) // TODO: Currently this prevents them from joining the game on game start
-    } 
+    }
   }, [])
 
   useEffect(() => {
@@ -180,7 +180,7 @@ function Game() { // TODO: Extract logic to maze class
         else {
           dispatch(updateMinion({minionId: minion.id, updatedMinion: {...updatedMinion, rotation: ''}}));
           dispatch(removeMovingMinion(minion.id));
-          for (let tower of towers) {     
+          for (let tower of towers) {
             if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
               socket.emit('enterTower', tower.id, minion.id, roomId, currentPlayer);
               enterTower(tower.id, (minion as minionType).id);
@@ -276,7 +276,6 @@ function Game() { // TODO: Extract logic to maze class
             currentTower={currentTower}
             currentMinion={currentMinion}
             towers={towers}
-            currentPlayer={currentPlayer}
             />
           <Maze
             towers={towers}
