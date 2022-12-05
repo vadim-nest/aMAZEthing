@@ -2,7 +2,7 @@ import { useEffect, useState, useRef} from "react";
 import { generateConnectedGraph } from "../../utils/maze";
 import "../../css/dfs-lesson.css";
 import { Graph, value } from "../../utils/graph";
-import GraphVertex from "../graphVertex";
+import GraphVertex from "./graphVertex";
 
 
 function DfsLesson() {
@@ -71,7 +71,7 @@ function DfsLesson() {
       <div className="dfs lesson-wrapper-2">
         <div ref={ref} id="dfs myCanvas" >
           <div className="dfs graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={graph.edges.filter((edge:any)=>edge[0]===vertex)} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} weightedGraph={false}/>)}
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={graph.edges.filter((edge:any)=>edge[0]===vertex)} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={false}/>)}
           </div>
         </div>
       </div>

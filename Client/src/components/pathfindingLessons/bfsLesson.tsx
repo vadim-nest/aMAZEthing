@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { generateConnectedGraph } from "../../utils/maze";
 import "../../css/bfs-lesson.css";
 import { value } from "../../utils/graph";
-import GraphVertex from "../graphVertex";
+import GraphVertex from "./graphVertex";
 
 function BfsLesson() {
   const ref: any = useRef(null);
@@ -73,10 +73,11 @@ function BfsLesson() {
           <div className="bfs graph-vertices" style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}>
             {graph && graph.vertices.map((vertex: value) => (
                 <GraphVertex
-                  key={vertex}
+                  key={graph.edges.filter((edge:any)=>edge[0]===vertex)}
                   width={width}
                   vertex={vertex}
                   edges={graph.edges.filter((edge: any) => edge[0] === vertex)}
+                  end={end}
                   setEnd={setEnd}
                   weightedGraph={false}
                 />

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import "../../css/dijkstra-lesson.css";
 import { generateConnectedGraph } from "../../utils/maze";
 import { value } from "../../utils/graph";
-import GraphVertex from "../graphVertex";
+import GraphVertex from "./graphVertex";
 
 
 function DijkstraLesson() {
@@ -70,7 +70,7 @@ function DijkstraLesson() {
       <div className="dijk lesson-wrapper-2">
         <div ref={ref} id="dijk myCanvas" >
           <div className="dijk graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={vertex} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} weightedGraph={true}/>)}
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={graph.edges.filter((edge:any)=>edge[0]===vertex)} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
           </div>
         </div>
       </div>

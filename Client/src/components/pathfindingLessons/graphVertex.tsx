@@ -1,15 +1,16 @@
 
-import { value } from "../utils/graph"
-import '../css/graphVertex.css'
-function GraphVertex({vertex, edges, width, setEnd, weightedGraph}:{
+import { value } from "../../utils/graph"
+import '../../css/graphVertex.css'
+function GraphVertex({vertex, edges, width, setEnd, end, weightedGraph}:{
     vertex:value;
     edges:any;
     width:number;
     setEnd:any;
+    end:number;
     weightedGraph:boolean;
 }){
 
-    return(<div  id={`${vertex}`} className="vertex" onClick={()=>{setEnd(vertex) }}>
+    return(<div  id={`${vertex}`} className={`vertex ${vertex===end?'selectedEndVertex':''}`} onClick={()=>{setEnd(vertex) }}>
             {edges && edges.map((edge:[number, number, number])=>{
 
                 if(edge[2]!==0){
