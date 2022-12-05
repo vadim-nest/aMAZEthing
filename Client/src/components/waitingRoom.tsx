@@ -34,7 +34,7 @@ function WaitingRoom() {
         socket.emit('retry game start');
       }
     });
-    return ()=>{ 
+    return ()=>{
       // console.log('clearing waiting');
       // socket.emit('clear waiting', store.getState().game.roomId) // TODO: Currently this prevents them from joining the game on game start
       socket.off('receiveRoomId');
@@ -42,7 +42,7 @@ function WaitingRoom() {
       socket.off('receiveRoomIdJoin');
       socket.off('Game start');
       setPlayClicked(false);
-    } 
+    }
   }, []);
 
   function hostRoom() {
@@ -59,48 +59,45 @@ function WaitingRoom() {
     socket.emit('clear waiting');
     socket.emit('join', room, userRedux.email);
   }
-  
+
   function play() {
     console.log('play pressed');
     socket.emit('clear waiting');
     socket.emit('play', userRedux.email);
   }
 
+  function setButtonsClicked(createButton: boolean, joinButton: boolean, playButton: boolean) {
+    setCreateClicked(createButton);
+    setJoinClicked(joinButton);
+    setPlayClicked(playButton);
+  }
+
   function onCreateCLicked() {
     if (!createClicked) {
-      // greyOutOtherButtons('Create');
-      console.log('playClicked');
-      setCreateClicked(true);
-      setJoinClicked(false);
-      setPlayClicked(false);
+      setButtonsClicked(true, false, false);
       hostRoom();
     } else {
       console.log('clearing waiting');
       socket.emit('clear waiting', socket.id)
-      
-      setCreateClicked(false);
+      setButtonsClicked(false, false, false);
     }
   }
 
   function onJoinCLicked() {
     console.log('joining');
     if (!joinClicked) {
-      setJoinClicked(true);
-      setCreateClicked(false);
-      setPlayClicked(false);
+      setButtonsClicked(false, true, false);
     } else {
-      setJoinClicked(false);
+      setButtonsClicked(false, false, false);
     }
   }
 
   function onPlayClicked() {
     if (!playClicked) {
-      setPlayClicked(true);
-      setJoinClicked(false);
-      setCreateClicked(false);
+      setButtonsClicked(false, false, true);
       play();
     } else {
-      setPlayClicked(false);
+      setButtonsClicked(false, false, false);
       console.log('clearing waiting');
       socket.emit('clear waiting')
     }
