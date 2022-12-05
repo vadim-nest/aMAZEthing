@@ -10,8 +10,8 @@ export default function LearningPage() {
 
   return (
     <div className="disable-horizontal-scroll">
-      <div className="initial-view">
-        <div>
+      <div  className="initial-view">
+        <div >
           <h1 className={!isPhone ? 'title-small' : ''}>
             Welcome to the amazing learning experience.
           </h1>
@@ -27,7 +27,7 @@ export default function LearningPage() {
           <h3>↓</h3>
         </button>
       </div>
-      <div className="all-algs" ref={scrollTo}>
+      <div ref={scrollTo} className="all-algs" >
         <div className="sorting-algs">
           <div className="explanation">
             <div className="sorting-algo">

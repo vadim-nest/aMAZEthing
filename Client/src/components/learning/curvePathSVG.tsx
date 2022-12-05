@@ -74,11 +74,8 @@ function CurvePath() {
   }
 
   function helperCSS(updateNum: number) {
-    console.log({user, updateNum});
     if (isAuthenticated) return user.pathLessons[updateNum];
-    if( JSON.parse(localStorage.getItem('path') as any)[updateNum]) {
-      return  JSON.parse(localStorage.getItem('path') as any)[updateNum]
-    };
+    if( JSON.parse(localStorage.getItem('path') as any)[updateNum]) return JSON.parse(localStorage.getItem('path') as any)[updateNum];
   }
 
   return (
