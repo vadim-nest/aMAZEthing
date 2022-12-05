@@ -35,9 +35,7 @@ function Maze({ towers, currentPlayer}: {
         dispatch(updateMazeClasses({classes, visited}));
       }
       else if (allTilesHidden && currentGraph) {
-        console.log('showing Tiles', {displayVisited})
         const mazeTiles = document.getElementsByClassName('mazeTile');
-        console.log({mazeTiles})
         const halfway = Math.floor(mazeTiles.length/2);
         let index = -1;
         function step() {
@@ -61,7 +59,6 @@ function Maze({ towers, currentPlayer}: {
   },[maze]);
 
   return (
-    <>
       <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           <Home xPos={0} yPos={0} boxSize={boxSize} player='p1'/>
@@ -71,7 +68,6 @@ function Maze({ towers, currentPlayer}: {
           {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize}/>)}
         </div>
       </div>
-    </>
   );
 }
 
