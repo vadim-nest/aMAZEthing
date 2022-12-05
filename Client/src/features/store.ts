@@ -4,7 +4,8 @@ import gameReducer from './game_slice';
 
 function saveToLocalStorage(store: any) {
   try {
-    const serializedStore = JSON.stringify(store.getState().user);
+    const serializedStore = JSON.stringify(store);
+    console.log({serializedStore})
     window.localStorage.setItem('store', serializedStore);
   } catch (e) {
     console.log(e);
@@ -29,10 +30,10 @@ export const store = configureStore({
     user: userReducer,
     game: gameReducer
   },
-  preloadedState: persistedState,
+  // preloadedState: persistedState,
 });
 
-store.subscribe(() => saveToLocalStorage(store.getState().user));
+// store.subscribe(() => saveToLocalStorage(store.getState().user));
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
