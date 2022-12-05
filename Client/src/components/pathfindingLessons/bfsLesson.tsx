@@ -3,7 +3,7 @@ import { generateConnectedGraph } from "../../utils/maze";
 import "../../css/pathFinding.css";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
-import {delay} from '../../utils/functionalities'
+import { delay } from "../../utils/functionalities";
 
 function BfsLesson() {
   const [graph, setGraph] = useState<any>();
@@ -30,24 +30,43 @@ function BfsLesson() {
 
   async function bfs() {
     const BFSVisualpaths = graph.findPath(0, end, "vbfs");
-    if(BFSVisualpaths){
+    if (BFSVisualpaths) {
       let path: any = Array.from(BFSVisualpaths.visited);
       console.log("PATH", path);
-      await showPath(path,true);
+      await showPath(path, true);
       path = Array.from(BFSVisualpaths.path);
       await showPath(path);
     }
   }
 
-  async function showPath(path:number[],visited:boolean = false){
+  async function showPath(path: number[], visited: boolean = false) {
     for (let i = 0; i < path.length; i++) {
       await delay(10);
-      document.getElementById(`${path[i]}`)!.style.backgroundColor = visited?"var(--sand)" :"var(--yellow)";
+      document.getElementById(`${path[i]}`)!.style.backgroundColor = visited
+        ? "var(--sand)"
+        : "var(--yellow)";
       await delay(10);
       if (i + 1 !== path.length) {
-        if(document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`) || document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)){
-          if (path[i] < path[i + 1]) document.getElementById(`${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`)!.style.backgroundColor = visited ? "var(--sand)" : "var(--yellow)";
-          else document.getElementById(`${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`)!.style.backgroundColor = visited ? "var(--sand)" : "var(--yellow)";
+        if (
+          document.getElementById(
+            `${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`
+          ) ||
+          document.getElementById(
+            `${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`
+          )
+        ) {
+          if (path[i] < path[i + 1])
+            document.getElementById(
+              `${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`
+            )!.style.backgroundColor = visited
+              ? "var(--sand)"
+              : "var(--yellow)";
+          else
+            document.getElementById(
+              `${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`
+            )!.style.backgroundColor = visited
+              ? "var(--sand)"
+              : "var(--yellow)";
         }
       }
     }
@@ -60,13 +79,21 @@ function BfsLesson() {
         <p className="explanation-text">{paragraphs.firstP}</p>
       </div>
       <div className="buttons-pos">
-        <button className="button" onClick={() => newGraph()}>NEW Graph</button>
-        <button className="button" onClick={() => bfs()}>Visualize bfs</button>
+        <button className="button" onClick={() => newGraph()}>
+          NEW Graph
+        </button>
+        <button className="button" onClick={() => bfs()}>
+          Visualize bfs
+        </button>
       </div>
       <div className="lesson-wrapper-2">
         <div id="myCanvas">
-          <div className="graph-vertices" style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}>
-            {graph && graph.vertices.map((vertex: value) => (
+          <div
+            className="graph-vertices"
+            style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}
+          >
+            {graph &&
+              graph.vertices.map((vertex: value) => (
                 <GraphVertex
                   key={Math.random()}
                   width={width}

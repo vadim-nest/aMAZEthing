@@ -12,16 +12,16 @@ export default function MergeLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 35
-  let MIN_VAL = 10
-  let MAX_VAL = 100
-  let NUM_BARS = 25
-  let DELAY = 5
-  let PADTOP = 10
-  let MARGIN = 3
-  let HEIGHT = 3
+  const WIDTH = 35
+  const MIN_VAL = 10
+  const MAX_VAL = 100
+  const NUM_BARS = 25
+  const DELAY = 5
+  const PADTOP = 10
+  const MARGIN = 3
+  const HEIGHT = 3
 
-  let paragraphs = {
+  const paragraphs = {
     sortName: 'Merge sort',
     firstP:
       'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. As we go through each element, if the current element is bigger than the next one, we swap them. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.',
