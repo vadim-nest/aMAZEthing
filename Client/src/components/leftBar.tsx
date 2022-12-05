@@ -1,12 +1,12 @@
-import '../../css/leftBar.css';
-import { minionType, TowerType } from '../../utils/types';
-import FlagSVG from '../svg/flagSVG';
+import '../css/leftBar.css';
+import { minionType, TowerType } from '../utils/types';
+import FlagSVG from './svg/flagSVG';
 import MediaQuery from 'react-responsive';
-import { useAppDispatch, useAppSelector } from '../../features/hooks';
+import { useAppSelector } from '../features/hooks';
 import React from 'react';
-import { ZoomInSVG, ZoomOutSVG } from '../svg/zoomButtonsSVG';
-import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
-import TowerSVG from '../svg/towerSVG';
+import { ZoomInSVG, ZoomOutSVG } from './svg/zoomButtonsSVG';
+import { Squirrel, Badger, Hare, Deer, Koala, Bear } from './svg/animalsSVG';
+import TowerSVG from './svg/towerSVG';
 import LeftBarSmall from './leftBarSmall';
 import BottomNavbar from './bottomNavbar';
 
@@ -113,48 +113,54 @@ export default function LeftBar({
   const user = useAppSelector((state) => state.user);
 
   return (
-    <div className="leftBarContainer">
-      <div className="flags">
-        <h3 className="p1Name">{user.username ? user.username : 'You'}</h3>
-        <div className="p1Flag">
-          <FlagSVG
-            playerName="you"
-            playerScore={gameStats.p1Towers.length}
-            playerClass="p1FlagColor"
-            textReverse="text-reverse-nope"
-          />
-        </div>
-        <h1 className="p2Name">Opponent</h1>
-        <div className="p2Flag">
-          <FlagSVG
-            playerName="Isaac"
-            playerScore={gameStats.p2Towers.length}
-            playerClass="p2FlagColor"
-            textReverse="text-reverse-yep"
-          />
-        </div>
-      </div>
-
-      <div className="money-time">
-        <h3 className="time-money-text">Time remaining</h3>
-        <h3 className="time-count">{gameStats.timeRemaining}</h3>
-        <h3 className="time-money-text">Money</h3>
-        <h3 className="money-count price">{currentPlayer === 'p1' ? gameStats.p1Coins : gameStats.p2Coins}</h3>
-      </div>
-      <div className="scores"></div>
-      <div className="selected-info">
-        {currentMinion !== null && (
-          <div className="current-minion-left-bar">
-            <div className="left-just-top">
-              <h1 className="current-minion-name-left-bar">
-                {minions[currentMinion].name}
-              </h1>
-              <h1 className="current-minion-svg-left-bar">
-                {whichAnimalSVG(minions[currentMinion])}
-              </h1>
+    <>
+      <MediaQuery minWidth={951}>
+        <div className="leftBarContainer">
+          <div className="flags">
+            <h3 className="p1Name">{user.username ? user.username : 'You'}</h3>
+            <div className="p1Flag">
+              <FlagSVG
+                playerName="you"
+                playerScore={gameStats.p1Towers.length}
+                playerClass="p1FlagColor"
+                textReverse="text-reverse-nope"
+              />
             </div>
+            <h1 className="p2Name">Opponent</h1>
+            <div className="p2Flag">
+              <FlagSVG
+                playerName="Isaac"
+                playerScore={gameStats.p2Towers.length}
+                playerClass="p2FlagColor"
+                textReverse="text-reverse-yep"
+              />
+            </div>
+          </div>
 
-            <h1 className="left-just-stats">{minions[currentMinion].type}</h1>
+          <div className="money-time">
+            <h3 className="time-money-text">Time remaining</h3>
+            <h3 className="time-count">{gameStats.timeRemaining}</h3>
+            <h3 className="time-money-text">Money</h3>
+            <h3 className="money-count price">
+              {currentPlayer === 'p1' ? gameStats.p1Coins : gameStats.p2Coins}
+            </h3>
+          </div>
+          <div className="scores"></div>
+          <div className="selected-info">
+            {currentMinion !== null && (
+              <div className="current-minion-left-bar">
+                <div className="left-just-top">
+                  <h1 className="current-minion-name-left-bar">
+                    {minions[currentMinion].name}
+                  </h1>
+                  <h1 className="current-minion-svg-left-bar">
+                    {whichAnimalSVG(minions[currentMinion])}
+                  </h1>
+                </div>
+
+                <h1 className="left-just-stats">
+                  {minions[currentMinion].type}
+                </h1>
 
                 <h1 className="left-just-text">ID</h1>
                 <h1 className="left-just-stats">{minions[currentMinion].id}</h1>
