@@ -160,7 +160,7 @@ function Game() { // TODO: Extract logic to maze class
           previousTimeStamp = timestamp;
         }
         let updatedMinion = minion as minionType;
-        if ((previousTimeStamp as number) + speed < timestamp) {
+        if ((previousTimeStamp as number) + minion.movementSpeed < timestamp) {
           previousTimeStamp = timestamp
           const nextDirection = path.shift() as number;
           const direction = getDirection(previousDirection as number, nextDirection as number, width);

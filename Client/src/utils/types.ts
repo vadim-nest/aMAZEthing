@@ -14,6 +14,7 @@ export interface minionType {
   pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
   sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
   sortingSpeed: number;
+  movementSpeed: number;
   type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear'
 }
 
@@ -41,6 +42,7 @@ export interface animal {
   pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
   sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
   sortingSpeed: number;
+  movementSpeed: number;
   type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear'
 }
 
@@ -48,6 +50,7 @@ export const squirrel: animal = {
   pathFindingAlgo: 'dfs',
   sortingAlgo: 'bubble',
   sortingSpeed: 300,
+  movementSpeed: 300,
   type: 'Squirrel'
 }
 
@@ -55,6 +58,7 @@ export const badger: animal = {
   pathFindingAlgo: 'bfs',
   sortingAlgo: 'selection',
   sortingSpeed: 300,
+  movementSpeed: 500,
   type: 'Badger'
 }
 
@@ -62,6 +66,7 @@ export const hare: animal = {
   pathFindingAlgo: 'dijk',
   sortingAlgo: 'insertion',
   sortingSpeed: 300,
+  movementSpeed: 300,
   type: 'Hare'
 }
 
@@ -69,6 +74,7 @@ export const deer: animal = {
   pathFindingAlgo: 'a*',
   sortingAlgo: 'merge',
   sortingSpeed: 50,
+  movementSpeed: 400,
   type: 'Deer'
 }
 
@@ -76,6 +82,7 @@ export const koala: animal = {
   pathFindingAlgo: 'a*',
   sortingAlgo: 'quick',
   sortingSpeed: 50,
+  movementSpeed: 350,
   type: 'Koala'
 }
 
@@ -83,6 +90,7 @@ export const bear: animal = {
   pathFindingAlgo: 'a*',
   sortingAlgo: 'quick',
   sortingSpeed: 50,
-  type: 'Bear'
+  type: 'Bear',
+  movementSpeed: 300,
 }
 
