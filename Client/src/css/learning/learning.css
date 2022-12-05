@@ -74,8 +74,8 @@ margin: -150px 0;
 .pagination-left{
 
   height: 90vh;
-  min-width: 10vw;
-  width:10vw;
+  min-width: 5vw;
+  width:5vw;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -84,8 +84,8 @@ margin: -150px 0;
 
 .pagination-right{
   height: 90vh;
-  min-width: 10vw;
-  width:10vw;
+  min-width: 5vw;
+  width:5vw;
   display:flex;
   justify-content: center;
   align-items: center;

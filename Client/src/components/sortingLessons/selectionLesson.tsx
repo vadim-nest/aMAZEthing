@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../../css/sorting.css";
 import { selectionSortAlgo, generateArray } from "../../utils/sorting-algo";
 import { selectionSortVisual } from "../../utils/sorting-helper-visual";
+import Pagination from "../learning/pagination";
 import Visualization from "./visualization";
 
 export default function SelectionLesson() {
@@ -42,6 +43,7 @@ export default function SelectionLesson() {
   }
 
   return (
+    <Pagination leftName={'Insertion'} rightName={'Merge'} leftLink={'learning/insertionLesson'} rightLink={'learning/mergeLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
@@ -93,5 +95,6 @@ export default function SelectionLesson() {
           setIsSorted={setIsSorted} tower={undefined} isSorted={false}        />
       </div>
     </div>
+    </Pagination>
   );
 }

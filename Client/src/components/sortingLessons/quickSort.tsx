@@ -5,6 +5,7 @@ import Visualization from "./visualization";
 import { quickSortVisual } from "../../utils/sorting-helper-visual";
 import { quickSortAlgo } from "../../utils/sorting-algo";
 import { useAlgo } from "../../features/hooks";
+import Pagination from "../learning/pagination";
 
 export default function QuickLesson() {
   const [array, setArray] = useState([3, 5, 7]);
@@ -12,10 +13,11 @@ export default function QuickLesson() {
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
 
-  const WIDTH = 25;
-  const MIN_VAL = 10;
-  const MAX_VAL = 60;
-  const NUM_BARS = 35;
+  const WIDTH = 35;
+  const MIN_VAL = 5;
+  const MAX_VAL = 50;
+  const NUM_BARS = 20;
+  const FONTSIZE = 15
   const DELAY = 10;
   const PADTOP = 5;
   const MARGIN = 3;
@@ -44,6 +46,7 @@ export default function QuickLesson() {
   }
 
   return (
+    <Pagination leftName={'Merge'} rightName={'Customize'} leftLink={'learning/mergeLesson'} rightLink={'learning/allSortsPlay'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
@@ -87,14 +90,14 @@ export default function QuickLesson() {
           paddingTop={PADTOP}
           height={HEIGHT}
           array={array}
-          key={array}
+          key={array as any}
           animations={animations}
           clicked={clicked}
           sortingAlgo={quickSortVisual}
           setClicked={setClicked}
-          setIsSorted={setIsSorted}
-        />
+          setIsSorted={setIsSorted} fontSize={FONTSIZE} tower={undefined} isSorted={false}        />
       </div>
     </div>
+    </Pagination>
   );
 }

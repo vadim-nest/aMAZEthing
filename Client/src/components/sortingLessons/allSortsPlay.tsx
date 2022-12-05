@@ -18,6 +18,7 @@ import {
 } from "../../utils/sorting-algo";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { useAlgo } from "../../features/hooks";
+import Pagination from "../learning/pagination";
 
 export default function AllSortsPlay() {
   const [array, setArray] = useState([] as number[]);
@@ -40,14 +41,14 @@ export default function AllSortsPlay() {
 
   const MIN_VAL = 20;
   const MAX_VAL = 300;
-  const PADTOP = 10;
-  const MARGIN = 1;
+  const PADTOP = 2;
+  let MARGIN = 1;
   const HEIGHT = 2;
   const WIDTH = Number(`${width / array.length - MARGIN * 2}`);
   let FONTSIZE: number; //TODO ITS NOT A CONST, CHANGE NAME AND DISPLAY NONE
 
   if (array.length >= 55) {
-    FONTSIZE = 0.0000000001;
+    FONTSIZE = 0;
   } else {
     FONTSIZE = Number(`${WIDTH / 4}`);
   }
@@ -78,6 +79,7 @@ export default function AllSortsPlay() {
   }
 
   return (
+    <Pagination leftName={'Quick'} rightName={'Learning'} leftLink={'learning/quickLesson'} rightLink={'learning/'}>
     <div className="playContainer">
       <div className="formContainer">
         <label className="sorting-label">
@@ -98,7 +100,7 @@ export default function AllSortsPlay() {
         </label>
 
         <label className="sorting-label">
-          Delay: {delayRef.current?.value + " "}
+          Delay: {delayRef.current?.value + "% "}
           <input
             ref={delayRef}
             type="range"
@@ -106,8 +108,8 @@ export default function AllSortsPlay() {
             step="5"
             value={DELAY}
             disabled={clicked ? true : false}
-            min="1"
-            max="101"
+            min="0"
+            max="100"
             onChange={(e) => initSpeed(e.target.valueAsNumber)}
           />
         </label>
@@ -117,9 +119,9 @@ export default function AllSortsPlay() {
             disabled={
               selectRef.current?.value === "SelectAValue"
                 ? true
-                : isSorted
-                ? true
-                : false
+                : !isSorted
+                ? false
+                : true
             }
             className={
               selectRef.current?.value === "SelectAValue"
@@ -135,7 +137,7 @@ export default function AllSortsPlay() {
             visualize
           </button>
         ) : (
-          <button className="button clickSort"> Hol up...</button>
+          <button className="button clickSort">Visualizing</button>
         )}
 
         <label className="sorting-label">
@@ -205,5 +207,6 @@ export default function AllSortsPlay() {
                   : quickSortVisual} tower={undefined}        />
       </div>
     </div>
+    </Pagination>
   );
 }

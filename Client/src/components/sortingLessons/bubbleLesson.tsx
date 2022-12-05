@@ -4,6 +4,7 @@ import { bubbleSortAlgo, generateArray } from "../../utils/sorting-algo";
 import Visualization from "./visualization";
 import { bubbleSortVisual } from "../../utils/sorting-helper-visual";
 import { useAlgo, useAppSelector } from "../../features/hooks";
+import Pagination from "../learning/pagination";
 
 export default function BubbleLesson() {
   const user = useAppSelector((state) => state.user);
@@ -17,9 +18,10 @@ export default function BubbleLesson() {
   const MAX_VAL = 50;
   const NUM_BARS = 20;
   const DELAY = 5;
-  const PADTOP = 10;
+  const PADTOP = 5;
   const MARGIN = 3;
   const HEIGHT = 5;
+  const FONTSIZE = 15
 
   const paragraphs = {
     sortName: "Bubble sort",
@@ -43,36 +45,11 @@ export default function BubbleLesson() {
   }
 
   return (
+    <Pagination leftName={'Learning'} rightName={'Insertion'} leftLink={'learning/'} rightLink={'learning/insertionLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
         <p className="explanation-text">{paragraphs.firstP}</p>
-
-        <div className="lesson-wrapper-pseudo">
-          <div className="pseudoBlock">
-            <h1 className="lesson-h1">{paragraphs.sortName}</h1>
-            <code>
-              <span className="code indent0 "> bubbleSort(array) </span> <br />
-              <span className="code indent1">
-                {" "}
-                for i &gt;= indexOfLastUnsortedElement-1{" "}
-              </span>{" "}
-              <br />
-              <span className="code indent2">
-                {" "}
-                if leftElement &gt; rightElement{" "}
-              </span>{" "}
-              <br />
-              <span className="code indent3">
-                {" "}
-                swap leftElement and rightElement
-              </span>{" "}
-              <br />
-              <span className="code ">end bubbleSort </span>
-            </code>
-          </div>
-          <div className="pseudoExplain"></div>
-        </div>
 
         <div className="lesson-wrapper-2">
           <div>
@@ -115,10 +92,10 @@ export default function BubbleLesson() {
             clicked={clicked}
             sortingAlgo={bubbleSortVisual}
             setClicked={setClicked}
-            setIsSorted={setIsSorted}
-          />
+            setIsSorted={setIsSorted} fontSize={FONTSIZE} tower={undefined} isSorted={false}          />
         </div>
       </div>
     </div>
+    </Pagination>
   );
 }
