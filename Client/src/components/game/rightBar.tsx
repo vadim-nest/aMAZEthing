@@ -24,7 +24,7 @@ function storeButtonHover(isOnHover: boolean) {
 function crossButtonHover(isOnHover: boolean) {
   document.querySelectorAll('.close-cross-green').forEach((svgEl) => {
     isOnHover
-      ? ((svgEl as unknown as HTMLElement).style.fill = `#96B0A2`)
+      ? ((svgEl as unknown as HTMLElement).style.fill = `--white-green-hover`)
       : ((svgEl as unknown as HTMLElement).style.fill = `var(--white-green)`)
 
   });
@@ -51,20 +51,10 @@ function styleCurrentMinionBorder(currentMinId: number) {
   (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).style.backgroundColor = 'var(--purple)';
 }
 
-function RightBar({
-  addNewMinion,
-  currentMinion,
-  minions,
-  currentPlayer
-}: {
-  addNewMinion: (type: animal, player: 'p1' | 'p2') => void;
-  currentMinion: null | number,
-  minions: {[key: number]: minionType},
-  currentPlayer: 'p1' | 'p2'
-}) {
- 
+function RightBar() {
+
   const [shopOpen, setShopOpen] = useState(false);
-  const {allTilesHidden} = useAppSelector(state => state.game);
+  const { allTilesHidden, currentPlayer, minions } = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
   let allPlayerMinions: Array<minionType> = [];
@@ -98,7 +88,7 @@ function RightBar({
     <div className='right-bar'>
 
       {shopOpen ? (
-        <Shop addNewMinion={addNewMinion} minions={minions} currentPlayer = {currentPlayer}/>
+        <Shop minions={minions} currentPlayer = {currentPlayer}/>
       ) : <div className='your-minions'>
       {minions &&
         // Should be a name instead
@@ -113,7 +103,7 @@ function RightBar({
 
       {!allTilesHidden && (
         <button
-          
+
           className='store-button'
           style={shopOpen ? {backgroundColor: 'var(--sand)'} : {backgroundColor: 'transparent'}}
           onClick={() => {shopOpen ? setShopOpen(false) : setShopOpen(true)}}

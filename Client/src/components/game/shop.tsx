@@ -1,20 +1,22 @@
 import '../../css/shop.css';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import { animal, badger, bear, deer, hare, koala, minionType, squirrel } from '../../utils/types';
+import { useAppDispatch } from '../../features/hooks';
+import { addNewMinionState } from '../../features/game_slice';
 
 export default function Shop({
-  addNewMinion,
   minions,
   currentPlayer
 }: {
-  addNewMinion: (type: animal, player: 'p1' | 'p2') => void;
   minions: {[key: number]: minionType},
   currentPlayer: 'p1' | 'p2'
 }) {
 
+  const dispatch = useAppDispatch();
+
   function shopItem(animal: animal) {
     return (
-    <div  className='buy-minion-button' onClick={() => addNewMinion(animal, currentPlayer)}>
+    <div  className='buy-minion-button' onClick={() => dispatch(addNewMinionState({type: animal, player: currentPlayer}))}>
     <div className='shop-stats'>
       <h1 className='shop-just-stats'>{animal.type}</h1>
 
