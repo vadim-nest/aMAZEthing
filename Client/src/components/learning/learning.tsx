@@ -27,8 +27,8 @@ export default function LearningPage() {
           <h3>↓</h3>
         </button>
       </div>
-      <div ref={scrollTo} className="all-algs" >
-        <div className="sorting-algs">
+      
+        <div ref={scrollTo} className="sorting-algs">
           <div className="explanation">
             <div className="sorting-algo">
               <h3 className="explanation-title">Sorting algorithms</h3>
@@ -66,6 +66,5 @@ export default function LearningPage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

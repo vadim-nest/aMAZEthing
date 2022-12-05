@@ -1,7 +1,3 @@
-.all-algs {
-  width: 100vw;
-}
-
 .path-finding-algs,
 .sorting-algs {
   background-color: var(--white);
