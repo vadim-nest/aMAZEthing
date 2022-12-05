@@ -37,7 +37,7 @@ function Tower({ tower }: {
                   tower.alignment === 'p2' ? 'p2Tower' :
                   'neutralTower'}
       />
-      <TowerPopup boxSize={boxSize} tower={tower} width={width} height={height}/>
+      <TowerPopup tower={tower} width={width} height={height}/>
     </div>
   )
 }

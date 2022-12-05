@@ -14,6 +14,10 @@
   fill: var(--yellow);
 }
 
+.neutral-color {
+  fill: var(--grey);
+}
+
 .p2-color {
   fill: var(--red);
 }

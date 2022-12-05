@@ -34,7 +34,7 @@ export function useAlgo(algoName: string = 'bubble', array: any = [], reversed: 
     return [[]]
 }
 
-export function whichAnimalSVG(minion: minionType) {
+export function whichAnimalSVG(minion: minionType | {type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear', alignment: 'p1' | 'p2' | 'neutral'}) {
   return minion.type === 'Squirrel' ? (
     <Squirrel currentPlayer={`${minion.alignment}-color`} />
   ) : minion.type === 'Badger' ? (

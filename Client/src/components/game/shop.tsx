@@ -1,7 +1,7 @@
 import '../../css/game/shop.css';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import { animal, badger, bear, deer, hare, koala, minionType, squirrel } from '../../utils/types';
-import { useAppDispatch } from '../../features/hooks';
+import { useAppDispatch, whichAnimalSVG } from '../../features/hooks';
 
 export default function Shop({
   minions,
@@ -34,7 +34,7 @@ export default function Shop({
       <h1 className='shop-just-stats'>{animal.sortingSpeed}</h1>
     </div>
     <div className='in-shop-svg-large'>
-      {theRightSVG(animal.type)}
+      {whichAnimalSVG({type: animal.type, alignment: 'neutral'})};
     </div>
   </div>
   )
