@@ -36,12 +36,6 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
           'var(--dark-green)';
       }
     }
-  //   for(let i = 0; i<arrayBars.length ; i++) {
-  //     const bar = document.getElementById(`${i}arrayColumn${tower}`)
-  //     console.log(bar)
-  //     await delay(50)
-  //     bar!.style.background = 'var(--dark-green)'
-  // }
 
     if (cb) cb()
   }
@@ -78,14 +72,6 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
         document.getElementById(`${indexOne}arrayColumn${tower}`)!.style.backgroundColor = 'var(--dark-green)';
       }
     }
-    // const arrayBars = document.getElementsByClassName('array-el');
-
-  //   for(let i = 0; i<arrayBars.length ; i++) {
-  //     const bar = document.getElementById(`${i}arrayColumn${tower}`)
-  //     console.log(bar)
-  //     await delay(50)
-  //     bar!.style.background = 'var(--main-green)'
-  // }
     if (cb) cb()
 
   }
@@ -116,12 +102,6 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
       }
       
     }   
-  //   for(let i = 0; i<arrayBars.length ; i++) {
-  //     const bar = document.getElementById(`${i}arrayColumn${tower}`)
-  //     console.log(bar)
-  //     await delay(50)
-  //     bar!.style.background = 'var(--main-green)'
-  // }
     if (cb) cb()
 
   }
@@ -150,11 +130,6 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
     }
   }
 
-  //   for(let i = 0; i<arrayBars.length ; i++) {
-  //     const bar = arrayBars[i] as HTMLElement 
-  //     await delay(50)
-  //     bar.style.background = 'var(--main-green)'
-  // }
   if (cb) cb()
 
 

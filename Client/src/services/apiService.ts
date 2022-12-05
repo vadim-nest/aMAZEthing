@@ -2,16 +2,7 @@ import { store } from "../features/store";
 
 const BASE_URL = 'http://localhost:3000'; //TODO Add to .env
 
-type ApiService = {
-  profile: Function,
-  updateUsername: Function,
-  createMaze:Function,
-  updateSortLearning:Function,
-  updatePathLearning:Function
-}
-const apiService: any = {};
-
-apiService.profile = function (accessToken:any,user:any) {
+const profile = function (accessToken:any,user:any) {
   return fetch(`${BASE_URL}/profile`, {
     method: 'POST',
     headers: { 
@@ -24,7 +15,7 @@ apiService.profile = function (accessToken:any,user:any) {
     .catch((err) => console.log(err));
 };
 
-apiService.updateUsername = function (accessToken:any,user:any) { //TODO solve type -> in redux userSlice
+const updateUsername = function (accessToken:any,user:any) { //TODO solve type -> in redux userSlice
   return fetch(`${BASE_URL}/updateUsername`, {
     method: 'POST',
     headers: { 
@@ -37,7 +28,7 @@ apiService.updateUsername = function (accessToken:any,user:any) { //TODO solve t
     .catch((err) => console.log(err));
 }
 
-apiService.createMaze = function () { 
+const createMaze = function () { 
   console.log('apiService roomId:', store.getState().game.roomId);
   return fetch(`${BASE_URL}/createMaze`, {
     method: 'POST',
@@ -50,7 +41,7 @@ apiService.createMaze = function () {
     .catch((err) => console.log(err));
 }
 
-apiService.updateSortLearning = function(accessToken:any,user:any){
+const updateSortLearning = function(accessToken:any,user:any){
   return fetch(`${BASE_URL}/updateSortingPath`, {
     method: 'POST',
     headers: { 
@@ -64,7 +55,7 @@ apiService.updateSortLearning = function(accessToken:any,user:any){
 
 }
 
-apiService.updatePathLearning = function(accessToken:any,user:any){
+const updatePathLearning = function(accessToken:any,user:any){
   return fetch(`${BASE_URL}/updatePathLearning`, {
     method: 'POST',
     headers: { 
@@ -77,5 +68,20 @@ apiService.updatePathLearning = function(accessToken:any,user:any){
     .catch((err) => console.log(err));
 
 }
+
+type ApiService = {
+  profile: Function,
+  updateUsername: Function,
+  createMaze:Function,
+  updateSortLearning:Function,
+  updatePathLearning:Function
+}
+const apiService: ApiService = {
+  profile,
+  updateUsername,
+  createMaze,
+  updateSortLearning,
+  updatePathLearning
+};
 
 export default apiService;
