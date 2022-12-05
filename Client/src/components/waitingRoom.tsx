@@ -46,6 +46,7 @@ function WaitingRoom() {
   }, []);
 
   function hostRoom() {
+    socket.emit('clear waiting');
     socket.emit('host', userRedux.email);
   }
 
@@ -55,11 +56,13 @@ function WaitingRoom() {
       fname: { value: string };
     };
     const room = target.fname.value;
+    socket.emit('clear waiting');
     socket.emit('join', room, userRedux.email);
   }
-
+  
   function play() {
     console.log('play pressed');
+    socket.emit('clear waiting');
     socket.emit('play', userRedux.email);
   }
 
