@@ -106,6 +106,10 @@ function WaitingRoom() {
     }
   }
 
+  useEffect(() => {
+    console.log(roomId);
+  }, [roomId])
+
   return (
     <div className="waiting-room">
       <h3 className="wr-explanation-text">
