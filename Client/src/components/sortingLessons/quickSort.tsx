@@ -13,16 +13,16 @@ export default function QuickLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 25
-  let MIN_VAL = 10
-  let MAX_VAL = 60
-  let NUM_BARS = 35
-  let DELAY = 10
-  let PADTOP = 5
-  let MARGIN = 3
-  let HEIGHT = 8
+  const WIDTH = 25
+  const MIN_VAL = 10
+  const MAX_VAL = 60
+  const NUM_BARS = 35
+  const DELAY = 10
+  const PADTOP = 5
+  const MARGIN = 3
+  const HEIGHT = 8
 
-  let paragraphs = {
+  const paragraphs = {
     sortName: 'Quick sort',
     firstP:
       'Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. As we go through each element, if the current element is bigger than the next one, we swap them. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.',

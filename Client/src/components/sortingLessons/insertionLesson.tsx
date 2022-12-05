@@ -11,16 +11,16 @@ export default function InsertionLesson() {
   const [animations, setAnimations] = useState([[1]])
   const [isSorted, setIsSorted] = useState(false)
 
-  let WIDTH = 35
-  let MIN_VAL = 3
-  let MAX_VAL = 50
-  let NUM_BARS = 20
-  let DELAY = 150
-  let PADTOP = 10
-  let MARGIN = 3
-  let HEIGHT = 5
+  const WIDTH = 35
+  const MIN_VAL = 3
+  const MAX_VAL = 50
+  const NUM_BARS = 20
+  const DELAY = 150
+  const PADTOP = 10
+  const MARGIN = 3
+  const HEIGHT = 5
 
-  let paragraphs = {
+  const paragraphs = {
     sortName: 'Insertion sort',
     firstP:
       'Starts on one side and compares two first items, sorts them and moves on to the next item checking if it is smaller than the previous items and places it in its place. Worst time complexity O(N^2). ',

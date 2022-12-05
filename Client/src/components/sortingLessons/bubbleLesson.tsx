@@ -12,18 +12,16 @@ export default function BubbleLesson() {
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
 
-  console.log(user);
+  const WIDTH = 35;
+  const MIN_VAL = 7;
+  const MAX_VAL = 50;
+  const NUM_BARS = 20;
+  const DELAY = 100;
+  const PADTOP = 10;
+  const MARGIN = 3;
+  const HEIGHT = 5;
 
-  let WIDTH = 35;
-  let MIN_VAL = 7;
-  let MAX_VAL = 50;
-  let NUM_BARS = 20;
-  let DELAY = 100;
-  let PADTOP = 10;
-  let MARGIN = 3;
-  let HEIGHT = 5;
-
-  let paragraphs = {
+  const paragraphs = {
     sortName: "Bubble sort",
     firstP:
       "Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. Starting on one side, it compares adjacent items and keep “bubbling” the larger one to the other side.",

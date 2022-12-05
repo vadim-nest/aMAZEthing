@@ -34,19 +34,17 @@ export default function AllSortsPlay() {
   let arrayRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
 
-  console.log(selectRef.current?.value);
-
   useLayoutEffect(() => {
     setWidth(containerRef.current.offsetWidth);
   }, []);
 
-  let MIN_VAL = 20;
-  let MAX_VAL = 300;
-  let PADTOP = 10;
-  let MARGIN = 1;
-  let HEIGHT = 2;
-  let WIDTH = Number(`${width / array.length - MARGIN * 2}`);
-  let FONTSIZE: number;
+  const MIN_VAL = 20;
+  const MAX_VAL = 300;
+  const PADTOP = 10;
+  const MARGIN = 1;
+  const HEIGHT = 2;
+  const WIDTH = Number(`${width / array.length - MARGIN * 2}`);
+  let FONTSIZE: number; //TODO ITS NOT A CONST, CHANGE NAME AND DISPLAY NONE
 
   if (array.length >= 55) {
     FONTSIZE = 0.0000000001;
