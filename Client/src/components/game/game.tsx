@@ -272,11 +272,7 @@ function Game() { // TODO: Extract logic to maze class
       <div>
         <div className='gameContainer'>
           {/* Need to rename the components, but for now: ToolBar is on the left, GameStats is on the right */}
-          <LeftBar
-            currentTower={currentTower}
-            currentMinion={currentMinion}
-            towers={towers}
-            />
+          <LeftBar />
           <Maze
             towers={towers}
             currentPlayer={currentPlayer}
