@@ -4,12 +4,3 @@
   height: 90vh;
 }
 
-.gameContainer-small {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-}
-
-.maze-small {
-  height: 80vh;
-}

@@ -29,11 +29,27 @@ export default function LeftBarSmall({
   };
   towers: TowerType[];
 }) {
+  const [toggle, setToggle] = useState(false);
 
   const user = useAppSelector((state) => state.user);
 
+  const toggleLeftBar = () => {
+    setToggle(!toggle);
+  };
+
   return (
     <>
+      <MediaQuery maxWidth={950}>
+        <div
+          className="container-left-bar"
+          onClick={() => {
+            toggleLeftBar();
+          }}
+        >
+          <div className={`plus ${toggle}`}>+</div>
+          <div className={`minus ${toggle}`}>-</div>
+        </div>
+      </MediaQuery>
       {/* <MediaQuery maxWidth={950}>
         <div className={`modal-body open-${toggle}`}>
           <div className="flags">

@@ -8,49 +8,7 @@ import { ZoomInSVG, ZoomOutSVG } from '../svg/zoomButtonsSVG';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import TowerSVG from '../svg/towerSVG';
 import LeftBarSmall from './leftBarSmall';
-import BottomNavbar from './bottomNavbar';
-
-export function zoomIn({
-  amount,
-  setBoxSize,
-  maxBoxSize,
-  setCurrentTower,
-  setZoomed,
-}: {
-  amount: number;
-  setBoxSize: React.Dispatch<React.SetStateAction<number>>;
-  maxBoxSize: number;
-  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
-  setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  setCurrentTower(null);
-  setZoomed(true);
-  setBoxSize((oldBoxSize) => {
-    if (oldBoxSize + amount > maxBoxSize) return maxBoxSize;
-    return oldBoxSize + amount;
-  });
-}
-
-export function zoomOut({
-  amount,
-  minBoxSize,
-  setBoxSize,
-  setCurrentTower,
-  setZoomed,
-}: {
-  amount: number;
-  minBoxSize: number;
-  setBoxSize: React.Dispatch<React.SetStateAction<number>>;
-  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
-  setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  setCurrentTower(null);
-  setZoomed(true);
-  setBoxSize((oldBoxSize) => {
-    if (oldBoxSize - amount < minBoxSize) return minBoxSize;
-    return oldBoxSize - amount;
-  });
-}
+import { zoomIn, zoomOut } from '../../features/game_slice';
 
 export function zoomHover(zoomInOrOut: string, color: string) {
   document.querySelectorAll(`.zoom-${zoomInOrOut}-svg`).forEach((svgEl) => {
@@ -77,41 +35,24 @@ export function whichAnimalSVG(minion: minionType) {
   );
 }
 
-export default function LeftBar({
-  currentMinion,
-  minions,
-  currentTower,
-  gameStats,
-  towers,
-  currentPlayer,
-  minBoxSize,
-  maxBoxSize,
-  setBoxSize,
-  setCurrentTower,
-  setZoomed,
-}: {
-  currentMinion: null | number;
-  currentTower: null | TowerType;
-  minions: { [key: number]: minionType };
-  gameStats: {
-    timeRemaining: number;
-    p1Coins: number;
-    p2Coins: number;
-    p1Towers: number[];
-    p2Towers: number[];
-    p1MinionCount: number;
-    p2MinionCount: number;
-  };
-  towers: TowerType[];
-  currentPlayer: string;
-  minBoxSize: number;
-  maxBoxSize: number;
-  setBoxSize: React.Dispatch<React.SetStateAction<number>>;
-  setCurrentTower: React.Dispatch<React.SetStateAction<null | TowerType>>;
-  setZoomed: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  const user = useAppSelector((state) => state.user);
+export default function LeftBar (
+  {
+    currentMinion,
+    currentTower,
+    towers,
+    currentPlayer,
+  }: {
+    currentMinion: null | number;
+    currentTower: null | TowerType;
+    towers: TowerType[];
+    currentPlayer: string;
+  }
+) {
 
+  const user = useAppSelector((state) => state.user);
+  const {gameStats, minions} = useAppSelector(state => state.game);
+  const dispatch = useAppDispatch();
+  
   return (
     <div className="leftBarContainer">
       <div className="flags">
@@ -143,7 +84,7 @@ export default function LeftBar({
       </div>
       <div className="scores"></div>
       <div className="selected-info">
-        {currentMinion !== null && (
+        {currentMinion !== null && minions[currentMinion] && (
           <div className="current-minion-left-bar">
             <div className="left-just-top">
               <h1 className="current-minion-name-left-bar">
@@ -156,126 +97,107 @@ export default function LeftBar({
 
             <h1 className="left-just-stats">{minions[currentMinion].type}</h1>
 
-                <h1 className="left-just-text">ID</h1>
-                <h1 className="left-just-stats">{minions[currentMinion].id}</h1>
+            <h1 className="left-just-text">ID</h1>
+            <h1 className="left-just-stats">{minions[currentMinion].id}</h1>
 
-                <h1 className="left-just-text">Alignment</h1>
-                <h1 className="left-just-stats">
-                  {minions[currentMinion].alignment}
-                </h1>
+            <h1 className="left-just-text">Alignment</h1>
+            <h1 className="left-just-stats">
+              {minions[currentMinion].alignment}
+            </h1>
 
-                <h1 className="left-just-text">Path finding</h1>
-                <h1 className="left-just-stats">
-                  {minions[currentMinion].pathFindingAlgo}
-                </h1>
+            <h1 className="left-just-text">Path finding</h1>
+            <h1 className="left-just-stats">
+              {minions[currentMinion].pathFindingAlgo}
+            </h1>
 
-                <h1 className="left-just-text">Sorting</h1>
-                <h1 className="left-just-stats">
-                  {minions[currentMinion].sortingAlgo}
-                </h1>
+            <h1 className="left-just-text">Sorting</h1>
+            <h1 className="left-just-stats">
+              {minions[currentMinion].sortingAlgo}
+            </h1>
 
-                <h1 className="left-just-text">
-                  {minions[currentMinion].sortingSpeed}
-                </h1>
-                <h1 className="left-just-stats">
-                  {minions[currentMinion].sortingSpeed}
-                </h1>
-              </div>
+            <h1 className="left-just-text">
+              {minions[currentMinion].sortingSpeed}
+            </h1>
+            <h1 className="left-just-stats">
+              {minions[currentMinion].sortingSpeed}
+            </h1>
+          </div>
+        )}
+
+        {currentTower !== null && (
+          <div>
+            {towers.find((tower) => tower.id === currentTower.id)!.alignment ===
+            'none' ? (
+              <h1 className="current-minion-name-left-bar">unsorted</h1>
+            ) : (
+              <h1 className="current-minion-name-left-bar">
+                {currentTower &&
+                  towers.find((tower) => tower.id === currentTower.id)!
+                    .alignment}
+                's tower
+              </h1>
             )}
-
-            {currentTower !== null && (
-              <div>
-                {towers.find((tower) => tower.id === currentTower.id)!
-                  .alignment === 'none' ? (
-                  <h1 className="current-minion-name-left-bar">unsorted</h1>
-                ) : (
-                  <h1 className="current-minion-name-left-bar">
-                    {currentTower &&
+            {towers.find((tower) => tower.id === currentTower.id)!.alignment ===
+            'none' ? (
+              <h1 className="current-minion-svg-left-bar">
+                {
+                  <TowerSVG
+                    playerClass={'neutralTower'}
+                    playerClassShadow={'neutralTowerShadow'}
+                  />
+                }
+              </h1>
+            ) : (
+              <h1 className="current-minion-svg-left-bar">
+                {
+                  <TowerSVG
+                    playerClass={
                       towers.find((tower) => tower.id === currentTower.id)!
-                        .alignment}
-                    's tower
-                  </h1>
-                )}
-                {towers.find((tower) => tower.id === currentTower.id)!
-                  .alignment === 'none' ? (
-                  <h1 className="current-minion-svg-left-bar">
-                    {
-                      <TowerSVG
-                        playerClass={'neutralTower'}
-                        playerClassShadow={'neutralTowerShadow'}
-                      />
+                        .alignment + '-color'
                     }
-                  </h1>
-                ) : (
-                  <h1 className="current-minion-svg-left-bar">
-                    {
-                      <TowerSVG
-                        playerClass={
-                          towers.find((tower) => tower.id === currentTower.id)!
-                            .alignment + '-color'
-                        }
-                        playerClassShadow={
-                          towers.find((tower) => tower.id === currentTower.id)!
-                            .alignment + '-color'
-                        }
-                      />
-                    }
-                  </h1>
-                )}
-                <h1 className="left-bar-tower-array">
-                  {currentTower &&
-                    towers
-                      .find((tower) => tower.id === currentTower.id)!
-                      .numbers.join(', ')}
-                </h1>
-                {currentTower.minion !== null && (
-                  <h1 className="left-just-text">
-                    Tower contains minion{' '}
-                    {currentTower &&
+                    playerClassShadow={
                       towers.find((tower) => tower.id === currentTower.id)!
-                        .minion}
-                  </h1>
-                )}
-              </div>
+                        .alignment + '-color'
+                    }
+                  />
+                }
+              </h1>
+            )}
+            <h1 className="left-bar-tower-array">
+              {currentTower &&
+                towers
+                  .find((tower) => tower.id === currentTower.id)!
+                  .numbers.join(', ')}
+            </h1>
+            {currentTower.minion !== null && (
+              <h1 className="left-just-text">
+                Tower contains minion{' '}
+                {currentTower &&
+                  towers.find((tower) => tower.id === currentTower.id)!.minion}
+              </h1>
             )}
           </div>
+        )}
+      </div>
 
-          <div className="zoom-buttons">
-            <div
-              className="zoomInButton"
-              onMouseEnter={() => zoomHover('in', 'var(--yellow)')}
-              onMouseLeave={() => zoomHover('in', 'var(--white-green)')}
-              onClick={() =>
-                zoomIn({
-                  amount: 10,
-                  setBoxSize,
-                  maxBoxSize,
-                  setCurrentTower,
-                  setZoomed,
-                })
-              }
-            >
-              <ZoomInSVG />
-            </div>
-            <div
-              className="zoomOutButton"
-              onMouseEnter={() => zoomHover('out', 'var(--yellow)')}
-              onMouseLeave={() => zoomHover('out', 'var(--white-green)')}
-              onClick={() =>
-                zoomOut({
-                  amount: 10,
-                  setBoxSize,
-                  minBoxSize,
-                  setCurrentTower,
-                  setZoomed,
-                })
-              }
-            >
-              <ZoomOutSVG />
-            </div>
-          </div>
+      <div className="zoom-buttons">
+        <div
+          className="zoomInButton"
+          onMouseEnter={() => zoomHover('in', 'var(--yellow)')}
+          onMouseLeave={() => zoomHover('in', 'var(--white-green)')}
+          onClick={() => dispatch(zoomIn(10))}
+        >
+          <ZoomInSVG />
         </div>
-      </MediaQuery>
+        <div
+          className="zoomOutButton"
+          onMouseEnter={() => zoomHover('out', 'var(--yellow)')}
+          onMouseLeave={() => zoomHover('out', 'var(--white-green)')}
+          onClick={() => dispatch(zoomOut(10))}
+        >
+          <ZoomOutSVG />
+        </div>
+      </div>
       {/* <MediaQuery maxWidth={950}>
         <div>
           <LeftBarSmall
@@ -283,10 +205,9 @@ export default function LeftBar({
             currentMinion={currentMinion}
             minions={minions}
             gameStats={gameStats}
-            towers={towers}
-          />
+            towers={towers} />
         </div>
       </MediaQuery> */}
-    </>
+    </div>
   );
 }
