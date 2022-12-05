@@ -78,7 +78,8 @@ export default function Connect(server: http.Server) {
   }
 
   function createNewGame(roomId: string, p1Id: string, p1Username: string) {
-    const maze = generateMaze(86, 40) // TODO: Generalize this;
+    const maze = generateMaze(86, 40, true, 2) // TODO: Generalize this;
+    console.log('Edges', maze.graph.edges);
     mazes[roomId] = maze;
     activeGames.push({
       roomId,
@@ -87,7 +88,7 @@ export default function Connect(server: http.Server) {
       p2Id: '',
       p2Username: '',
       playersLoaded: 0,
-      timeRemaining: 60,
+      timeRemaining: 300,
       p1Coins: 10000,
       p2Coins: 0,
       p1Towers: [],

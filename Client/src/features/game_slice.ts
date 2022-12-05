@@ -281,6 +281,9 @@ const gameSlice = createSlice({
     },
     resetMinions(state) {
       state.minions = {};
+    },
+    updateWeightPositions(state, action: PayloadAction<{[key: string]: { xPos: number; yPos: number}}>) {
+      state.weightPositions = action.payload;
     }
   }
 })
@@ -321,6 +324,7 @@ export const {
   resetIntervals,
   receiveRoomId,
   resetMinions,
-  clearIntervals
+  clearIntervals,
+  updateWeightPositions
 } = gameSlice.actions;
 export default gameSlice.reducer;
