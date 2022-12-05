@@ -6,6 +6,7 @@ import { ZoomInSVG, ZoomOutSVG } from '../svg/zoomButtonsSVG';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import TowerSVG from '../svg/towerSVG';
 import { zoomIn, zoomOut } from '../../features/game_slice';
+import { whichAnimalSVG } from '../../features/hooks';
 
 export function zoomHover(zoomInOrOut: string, color: string) {
   document.querySelectorAll(`.zoom-${zoomInOrOut}-svg`).forEach((svgEl) => {
@@ -14,23 +15,7 @@ export function zoomHover(zoomInOrOut: string, color: string) {
   });
 }
 
-export function whichAnimalSVG(minion: minionType) {
-  return minion.type === 'Squirrel' ? (
-    <Squirrel currentPlayer={`${minion.alignment}-color`} />
-  ) : minion.type === 'Badger' ? (
-    <Badger currentPlayer={`${minion.alignment}-color`} />
-  ) : minion.type === 'Hare' ? (
-    <Hare currentPlayer={`${minion.alignment}-color`} />
-  ) : minion.type === 'Deer' ? (
-    <Deer currentPlayer={`${minion.alignment}-color`} />
-  ) : minion.type === 'Koala' ? (
-    <Koala currentPlayer={`${minion.alignment}-color`} />
-  ) : (
-    minion.type === 'Bear' && (
-      <Bear currentPlayer={`${minion.alignment}-color`} />
-    )
-  );
-}
+
 
 export default function LeftBar () {
 
