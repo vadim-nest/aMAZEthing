@@ -3,7 +3,7 @@ import "../../css/dijkstra-lesson.css";
 import { generateConnectedGraph } from "../../utils/maze";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
-
+import {delay} from '../../utils/functionalities'
 
 function DijkstraLesson() {
   const [graph,setGraph] = useState<any>();
@@ -49,10 +49,6 @@ function DijkstraLesson() {
         }
       }
     }
-  }
-
-  function delay(time: number) {
-    return new Promise((res) => setTimeout(res, time));
   }
 
   return (

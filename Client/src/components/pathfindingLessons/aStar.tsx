@@ -3,6 +3,7 @@ import "../../css/aStar-lesson.css";
 import { generateConnectedGraph } from "../../utils/maze";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
+import {delay} from '../../utils/functionalities'
 
 
 function AStarLesson() {
@@ -54,9 +55,7 @@ function AStarLesson() {
     }
   }
 
-  function delay(time: number) {
-    return new Promise((res) => setTimeout(res, time));
-  }
+  
 
   return (
     <div className="aStar whole-page-wrapper">

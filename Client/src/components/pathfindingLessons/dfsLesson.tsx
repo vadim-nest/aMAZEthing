@@ -3,7 +3,7 @@ import { generateConnectedGraph } from "../../utils/maze";
 import "../../css/dfs-lesson.css";
 import {  value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
-
+import {delay} from '../../utils/functionalities'
 
 function DfsLesson() {
   const [graph,setGraph] = useState<any>();
@@ -51,9 +51,6 @@ function DfsLesson() {
         }
       }
     }
-  }
-  function delay(time: number) {
-    return new Promise((res) => setTimeout(res, time));
   }
 
   return (

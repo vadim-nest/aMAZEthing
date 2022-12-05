@@ -3,6 +3,7 @@ import { generateConnectedGraph } from "../../utils/maze";
 import "../../css/bfs-lesson.css";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
+import {delay} from '../../utils/functionalities'
 
 function BfsLesson() {
   const [graph, setGraph] = useState<any>();
@@ -50,10 +51,6 @@ function BfsLesson() {
         }
       }
     }
-  }
-
-  function delay(time: number) {
-    return new Promise((res) => setTimeout(res, time));
   }
 
   return (
