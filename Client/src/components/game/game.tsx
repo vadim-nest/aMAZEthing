@@ -30,15 +30,15 @@ function Game() { // TODO: Extract logic to maze class
 
   useEffect(() => {
     console.log('setting maze generated');
-    socket.off('maze generated');
     socket.on('maze generated', () => {
       console.log('all players ready to play')
     })
-    socket.off('updateGameState');
     socket.on('updateGameState', (newGameState: GameStatsType) => {
       dispatch(updateGameStats(newGameState));
     })
     return ()=>{
+      socket.off('maze generated');
+      socket.off('updateGameState');
       console.log('clearing waiting');
       socket.emit('clear waiting', socket.id) // TODO: Currently this prevents them from joining the game on game start
     }

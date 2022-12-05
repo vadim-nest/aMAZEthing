@@ -21,7 +21,7 @@ export default function LearningPage() {
         </div>
         <button
           className="scroll-learning"
-          onClick={() => {scrollTo.current?.scrollIntoView()}} //TODO THis is not taking care of the navbar - Either we add an offset of 10VH or we take out the navbar after certain files
+          onClick={() => {window.scrollTo(0, scrollTo?.current.getBoundingClientRect().top-window.innerHeight * 0.1)}} //TODO THis is not taking care of the navbar - Either we add an offset of 10VH or we take out the navbar after certain files
         >
           <h3>Scroll to learn more.</h3>
           <h3>↓</h3>
