@@ -11,7 +11,7 @@ import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 import socket from '../../services/socket';
 import GameOver from './gameOver';
 import { store } from '../../features/store';
-import { useAppDispatch, useAppSelector } from '../../features/hooks';
+import { useAppDispatch, useAppSelector, usePathAlgo } from '../../features/hooks';
 import { addMovingMinion, addNewMinionState, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMazePath, updateMinion, updateTowerNumbers, updateZoomed } from '../../features/game_slice';
 
 // TODO: Convert request animation frames to setInterval
@@ -92,22 +92,7 @@ function Game() { // TODO: Extract logic to maze class
     let directions : false | {
       visited: value[];
       path: value[];
-    };
-    if (minion.pathFindingAlgo === 'bfs') {
-      directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
-    }
-    else if (minion.pathFindingAlgo === 'dfs') {
-      directions = vDFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
-    }
-    else if (minion.pathFindingAlgo === 'dijk') {
-      directions = vDijk(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph)
-    }
-    else if (minion.pathFindingAlgo === 'a*') {
-      directions = aStar(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph, distanceConstruct(width))
-    }
-    else {
-      directions = vBFS(comeFrom.xPos + comeFrom.yPos*width, goTo.xPos + goTo.yPos*width, currentGraph);
-    }
+    } = usePathAlgo(minion.pathFindingAlgo, comeFrom, goTo, currentGraph, width);
     if (directions === false) return;
     const path = [...directions.path] as number[];
     const visited = [...directions.visited] as number[];
