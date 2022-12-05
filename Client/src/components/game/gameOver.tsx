@@ -2,11 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import '../../css/gameOver.css';
 import { useAppSelector } from '../../features/hooks';
 
-function GameOver ({currentPlayer} : {
-  currentPlayer: 'p1' | 'p2'
-}) {
+function GameOver () {
 
-  const {finalGameStats} = useAppSelector(state => state.game);
+  const {finalGameStats, currentPlayer} = useAppSelector(state => state.game);
 
   let win = finalGameStats.p1Towers.length > finalGameStats.p2Towers.length ? 'p1' : 'draw';
   if (win === 'draw' && finalGameStats.p1Towers.length < finalGameStats.p2Towers.length) win = 'p2';
@@ -17,7 +15,7 @@ function GameOver ({currentPlayer} : {
     <div className={`gameOver ${win !== currentPlayer ? '' : 'lose'}`}>
       <div className='gameOverModal'>
         <div className="header">
-          <h1>{win === currentPlayer ? 'VICTORY' : 
+          <h1>{win === currentPlayer ? 'VICTORY' :
             win === 'draw' ? 'DRAW' : 'LOSE'}</h1>
           <h2>GAME STATS</h2>
         </div>
