@@ -5,7 +5,7 @@ export function bubbleSortAlgo(arr: any, ASC_MODE:boolean) {
   let iterations = 0;
   while (swaps === false) {
     swaps = true;
-    for (let i = 0; i < arr.length - 1 - iterations; i++) {
+    for (let i = 0, end = arr.length - 1 - iterations; i < end; i++) {
       animations.push([i, arr[i]]);
       if(ASC_MODE === false) {
         if (arr[i] > arr[i + 1]) {

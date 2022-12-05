@@ -1,6 +1,6 @@
 
 export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number,  tower:'' = '', height:number, cb?: () => void) {
-    for (let i = 0; i < animations.length; i++) {
+  for ( let i = 0, len = animations.length; i < len; i++ ) {
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
         const [indexOne, elementOne, indexTwo, elementTwo] = animations[i];
@@ -44,7 +44,7 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
   }
 
   export async function insertionSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number, tower: string = '',  height:number, cb?: () => void) {
-    for (let i = 0; i < animations.length; i++) {
+    for ( let i = 0, len = animations.length; i < len; i++ ) {
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
         const [indexOne, elementOne, indexTwo, elementTwo] = animations[i];
@@ -77,7 +77,7 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
   }
 
 export async function selectionSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number, tower: string = '', height:number, cb?: () => void) {
-    for(let i = 0; i<animations.length; i++) {
+  for ( let i = 0, len = animations.length; i < len; i++ ) {
       await delay(DELAY_MS)
       if(animations[i].length > 2) {
         const [indexOne, elementOne, indexTwo, elementTwo] = animations[i]
@@ -108,7 +108,7 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
 
   export async function mergeSortVisual(animations:any, DELAY_MS:number, width:number, margin:number, tower: string = '', height: number ,  cb?: () => void) {
     const arrayBars = document.getElementsByClassName(`array-el${tower}`);
-    for(let i = 0; i<animations.length; i++) {
+    for ( let i = 0, len = animations.length; i < len; i++ ){
       await delay(DELAY_MS)
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
@@ -137,7 +137,7 @@ export async function selectionSortVisual(animations:number[][], DELAY_MS:number
 
 export async function quickSortVisual(animations:any, DELAY_MS:number, width:number, margin:number, tower: string = '', height:number,  cb?: () => void) {
   const arrayBars = document.getElementsByClassName(`array-el${tower}`);
-  for(let i = 0; i<animations.length; i++) {
+  for ( let i = 0, len = animations.length; i < len; i++ ) {
     await delay(DELAY_MS)
     if (animations[i].length === 2) {
       const [barOneIdx, barTwoIdx] = animations[i];
