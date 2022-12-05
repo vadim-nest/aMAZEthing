@@ -40,6 +40,7 @@ const gameSlice = createSlice({
         p2MinionCount: 0,
       }
       defaultState.displayVisited = [];
+
       return defaultState;
     },
     updateRoomID(state, action: PayloadAction<string>) {
@@ -257,6 +258,22 @@ const gameSlice = createSlice({
       const { roomId, player } = action.payload;
       state.roomId = roomId;
       state.currentPlayer = player;
+    },
+    addNewInterval(state, action: PayloadAction<NodeJS.Timer>) {
+      state.intervals.push(action.payload);
+    },
+    clearIntervals(state) {
+      for (let interval of state.intervals) {
+        console.log(interval);
+        clearInterval(interval);
+      }
+      state.intervals = [];
+    },
+    resetIntervals(state) {
+      state.intervals = [];
+    },
+    resetMinions(state) {
+      state.minions = {};
     }
   }
 })
@@ -293,6 +310,10 @@ export const {
   updateDisplayVisited,
   increaseTowersSorting,
   updateMazeGenerated,
-  receiveRoomId
+  addNewInterval,
+  resetIntervals,
+  receiveRoomId,
+  resetMinions,
+  clearIntervals
 } = gameSlice.actions;
 export default gameSlice.reducer;

@@ -27,7 +27,8 @@ export interface GameState{ //shape of the state inside inside of the slice
   maxBoxSize: number,
   minBoxSize: number,
   displayVisited: value[],
-  mazeGenerated: boolean
+  mazeGenerated: boolean,
+  intervals: NodeJS.Timer[],
 }
 const width = 86;
 const height = 40;
@@ -78,5 +79,6 @@ export const initialGameState: GameState = {
   minBoxSize: 20,
   maxBoxSize: 100,
   displayVisited: [],
-  mazeGenerated: false
+  mazeGenerated: false,
+  intervals: [],
 }

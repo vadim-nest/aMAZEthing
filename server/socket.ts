@@ -52,15 +52,11 @@ export default function Connect(server: http.Server) {
   });
 
   function clearRoomsBySocket(socket) {
-    console.log(socket.rooms);
-    console.log({intervals});
     for (let room of socket.rooms) {
-      console.log(room);
       if (intervals[room]) {clearInterval(intervals[room]); delete intervals[room]};
       socket.leave(room);
       delete ready[room];
     }
-    console.log({intervals});
     socket.join(socket.id);
     playerSearch = playerSearch.filter(room => {
       if (room.socketId === socket.id) {
@@ -176,8 +172,6 @@ export default function Connect(server: http.Server) {
     activeGames = activeGames.filter(game => game.roomId !== roomId);
     let user1 = await User.findOne({email: finalState.p1Username});
     let user2 = await User.findOne({email: finalState.p2Username});
-    console.log({user1});
-    console.log({user2});
     if (!user1 || !user2) return;
 
     const result1 = finalState.p1Towers.length > finalState.p2Towers.length ? 'win' :
@@ -216,21 +210,17 @@ export default function Connect(server: http.Server) {
   }
 
   io.on('connection', socket => {
-    console.log('user connected');
     socket.on('host', (p1Username: string) => {
-      console.log('hosting');
       const roomId = generateRoomId();
       if (waiting.find(waitingRoom => waitingRoom.socketId === socket.id)) return;
       waiting.push({socketId: socket.id, roomId});
       createNewGame(roomId, socket.id, p1Username)
       socket.join(socket.id);
-      console.log('generated room id', roomId)
       socket.join(roomId);
       io.emit('receiveRoomId', roomId, 'p1', 'Host');
     })
 
     socket.on('join', (roomId, p2Username) => {
-      console.log('joining');
       const found = waiting.find(room => room.roomId === roomId);
       if (found) {
         socket.join(roomId);
@@ -242,35 +232,23 @@ export default function Connect(server: http.Server) {
     })
 
     socket.on('play', (username: string) => {
-      console.log({playerSearch});
       if (playerSearch.length !== 0) {
         const game = playerSearch.pop();
-        console.log(game);
         const roomId = game.roomId;
-        console.log('joining room', roomId);
         addP2ToGame(roomId, socket.id, username);
         io.to(socket.id).emit('receiveRoomId', roomId, 'p2', 'Play');
         socket.join(roomId);
-        // io.to(socket.id).emit('set player 2');
       } else {
         const roomId = generateRoomId();
-        console.log({socket});
         io.to(socket.id).emit('receiveRoomId', roomId, 'p1', 'Play');
-        console.log('creating room', roomId);
         playerSearch.push({socketId: socket.id, roomId});
         createNewGame(roomId, socket.id, username);
-        console.log({mazes});
-        // io.to(socket.id).emit('set player 1', 'p1');
-        console.log('sending room id');
-        console.log('room id sent');
         socket.join(roomId);
         
       }
     });
 
     socket.on('readyPlay', (roomId) => {
-      console.log('roomId ready', roomId, socket.id);
-      console.log({ready})
       if (ready[roomId] && ready[roomId] !== socket.id) {
         delete ready[roomId];
         io.to(roomId).emit('Game start');
@@ -280,14 +258,10 @@ export default function Connect(server: http.Server) {
     });
 
     socket.on('readyHost', (roomId) => {
-      console.log('roomId readyHost', roomId, socket.id);
-      console.log({readyHost}) // TODO: prevent making more than one room
       readyHost[roomId] = socket.id;
     });
 
     socket.on('readyJoin', (roomId) => {
-      console.log('roomId readyJoin', roomId, socket.id);
-      console.log({readyHost})
       if (readyHost[roomId] && readyHost[roomId] !== socket.id) {
         delete ready[roomId];
         io.to(roomId).emit('Game start');
@@ -312,12 +286,11 @@ export default function Connect(server: http.Server) {
     })
 
     socket.on('new minion', (type, roomId, player) => {
-      console.log('new minion', type, roomId);
       socket.to(roomId).emit('new minion', type);
       const newGameState = addNewMinionGame(roomId, type, player);
     });
     socket.on('minion move', (direction, minionId, roomId) => {
-        socket.to(roomId).emit('minion move', direction, minionId);
+      socket.to(roomId).emit('minion move', direction, minionId);
     });
 
     socket.on('enterTower', (towerId, minionId, roomID, player) => {
@@ -327,18 +300,15 @@ export default function Connect(server: http.Server) {
     
     socket.on('conquerTower', (roomID, towerId, firstCapture, player) => {
       let newGameState = addTowerGame(roomID, towerId, player, firstCapture);
-      console.log(newGameState);
       sendGameState(newGameState, roomID, io);
     })
 
     socket.on('clear waiting', () => {
-      console.log('clearing waiting');
       clearRoomsBySocket(socket);
     })
 
-    socket.on('disconnect', ()=>{
+    socket.on('disconnect', () => {
       clearRoomsBySocket(socket);
-      console.log('a user disconnected')
     })
   })
 }
