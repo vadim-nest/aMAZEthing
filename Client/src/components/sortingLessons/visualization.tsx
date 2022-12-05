@@ -4,19 +4,24 @@ import { useAppDispatch } from '../../features/hooks';
 
 export default function Visualization(props: any) {
 
-    let {array, animations, clicked, sortingAlgo, margin, fontColor, fontSize, paddingTop, width, delay, height, tower, setClicked,setIsSorted} = props
-    const dispatch = useAppDispatch();
-    if (!delay) delay = 100;
-    if(!margin) margin = 5
-    if (!height) height = 20;
-    if(!fontColor) fontColor = 'var(--white-green)';
-    if(!fontSize) fontSize = 15
-    if (!tower) {
-      tower = '';
-    }
-    if (!setClicked) setClicked = () => {};
-
-  
+    let {
+      array, 
+      animations, 
+      clicked, 
+      sortingAlgo, 
+      margin = 5, 
+      fontColor = 'var(--white-green)', 
+      fontSize = 15, 
+      paddingTop,
+      width, 
+      delay = 100, 
+      height = 20, 
+      tower = '', 
+      setClicked = () => {},
+      setIsSorted
+    } = props;
+    
+    const dispatch = useAppDispatch();  
 
     if(clicked) {
       if (tower) dispatch(increaseTowersSorting(tower));
