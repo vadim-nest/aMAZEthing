@@ -2,24 +2,6 @@ import '../../css/sorting.css';
 import { increaseTowersSorting } from '../../features/game_slice';
 import { useAppDispatch } from '../../features/hooks';
 
-interface visualProps {
-  array: number[];
-  key?: any;
-  animations: number[][];
-  sortingAlgo:any;
-  clicked?:boolean;
-  margin?:number;
-  fontColor?: string;
-  fontSize?: number;
-  paddingTop?: number;
-  width: number;
-  delay?: number;
-  height?: number;
-  tower?: string|any;
-  isSorted:boolean;
-  setClicked: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-  setIsSorted:(value: boolean | ((prevVar: boolean) => boolean)) => void;
-}
 
 export default function Visualization({
   array, 
