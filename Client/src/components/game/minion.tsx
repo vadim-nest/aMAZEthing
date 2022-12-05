@@ -1,15 +1,13 @@
 import React from 'react';
 import '../../css/minion.css';
 import { updateCurrentMinion, updateCurrentTile, updateCurrentTower } from '../../features/game_slice';
-import { useAppDispatch } from '../../features/hooks';
+import { useAppDispatch, useAppSelector } from '../../features/hooks';
 import { minionType, TowerType } from '../../utils/types';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 
-function Minion({boxSize, minion, currentPlayer}: {
-  boxSize: number,
-  minion: minionType,
-  currentPlayer: 'p1' | 'p2'
-}) {
+function Minion({ minion }: { minion: minionType }) {
+
+  const { boxSize, currentPlayer } = useAppSelector(state => state.game);
 
   const dispatch = useAppDispatch();
 

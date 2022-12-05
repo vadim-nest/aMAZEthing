@@ -1,13 +1,10 @@
 import '../../css/leftBar.css';
 import { minionType, TowerType } from '../../utils/types';
 import FlagSVG from '../svg/flagSVG';
-import MediaQuery from 'react-responsive';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';
-import React from 'react';
 import { ZoomInSVG, ZoomOutSVG } from '../svg/zoomButtonsSVG';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import TowerSVG from '../svg/towerSVG';
-import LeftBarSmall from './leftBarSmall';
 import { zoomIn, zoomOut } from '../../features/game_slice';
 
 export function zoomHover(zoomInOrOut: string, color: string) {
@@ -181,16 +178,6 @@ export default function LeftBar () {
           <ZoomOutSVG />
         </div>
       </div>
-      {/* <MediaQuery maxWidth={950}>
-        <div>
-          <LeftBarSmall
-            currentTower={currentTower}
-            currentMinion={currentMinion}
-            minions={minions}
-            gameStats={gameStats}
-            towers={towers} />
-        </div>
-      </MediaQuery> */}
     </div>
   );
 }

@@ -5,10 +5,8 @@ import { useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 export default function LearningPage() {
-  const scrollTo = useRef<any>(null);
-  const isPhone = useMediaQuery({
-    query: '(max-width: 600)',
-  });
+  const scrollTo = useRef<HTMLInputElement>(null as any);
+  const isPhone = useMediaQuery({maxWidth: 600});
 
   return (
     <div className="disable-horizontal-scroll">

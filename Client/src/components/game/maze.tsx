@@ -63,7 +63,7 @@ function Maze({ towers, currentPlayer}: {
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           <Home xPos={0} yPos={0} player='p1'/>
           <Home xPos={width - 3} yPos={height - 3} player='p2'/>
-          {Object.values(minions).map(minion => <Minion key={minion.id} boxSize={boxSize} minion={minion} currentPlayer={currentPlayer}/>)}
+          {Object.values(minions).map(minion => <Minion key={minion.id} minion={minion}/>)}
           {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower} boxSize={boxSize} width={width} height={height}/>)}
           {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} boxSize={boxSize}/>)}
         </div>
