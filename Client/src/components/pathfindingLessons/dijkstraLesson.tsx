@@ -31,6 +31,7 @@ function DijkstraLesson() {
   }
 
   async function dijkstra() {
+    setClicked(false);
     const DIJKVisualpaths = graph.findPath(0, end, "vdijk");
     console.log("PATH", DIJKVisualpaths);
     if (DIJKVisualpaths) {
@@ -39,6 +40,7 @@ function DijkstraLesson() {
       path = Array.from(DIJKVisualpaths.path);
       await showPath(path);
     }
+
   }
 
   async function showPath(path: number[], visited: boolean = false) {
@@ -99,7 +101,6 @@ function DijkstraLesson() {
         onClick={() => {
           setClicked(true);
           dijkstra()
-          setClicked(false);
           }}>
           Visualize Dijkstra
         </button>

@@ -15,13 +15,13 @@ export default function QuickLesson() {
 
   const WIDTH = 35;
   const MIN_VAL = 5;
-  const MAX_VAL = 50;
+  const MAX_VAL = 100;
   const NUM_BARS = 20;
   const FONTSIZE = 15
   const DELAY = 10;
   const PADTOP = 5;
   const MARGIN = 3;
-  const HEIGHT = 8;
+  const HEIGHT = 3;
 
   const paragraphs = {
     sortName: "Quick sort",

@@ -31,6 +31,7 @@ function AStarLesson() {
   }
 
   async function aStar() {
+    setClicked(false);
     const aStarVisualpaths = graph.findPath(
       0,
       end ? end : width * width,
@@ -45,6 +46,7 @@ function AStarLesson() {
       path = Array.from(aStarVisualpaths.path);
       await showPath(path);
     }
+
   }
 
   async function showPath(path: number[], visited: boolean = false) {
@@ -98,7 +100,6 @@ function AStarLesson() {
         onClick={() =>{
           setClicked(true);
           newGraph();
-          setClicked(false);
           }}>
           NEW Graph
         </button>

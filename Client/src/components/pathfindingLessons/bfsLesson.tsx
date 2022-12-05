@@ -25,6 +25,7 @@ function BfsLesson() {
   }
 
   async function bfs() {
+    setClicked(false);
     const BFSVisualpaths = graph.findPath(0, end, "vbfs");
     if (BFSVisualpaths) {
       let path: any = Array.from(BFSVisualpaths.visited);
@@ -33,6 +34,7 @@ function BfsLesson() {
       path = Array.from(BFSVisualpaths.path);
       await showPath(path);
     }
+
   }
 
   async function showPath(path: number[], visited: boolean = false) {
@@ -93,7 +95,6 @@ function BfsLesson() {
           onClick={() => {
             setClicked(true);
             bfs();
-            setClicked(false);
             }}>
           Visualize bfs
         </button>
