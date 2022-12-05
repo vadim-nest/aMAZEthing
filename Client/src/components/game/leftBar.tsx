@@ -131,7 +131,6 @@ export default function LeftBar () {
                 {
                   <TowerSVG
                     playerClass={'neutralTower'}
-                    playerClassShadow={'neutralTowerShadow'}
                   />
                 }
               </h1>
@@ -140,10 +139,6 @@ export default function LeftBar () {
                 {
                   <TowerSVG
                     playerClass={
-                      towers.find((tower) => tower.id === currentTower.id)!
-                        .alignment + '-color'
-                    }
-                    playerClassShadow={
                       towers.find((tower) => tower.id === currentTower.id)!
                         .alignment + '-color'
                     }
