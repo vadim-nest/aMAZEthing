@@ -113,9 +113,6 @@
 
 .join-code-input {
   display: flex;
-  /* margin-left: auto;
-  margin-right: auto; */
-  /* margin-right: 16px; */
 }
 
 .join-room-code {
@@ -171,8 +168,3 @@
   color: var(--dark-green) !important;
   cursor: default;
 }
-
-.wr-game-history {
-  /* margin-left: -4vw; */
-}
-
