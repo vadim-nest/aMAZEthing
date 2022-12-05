@@ -13,7 +13,9 @@ function BfsLesson() {
   let paragraphs = {
     sortName: "Breath First Search (BFS) algorithm",
     firstP:
-      "It begins at the root of the tree or graph and investigates all nodes at the current depth level (neighbours) before moving on to nodes at the next depth level.",
+      "Investigates all nodes at the current depth level (neighbours) before moving on to nodes at the next depth level.",
+    secondP:
+      "(unweighted) a great algorithm; guarantees the shortest path"
   };
 
   useEffect(() => {
@@ -77,6 +79,7 @@ function BfsLesson() {
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
         <p className="explanation-text">{paragraphs.firstP}</p>
+        <p className="explanation-text centered-text">{paragraphs.secondP}</p>
       </div>
       <div className="buttons-pos">
         <button className="button" onClick={() => newGraph()}>

@@ -14,6 +14,8 @@ function DijkstraLesson() {
     sortName: "Dijkstra algorithm",
     firstP:
       "This algorithm uses the weights of the edges to find the path that minimizes the total distance (weight) between the source node and all other nodes.",
+    secondP:
+    "(weighted): the father of pathfinding algorithms; guarantees the shortest path"
   };
 
   useEffect(() => {
@@ -75,6 +77,7 @@ function DijkstraLesson() {
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
         <p className="explanation-text">{paragraphs.firstP}</p>
+        <p className="explanation-text centered-text">{paragraphs.secondP}</p>
       </div>
       <div className="buttons-pos">
         <button className="button" onClick={() => newGraph()}>

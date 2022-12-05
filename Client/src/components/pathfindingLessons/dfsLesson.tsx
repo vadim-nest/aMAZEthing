@@ -14,6 +14,8 @@ function DfsLesson() {
     sortName: "Depth First Search (DFS) algorithm",
     firstP:
       "DFS starts at the root (top) node of a tree and goes as far as it can down a given branch (path), then backtracks until it finds an unexplored path, and then explores it.",
+    secondP:
+    "(unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path"
   };
 
   useEffect(() => {
@@ -76,6 +78,7 @@ function DfsLesson() {
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
         <p className="explanation-text">{paragraphs.firstP}</p>
+        <p className="explanation-text centered-text">{paragraphs.secondP}</p>
       </div>
       <div className="buttons-pos">
         <button
