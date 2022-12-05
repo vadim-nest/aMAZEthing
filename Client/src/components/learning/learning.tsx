@@ -93,7 +93,7 @@ export default function LearningPage() {
               </button>
               </div>
             <p className="explanation-text">
-              At its core, a path finding algorithm seeks to find the shortest
+              At its core, a path finding algorithm seeks to find a
               path between two points. This application visualizes various path
               finding algorithms in action.
             </p>
