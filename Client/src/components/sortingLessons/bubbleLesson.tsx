@@ -86,9 +86,6 @@ export default function BubbleLesson() {
             </button>
           )}
 
-          {!isSorted && clicked && (
-            <button className="button clickSort">wait... </button>
-          )}
         </div>
         <Visualization
           width={WIDTH}

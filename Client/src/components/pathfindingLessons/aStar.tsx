@@ -72,7 +72,7 @@ function AStarLesson() {
       <div className="aStar lesson-wrapper-2">
         <div ref={ref} id="aStar myCanvas" >
           <div className="aStar graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={graph.edges.filter((edge: any) => edge[0] === vertex)} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} weightedGraph={true}/>)}
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()*Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} weightedGraph={true}/>)}
           </div>
         </div>
       </div>
