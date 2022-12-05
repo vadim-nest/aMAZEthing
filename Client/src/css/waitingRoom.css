@@ -152,8 +152,8 @@
   border: 10px solid var(--dark-green);
   border-radius: 50%;
   border-top: 10px solid var(--red);
-  width: 100px;
-  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
   animation: spinner 4s linear infinite;
 }
 
