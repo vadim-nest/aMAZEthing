@@ -227,13 +227,7 @@ function Game() { // TODO: Extract logic to maze class
   function exitTower(towerId: number, minionId: number, movedAfter: boolean) {
     let minion = minions[minionId];
     let tower = towers.find(tower => tower.id === towerId) as TowerType;
-    if (minion.alignment === currentPlayer) {
-      if (tower.alignment === 'none') {
-        socket.emit('conquerTower', roomId, towerId, true, currentPlayer);
-      } else {
-        socket.emit('conquerTower', roomId, towerId, false, currentPlayer);
-      }
-    }
+    if (minion.alignment === currentPlayer) socket.emit('conquerTower', roomId, towerId, tower.alignment === 'none', currentPlayer);
     dispatch(minionExitTower({minionId, towerId}));
     dispatch(addMovingMinion(currentMinion as number));
     tower = towers.find(tower => tower.id === towerId) as TowerType;
