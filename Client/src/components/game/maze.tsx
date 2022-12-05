@@ -8,7 +8,7 @@ import Minion from "./minion";
 import Tower from "./tower";
 import Home from './home'
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { mazeComplete, newTowers, setAllTilesHidden, setCurrentGraph, updateCurrentTile, updateDisplayVisited, updateMazeClasses, updateMazeGenerated } from "../../features/game_slice";
+import { addNewInterval, mazeComplete, newTowers, setAllTilesHidden, setCurrentGraph, updateCurrentTile, updateDisplayVisited, updateMazeClasses, updateMazeGenerated } from "../../features/game_slice";
 
 function Maze({ towers, currentPlayer}: {
   towers: TowerType[],
@@ -37,7 +37,9 @@ function Maze({ towers, currentPlayer}: {
         const mazeTiles = document.getElementsByClassName('mazeTile');
         const halfway = Math.floor(mazeTiles.length/2);
         let index = -1;
-        function step() {
+        // function step() 
+        // requestAnimationFrame(step);
+        const interval = setInterval(() => {
           for (let i = 0; i < 50 - 49*((Math.abs(halfway - index)/halfway)); i++) {
             index++;
             if (index === displayVisited.length) break;
@@ -45,13 +47,13 @@ function Maze({ towers, currentPlayer}: {
             currentTile.classList.remove('showNone');
           }
 
-          if (index < displayVisited.length) requestAnimationFrame(step)
-          else {
+          if (index >= displayVisited.length) {
+            clearInterval(interval);
             dispatch(setAllTilesHidden(false));
             dispatch(mazeComplete());
           };
-        }
-        requestAnimationFrame(step);
+        }, 0);
+        dispatch(addNewInterval(interval));
       }
     }
     mazeInit();
