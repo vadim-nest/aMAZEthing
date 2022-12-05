@@ -2,8 +2,6 @@ import '../css/waitingRoom.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import socket from '../services/socket';
-import ProfileGameHistory from './profile/profileGameHistory';
-import { io } from 'socket.io-client';
 import { store } from '../features/store';
 import { useAppDispatch, useAppSelector } from '../features/hooks';
 import { defaultState, updatePlayer, updateRoomID } from '../features/game_slice';
