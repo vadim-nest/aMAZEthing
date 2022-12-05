@@ -104,13 +104,6 @@ function WaitingRoom() {
     }
   }
 
-  // useEffect(() => {
-  //   if (!(playClicked || joinClicked || createClicked)) {
-  //     socket.emit('clear waiting', socket.id);
-  //     dispatch(updateRoomID(''));
-  //   }
-  // }, [playClicked, joinClicked, createClicked]);
-
   return (
     <div className="waiting-room">
       <h3 className="wr-explanation-text">
