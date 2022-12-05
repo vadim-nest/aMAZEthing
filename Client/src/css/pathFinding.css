@@ -1,39 +1,32 @@
-.bfs .lesson-wrapper-2 {
+.lesson-wrapper-2 {
+  background-color: var(--white);
+  border-color: var(--white);
   border-radius: 20px;
   min-width: 70vw;
   width: 900px;
-  height:900px;
+  height: 900px;
   color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.bfs #myCanvas {
+#myCanvas {
   position: relative;
-  
 }
-
-.bfs .graph-vertices{
+.graph-vertices {
   position: relative;
   display: grid;
-  gap:10px;
+  gap: 10px;
   /* grid-auto-flow: column; */
   place-items: start;
-  transform: rotate(0deg) scale(1, 1);
+  transform: rotate(0deg) scale(0.8, 0.8);
   z-index: 2;
 }
-
-.bfs .graph-edges{
-  position:absolute;
+.graph-edges {
+  position: absolute;
   display: grid;
-  gap:10px;
+  gap: 10px;
   place-items: start;
   z-index: 3;
-}
-
-.buttons-pos{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }

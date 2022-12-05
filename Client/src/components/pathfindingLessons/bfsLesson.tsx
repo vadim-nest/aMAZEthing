@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { generateConnectedGraph } from "../../utils/maze";
-import "../../css/bfs-lesson.css";
+import "../../css/pathFinding.css";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 import {delay} from '../../utils/functionalities'
@@ -63,9 +63,9 @@ function BfsLesson() {
         <button className="button" onClick={() => newGraph()}>NEW Graph</button>
         <button className="button" onClick={() => bfs()}>Visualize bfs</button>
       </div>
-      <div className="bfs lesson-wrapper-2">
-        <div id="bfs myCanvas">
-          <div className="bfs graph-vertices" style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}>
+      <div className="lesson-wrapper-2">
+        <div id="myCanvas">
+          <div className="graph-vertices" style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}>
             {graph && graph.vertices.map((vertex: value) => (
                 <GraphVertex
                   key={Math.random()}

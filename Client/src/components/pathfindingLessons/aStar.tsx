@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import "../../css/aStar-lesson.css";
+import { useEffect, useState } from "react";
+import "../../css/pathFinding.css";
 import { generateConnectedGraph } from "../../utils/maze";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
@@ -58,7 +58,7 @@ function AStarLesson() {
   
 
   return (
-    <div className="aStar whole-page-wrapper">
+    <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
         <p className="explanation-text">{paragraphs.firstP}</p>
@@ -67,9 +67,9 @@ function AStarLesson() {
         <button className="button" onClick={()=>newGraph()}>NEW Graph</button>
         <button className="button" onClick={()=>aStar()}>Visualize A*</button>
       </div>
-      <div className="aStar lesson-wrapper-2">
-        <div id="aStar myCanvas" >
-          <div className="aStar graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
+      <div className="lesson-wrapper-2">
+        <div id="myCanvas" >
+          <div className="graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
           </div>
         </div>

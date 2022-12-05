@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef} from "react";
 import { generateConnectedGraph } from "../../utils/maze";
-import "../../css/dfs-lesson.css";
+import "../../css/pathFinding.css";
 import {  value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
 import {delay} from '../../utils/functionalities'
@@ -54,7 +54,7 @@ function DfsLesson() {
   }
 
   return (
-    <div className="dfs whole-page-wrapper">
+    <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
         <p className="explanation-text">{paragraphs.firstP}</p>
@@ -64,9 +64,9 @@ function DfsLesson() {
           newGraph()}}>NEW Graph</button>
         <button className="button" onClick={()=>dfs()}>Visualize DFS</button>
       </div>
-      <div className="dfs lesson-wrapper-2">
-        <div id="dfs myCanvas" >
-          <div className="dfs graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
+      <div className="lesson-wrapper-2">
+        <div id="myCanvas" >
+          <div className="graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} end={end} setEnd={setEnd} weightedGraph={false}/>)}
           </div>
         </div>

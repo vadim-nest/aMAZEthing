@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import "../../css/dijkstra-lesson.css";
+import { useEffect, useState } from "react";
+import "../../css/pathFinding.css";
 import { generateConnectedGraph } from "../../utils/maze";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
@@ -61,9 +61,9 @@ function DijkstraLesson() {
         <button className="button" onClick={() => newGraph()}>NEW Graph </button>
         <button className="button" onClick={()=>dijkstra()}>Visualize Dijkstra</button>
       </div>
-      <div className="dijk lesson-wrapper-2">
-        <div id="dijk myCanvas" >
-          <div className="dijk graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
+      <div className="lesson-wrapper-2">
+        <div id="myCanvas" >
+          <div className="graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
           {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
           </div>
         </div>
