@@ -18,7 +18,6 @@ function AStarLesson() {
   };
 
  useEffect(() => {
-    setGraph([]);
     const graph = generateConnectedGraph(width, width, true);
     graph.removeUnweightedEdges();
     setGraph(graph);
@@ -42,6 +41,7 @@ function AStarLesson() {
   } 
 
   async function showPath(path:number[],visited:boolean = false){
+    document.getElementById(`0`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
     for (let i = 0; i < path.length; i++) {
       await delay(10);
       document.getElementById(`${path[i]}`)!.style.backgroundColor = visited?"yellow" :"var(--main-green)";
@@ -72,7 +72,7 @@ function AStarLesson() {
       <div className="aStar lesson-wrapper-2">
         <div ref={ref} id="aStar myCanvas" >
           <div className="aStar graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={graph.edges.filter((edge:any)=>edge[0]===vertex)} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()*Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
           </div>
         </div>
       </div>

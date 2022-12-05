@@ -15,8 +15,32 @@ const gameSlice = createSlice({
   name: 'game',
   initialState: initialGameState,
   reducers: {
-    defaultState() {
-      return initialGameState;
+    defaultState(state) {
+      let defaultState = {...initialGameState};
+      defaultState.minions = {};
+      defaultState.movingMinions = [];
+      defaultState.towers = [];
+      defaultState.towersSorting = {};
+      defaultState.gameStats = {
+        timeRemaining: 300,
+        p1Coins: 0,
+        p2Coins: 0,
+        p1Towers: [],
+        p2Towers: [],
+        p1MinionCount: 0,
+        p2MinionCount: 0,
+      }
+      defaultState.finalGameStats = {
+        timeRemaining: 300,
+        p1Coins: 0,
+        p2Coins: 0,
+        p1Towers: [],
+        p2Towers: [],
+        p1MinionCount: 0,
+        p2MinionCount: 0,
+      }
+      defaultState.displayVisited = [];
+      return defaultState;
     },
     updateRoomID(state, action: PayloadAction<string>) {
       state.roomId = action.payload;

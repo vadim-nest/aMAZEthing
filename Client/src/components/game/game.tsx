@@ -14,6 +14,7 @@ import { store } from '../../features/store';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';
 import { addMovingMinion, addNewMinionState, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMazePath, updateMinion, updateTowerNumbers, updateZoomed } from '../../features/game_slice';
 
+// TODO: Convert request animation frames to setInterval
 
 socket.on('message', message => {console.log(message)});
 
@@ -39,7 +40,7 @@ function Game() { // TODO: Extract logic to maze class
     })
     return ()=>{ 
       console.log('clearing waiting');
-      socket.emit('clear waiting', store.getState().game.roomId) // TODO: Currently this prevents them from joining the game on game start
+      socket.emit('clear waiting', socket.id) // TODO: Currently this prevents them from joining the game on game start
     } 
   }, [])
 
@@ -241,7 +242,7 @@ function Game() { // TODO: Extract logic to maze class
         dispatch(updateTowerNumbers({towerId, newNumbers: array}));
         clearInterval(interval);
         resolve(true);
-      }, minion.sortingSpeed*2*(animations.length + 4));
+      }, minion.sortingSpeed*2*(animations.length + 4)); // TODO: Check this is accurate
     })
     exitTower(towerId, minionId, movedAfter);
   }

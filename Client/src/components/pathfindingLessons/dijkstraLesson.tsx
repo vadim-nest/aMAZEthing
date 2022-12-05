@@ -23,7 +23,6 @@ function DijkstraLesson() {
 }, []);
 
   function newGraph() {
-    setGraph([]);
     const newgraph = generateConnectedGraph(width, width, true);
     setGraph(newgraph);
   }
@@ -70,7 +69,7 @@ function DijkstraLesson() {
       <div className="dijk lesson-wrapper-2">
         <div ref={ref} id="dijk myCanvas" >
           <div className="dijk graph-vertices" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
-          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={graph.edges.filter((edge:any)=>edge[0]===vertex)} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
+          {graph && graph.vertices.map((vertex:value) => <GraphVertex key={Math.random()*Math.random()} width={width} vertex={vertex} edges={graph.edges.filter((edge:any)=>edge[0]===vertex)} setEnd={setEnd} end={end} weightedGraph={true}/>)}
           </div>
         </div>
       </div>

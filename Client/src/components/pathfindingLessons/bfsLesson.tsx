@@ -23,7 +23,6 @@ function BfsLesson() {
   }, []);
 
   function newGraph() {
-    setGraph([]);
     const newgraph = generateConnectedGraph(width, width, true);
     graph.removeUnweightedEdges();
     setGraph(newgraph);
@@ -73,7 +72,7 @@ function BfsLesson() {
           <div className="bfs graph-vertices" style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}>
             {graph && graph.vertices.map((vertex: value) => (
                 <GraphVertex
-                  key={graph.edges.filter((edge:any)=>edge[0]===vertex)}
+                  key={Math.random()*Math.random()}
                   width={width}
                   vertex={vertex}
                   edges={graph.edges.filter((edge: any) => edge[0] === vertex)}
