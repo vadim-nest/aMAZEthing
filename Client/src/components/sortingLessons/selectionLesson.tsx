@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import '../../css/sorting.css';
-import { selectionSortAlgo, generateArray } from '../../utils/sorting-algo';
-import { selectionSortVisual } from '../../utils/sorting-helper-visual';
-import Visualization from './visualization';
+import { useEffect, useState } from "react";
+import "../../css/sorting.css";
+import { selectionSortAlgo, generateArray } from "../../utils/sorting-algo";
+import { selectionSortVisual } from "../../utils/sorting-helper-visual";
+import Visualization from "./visualization";
 
 export default function SelectionLesson() {
   const [array, setArray] = useState([] as number[]);
@@ -20,9 +20,9 @@ export default function SelectionLesson() {
   let HEIGHT = 5;
 
   let paragraphs = {
-    sortName: 'Selection sort',
+    sortName: "Selection sort",
     firstP:
-      'This algorithm scans all the items and finds the smallest, swaps it into position as the first item. Then repeats the selection sort on the remaining items. Worst time complexity O(N^2)',
+      "This algorithm scans all the items and finds the smallest, swaps it into position as the first item. Then repeats the selection sort on the remaining items. Worst time complexity O(N^2)",
   };
 
   useEffect(() => {
@@ -50,27 +50,34 @@ export default function SelectionLesson() {
 
       <div className="lesson-wrapper-2">
         <div>
-          {!clicked && (
-            <button className="button clickSort" onClick={() => initArr()}>
-              new array
-            </button>
-          )}
-          {!clicked &&!isSorted &&
-            <button
-              className="button clickSort"
-              onClick={() => {
-                setClicked(true);
-              }}
-            >
-              visualize
-            </button>
-          }
-           {!isSorted && clicked &&
-           <button className="button clickSort visualizing">wait...</button>
-          }
+          <button
+            className={
+              clicked ? "button disabled clickSort" : "button clickSort"
+            }
+            disabled={clicked ? true : false}
+            onClick={() => initArr()}
+          >
+            new array
+          </button>
+
+          <button
+            className={
+              clicked && !isSorted
+                ? "button disabled clickSort"
+                : isSorted
+                ? "button disabled clickSort"
+                : "button clickSort"
+            }
+            disabled={!isSorted && clicked ? true : isSorted ? true : false}
+            onClick={() => {
+              setClicked(true);
+            }}
+          >
+            visualize
+          </button>
         </div>
         <Visualization
-          fontColor={'white'}
+          fontColor={"white"}
           fontSize={15}
           width={WIDTH}
           delay={DELAY}

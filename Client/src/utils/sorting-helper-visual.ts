@@ -1,5 +1,5 @@
 
-export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number,  tower:'' = '', height:number, cb?: () => void) {
+export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number,  tower:'' = '', height?:number, cb?: () => void) {
   for ( let i = 0, len = animations.length; i < len; i++ ) {
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
@@ -23,7 +23,6 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
 
 
         let tempNode = document.getElementById(`${indexTwo}arrayColumn${tower}`);
-        // console.log(tempNode)
         document.getElementById(`${indexOne}arrayColumn${tower}`)!.setAttribute('id', `${indexTwo}arrayColumn${tower}`)
         tempNode!.setAttribute('id', `${indexOne}arrayColumn${tower}`);
 
@@ -43,7 +42,7 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
     return new Promise((res) => setTimeout(res, time));
   }
 
-  export async function insertionSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number, tower: string = '',  height:number, cb?: () => void) {
+  export async function insertionSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number, tower: string = '',  height?:number, cb?: () => void) {
     for ( let i = 0, len = animations.length; i < len; i++ ) {
       await delay(DELAY_MS);
       if (animations[i].length > 2) {
@@ -76,7 +75,7 @@ export async function bubbleSortVisual(animations:number[][], DELAY_MS:number, w
 
   }
 
-export async function selectionSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number, tower: string = '', height:number, cb?: () => void) {
+export async function selectionSortVisual(animations:number[][], DELAY_MS:number, width:number, margin:number, tower: string = '', height?:number, cb?: () => void) {
   for ( let i = 0, len = animations.length; i < len; i++ ) {
       await delay(DELAY_MS)
       if(animations[i].length > 2) {

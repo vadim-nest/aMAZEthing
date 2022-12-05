@@ -16,7 +16,7 @@ export default function BubbleLesson() {
   const MIN_VAL = 7;
   const MAX_VAL = 50;
   const NUM_BARS = 20;
-  const DELAY = 100;
+  const DELAY = 5;
   const PADTOP = 10;
   const MARGIN = 3;
   const HEIGHT = 5;
@@ -76,26 +76,31 @@ export default function BubbleLesson() {
 
         <div className="lesson-wrapper-2">
           <div>
-            {!clicked && (
-              <button className="button clickSort" onClick={() => initArr()}>
-                new array
-              </button>
-            )}
+            <button
+              className={
+                clicked ? "button disabled clickSort" : "button clickSort"
+              }
+              disabled={clicked ? true : false}
+              onClick={() => initArr()}
+            >
+              new array
+            </button>
 
-            {!clicked && !isSorted && (
-              <button
-                className="button clickSort"
-                onClick={() => {
-                  setClicked(true);
-                }}
-              >
-                visualize
-              </button>
-            )}
-
-            {!isSorted && clicked && (
-              <button className="button clickSort">Visualizing</button>
-            )}
+            <button
+              className={
+                clicked && !isSorted
+                  ? "button disabled clickSort"
+                  : isSorted
+                  ? "button disabled clickSort"
+                  : "button clickSort"
+              }
+              disabled={!isSorted && clicked ? true : isSorted ? true : false}
+              onClick={() => {
+                setClicked(true);
+              }}
+            >
+              visualize
+            </button>
           </div>
           <Visualization
             width={WIDTH}
