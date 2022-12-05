@@ -277,7 +277,7 @@ function Game() { // TODO: Extract logic to maze class
             towers={towers}
             currentPlayer={currentPlayer}
             />
-          <RightBar />
+          <RightBar addNewMinion={addNewMinion}/>
           {gameEnded && <GameOver />}
         </div>
       </div>

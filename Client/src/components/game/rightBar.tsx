@@ -51,7 +51,7 @@ function styleCurrentMinionBorder(currentMinId: number) {
   (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).style.backgroundColor = 'var(--purple)';
 }
 
-function RightBar() {
+function RightBar({addNewMinion}: (type: animal, player: 'p1' | 'p2') => void) {
 
   const [shopOpen, setShopOpen] = useState(false);
   const { allTilesHidden, currentPlayer, minions } = useAppSelector(state => state.game);
@@ -88,7 +88,7 @@ function RightBar() {
     <div className='right-bar'>
 
       {shopOpen ? (
-        <Shop minions={minions} currentPlayer = {currentPlayer}/>
+        <Shop minions={minions} currentPlayer = {currentPlayer} addNewMinion={addNewMinion}/>
       ) : <div className='your-minions'>
       {minions &&
         // Should be a name instead
