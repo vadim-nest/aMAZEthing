@@ -98,6 +98,13 @@ const gameSlice = createSlice({
     addNewMinionState(state, action: PayloadAction<{type: animal, player: 'p1' | 'p2'}>) {
       const newId = Object.keys(state.minions).length;
       const {type, player} = action.payload;
+      if (player === 'p1') {
+        if (state.gameStats.p1Coins < type.cost) return;
+        state.gameStats.p1Coins -= type.cost;
+      } else {
+        if (state.gameStats.p2Coins < type.cost) return;
+        state.gameStats.p2Coins -= type.cost;
+      }
       let playerSpecific = {
         xPos: 0,
         yPos: 3,

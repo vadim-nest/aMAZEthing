@@ -2,15 +2,13 @@ import '../../css/game/game.css';
 import Maze from './maze';
 import RightBar from './rightBar';
 import LeftBar from './leftBar';
-import { useEffect, useRef, useState } from 'react';
-import { animal, MazeTileType, minionType, TowerType } from '../../utils/types';
+import { useEffect } from 'react';
+import { animal, minionType, TowerType } from '../../utils/types';
 import { Graph, value } from '../../utils/graph';
-import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../../utils/path-finding-algo';
+import { getDirection} from '../../utils/path-finding-algo';
 import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, selectionSortAlgo } from '../../utils/sorting-algo';
-import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 import socket from '../../services/socket';
 import GameOver from './gameOver';
-import { store } from '../../features/store';
 import { useAppDispatch, useAppSelector, usePathAlgo } from '../../features/hooks';
 import { addMovingMinion, addNewInterval, addNewMinionState, clearIntervals, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, resetIntervals, resetMinions, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMazePath, updateMinion, updateTowerNumbers, updateZoomed } from '../../features/game_slice';
 
@@ -88,8 +86,8 @@ function Game() { // TODO: Extract logic to maze class
     }
   }
 
-
-  async function moveMinion(goTo: {xPos: number, yPos: number}, comeFrom: {xPos: number, yPos: number}, currentGraph: Graph, minion: false | minionType = false, showPath = true) {
+  interface position {xPos: number, yPos: number};
+  async function moveMinion(goTo: position, comeFrom: position, currentGraph: Graph, minion: false | minionType = false, showPath = true) {
     if (!minion) minion = minions[currentMinion as number] as minionType;
     let directions : false | {
       visited: value[];
@@ -135,7 +133,6 @@ function Game() { // TODO: Extract logic to maze class
     function applyMovement(minion: minionType) {
       let xAdd = 0;
       let yAdd = 0;
-      let previousTimeStamp: undefined | number;
       let previousDirection = minion.xPos + minion.yPos*width;
       const interval = setInterval(() => {
         let updatedMinion = minion as minionType;

@@ -9,7 +9,9 @@ export interface animal {
   pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
   sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
   sortingSpeed: number;
-  type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear'
+  movementSpeed: number;
+  type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear';
+  cost: number;
 }
 
 function generateRoomId() {
@@ -85,8 +87,8 @@ export default function Connect(server: http.Server) {
       p2Id: '',
       p2Username: '',
       playersLoaded: 0,
-      timeRemaining: 600,
-      p1Coins: 0,
+      timeRemaining: 60,
+      p1Coins: 10000,
       p2Coins: 0,
       p1Towers: [],
       p2Towers: [],
@@ -127,8 +129,15 @@ export default function Connect(server: http.Server) {
     const game = activeGames.find(game => game.roomId === roomID);
     if (!game) return false;
     const newEntry: [number, animal] = [game.p1Minions.length + game.p2Minions.length, type];
-    if (player === 'p1') game.p1Minions.push(newEntry);
-    else game.p2Minions.push(newEntry);
+    
+    if (player === 'p1') {
+      game.p1Minions.push(newEntry);
+      game.p1Coins -= type.cost;
+    }
+    else {
+      game.p2Minions.push(newEntry);
+      game.p2Coins -= type.cost;
+    }
     return game;
   }
 

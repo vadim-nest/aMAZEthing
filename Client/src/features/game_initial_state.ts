@@ -33,8 +33,9 @@ export interface GameState{ //shape of the state inside inside of the slice
 const width = 86;
 const height = 40;
 const array: MazeTileType[] = [];
+const nodeNum = width*height;
 
-for (let i = 0; i < width*height; i++) {
+for (let i = 0; i < nodeNum; i++) {
   array.push({value: i, classes: [], path: ''})
 }
 
