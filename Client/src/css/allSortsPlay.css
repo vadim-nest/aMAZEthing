@@ -32,12 +32,12 @@
 }
 
 .disabled{
-    color: gray;
+    color: var(--main-grey);
 }
 
 .disabled:hover{
     cursor: default;
-    color: grey;
+    color: var(--main-grey);
 }
 
 
@@ -50,14 +50,14 @@ input[type='range'] {
 	height: 7px;
     width: 150px;
 	border-radius: 5px;
-	
+
 }
 
 
 .nice-select {
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 5px;
-    border: solid 1px #e8e8e8;
+    border: solid 1px var(--even-lighter-grey);
     box-sizing: border-box;
     clear: both;
     cursor: pointer;
@@ -73,7 +73,7 @@ input[type='range'] {
     transition: all 0.2s ease-in-out;
     width: auto; }
 .nice-select:hover {
-      border-color: #dbdbdb; }
+      border-color: var(--light-grey); }
 .nice-select:active, .nice-select.open, .nice-select:focus {
-      border-color: #999; }
+      border-color: var(--main-grey); }
 
