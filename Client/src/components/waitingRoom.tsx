@@ -11,6 +11,7 @@ function WaitingRoom() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userRedux = useAppSelector((state) => state.user);
+  const {roomId} = useAppSelector(state => state.game);
   const [createClicked, setCreateClicked] = useState(false);
   const [joinClicked, setJoinClicked] = useState(false);
   const [playClicked, setPlayClicked] = useState(false);
@@ -27,10 +28,8 @@ function WaitingRoom() {
       socket.emit(`ready${type}`, roomId);
     });
     socket.on('Game start', () => {
-      const roomId = store.getState().game.roomId;
       if (roomId) {
-        console.log('Game started', store.getState().game.roomId);
-        console.log('Game state', store.getState().game)
+        console.log('Game started', roomId);
         navigate('/game');
       } else {
         socket.emit('retry game start');
