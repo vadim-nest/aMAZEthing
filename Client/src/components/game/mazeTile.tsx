@@ -4,16 +4,15 @@ import { useAppDispatch, useAppSelector } from '../../features/hooks';
 import { TowerType } from '../../utils/types';
 import Path from './path';
 
-function MazeTile({value, classes, path, boxSize, generated}: {
-  value: string, 
-  classes: string[], 
-  boxSize: number, 
+function MazeTile({value, classes, path, generated}: {
+  value: string,
+  classes: string[],
   generated: boolean,
   path: '' | 'THOUGHTPROCESS' | 'PATH'
 }) {
 
   const dispatch = useAppDispatch();
-  const {width} = useAppSelector(state => state.game)
+  const {width, boxSize} = useAppSelector(state => state.game)
 
   function setCurrentTileHelper(value: number) {
     dispatch(updateCurrentTile({

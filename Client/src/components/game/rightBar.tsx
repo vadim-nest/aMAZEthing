@@ -62,7 +62,6 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
         <div className={`your-minion-button right-bar-selector-${p1minion.id}`} onClick={() => {
             dispatch(updateCurrentMinion(p1minion.id));
             styleCurrentMinionBorder(p1minion.id);
-
           }}>
           <h1 className='right-bar-name'>{p1minion.name}</h1>
           <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[p1minion.id])}</h1>
