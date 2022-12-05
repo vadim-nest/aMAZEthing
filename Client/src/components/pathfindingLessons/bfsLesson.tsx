@@ -76,7 +76,8 @@ function BfsLesson() {
       </div>
       <div className="buttons-pos">
         <button 
-        className="button" 
+        className={clicked ? "button disabled": "button"}  
+        disabled={clicked}
         onClick={() => {
           setClicked(true);
           newGraph();
@@ -85,7 +86,8 @@ function BfsLesson() {
           NEW Graph
         </button>
         <button 
-          className="button" 
+          className={clicked ? "button disabled": "button"} 
+          disabled={clicked} 
           onClick={() => {
             setClicked(true);
             bfs();

@@ -82,7 +82,8 @@ function DijkstraLesson() {
       </div>
       <div className="buttons-pos">
         <button 
-        className="button" 
+        className={clicked ? "button disabled": "button"} 
+        disabled={clicked} 
         onClick={() => {
           setClicked(true);
           newGraph()
@@ -91,7 +92,8 @@ function DijkstraLesson() {
           NEW Graph{" "}
         </button>
         <button 
-        className="button" 
+        className={clicked ? "button disabled": "button"}  
+        disabled={clicked}
         onClick={() => {
           setClicked(true);
           dijkstra()

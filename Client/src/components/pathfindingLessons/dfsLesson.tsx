@@ -83,7 +83,7 @@ function DfsLesson() {
       <div className="buttons-pos">
         
           <button
-          className={clicked ? "button ": "button"}
+          className={clicked ? "button disabled": "button"}
           disabled={clicked}
           onClick={() =>{ 
             setClicked(true);
@@ -92,9 +92,8 @@ function DfsLesson() {
             }}>
           NEW Graph
         </button>
-        
           <button 
-          className={clicked ? "button ": "button"} 
+          className={clicked ? "button disabled": "button"} 
           disabled={clicked}
           onClick={() => {
             setClicked(true);
