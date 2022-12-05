@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../../css/maze.css';
+import '../../css/game/maze.css';
 import apiService from "../../services/apiService";
 import { Graph, value } from "../../utils/graph";
 import { MazeTileType, minionType, TowerType } from "../../utils/types";

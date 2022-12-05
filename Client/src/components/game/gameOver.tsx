@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import '../../css/gameOver.css';
+import '../../css/game/gameOver.css';
 import { useAppSelector } from '../../features/hooks';
 
 function GameOver () {

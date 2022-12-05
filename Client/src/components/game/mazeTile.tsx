@@ -1,4 +1,4 @@
-import '../../css/mazeTile.css';
+import '../../css/game/mazeTile.css';
 import { updateCurrentMinion, updateCurrentTile, updateCurrentTower } from '../../features/game_slice';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';
 import { TowerType } from '../../utils/types';

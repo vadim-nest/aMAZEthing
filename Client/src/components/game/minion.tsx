@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/minion.css';
+import '../../css/game/minion.css';
 import { updateCurrentMinion, updateCurrentTile, updateCurrentTower } from '../../features/game_slice';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';
 import { minionType, TowerType } from '../../utils/types';

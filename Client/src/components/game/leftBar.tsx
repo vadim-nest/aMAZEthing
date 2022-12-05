@@ -1,4 +1,4 @@
-import '../../css/leftBar.css';
+import '../../css/game/leftBar.css';
 import { minionType, TowerType } from '../../utils/types';
 import FlagSVG from '../svg/flagSVG';
 import { useAppDispatch, useAppSelector } from '../../features/hooks';

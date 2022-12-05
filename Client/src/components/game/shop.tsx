@@ -1,4 +1,4 @@
-import '../../css/shop.css';
+import '../../css/game/shop.css';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import { animal, badger, bear, deer, hare, koala, minionType, squirrel } from '../../utils/types';
 import { useAppDispatch } from '../../features/hooks';

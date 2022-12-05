@@ -1,4 +1,4 @@
-import '../../css/rightBar.css';
+import '../../css/game/rightBar.css';
 import ShopSVG from '../svg/ShopSVG';
 import { animal, minionType } from '../../utils/types';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
