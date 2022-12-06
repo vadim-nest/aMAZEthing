@@ -1,37 +1,45 @@
 .gameDashboard {
   height: 80vh;
-  width: 47.5vw;
+  width: 40vw;
   min-width: 470px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 5vh;
-  margin: 0 auto;
-  overflow: scroll;
-  margin: auto;
+  gap: 20px;
+  overflow: auto;
+  margin: 20px;
 }
 
 .match {
   height: 20vh;
   min-height: 200px;
-  width: 47.5vw;
+  width: 38vw;
   min-width: 470px;
   border-radius: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  border: 3px solid var(--red);
   background-color: var(--purple);
   padding: 20px;
 }
 
+.match-win {
+  border: 3px solid var(--yellow);
+}
+
+.match-loss {
+  border: 3px solid var(--red);
+}
+
+.match-draw {
+  border: 3px solid var(--main-grey);
+}
+
 .gameDuration {
-  height: 100%;
-  flex-grow: 2;
-  background-color: inherit;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .result-win {
@@ -42,6 +50,11 @@
 .result-loss {
   font-size: 50px !important;
   color: var(--red);
+}
+
+.result-draw {
+  font-size: 50px !important;
+  color: var(--main-grey);
 }
 
 .date {
@@ -70,4 +83,30 @@
   height: 70px;
   width: 70px;
   margin: 20px;
+}
+
+/* width */
+.gameDashboard::-webkit-scrollbar {
+  width: 18px;
+}
+
+/* Track */
+.gameDashboard::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--white-green);
+  border-radius: 5px;
+}
+
+/* Handle */
+.gameDashboard::-webkit-scrollbar-thumb {
+  background: var(--white-green);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.gameDashboard::-webkit-scrollbar-thumb:hover {
+  background: var(--yellow);
+}
+
+.gameDashboard::-webkit-scrollbar-corner {
+  background: var(--green);
 }
