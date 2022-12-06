@@ -79,7 +79,6 @@ export default function Connect(server: http.Server) {
 
   function createNewGame(roomId: string, p1Id: string, p1Username: string) {
     const maze = generateMaze(86, 40, true, 8) // TODO: Generalize this;
-    console.log('Edges', maze.graph.edges);
     mazes[roomId] = maze;
     activeGames.push({
       roomId,
@@ -100,8 +99,6 @@ export default function Connect(server: http.Server) {
 
   function addP2ToGame(roomID: string, p2Id:string, p2Username: string) {
     const game = activeGames.find(game => game.roomId === roomID);
-    console.log('Adding p2');
-    console.log({game})
     if (!game) return false;
     game.p2Id = p2Id;
     game.p2Username = p2Username;
@@ -130,7 +127,6 @@ export default function Connect(server: http.Server) {
 
   function addNewMinionGame(roomID: string, type: animal, player: 'p1' | 'p2') {
     const game = activeGames.find(game => game.roomId === roomID);
-    console.log({game, activeGames})
     if (!game) return false;
     const newEntry: [number, animal] = [game.p1Minions.length + game.p2Minions.length, type];
     
@@ -236,7 +232,6 @@ export default function Connect(server: http.Server) {
     socket.on('join', (roomId, p2Username) => {
       const found = waiting.find(room => room.roomId === roomId);
       const game = activeGames.find(game => game.roomId === roomId);
-      console.log({game, activeGames})
       if (game) {
         socket.join(roomId);
         game.p2Id = socket.id;
@@ -276,10 +271,8 @@ export default function Connect(server: http.Server) {
     });
 
     socket.on('readyJoin', (roomId) => {
-      console.log('readyJoin', roomId, readyHost, socket.id)
       if (readyHost[roomId] && readyHost[roomId] !== socket.id) {
         delete ready[roomId];
-        console.log('Game starting');
         io.to(roomId).emit('Game start');
       }
     });
@@ -310,7 +303,6 @@ export default function Connect(server: http.Server) {
       const newGameState = addNewMinionGame(roomId, type, player);
     });
     socket.on('minion move', (direction, minionId, roomId) => {
-      console.log('minion move', {direction, minionId})
       socket.to(roomId).emit('minion move', direction, minionId);
     });
 

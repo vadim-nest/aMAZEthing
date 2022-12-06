@@ -204,6 +204,7 @@ const gameSlice = createSlice({
     newTowers(state, action: PayloadAction<any[]>) {
       const towers = action.payload;
       const width = state.width;
+      if (towers === undefined) return;
       state.towers = towers.map(tower => {
         return {
           id: tower[0],

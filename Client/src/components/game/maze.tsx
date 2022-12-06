@@ -32,14 +32,12 @@ function Maze({ towers, currentPlayer}: {
         const {graphBE, visited, classes, towers, weightPositions} = await apiService.createMaze();
         let graph = new Graph()
         graph.reAssign(graphBE)
-        console.log({weightPositions});
         dispatch(newTowers(towers));
         dispatch(setCurrentGraph(graph));
         dispatch(updateDisplayVisited(visited));
         dispatch(updateWeightPositions(weightPositions));
         dispatch(updateMazeClasses({classes, visited}));
         const newBoxSize = mazeOuterRef.current?.clientHeight!/height;
-        console.log({newBoxSize});
         dispatch(updateMinBoxSize(newBoxSize));
         dispatch(updateBoxSize(newBoxSize));
 
@@ -81,7 +79,7 @@ function Maze({ towers, currentPlayer}: {
         <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}} ref={mazeInnerRef}>
           <Home xPos={0} yPos={0} player='p1'/>
           <Home xPos={width - 3} yPos={height - 3} player='p2'/>
-          {Object.values(weightPositions).map(weightPosition => <Mud xPos={weightPosition.xPos} yPos={weightPosition.yPos}/>)}
+          {Object.values(weightPositions).map(weightPosition => <Mud key={weightPosition.xPos + weightPosition.yPos*width} xPos={weightPosition.xPos} yPos={weightPosition.yPos}/>)}
           {Object.values(minions).map(minion => <Minion key={minion.id} minion={minion}/>)}
           {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower}/>)}
           {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} />)}

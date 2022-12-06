@@ -35,8 +35,6 @@ function Game() { // TODO: Extract logic to maze class
     return ()=>{
       socket.off('maze generated');
       socket.off('updateGameState');
-      console.log('clearing waiting');
-      // clearIntervals();
       dispatch(clearIntervals());
       socket.emit('clear waiting', socket.id) // TODO: Currently this prevents them from joining the game on game start
     }
