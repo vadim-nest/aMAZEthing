@@ -1,12 +1,12 @@
-import { useEffect, useState, useRef } from "react";
-import { generateConnectedGraph } from "../../utils/maze";
-import "../../css/pathFinding.css";
-import { value } from "../../utils/graph";
-import GraphVertex from "./graphVertex";
-import { showPath } from "../../utils/functionalities";
-import Pagination from "../learning/pagination";
-import MapKeys from "./map-keys";
-import StepsPath from "./stepsPath";
+import { useEffect, useState, useRef } from 'react';
+import { generateConnectedGraph } from '../../utils/maze';
+import '../../css/pathFinding.css';
+import { value } from '../../utils/graph';
+import GraphVertex from './graphVertex';
+import { showPath } from '../../utils/functionalities';
+import Pagination from '../learning/pagination';
+import MapKeys from './map-keys';
+import StepsPath from './stepsPath';
 
 function BfsLesson() {
   const [stats, setStats] = useState({ visited: 0, path: 0 });
@@ -15,11 +15,11 @@ function BfsLesson() {
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
-    "Check neighbors",
-    "Add neighbors into queue",
-    "Shift queue and keep checking neighbors",
-    "Repeat until it founds last state",
-    "Find shortest path",
+    'Check neighbors',
+    'Add neighbors into queue',
+    'Shift queue and keep checking neighbors',
+    'Repeat until it founds last state',
+    'Find shortest path',
   ];
   useEffect(() => {
     newGraph();
@@ -33,14 +33,14 @@ function BfsLesson() {
   }
 
   async function bfs() {
-    const BFSVisualpaths = graph.findPath(0, end, "vbfs");
+    const BFSVisualpaths = graph.findPath(0, end, 'vbfs');
     if (BFSVisualpaths) {
       setStats({
         visited: BFSVisualpaths.visited.length,
         path: BFSVisualpaths.path.length,
       });
       let path: any = Array.from(BFSVisualpaths.visited);
-      console.log("PATH", path);
+      console.log('PATH', path);
       await showPath(path, true);
       path = Array.from(BFSVisualpaths.path);
       await showPath(path);
@@ -51,10 +51,10 @@ function BfsLesson() {
   return (
     <Pagination
       clicked={clicked}
-      leftName={"Learning"}
-      rightName={"Dfs"}
-      leftLink={"learning"}
-      rightLink={"learning/dfsLesson"}
+      leftName={'Learning'}
+      rightName={'Dfs'}
+      leftLink={'learning'}
+      rightLink={'learning/dfsLesson'}
     >
       <div className="whole-page-wrapper">
         <div className="sorting-algo">
@@ -62,11 +62,12 @@ function BfsLesson() {
             Breath First Search (BFS) algorithm
           </h1>
           <p className="explanation-text">
-            Investigates all nodes at the current depth level (neighbours)
+            Investigates all nodes at the current depth level (neighbors)
             before moving on to nodes at the next depth level.
           </p>
           <p className="explanation-text centered-text">
-            ‣  <span className="yellow-learning">(unweighted)</span> guarantees the shortest path.
+          <span className="yellow-learning">UNWEIGHTED</span> - guarantees the
+            shortest path.
           </p>
         </div>
 
@@ -96,7 +97,7 @@ function BfsLesson() {
             </div>
             <div className="buttons-pos">
               <button
-                className={clicked ? "button disabled" : "button"}
+                className={clicked ? 'button disabled' : 'button'}
                 onClick={() => {
                   newGraph();
                 }}
@@ -104,7 +105,7 @@ function BfsLesson() {
                 NEW Graph
               </button>
               <button
-                className={clicked ? "button disabled" : "button"}
+                className={clicked ? 'button disabled' : 'button'}
                 disabled={clicked}
                 onClick={() => {
                   //setClicked(true);

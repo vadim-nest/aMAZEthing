@@ -66,7 +66,7 @@ function DijkstraLesson() {
             all other nodes.
           </p>
           <p className="explanation-text centered-text">
-          ‣   <span className="yellow-learning">(weighted)</span> the father of pathfinding algorithms; guarantees the
+          <span className="yellow-learning">WEIGHTED</span> - the father of path finding algorithms; guarantees the
             shortest path.
           </p>
         </div>

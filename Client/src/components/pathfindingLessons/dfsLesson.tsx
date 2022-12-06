@@ -68,7 +68,7 @@ function DfsLesson() {
             unexplored path, and then explores it.
           </p>
           <p className="explanation-text centered-text">
-          ‣   <span className="yellow-learning">(unweighted)</span> a very bad algorithm for pathfinding; does not
+          <span className="yellow-learning">UNWEIGHTED</span> - a very bad algorithm for path finding; does not
             guarantee the shortest path.
           </p>
         </div>

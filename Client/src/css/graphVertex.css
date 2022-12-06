@@ -4,7 +4,7 @@
     width:20px;
     height:20px;
     border-radius: 50%;
-    background: radial-gradient(circle at 7px 7px,var(--main-green), #000);
+    background: radial-gradient(circle at 7px 7px,var(--white-green), #FFF);
     z-index:20;
 }
 
@@ -37,7 +37,7 @@
     width:20px;
     height:20px;
     border-radius: 50%;
-    background: var(--sand);
+    background: var(--purple);
     z-index:20;
 }
 .edge-key-path{
