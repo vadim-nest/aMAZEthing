@@ -1,8 +1,9 @@
 .shop-page {
   background-color: var(--sand);
-  height: 76vh;
+  height: 74vh;
   width: 94%;
   border-radius: 15px 15px 0 0;
+  margin-top: 10vh;
 }
 
 .the-shop-sign {
@@ -11,7 +12,7 @@
 }
 
 .shop-list {
-  height: 76vh;
+  height: 72vh;
   overflow-y: auto;
   list-style-type: none;
   margin: 0;
@@ -49,10 +50,12 @@
   margin-bottom: 0px;
   padding-bottom: 0px;
   white-space: nowrap;
+  line-height: 10px;
 }
 
 .shop-just-stats {
   width: 70%;
+  margin-top: 0px;
   margin-bottom: 10px;
   padding-top: 0px;
   font-size: 30px;

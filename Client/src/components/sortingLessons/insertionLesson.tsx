@@ -17,7 +17,7 @@ export default function InsertionLesson() {
   const MAX_VAL = 50;
   const NUM_BARS = 20;
   const DELAY = 150;
-  const PADTOP = 10;
+  const PADTOP = 3;
   const MARGIN = 3;
   const FONTSIZE = 15
   const HEIGHT = 5;

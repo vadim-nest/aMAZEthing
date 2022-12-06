@@ -1,7 +1,7 @@
 import '../../css/game/rightBar.css';
 import ShopSVG from '../svg/ShopSVG';
 import { animal, minionType } from '../../utils/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Shop from './shop';
 import CloseCross from '../svg/closeCross';
 import { useAppDispatch, useAppSelector, whichAnimalSVG } from '../../features/hooks';
@@ -56,6 +56,9 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
   });
 
   // console.log(allPlayerMinions.length);
+  useEffect(() => {
+    if (currentMinion !== null) styleCurrentMinionBorder(currentMinion as number);
+  }, [currentMinion]);
 
 
   let minionsToRender = allPlayerMinions.map((p1minion) => {
@@ -83,6 +86,7 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
       {minions &&
 
         <>
+            <h1 className='your-animals-sign'>your animals</h1>
             <ul className='your-minions-list'>
             {minionsToRender}
             {allPlayerMinions.length < 1 &&

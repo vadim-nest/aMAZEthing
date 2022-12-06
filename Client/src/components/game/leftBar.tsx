@@ -83,12 +83,13 @@ export default function LeftBar () {
               {minions[currentMinion].sortingAlgo}
             </h1>
 
-            <h1 className="left-just-text">
-              {minions[currentMinion].sortingSpeed}
-            </h1>
+            <h1 className="left-just-text">Sorting speed</h1>
             <h1 className="left-just-stats">
               {minions[currentMinion].sortingSpeed}
             </h1>
+
+            <h1 className='left-just-text'>Speed</h1>
+            <h1 className='left-just-stats'>{minions[currentMinion].movementSpeed}</h1>
           </div>
         )}
 

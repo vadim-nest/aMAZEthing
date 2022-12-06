@@ -45,7 +45,7 @@ export default function MergeLesson() {
   }
 
   return (
-    <Pagination leftName={'Selection'} rightName={'Quick'} leftLink={'learning/selectionLesson'} rightLink={'learning/quickLesson'}>
+    <Pagination   clicked={clicked} leftName={'Selection'} rightName={'Quick'} leftLink={'learning/selectionLesson'} rightLink={'learning/quickLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
