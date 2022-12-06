@@ -15,10 +15,10 @@ function BfsLesson() {
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
-    'Check neighbors',
-    'Add neighbors into queue',
+    'Check all surrounding neighbors',
+    'Add each neighbor into the queue',
     'Shift queue and keep checking neighbors',
-    'Repeat until it founds last state',
+    'Repeat until we reach the final location',
     'Find shortest path',
   ];
   useEffect(() => {
