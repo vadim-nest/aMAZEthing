@@ -79,7 +79,7 @@ export default function AllSortsPlay() {
   }
 
   return (
-    <Pagination leftName={'Quick'} rightName={'Learning'} leftLink={'learning/quickLesson'} rightLink={'learning/'}>
+    <Pagination  clicked={clicked} leftName={'Quick'} rightName={'Learning'} leftLink={'learning/quickLesson'} rightLink={'learning/'}>
     <div className="playContainer">
       <div className="formContainer">
         <label className="sorting-label">

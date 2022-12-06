@@ -43,7 +43,7 @@ export default function SelectionLesson() {
   }
 
   return (
-    <Pagination leftName={'Insertion'} rightName={'Merge'} leftLink={'learning/insertionLesson'} rightLink={'learning/mergeLesson'}>
+    <Pagination  clicked={clicked} leftName={'Insertion'} rightName={'Merge'} leftLink={'learning/insertionLesson'} rightLink={'learning/mergeLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
