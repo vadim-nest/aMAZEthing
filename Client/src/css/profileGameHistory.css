@@ -11,6 +11,8 @@
   margin: 20px;
 }
 
+
+
 .match {
   height: 20vh;
   min-height: 200px;
@@ -124,4 +126,16 @@
 
 .gameDashboard::-webkit-scrollbar-corner {
   background: var(--green);
+}
+
+@media only screen and (max-width: 1250px) {
+  .gameDashboard {
+    width: inherit;
+    overflow: visible;
+  }
+
+  .match {
+    width: 75vw;
+    overflow: visible;
+  }
 }
