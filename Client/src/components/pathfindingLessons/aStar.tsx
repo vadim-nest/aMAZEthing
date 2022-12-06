@@ -9,16 +9,8 @@ import Pagination from "../learning/pagination";
 function AStarLesson() {
   const [graph, setGraph] = useState<any>();
   const [clicked, setClicked] = useState(false);
-  const [width] = useState(25);
+  const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
-
-  let paragraphs = {
-    sortName: "aStar (A*) algorithm",
-    firstP:
-      "A* assigns a weight to each open node equal to the weight of the edge to that node plus the approximate distance between that node and the finish. This approximate distance is found by the heuristic, and represents a minimum possible distance between that node and the end.",
-    secondP:
-      "(weighted) arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm"
-  };
 
   useEffect(() => {
     newGraph();
@@ -87,9 +79,9 @@ function AStarLesson() {
     <Pagination leftName={'Dijkstra'} rightName={'Learning'} leftLink={'learning/dijkstraLesson'} rightLink={'learning'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
-        <h1 className="explanation-title">{paragraphs.sortName}</h1>
-        <p className="explanation-text">{paragraphs.firstP}</p>
-        <p className="explanation-text centered-text">{paragraphs.secondP}</p>
+        <h1 className="explanation-title">aStar (A*) algorithm</h1>
+        <p className="explanation-text">A* assigns a weight to each open node equal to the weight of the edge to that node plus the approximate distance between that node and the finish. This approximate distance is found by the heuristic, and represents a minimum possible distance between that node and the end.</p>
+        <p className="explanation-text centered-text">(weighted) arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm</p>
       </div>
       <div className="buttons-pos">
         <button 

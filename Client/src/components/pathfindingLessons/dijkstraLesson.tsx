@@ -9,16 +9,8 @@ import Pagination from "../learning/pagination";
 function DijkstraLesson() {
   const [graph, setGraph] = useState<any>();
   const [clicked, setClicked] = useState(false);
-  const [width] = useState(15);
+  const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
-
-  let paragraphs = {
-    sortName: "Dijkstra algorithm",
-    firstP:
-      "This algorithm uses the weights of the edges to find the path that minimizes the total distance (weight) between the source node and all other nodes.",
-    secondP:
-      "(weighted) the father of pathfinding algorithms; guarantees the shortest path"
-  };
 
   useEffect(() => {
     const graph = generateConnectedGraph(width, width, true);
@@ -78,9 +70,9 @@ function DijkstraLesson() {
     <Pagination leftName={'Dfs'} rightName={'aStar'} leftLink={'learning/dfsLesson'} rightLink={'learning/aStarLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
-        <h1 className="explanation-title">{paragraphs.sortName}</h1>
-        <p className="explanation-text">{paragraphs.firstP}</p>
-        <p className="explanation-text centered-text">{paragraphs.secondP}</p>
+        <h1 className="explanation-title">Dijkstra algorithm</h1>
+        <p className="explanation-text">This algorithm uses the weights of the edges to find the path that minimizes the total distance (weight) between the source node and all other nodes.</p>
+        <p className="explanation-text centered-text">(weighted) the father of pathfinding algorithms; guarantees the shortest path</p>
       </div>
       <div className="buttons-pos">
         <button 

@@ -9,17 +9,10 @@ import Pagination from "../learning/pagination";
 function DfsLesson() {
   const [graph, setGraph] = useState<any>();
   const [clicked, setClicked] = useState(false);
-  const [width] = useState(15);
+  const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
 
-  let paragraphs = {
-    sortName: "Depth First Search (DFS) algorithm",
-    firstP:
-      "DFS starts at the root (top) node of a tree and goes as far as it can down a given branch (path), then backtracks until it finds an unexplored path, and then explores it.",
-    secondP:
-    "(unweighted) a very bad algorithm for pathfinding; does not guarantee the shortest path"
-  };
-
+  
   useEffect(() => {
     newGraph();
   }, []);
@@ -78,9 +71,9 @@ function DfsLesson() {
     <Pagination leftName={'Bfs'} rightName={'Dijkstra'} leftLink={'learning/bfsLesson'} rightLink={'learning/dijkstraLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
-        <h1 className="explanation-title">{paragraphs.sortName}</h1>
-        <p className="explanation-text">{paragraphs.firstP}</p>
-        <p className="explanation-text centered-text">{paragraphs.secondP}</p>
+        <h1 className="explanation-title">Depth First Search (DFS) algorithm</h1>
+        <p className="explanation-text">DFS starts at the root (top) node of a tree and goes as far as it can down a given branch (path), then backtracks until it finds an unexplored path, and then explores it.</p>
+        <p className="explanation-text centered-text">(unweighted) a very bad algorithm for pathfinding; does not guarantee the shortest path</p>
       </div>
       <div className="buttons-pos">
         

@@ -9,7 +9,7 @@ import Pagination from "../learning/pagination";
 function BfsLesson() {
   const [graph, setGraph] = useState<any>();
   const [clicked, setClicked] = useState(false);
-  const [width] = useState(15);
+  const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
 
   useEffect(() => {
