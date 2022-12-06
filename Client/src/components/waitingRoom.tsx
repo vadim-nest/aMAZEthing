@@ -20,22 +20,18 @@ function WaitingRoom() {
   useEffect(() => {
     dispatch(defaultState());
     socket.on('receiveRoomId', (roomId: string, player: 'p1' | 'p2', type: 'Host' | 'Join' | 'Play') => {
-      console.log('Received room ID', {roomId})
       setId(roomId);
       dispatch(receiveRoomId({roomId, player}));
-      console.log('Emitting ready');
       socket.emit(`ready${type}`, roomId);
     });
     socket.on('Game start', () => {
       if (roomId) {
-        console.log('Game started', roomId);
         navigate('/game');
       } else {
         socket.emit('retry game start');
       }
     });
     return ()=>{
-      // console.log('clearing waiting');
       // socket.emit('clear waiting', store.getState().game.roomId) // TODO: Currently this prevents them from joining the game on game start
       socket.off('receiveRoomId');
       socket.off('receiveRoomIdHost');
@@ -61,7 +57,6 @@ function WaitingRoom() {
   }
 
   function play() {
-    console.log('play pressed');
     socket.emit('clear waiting');
     socket.emit('play', userRedux.email);
   }
@@ -71,20 +66,20 @@ function WaitingRoom() {
     setJoinClicked(joinButton);
     setPlayClicked(playButton);
   }
-
+  
   function onCreateCLicked() {
+    socket.emit('clear waiting')
     if (!createClicked) {
       setButtonsClicked(true, false, false);
       hostRoom();
     } else {
-      console.log('clearing waiting');
       socket.emit('clear waiting', socket.id)
       setButtonsClicked(false, false, false);
     }
   }
 
   function onJoinCLicked() {
-    console.log('joining');
+    socket.emit('clear waiting')
     if (!joinClicked) {
       setButtonsClicked(false, true, false);
     } else {
@@ -93,19 +88,16 @@ function WaitingRoom() {
   }
 
   function onPlayClicked() {
+    socket.emit('clear waiting')
     if (!playClicked) {
       setButtonsClicked(false, false, true);
       play();
     } else {
       setButtonsClicked(false, false, false);
-      console.log('clearing waiting');
       socket.emit('clear waiting')
     }
   }
 
-  useEffect(() => {
-    console.log(roomId);
-  }, [roomId])
 
   return (
     <div className="waiting-room">

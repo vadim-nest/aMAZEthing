@@ -30,6 +30,7 @@ export interface GameState{ //shape of the state inside inside of the slice
   displayVisited: value[],
   mazeGenerated: boolean,
   intervals: NodeJS.Timer[],
+  animationFrames: number[],
 }
 const width = 86;
 const height = 40;
@@ -84,4 +85,5 @@ export const initialGameState: GameState = {
   displayVisited: [],
   mazeGenerated: false,
   intervals: [],
+  animationFrames: []
 }

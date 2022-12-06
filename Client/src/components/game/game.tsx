@@ -10,7 +10,7 @@ import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, select
 import socket from '../../services/socket';
 import GameOver from './gameOver';
 import { useAppDispatch, useAppSelector, usePathAlgo } from '../../features/hooks';
-import { addMovingMinion, addNewInterval, addNewMinionState, clearIntervals, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, resetIntervals, resetMinions, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMazePath, updateMinion, updateTowerNumbers, updateZoomed } from '../../features/game_slice';
+import { addMovingMinion, addNewAnimationFrame, addNewInterval, addNewMinionState, clearIntervals, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, resetIntervals, resetMinions, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMazePath, updateMinion, updateTowerNumbers, updateZoomed } from '../../features/game_slice';
 
 // TODO: Convert request animation frames to setInterval
 
@@ -130,7 +130,7 @@ function Game() { // TODO: Extract logic to maze class
         requestAnimationFrame(step);
       }
       const interval = requestAnimationFrame(step);
-      // dispatch(addNewAnimationFrame(interval));
+      dispatch(addNewAnimationFrame(interval));
     }
     function applyMovement(minion: minionType) {
       let xAdd = 0;
@@ -196,7 +196,7 @@ function Game() { // TODO: Extract logic to maze class
         requestAnimationFrame(step);
       }
       const interval = requestAnimationFrame(step);
-      // dispatch(addNewAnimationFrame(interval));
+      dispatch(addNewAnimationFrame(interval));
     }
   }
 
