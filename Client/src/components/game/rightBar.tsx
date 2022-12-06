@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Shop from './shop';
 import CloseCross from '../svg/closeCross';
 import { useAppDispatch, useAppSelector, whichAnimalSVG } from '../../features/hooks';
-import { updateCurrentMinion } from '../../features/game_slice';
+import { updateCurrentMinion, updateCurrentTower } from '../../features/game_slice';
 
 function storeButtonHover(isOnHover: boolean) {
   document.querySelectorAll('.store-button-yellow').forEach((svgEl) => {
@@ -53,6 +53,7 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
       <>
         <div className={`your-minion-button right-bar-selector-${p1minion.id} ${currentMinion === p1minion.id ? 'right-bar-selected-animal' : ''}`} onClick={() => {
             dispatch(updateCurrentMinion(p1minion.id));
+            dispatch(updateCurrentTower(null));
           }}>
           <h1 className='right-bar-name'>{p1minion.name}</h1>
           <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[p1minion.id])}</h1>

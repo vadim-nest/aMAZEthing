@@ -191,7 +191,7 @@ function Game() { // TODO: Extract logic to maze class
               }
             }
             return;
-          } 
+          }
         }
         requestAnimationFrame(step);
       }
