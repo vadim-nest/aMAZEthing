@@ -40,8 +40,8 @@ function AStarLesson() {
       end ? end : width * width,
       "aStar",
       width,
-      heuristicValue
-    ); //TODO - ADD heuristic value as slider
+      heuristicValue/20
+    );
     if (aStarVisualpaths) {
       setStats({
         visited: aStarVisualpaths.visited.length,

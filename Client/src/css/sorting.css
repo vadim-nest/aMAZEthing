@@ -54,12 +54,15 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  border:2px solid;
+  border-color: var(--yellow);
+  margin-bottom: 30px;
 }
 
 .steps-visualization{
   min-height:max-content;
   min-width:250px;
-  border-radius: 10px;
+  border-radius: 15px;
   display:flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -67,6 +70,9 @@
   background-color: whitesmoke;
   /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
   padding: 1%;
+  border:2px solid;
+  border-color: var(--yellow);
+  margin-bottom: 30px;
 }
 
 .buttons-pos{
@@ -86,12 +92,13 @@
   min-width:200px;
   background-color: whitesmoke;
   /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
-  border-radius: 10px;
+  border-radius: 15px;
   margin-top: 5px;
   display:flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
 }
 
 .heuristicDiv{
