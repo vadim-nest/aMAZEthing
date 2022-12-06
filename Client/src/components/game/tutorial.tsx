@@ -2,7 +2,7 @@ import '../../css/game/game.css';
 import Maze from './maze';
 import RightBar from './rightBar';
 import LeftBar from './leftBar';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { animal, minionType, TowerType } from '../../utils/types';
 import { Graph, value } from '../../utils/graph';
 import { getDirection} from '../../utils/path-finding-algo';
@@ -10,13 +10,13 @@ import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, select
 import GameOver from './gameOver';
 import { useAppDispatch, useAppSelector, usePathAlgo } from '../../features/hooks';
 import { addMovingMinion, addNewAnimationFrame, addNewInterval, addNewMinionState, clearIntervals, defaultState, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, resetIntervals, resetMinions, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMazePath, updateMinion, updateTowerNumbers, updateZoomed } from '../../features/game_slice';
-
+import StepsTutorial from './stepsTutorial';
 // TODO: Convert request animation frames to setInterval
 
 export interface GameStatsType {timeRemaining: number, p1Coins: number, p2Coins: number, p1Towers: number[], p2Towers: number[], p1MinionCount: number, p2MinionCount: number};
 
 function Tutorial() { // TODO: Extract logic to maze class
-
+  const [skipTutorial,setSkipTutorial] = useState(true);
   const {currentPlayer, waitingForTile, height, width, currentGraph, currentMinion, gameStats, gameEnded, minions, currentTile, movingMinions, towers, weightPositions} = useAppSelector(state => state.game);
 
   const dispatch = useAppDispatch();
@@ -250,6 +250,7 @@ function Tutorial() { // TODO: Extract logic to maze class
 
   return (
     <>
+    {skipTutorial && <StepsTutorial setSkipTutorial={setSkipTutorial}></StepsTutorial>}
       <div>
         <div className='gameContainer'>
           {/* Need to rename the components, but for now: ToolBar is on the left, GameStats is on the right */}
