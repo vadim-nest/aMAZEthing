@@ -147,7 +147,6 @@ const gameSlice = createSlice({
     },
     updateMinion(state, action: PayloadAction<{minionId: number, updatedMinion: minionType}>) {
       const {minionId, updatedMinion} = action.payload;
-      console.log(action.payload)
       state.minions[minionId] = updatedMinion;
     },
     minionEnterTower(state, action: PayloadAction<{minionId: number, towerId: number}>) {
@@ -284,7 +283,11 @@ const gameSlice = createSlice({
         console.log(interval);
         clearInterval(interval);
       }
+      for (let interval of state.animationFrames) {
+        window.cancelAnimationFrame(interval);
+      }
       state.intervals = [];
+      state.animationFrames = [];
     },
     resetIntervals(state) {
       state.intervals = [];
@@ -294,6 +297,9 @@ const gameSlice = createSlice({
     },
     updateWeightPositions(state, action: PayloadAction<{[key: string]: { xPos: number; yPos: number}}>) {
       state.weightPositions = action.payload;
+    },
+    addNewAnimationFrame(state, action: PayloadAction<number>) {
+      state.animationFrames.push(action.payload);
     }
   }
 })
@@ -338,6 +344,7 @@ export const {
   updateWeightPositions,
   updateMaxBoxSize,
   updateMinBoxSize,
-  updateBoxSize
+  updateBoxSize,
+  addNewAnimationFrame
 } = gameSlice.actions;
 export default gameSlice.reducer;

@@ -20,30 +20,32 @@ function WaitingRoom() {
   useEffect(() => {
     dispatch(defaultState());
     socket.on('receiveRoomId', (roomId: string, player: 'p1' | 'p2', type: 'Host' | 'Join' | 'Play') => {
-      console.log('Received room ID', {roomId})
+      console.log('receivedRoomID', roomId)
       setId(roomId);
       dispatch(receiveRoomId({roomId, player}));
-      console.log('Emitting ready');
       socket.emit(`ready${type}`, roomId);
     });
+    return ()=>{
+      // socket.emit('clear waiting', store.getState().game.roomId) // TODO: Currently this prevents them from joining the game on game start
+      socket.off('receiveRoomId');
+      setPlayClicked(false);
+    }
+  }, []);
+
+  useEffect(() => {
     socket.on('Game start', () => {
+      console.log('game start', roomId)
       if (roomId) {
-        console.log('Game started', roomId);
+        console.log('navigating');
         navigate('/game');
       } else {
         socket.emit('retry game start');
       }
     });
-    return ()=>{
-      // console.log('clearing waiting');
-      // socket.emit('clear waiting', store.getState().game.roomId) // TODO: Currently this prevents them from joining the game on game start
-      socket.off('receiveRoomId');
-      socket.off('receiveRoomIdHost');
-      socket.off('receiveRoomIdJoin');
+    return () => {
       socket.off('Game start');
-      setPlayClicked(false);
     }
-  }, []);
+  }, [roomId])
 
   function hostRoom() {
     socket.emit('clear waiting');
@@ -52,16 +54,18 @@ function WaitingRoom() {
 
   function joinRoom(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    console.log(socket.id);
     const target = e.target as typeof e.target & {
       fname: { value: string };
     };
     const room = target.fname.value;
     socket.emit('clear waiting');
+    console.log('joining');
     socket.emit('join', room, userRedux.email);
+    console.log(socket.id);
   }
 
   function play() {
-    console.log('play pressed');
     socket.emit('clear waiting');
     socket.emit('play', userRedux.email);
   }
@@ -71,20 +75,18 @@ function WaitingRoom() {
     setJoinClicked(joinButton);
     setPlayClicked(playButton);
   }
-
+  
   function onCreateCLicked() {
     if (!createClicked) {
       setButtonsClicked(true, false, false);
       hostRoom();
     } else {
-      console.log('clearing waiting');
       socket.emit('clear waiting', socket.id)
       setButtonsClicked(false, false, false);
     }
   }
 
   function onJoinCLicked() {
-    console.log('joining');
     if (!joinClicked) {
       setButtonsClicked(false, true, false);
     } else {
@@ -98,14 +100,10 @@ function WaitingRoom() {
       play();
     } else {
       setButtonsClicked(false, false, false);
-      console.log('clearing waiting');
       socket.emit('clear waiting')
     }
   }
 
-  useEffect(() => {
-    console.log(roomId);
-  }, [roomId])
 
   return (
     <div className="waiting-room">

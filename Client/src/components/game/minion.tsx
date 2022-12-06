@@ -7,7 +7,7 @@ import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 
 function Minion({ minion }: { minion: minionType }) {
 
-  const { boxSize, currentPlayer } = useAppSelector(state => state.game);
+  const { boxSize, currentPlayer, currentMinion } = useAppSelector(state => state.game);
 
   const dispatch = useAppDispatch();
 
@@ -27,7 +27,7 @@ function Minion({ minion }: { minion: minionType }) {
   }
 
   return (
-    <div onClick={handleClick} onContextMenu={handleContextMenu}  id={`${minion.id}`} className={`minion ${minion.rotation} ${(minion.inTower !== false) && 'minionInTower'}`} style={{fill: `red`, height: `${boxSize}px`, width: `${boxSize}px`, top: `${boxSize*minion.yPos}px`, left: `${boxSize*minion.xPos}px`}}>
+    <div onClick={handleClick} onContextMenu={handleContextMenu}  id={`${minion.id}`} className={`minion ${minion.rotation} ${(minion.inTower !== false) ? 'minionInTower' : ''} ${currentMinion === minion.id ? 'selected' : ''}`} style={{fill: `red`, height: `${boxSize}px`, width: `${boxSize}px`, top: `${boxSize*minion.yPos}px`, left: `${boxSize*minion.xPos}px`}}>
     {whichAnimalSVG(minion)}
   </div>
   )
