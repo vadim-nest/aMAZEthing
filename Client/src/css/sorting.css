@@ -23,7 +23,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  
 }
 
 .lesson-wrapper-pseudo{
@@ -43,8 +42,7 @@
 
 .lesson-wrapper, .lesson-wrapper-2 {
   border-radius: 20px;
-  min-width: 70vw;
-  width: 900px;
+  width:max-content;
   
   display: flex;
   align-items: center;
@@ -52,6 +50,44 @@
   cursor: default;
   margin-bottom: 100px;
 }
+
+.visualization-wrapper{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.map-keys{
+  min-height:200px;
+  max-width:150px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flex-row{
+  min-width: 70%;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.Stats-flex{
+  min-height:100px;
+  min-width:200px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin-top: 5px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 
 .lesson-wrapper h1 {
   font-size: 50px;
