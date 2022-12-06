@@ -50,47 +50,47 @@ export interface animal {
 
 export const squirrel: animal = {
   pathFindingAlgo: 'dfs',
-  sortingAlgo: 'bubble',
-  sortingSpeed: 300,
+  sortingAlgo: 'quick',
+  sortingSpeed: 100,
   movementSpeed: 300,
   type: 'Squirrel',
-  cost: 1000,
+  cost: 300,
 }
 
 export const badger: animal = {
   pathFindingAlgo: 'bfs',
-  sortingAlgo: 'selection',
+  sortingAlgo: 'bubble',
   sortingSpeed: 300,
   movementSpeed: 500,
   type: 'Badger',
-  cost: 1000,
+  cost: 300,
 }
 
 export const hare: animal = {
-  pathFindingAlgo: 'dijk',
+  pathFindingAlgo: 'a*',
   sortingAlgo: 'insertion',
   sortingSpeed: 300,
   movementSpeed: 300,
   type: 'Hare',
-  cost: 1000,
+  cost: 500,
 }
 
 export const deer: animal = {
-  pathFindingAlgo: 'a*',
+  pathFindingAlgo: 'dijk',
   sortingAlgo: 'merge',
   sortingSpeed: 50,
-  movementSpeed: 400,
+  movementSpeed: 350,
   type: 'Deer',
-  cost: 1000
+  cost: 500
 }
 
 export const koala: animal = {
-  pathFindingAlgo: 'a*',
+  pathFindingAlgo: 'bfs',
   sortingAlgo: 'quick',
   sortingSpeed: 50,
   movementSpeed: 350,
   type: 'Koala',
-  cost: 1000,
+  cost: 550,
 }
 
 export const bear: animal = {
@@ -99,6 +99,6 @@ export const bear: animal = {
   sortingSpeed: 50,
   type: 'Bear',
   movementSpeed: 300,
-  cost: 1000
+  cost: 600
 }
 

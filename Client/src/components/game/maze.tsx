@@ -28,10 +28,14 @@ function Maze({ towers, currentPlayer}: {
     async function mazeInit(){
       if (mazeGenerated === false) {
         dispatch(updateMazeGenerated(true));
-
+        let graph: Graph;
         const {graphBE, visited, classes, towers, weightPositions} = await apiService.createMaze();
-        let graph = new Graph()
-        graph.reAssign(graphBE)
+        console.log({graphBE})
+        if (graphBE instanceof Graph) graph = graphBE;
+        else {
+          graph = new Graph()
+          graph.reAssign(graphBE)
+        }
         dispatch(newTowers(towers));
         dispatch(setCurrentGraph(graph));
         dispatch(updateDisplayVisited(visited));
@@ -46,8 +50,6 @@ function Maze({ towers, currentPlayer}: {
         const mazeTiles = document.getElementsByClassName('mazeTile');
         const halfway = Math.floor(mazeTiles.length/2);
         let index = -1;
-        // function step() 
-        // requestAnimationFrame(step);
         const interval = setInterval(() => {
           for (let i = 0; i < 50 - 49*((Math.abs(halfway - index)/halfway)); i++) {
             index++;

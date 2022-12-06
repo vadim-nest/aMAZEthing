@@ -88,8 +88,8 @@ export default function Connect(server: http.Server) {
       p2Username: '',
       playersLoaded: 0,
       timeRemaining: 300,
-      p1Coins: 10000,
-      p2Coins: 0,
+      p1Coins: 300,
+      p2Coins: 300,
       p1Towers: [],
       p2Towers: [],
       p1Minions: [],
@@ -117,10 +117,10 @@ export default function Connect(server: http.Server) {
     if (!game) return false;
     game.timeRemaining--;
     for (let tower of game.p1Towers) {
-      addCoinsGame(roomID, 20, 'p1');
+      addCoinsGame(roomID, 5, 'p1');
     }
     for (let tower of game.p2Towers) {
-      addCoinsGame(roomID, 20, 'p2');
+      addCoinsGame(roomID, 5, 'p2');
     }
     return game;
   }

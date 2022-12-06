@@ -10,7 +10,7 @@ function TowerPopup ({tower, width, height}: {tower: TowerType, width: number, h
 
   const {zoomed, towersSorting, boxSize} = useAppSelector(state => state.game);
 
-  return <div style={tower.minion !== null && !zoomed ? {'opacity': 1} : {'opacity': 0}} className={`towerPopup ${
+  return <div style={tower.minion !== null && !zoomed ? {'opacity': 1, 'zIndex': 1} : {'opacity': 0, 'zIndex': -1000}} className={`towerPopup ${
     tower.id/width < height/4 ? 'downPopup' :
     tower.id/width > 3*height/4 ? 'upPopup' :
     width - tower.id%width < width/3 ? 'leftPopup' : 

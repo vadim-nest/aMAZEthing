@@ -8,7 +8,6 @@ export class Graph {
   
   reAssign(graph:Graph){
     Object.assign(this, graph)
-
   }
 
   addVertex (value: value) {
