@@ -300,6 +300,7 @@ export default function Connect(server: http.Server) {
       const newGameState = addNewMinionGame(roomId, type, player);
     });
     socket.on('minion move', (direction, minionId, roomId) => {
+      console.log('minion move', {direction, minionId})
       socket.to(roomId).emit('minion move', direction, minionId);
     });
 

@@ -112,13 +112,13 @@ function Game() { // TODO: Extract logic to maze class
       thoughtProcess = [...thoughtProcess];
       let showThoughtProcess: number[] = [];
       let showPath: number[] = [];
-      const interval = setInterval(() => {
+      function step() {
         if (path.length === 0) {
           applyMovement(minion as minionType);
           clearInterval(interval);
           return;
         };
-        let nextThought = thoughtProcess.splice(0, Math.ceil(thoughtProcess.length/10));
+        let nextThought = thoughtProcess.splice(0, Math.ceil(thoughtProcess.length/3));
         if (nextThought.length) {
           showThoughtProcess.push(...nextThought);
         } else {
@@ -127,62 +127,76 @@ function Game() { // TODO: Extract logic to maze class
         if (currentMinion === minion.id) {
           setPath(showPath, showThoughtProcess, minion.id);
         } // TODO: get current Minion
-      }, 0);
-      dispatch(addNewInterval(interval));
+        requestAnimationFrame(step);
+      }
+      const interval = requestAnimationFrame(step);
+      // dispatch(addNewAnimationFrame(interval));
     }
     function applyMovement(minion: minionType) {
       let xAdd = 0;
       let yAdd = 0;
+      let previousInterval: number;
       let previousDirection = minion.xPos + minion.yPos*width;
       let nextDirection: number;
       let slow = 0;
       let max: number;
       let min: number;
-      const interval = setInterval(() => {
-        let updatedMinion = minion as minionType;
-        if (slow === 2) slow = 0;
-        if (slow === 0) {
-          nextDirection = path.shift() as number;
-          max = Math.max(nextDirection, previousDirection);
-          min = Math.min(nextDirection, previousDirection);
-        };
-        let key = `${min}-${max}`;
-        let multiplier = 1;
-        if (weightPositions[key] && slow < 2) {multiplier = 0.5; slow++}
-        else slow = 0;
-        const direction = getDirection(previousDirection as number, nextDirection as number, width);
-        direction.xPos *= multiplier;
-        direction.yPos *= multiplier;
-        socket.emit('minion move', direction, minion.id, roomId);
-        xAdd += direction.xPos;
-        yAdd += direction.yPos;
-        if (slow === 0 || slow === 2) previousDirection = nextDirection;
-        updatedMinion = {
-          ...(minion as minionType),
-          yPos: (minion as minionType).yPos + yAdd,
-          xPos: (minion as minionType).xPos + xAdd,
-          rotation: direction.rotation
-        }
-        console.log({slow, multiplier, updatedMinion, max, min});
-        dispatch(updateMinion({minionId: minion.id, updatedMinion}));
-        if (path.length === 0) {
-          if (slow === 1) {
-            updatedMinion.yPos += direction.yPos*multiplier;
-            updatedMinion.xPos += direction.xPos*multiplier;
-            dispatch(updateMinion({minionId: minion.id, updatedMinion}));
+      function step (interval: number) {
+        if (previousInterval === undefined) previousInterval = interval;
+        if (interval > previousInterval + minion.movementSpeed) {
+          previousInterval = interval;
+          let updatedMinion = minion as minionType;
+          if (slow === 2) slow = 0;
+          if (slow === 0) {
+            nextDirection = path.shift() as number;
+            max = Math.max(nextDirection, previousDirection);
+            min = Math.min(nextDirection, previousDirection);
+          };
+          let key = `${min}-${max}`;
+          let multiplier = 1;
+          if (weightPositions[key] && slow < 2) {multiplier = 0.5; slow++}
+          else slow = 0;
+          const direction = getDirection(previousDirection as number, nextDirection as number, width);
+          direction.xPos *= multiplier;
+          direction.yPos *= multiplier;
+          socket.emit('minion move', direction, minion.id, roomId);
+          xAdd += direction.xPos;
+          yAdd += direction.yPos;
+          if (slow === 0 || slow === 2) previousDirection = nextDirection;
+          updatedMinion = {
+            ...(minion as minionType),
+            yPos: (minion as minionType).yPos + yAdd,
+            xPos: (minion as minionType).xPos + xAdd,
+            rotation: direction.rotation
           }
-          clearInterval(interval);
-          dispatch(updateMinion({minionId: minion.id, updatedMinion: {...updatedMinion, rotation: ''}}));
-          dispatch(removeMovingMinion(minion.id));
-          for (let tower of towers) {
-            if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
-              socket.emit('enterTower', tower.id, minion.id, roomId, currentPlayer);
-              enterTower(tower.id, (minion as minionType).id);
+          dispatch(updateMinion({minionId: minion.id, updatedMinion}));
+          if (path.length === 0) {
+            if (slow === 1) {
+              console.log('new minion');
+              updatedMinion = {
+                ...updatedMinion,
+                yPos: updatedMinion.yPos + direction.yPos,
+                xPos: updatedMinion.xPos + direction.xPos,
+                rotation: 'minionR' as 'minionR'
+              };
             }
-          }
+            dispatch(updateMinion({minionId: minion.id, updatedMinion: {...updatedMinion, rotation: ''}}));
+            clearInterval(interval);
+            dispatch(removeMovingMinion(minion.id));
+            for (let tower of towers) {
+              if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
+                console.log({tower, updatedMinion});
+                socket.emit('enterTower', tower.id, minion.id, roomId, currentPlayer);
+                enterTower(tower.id, (minion as minionType).id);
+              }
+            }
+            return;
+          } 
         }
-      }, minion.movementSpeed);
-      dispatch(addNewInterval(interval));
+        requestAnimationFrame(step);
+      }
+      const interval = requestAnimationFrame(step);
+      // dispatch(addNewAnimationFrame(interval));
     }
   }
 
