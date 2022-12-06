@@ -147,6 +147,7 @@ const gameSlice = createSlice({
     },
     updateMinion(state, action: PayloadAction<{minionId: number, updatedMinion: minionType}>) {
       const {minionId, updatedMinion} = action.payload;
+      console.log(action.payload)
       state.minions[minionId] = updatedMinion;
     },
     minionEnterTower(state, action: PayloadAction<{minionId: number, towerId: number}>) {

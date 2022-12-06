@@ -38,8 +38,11 @@ export default function Shop({
       <h1 className='shop-just-text'>Path finding</h1>
       <h1 className='shop-just-stats'>{animal.pathFindingAlgo}</h1>
 
-      <h1 className='shop-just-text'>Speed</h1>
+      <h1 className='shop-just-text'>Sorting speed</h1>
       <h1 className='shop-just-stats'>{animal.sortingSpeed}</h1>
+
+      <h1 className='shop-just-text'>Speed</h1>
+      <h1 className='shop-just-stats'>{animal.movementSpeed}</h1>
     </div>
     <div className='in-shop-svg-large'>
       {whichAnimalSVG({type: animal.type, alignment: 'neutral'})};
