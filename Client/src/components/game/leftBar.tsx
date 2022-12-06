@@ -65,9 +65,6 @@ export default function LeftBar () {
 
             <h1 className="left-just-stats">{minions[currentMinion].type}</h1>
 
-            <h1 className="left-just-text">ID</h1>
-            <h1 className="left-just-stats">{minions[currentMinion].id}</h1>
-
             <h1 className="left-just-text">Alignment</h1>
             <h1 className="left-just-stats">
               {minions[currentMinion].alignment}
