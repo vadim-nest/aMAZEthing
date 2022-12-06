@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   overflow: scroll;
 }
 
@@ -15,6 +15,8 @@
   justify-content: space-between;
   width: 100%;
   gap: 20px;
+  align-items: flex-end;
+  margin-bottom: 20px;
 }
 
 .lesson-wrapper,
@@ -34,10 +36,35 @@
   justify-content: space-around;
 }
 
+.sortSteps-visualization {
+  min-height: max-content;
+  min-width: 250px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 1%;
+  border:2px solid;
+  border-color: var(--yellow);
+
+}
+
+.sort-keys {
+  min-height: 200px;
+  max-width: 300px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 3px solid var(--white-green);
+  padding: 10px;
+}
+
 .map-keys {
   min-height: 200px;
   max-width: 300px;
-  /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -59,30 +86,25 @@
   font-size: 16px;
 }
 
-.steps-visualization{
-  min-height:max-content;
-  min-width:250px;
-  border-radius: 15px;
-  display:flex;
-  justify-content: flex-start;
-  align-items: center;
+.visual-arrayAndButtons{
+  display: flex;
   flex-direction: column;
-  /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
-  /* padding: 20px; */
-  /* border: 3px solid var(--yellow); */
-  margin-bottom: 30px;
-  margin-left: 30px;
+  justify-content: flex-start;
+  min-height: 371px;
 }
 
-.steps-visualization h4 {
-  color: var(--main-green);
-  font-size: 20px;
+.visual-array{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 300px;
 }
 
-.steps-visualization h5 {
-  color: var(--dark-brown);
-  font-size: 16px;
+.visual-buttons{
+  display: flex;
+  justify-content: center;
 }
+
 .steps-visualization {
   min-height: max-content;
   min-width: 250px;
@@ -96,6 +118,18 @@
   border:2px solid;
   border-color: var(--yellow);
   margin-bottom: 30px;
+  margin-left: 30px;
+}
+
+
+.steps-visualization h4 {
+  color: var(--main-green);
+  font-size: 20px;
+}
+
+.steps-visualization h5 {
+  color: var(--dark-brown);
+  font-size: 16px;
 }
 
 .buttons-pos {

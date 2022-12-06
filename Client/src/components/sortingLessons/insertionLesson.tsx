@@ -5,8 +5,8 @@ import Visualization from "./visualization";
 import { useAlgo } from "../../features/hooks";
 import { insertionSortVisual } from "../../utils/sorting-helper-visual";
 import Pagination from "../learning/pagination";
-import StepsPath from "../pathfindingLessons/stepsPath";
-import PseudoCode from "./psuedoCode";
+import SortSteps from "./sortSteps";
+import MapKeys from "./sortStats";
 
 export default function InsertionLesson() {
   const [array, setArray] = useState([3, 5, 7]);
@@ -80,54 +80,60 @@ export default function InsertionLesson() {
         </div>
 
         <div className="lesson-wrapper-2">
-          <div>
-            <button
-              className={
-                clicked ? "button disabled clickSort" : "button clickSort"
-              }
-              disabled={clicked ? true : false}
-              onClick={() => initArr()}
-            >
-              new array
-            </button>
-
-            <button
-              className={
-                clicked && !isSorted
-                  ? "button disabled clickSort"
-                  : isSorted
-                  ? "button disabled clickSort"
-                  : "button clickSort"
-              }
-              disabled={!isSorted && clicked ? true : isSorted ? true : false}
-              onClick={() => {
-                setClicked(true);
-              }}
-            >
-              visualize
-            </button>
-          </div>
           <div className="visualRow">
-            <PseudoCode steps={pseudo}></PseudoCode>
-            <Visualization
-              fontColor={"white"}
-              width={WIDTH}
-              delay={DELAY}
-              margin={MARGIN}
-              height={HEIGHT}
-              paddingTop={PADTOP}
-              array={array}
-              key={array as any}
-              animations={animations}
-              clicked={clicked}
-              sortingAlgo={insertionSortVisual}
-              setClicked={setClicked}
-              setIsSorted={setIsSorted}
-              fontSize={FONTSIZE}
-              tower={undefined}
-              isSorted={false}
-            />
-            <StepsPath steps={steps}></StepsPath>
+            <MapKeys animations={animations}></MapKeys>
+
+            <div className="visual-arrayAndButtons">
+              <div className="visual-buttons">
+              <button
+                className={
+                  clicked ? "button disabled clickSort" : "button clickSort"
+                }
+                disabled={clicked ? true : false}
+                onClick={() => initArr()}
+              >
+                new array
+              </button>
+
+              <button
+                className={
+                  clicked && !isSorted
+                    ? "button disabled clickSort"
+                    : isSorted
+                    ? "button disabled clickSort"
+                    : "button clickSort"
+                }
+                disabled={!isSorted && clicked ? true : isSorted ? true : false}
+                onClick={() => {
+                  setClicked(true);
+                }}
+              >
+                visualize
+              </button>
+              </div>
+             
+
+              <Visualization
+                width={WIDTH}
+                delay={DELAY}
+                margin={MARGIN}
+                paddingTop={PADTOP}
+                array={array}
+                height={HEIGHT}
+                fontColor={"white"}
+                key={array as any}
+                animations={animations}
+                clicked={clicked}
+                sortingAlgo={insertionSortVisual}
+                setClicked={setClicked}
+                setIsSorted={setIsSorted}
+                fontSize={FONTSIZE}
+                tower={undefined}
+                isSorted={false}
+              />
+            </div>
+
+            <SortSteps steps={steps}></SortSteps>
           </div>
         </div>
       </div>

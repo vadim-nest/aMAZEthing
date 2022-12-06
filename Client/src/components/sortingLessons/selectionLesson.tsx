@@ -3,8 +3,8 @@ import "../../css/sorting.css";
 import { selectionSortAlgo, generateArray } from "../../utils/sorting-algo";
 import { selectionSortVisual } from "../../utils/sorting-helper-visual";
 import Pagination from "../learning/pagination";
-import StepsPath from "../pathfindingLessons/stepsPath";
-import PseudoCode from "./psuedoCode";
+import MapKeys from "./sortStats";
+import SortSteps from "./sortSteps";
 import Visualization from "./visualization";
 
 export default function SelectionLesson() {
@@ -19,14 +19,6 @@ export default function SelectionLesson() {
     "Repeat until it founds last state",
     "Find shortest path",
   ];
-
-  let psuedoCode = [
-    "bubbleSort(array)",
-    "for i <- 1 to indexOfLastUnsortedElement-1",
-    " if leftElement > rightElement",
-    "swap leftElement and rightElement",
-    "end bubbleSort"
-  ]
 
   const WIDTH = 27;
   const MIN_VAL = 7;
@@ -70,53 +62,63 @@ export default function SelectionLesson() {
       </div>
 
       <div className="lesson-wrapper-2">
-        <div>
-          <button
-            className={
-              clicked ? "button disabled clickSort" : "button clickSort"
-            }
-            disabled={clicked ? true : false}
-            onClick={() => initArr()}
-          >
-            new array
-          </button>
+          <div className="visualRow">
+            <MapKeys animations={animations}></MapKeys>
 
-          <button
-            className={
-              clicked && !isSorted
-                ? "button disabled clickSort"
-                : isSorted
-                ? "button disabled clickSort"
-                : "button clickSort"
-            }
-            disabled={!isSorted && clicked ? true : isSorted ? true : false}
-            onClick={() => {
-              setClicked(true);
-            }}
-          >
-            visualize
-          </button>
+            <div className="visual-arrayAndButtons">
+              <div className="visual-buttons">
+              <button
+                className={
+                  clicked ? "button disabled clickSort" : "button clickSort"
+                }
+                disabled={clicked ? true : false}
+                onClick={() => initArr()}
+              >
+                new array
+              </button>
+
+              <button
+                className={
+                  clicked && !isSorted
+                    ? "button disabled clickSort"
+                    : isSorted
+                    ? "button disabled clickSort"
+                    : "button clickSort"
+                }
+                disabled={!isSorted && clicked ? true : isSorted ? true : false}
+                onClick={() => {
+                  setClicked(true);
+                }}
+              >
+                visualize
+              </button>
+              </div>
+             
+              <div className="visual-array">
+              <Visualization
+                width={WIDTH}
+                delay={DELAY}
+                margin={MARGIN}
+                paddingTop={PADTOP}
+                array={array}
+                height={HEIGHT}
+                fontColor={"white"}
+                key={array as any}
+                animations={animations}
+                clicked={clicked}
+                sortingAlgo={selectionSortVisual}
+                setClicked={setClicked}
+                setIsSorted={setIsSorted}
+                fontSize={FONTSIZE}
+                tower={undefined}
+                isSorted={false}
+              />
+              </div>
+            </div>
+
+            <SortSteps steps={steps}></SortSteps>
+          </div>
         </div>
-        <div className="visualRow">
-        <PseudoCode steps={psuedoCode}></PseudoCode>
-        <Visualization
-          fontColor={"white"}
-          fontSize={15}
-          width={WIDTH}
-          delay={DELAY}
-          height={HEIGHT}
-          margin={MARGIN}
-          paddingTop={PADTOP}
-          array={array}
-          key={array as any}
-          animations={animations}
-          clicked={clicked}
-          sortingAlgo={selectionSortVisual}
-          setClicked={setClicked}
-          setIsSorted={setIsSorted} tower={undefined} isSorted={false}        />
-             <StepsPath steps={steps}></StepsPath>
-        </div>
-      </div>
     </div>
     </Pagination>
   );

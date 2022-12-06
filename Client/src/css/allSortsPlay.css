@@ -68,7 +68,7 @@
 .nice-select {
     background-color: var(--white);
     border-radius: 5px;
-    border: solid 1px var(--even-lighter-grey);
+    border: solid 1px var(--main-green);
     box-sizing: border-box;
     clear: both;
     cursor: pointer;
@@ -83,8 +83,5 @@
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     width: auto; }
-.nice-select:hover {
-      border-color: var(--light-grey); }
-.nice-select:active, .nice-select.open, .nice-select:focus {
-      border-color: var(--main-grey); }
+
 

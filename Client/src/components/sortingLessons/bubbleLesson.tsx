@@ -5,9 +5,8 @@ import Visualization from "./visualization";
 import { bubbleSortVisual } from "../../utils/sorting-helper-visual";
 import { useAlgo, useAppSelector } from "../../features/hooks";
 import Pagination from "../learning/pagination";
-import StepsPath from "../pathfindingLessons/stepsPath";
-import PseudoCode from "./psuedoCode";
 import MapKeys from "./sortStats";
+import SortSteps from "./sortSteps";
 
 export default function BubbleLesson() {
   const user = useAppSelector((state) => state.user);
@@ -28,8 +27,8 @@ export default function BubbleLesson() {
     "for i <- 1 to indexOfLastUnsortedElement-1",
     " if leftElement > rightElement",
     "swap leftElement and rightElement",
-    "end bubbleSort"
-  ]
+    "end bubbleSort",
+  ];
 
   const WIDTH = 27;
   const MIN_VAL = 7;
@@ -77,55 +76,60 @@ export default function BubbleLesson() {
         </div>
 
         <div className="lesson-wrapper-2">
-          <div>
-            <button
-              className={
-                clicked ? "button disabled clickSort" : "button clickSort"
-              }
-              disabled={clicked ? true : false}
-              onClick={() => initArr()}
-            >
-              new array
-            </button>
-
-            <button
-              className={
-                clicked && !isSorted
-                  ? "button disabled clickSort"
-                  : isSorted
-                  ? "button disabled clickSort"
-                  : "button clickSort"
-              }
-              disabled={!isSorted && clicked ? true : isSorted ? true : false}
-              onClick={() => {
-                setClicked(true);
-              }}
-            >
-              visualize
-            </button>
-          </div>
           <div className="visualRow">
             <MapKeys animations={animations}></MapKeys>
-            <Visualization
-              width={WIDTH}
-              delay={DELAY}
-              margin={MARGIN}
-              paddingTop={PADTOP}
-              array={array}
-              height={HEIGHT}
-              fontColor={"white"}
-              key={array as any}
-              animations={animations}
-              clicked={clicked}
-              sortingAlgo={bubbleSortVisual}
-              setClicked={setClicked}
-              setIsSorted={setIsSorted}
-              fontSize={FONTSIZE}
-              tower={undefined}
-              isSorted={false}
-            />
 
-            <StepsPath steps={steps}></StepsPath>
+            <div className="visual-arrayAndButtons">
+              <div className="visual-buttons">
+              <button
+                className={
+                  clicked ? "button disabled clickSort" : "button clickSort"
+                }
+                disabled={clicked ? true : false}
+                onClick={() => initArr()}
+              >
+                new array
+              </button>
+
+              <button
+                className={
+                  clicked && !isSorted
+                    ? "button disabled clickSort"
+                    : isSorted
+                    ? "button disabled clickSort"
+                    : "button clickSort"
+                }
+                disabled={!isSorted && clicked ? true : isSorted ? true : false}
+                onClick={() => {
+                  setClicked(true);
+                }}
+              >
+                visualize
+              </button>
+              </div>
+             
+
+              <Visualization
+                width={WIDTH}
+                delay={DELAY}
+                margin={MARGIN}
+                paddingTop={PADTOP}
+                array={array}
+                height={HEIGHT}
+                fontColor={"white"}
+                key={array as any}
+                animations={animations}
+                clicked={clicked}
+                sortingAlgo={bubbleSortVisual}
+                setClicked={setClicked}
+                setIsSorted={setIsSorted}
+                fontSize={FONTSIZE}
+                tower={undefined}
+                isSorted={false}
+              />
+            </div>
+
+            <SortSteps steps={steps}></SortSteps>
           </div>
         </div>
       </div>

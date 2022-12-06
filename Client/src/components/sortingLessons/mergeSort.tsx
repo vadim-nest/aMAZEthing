@@ -5,8 +5,8 @@ import Visualization from "./visualization";
 import { mergeSortVisual } from "../../utils/sorting-helper-visual";
 import { useAlgo } from "../../features/hooks";
 import Pagination from "../learning/pagination";
-import PseudoCode from "./psuedoCode";
-import StepsPath from "../pathfindingLessons/stepsPath";
+import SortSteps from "./sortSteps";
+import MapKeys from "./sortStats";
 
 export default function MergeLesson() {
   const [array, setArray] = useState([3, 5, 7]);
@@ -62,57 +62,65 @@ export default function MergeLesson() {
         <p className="explanation-text">{paragraphs.firstP}</p>
       </div>
 
-      <div className="lesson-wrapper-2">
-        <div>
-          <button
-            className={
-              clicked ? "button disabled clickSort" : "button clickSort"
-            }
-            disabled={clicked ? true : false}
-            onClick={() => initArr()}
-          >
-            new array
-          </button>
+     < div className="lesson-wrapper-2">
+          <div className="visualRow">
+            <MapKeys animations={animations}></MapKeys>
 
-          <button
-            className={
-              clicked && !isSorted
-                ? "button disabled clickSort"
-                : isSorted
-                ? "button disabled clickSort"
-                : "button clickSort"
-            }
-            disabled={!isSorted && clicked ? true : isSorted ? true : false}
-            onClick={() => {
-              setClicked(true);
-            }}
-          >
-            visualize
-          </button>
-    
-        </div>
-        <div className="visualRow">
-        <PseudoCode steps={steps}></PseudoCode>
-        <div className="visualDiv">
-        <Visualization
-          fontColor={"white"}
-          width={WIDTH}
-          delay={DELAY}
-          margin={MARGIN}
-          paddingTop={PADTOP}
-          height={HEIGHT}
-          array={array}
-          key={array as any}
-          animations={animations}
-          clicked={clicked}
-          sortingAlgo={mergeSortVisual}
-          setClicked={setClicked}
-          setIsSorted={setIsSorted} fontSize={FONTSIZE} tower={undefined} isSorted={false}        />
-        </div>
-        <StepsPath steps={steps}></StepsPath>
+            <div className="visual-arrayAndButtons">
+              <div className="visual-buttons">
+              <button
+                className={
+                  clicked ? "button disabled clickSort" : "button clickSort"
+                }
+                disabled={clicked ? true : false}
+                onClick={() => initArr()}
+              >
+                new array
+              </button>
+
+              <button
+                className={
+                  clicked && !isSorted
+                    ? "button disabled clickSort"
+                    : isSorted
+                    ? "button disabled clickSort"
+                    : "button clickSort"
+                }
+                disabled={!isSorted && clicked ? true : isSorted ? true : false}
+                onClick={() => {
+                  setClicked(true);
+                }}
+              >
+                visualize
+              </button>
+              </div>
+
+              <div className="visual-array">
+              <Visualization
+                width={WIDTH}
+                delay={DELAY}
+                margin={MARGIN}
+                paddingTop={PADTOP}
+                array={array}
+                height={HEIGHT}
+                fontColor={"white"}
+                key={array as any}
+                animations={animations}
+                clicked={clicked}
+                sortingAlgo={mergeSortVisual}
+                setClicked={setClicked}
+                setIsSorted={setIsSorted}
+                fontSize={FONTSIZE}
+                tower={undefined}
+                isSorted={false}
+              />
+              </div>
+            </div>
+
+            <SortSteps steps={steps}></SortSteps>
+          </div>
         </div>
       </div>
-    </div>
     </Pagination>
   );
 }
