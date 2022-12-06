@@ -62,15 +62,16 @@ function Profile() {
     <div className="profile-page">
       <div className="user-dashboard">
         <div className="user-part">
-          <div className="avatar"><span className='avatar-letter'>{userRedux?.username.charAt(0).toUpperCase()}</span></div> 
-          
+
           <div className="user-name">
             <h1 id="username">
-              HELLO{' '}
-              {inputOpen === false && userRedux.username
-                ? (userRedux as User).username
-                : 'THERE'}
-              ,
+              <span className='profile-smaller-text'>hi,</span>
+              <div className="username-input">
+                <input className='user-name-change'
+                      placeholder={userRedux.username} onClick={() => {
+                        }}></input>
+                <button className="change-the-name-button ">✓</button>
+              </div>
             </h1>
             <form className={`open-${inputOpen}`}>
               <input
@@ -94,8 +95,10 @@ function Profile() {
                 Save
               </button>
             </form>
-            <h2>Email: {userRedux.email}</h2>
+            <h2 className='profile-email'><span className='profile-smaller-text'>Email:</span>{(userRedux.email)?.split('').map(letter => ['.', '@'].includes(letter) ? <span className='profile-yellow-text'>{letter}</span> : letter)}</h2>
           </div>
+          <div className="avatar"><span className='avatar-letter'>{userRedux?.username.charAt(0).toUpperCase()}</span></div>
+
         </div>
         <div className="learning-progress">
           <h1 className="learning-progress-title">Learning progress:</h1>
@@ -166,7 +169,9 @@ function Profile() {
           {/* get the date when the account was created */}
         </div>
       </div>
-      <ProfileGameHistory />
+      <div className='profile-games'>
+        <ProfileGameHistory />
+      </div>
     </div>
   );
 }

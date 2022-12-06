@@ -1,7 +1,7 @@
 .gameDashboard {
-  height: 80vh;
-  width: 40vw;
-  min-width: 470px;
+  height: 100%;
+  /* width: 40%; */
+  min-width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -16,7 +16,7 @@
 .match {
   height: 20vh;
   min-height: 200px;
-  width: 38vw;
+  width: 100%;;
   min-width: 470px;
   border-radius: 20px;
   overflow: hidden;
