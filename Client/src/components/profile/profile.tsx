@@ -11,7 +11,7 @@ import sort from '../../assets/profile/sort.png';
 import path from '../../assets/profile/path.png';
 
 function Profile() {
-  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const userRedux = useAppSelector((state) => state.user);
@@ -62,9 +62,8 @@ function Profile() {
     <div className="profile-page">
       <div className="user-dashboard">
         <div className="user-part">
-          <div className="avatar">{user?.username}</div> 
-          {/* //how to get the first letter? */}
-            {/* {user && <img className="avatar" src={`${user?.picture}`} />} */}
+          <div className="avatar"><span className='avatar-letter'>{userRedux?.username.charAt(0).toUpperCase()}</span></div> 
+          
           <div className="user-name">
             <h1 id="username">
               HELLO{' '}

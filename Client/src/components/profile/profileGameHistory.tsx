@@ -6,7 +6,6 @@ import CoinSVG from './coin';
 
 export default function ProfileGameHistory() {
   const user = useAppSelector((state) => state.user);
-  //Im hard coding the data
   const games = user.games;
 
   return (
@@ -41,9 +40,6 @@ export default function ProfileGameHistory() {
                 </h3>
               </div>
               </div>
-              {/* <div className="duration">
-                <h3 className="durationDate">VS: {element.opponentUsername}</h3>
-              </div> */}
               <div className="stats-profile">
                 <div className="minionStats">
                   <h3 className="gameStatsText">{element.minions}</h3>
