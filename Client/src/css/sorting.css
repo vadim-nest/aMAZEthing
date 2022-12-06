@@ -45,13 +45,12 @@
   border-radius: 20px;
   min-width: 70vw;
   width: 900px;
-  min-height: 491px;
   
   display: flex;
   align-items: center;
   flex-direction: column;
   cursor: default;
-
+  margin-bottom: 100px;
 }
 
 .lesson-wrapper h1 {
