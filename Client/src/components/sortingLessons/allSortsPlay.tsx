@@ -44,8 +44,10 @@ export default function AllSortsPlay() {
   const PADTOP = 2;
   let MARGIN = 1;
   const HEIGHT = 2;
+  let FONTSIZE: number;
+  
+ 
   const WIDTH = Number(`${width / array.length - MARGIN * 2}`);
-  let FONTSIZE: number; //TODO ITS NOT A CONST, CHANGE NAME AND DISPLAY NONE
 
   if (array.length >= 55) {
     FONTSIZE = 0;
@@ -53,6 +55,7 @@ export default function AllSortsPlay() {
     FONTSIZE = Number(`${WIDTH / 4}`);
   }
 
+ 
   useEffect(() => {
     setArray(generateArray(20, MIN_VAL, MAX_VAL));
   }, []);
@@ -83,8 +86,9 @@ export default function AllSortsPlay() {
     <div className="playContainer">
       <div className="formContainer">
         <label className="sorting-label">
-          Array Size:{arrayRef.current?.value + " "}
+          Array Size: {arrayRef.current?.value + " "}
           <input
+          className="allSorts-slider"
             type="range"
             ref={arrayRef}
             disabled={clicked ? true : false}
@@ -102,6 +106,7 @@ export default function AllSortsPlay() {
         <label className="sorting-label">
           Delay: {delayRef.current?.value + "% "}
           <input
+          className="allSorts-slider"
             ref={delayRef}
             type="range"
             name="speed"

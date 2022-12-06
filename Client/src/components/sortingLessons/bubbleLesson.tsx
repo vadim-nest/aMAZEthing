@@ -7,6 +7,7 @@ import { useAlgo, useAppSelector } from "../../features/hooks";
 import Pagination from "../learning/pagination";
 import StepsPath from "../pathfindingLessons/stepsPath";
 import PseudoCode from "./psuedoCode";
+import MapKeys from "./sortStats";
 
 export default function BubbleLesson() {
   const user = useAppSelector((state) => state.user);
@@ -104,7 +105,7 @@ export default function BubbleLesson() {
             </button>
           </div>
           <div className="visualRow">
-            <PseudoCode steps={psuedoCode}></PseudoCode>
+            <MapKeys animations={animations}></MapKeys>
             <Visualization
               width={WIDTH}
               delay={DELAY}

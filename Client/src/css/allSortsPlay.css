@@ -28,6 +28,9 @@
 .sorting-label{
     text-align:start;
     font-weight: bolder;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .disabled{
@@ -45,12 +48,21 @@
     min-width: 200px;
 }
 
-input[type='range'] {
-	height: 7px;
-    width: 150px;
-	border-radius: 5px;
-
-}
+.allSorts-slider {
+    -webkit-appearance: none;
+    border-radius: 10px;
+    background-color: rgb(200, 200, 200);
+  }
+  
+.allSorts-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    background-color: var(--main-green);
+    overflow: visible;
+    cursor: pointer;
+  }
 
 
 .nice-select {

@@ -21,6 +21,18 @@ export default function InsertionLesson() {
     "Find shortest path",
   ];
 
+  let pseudo =[
+    "insertionSort(array)",
+    "mark first element as sorted",
+    "for each unsorted element X",
+    "'extract' the element X",
+    "for j <- lastSortedIndex down to 0",
+    "if current element j > X",
+    "move sorted element to the right by 1",
+    "break loop and insert X here",
+    "end insertionSort"
+  ]
+
   const WIDTH = 27;
   const MIN_VAL = 7;
   const MAX_VAL = 50;
@@ -96,7 +108,7 @@ export default function InsertionLesson() {
             </button>
           </div>
           <div className="visualRow">
-            <PseudoCode steps={steps}></PseudoCode>
+            <PseudoCode steps={pseudo}></PseudoCode>
             <Visualization
               fontColor={"white"}
               width={WIDTH}
