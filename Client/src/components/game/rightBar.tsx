@@ -1,6 +1,6 @@
 import '../../css/game/rightBar.css';
 import ShopSVG from '../svg/ShopSVG';
-import { animal, minionType } from '../../utils/types';
+import { animal, minionType, TowerType } from '../../utils/types';
 import { useEffect, useState } from 'react';
 import Shop from './shop';
 import CloseCross from '../svg/closeCross';
@@ -32,7 +32,7 @@ function crossButtonHover(isOnHover: boolean) {
 function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | 'p2') => void}) {
 
   const [shopOpen, setShopOpen] = useState(false);
-  const { allTilesHidden, currentPlayer, minions, currentMinion } = useAppSelector(state => state.game);
+  const { allTilesHidden, currentPlayer, minions, currentMinion, movingMinions, towers } = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
   let allPlayerMinions: Array<minionType> = [];
@@ -46,6 +46,8 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
   });
 
 
+  console.log(movingMinions);
+  console.log(allPlayerMinions);
 
   let minionsToRender = allPlayerMinions.map((p1minion) => {
 
@@ -57,10 +59,16 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
           }}>
           <h1 className='right-bar-name'>{p1minion.name}</h1>
           <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[p1minion.id])}</h1>
+          {movingMinions.includes(p1minion.id) && <h3 className='right-just-text'>moving</h3>}
+          {p1minion.inTower && <h3 className='right-just-text'>in tower</h3>}
+
         </div>
       </>
     )
   })
+
+
+
 
   return (
     <div className='right-bar'>
@@ -82,7 +90,7 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
                   onClick={() => {setShopOpen(true)}} //TODO THis is not taking care of the navbar - Either we add an offset of 10VH or we take out the navbar after certain files
                 >
                   <h3>Buy an animal</h3>
-                  <h3>↓</h3>
+                  <h3 className='bounce'>↓</h3>
                 </button>
               </div>
             }

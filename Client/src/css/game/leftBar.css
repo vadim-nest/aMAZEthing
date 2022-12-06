@@ -155,3 +155,7 @@
 .zoomOutButton {
   transform: rotate(90deg);
 }
+
+.left-bar-tower-alignment {
+  font-size: 28px;
+}

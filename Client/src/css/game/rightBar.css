@@ -50,6 +50,11 @@
   text-align: center;
 }
 
+.right-just-text {
+  font-size: 18px;
+  text-align: center;
+}
+
 .your-minion-button {
   width: 80%;
   margin-left: auto;

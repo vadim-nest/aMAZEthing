@@ -96,11 +96,10 @@ export default function LeftBar () {
             'none' ? (
               <h1 className="current-minion-name-left-bar">unsorted</h1>
             ) : (
-              <h1 className="current-minion-name-left-bar">
-                {currentTower &&
-                  towers.find((tower) => tower.id === currentTower.id)!
-                    .alignment}
-                's tower
+              <h1 className="current-minion-name-left-bar left-bar-tower-alignment">
+                {currentTower && currentTower.alignment === 'none' ? 'neutral tower' :
+                                currentTower.alignment === currentPlayer ? 'your tower' : "opponent's tower"
+                }
               </h1>
             )}
             {towers.find((tower) => tower.id === currentTower.id)!.alignment ===
