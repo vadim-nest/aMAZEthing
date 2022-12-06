@@ -56,7 +56,13 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
     }
   });
 
+  // console.log(allPlayerMinions.length);
+
+
   let minionsToRender = allPlayerMinions.map((p1minion) => {
+
+
+
     return (
       <>
         <div className={`your-minion-button right-bar-selector-${p1minion.id}`} onClick={() => {
@@ -70,19 +76,30 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
     )
   })
 
-
-
   return (
     <div className='right-bar'>
+
+
 
       {shopOpen ? (
         <Shop minions={minions} currentPlayer = {currentPlayer} addNewMinion={addNewMinion}/>
       ) : <div className='your-minions'>
+
       {minions &&
-        // Should be a name instead
         <>
           <ul className='your-minions-list'>
             {minionsToRender}
+            {allPlayerMinions.length < 1 &&
+              <div className='open-shop-arrow'>
+                <button
+                  className="scroll-learning"
+                  onClick={() => {setShopOpen(true)}} //TODO THis is not taking care of the navbar - Either we add an offset of 10VH or we take out the navbar after certain files
+                >
+                  <h3>Buy an animal</h3>
+                  <h3>↓</h3>
+                </button>
+              </div>
+            }
           </ul>
         </>
       }
@@ -91,7 +108,6 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
 
       {!allTilesHidden && (
         <button
-
           className='store-button'
           style={shopOpen ? {backgroundColor: 'var(--sand)'} : {backgroundColor: 'transparent'}}
           onClick={() => {shopOpen ? setShopOpen(false) : setShopOpen(true)}}

@@ -61,6 +61,15 @@ const gameSlice = createSlice({
       if (state.boxSize - action.payload < state.minBoxSize) state.boxSize = state.minBoxSize;
       else state.boxSize -= action.payload;
     },
+    updateMaxBoxSize(state, action: PayloadAction<number>) {
+      state.maxBoxSize = action.payload;
+    },
+    updateMinBoxSize(state, action: PayloadAction<number>) {
+      state.minBoxSize = action.payload;
+    },
+    updateBoxSize(state, action: PayloadAction<number>) {
+      state.boxSize = action.payload;
+    },
     mazeComplete(state) {
       state.mazeCompleted = true;
     },
@@ -98,6 +107,13 @@ const gameSlice = createSlice({
     addNewMinionState(state, action: PayloadAction<{type: animal, player: 'p1' | 'p2'}>) {
       const newId = Object.keys(state.minions).length;
       const {type, player} = action.payload;
+      if (player === 'p1') {
+        if (state.gameStats.p1Coins < type.cost) return;
+        state.gameStats.p1Coins -= type.cost;
+      } else {
+        if (state.gameStats.p2Coins < type.cost) return;
+        state.gameStats.p2Coins -= type.cost;
+      }
       let playerSpecific = {
         xPos: 0,
         yPos: 3,
@@ -274,6 +290,9 @@ const gameSlice = createSlice({
     },
     resetMinions(state) {
       state.minions = {};
+    },
+    updateWeightPositions(state, action: PayloadAction<{[key: string]: { xPos: number; yPos: number}}>) {
+      state.weightPositions = action.payload;
     }
   }
 })
@@ -314,6 +333,10 @@ export const {
   resetIntervals,
   receiveRoomId,
   resetMinions,
-  clearIntervals
+  clearIntervals,
+  updateWeightPositions,
+  updateMaxBoxSize,
+  updateMinBoxSize,
+  updateBoxSize
 } = gameSlice.actions;
 export default gameSlice.reducer;

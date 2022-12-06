@@ -13,6 +13,7 @@ export interface GameState{ //shape of the state inside inside of the slice
   currentTower: null | TowerType,
   waitingForTile: boolean,
   currentGraph: undefined | Graph,
+  weightPositions: {[key: string]: { xPos: number; yPos: number}},
   height: number,
   width: number,
   movingMinions: number[],
@@ -33,8 +34,9 @@ export interface GameState{ //shape of the state inside inside of the slice
 const width = 86;
 const height = 40;
 const array: MazeTileType[] = [];
+const nodeNum = width*height;
 
-for (let i = 0; i < width*height; i++) {
+for (let i = 0; i < nodeNum; i++) {
   array.push({value: i, classes: [], path: ''})
 }
 
@@ -49,6 +51,7 @@ export const initialGameState: GameState = {
   currentTower: null,
   waitingForTile: false,
   currentGraph: undefined,
+  weightPositions: {},
   height, // ! Change in server if you change it here
   width,
   movingMinions: [],

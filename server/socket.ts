@@ -9,7 +9,9 @@ export interface animal {
   pathFindingAlgo: 'dfs' | 'bfs' | 'dijk' | 'a*';
   sortingAlgo: 'bubble' | 'insertion' | 'selection' | 'merge' | 'quick';
   sortingSpeed: number;
-  type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear'
+  movementSpeed: number;
+  type: 'Squirrel' | 'Badger' | 'Hare' | 'Deer' | 'Koala' | 'Bear';
+  cost: number;
 }
 
 function generateRoomId() {
@@ -76,7 +78,8 @@ export default function Connect(server: http.Server) {
   }
 
   function createNewGame(roomId: string, p1Id: string, p1Username: string) {
-    const maze = generateMaze(86, 40) // TODO: Generalize this;
+    const maze = generateMaze(86, 40, true, 2) // TODO: Generalize this;
+    console.log('Edges', maze.graph.edges);
     mazes[roomId] = maze;
     activeGames.push({
       roomId,
@@ -85,8 +88,8 @@ export default function Connect(server: http.Server) {
       p2Id: '',
       p2Username: '',
       playersLoaded: 0,
-      timeRemaining: 60,
-      p1Coins: 0,
+      timeRemaining: 300,
+      p1Coins: 10000,
       p2Coins: 0,
       p1Towers: [],
       p2Towers: [],
@@ -127,8 +130,15 @@ export default function Connect(server: http.Server) {
     const game = activeGames.find(game => game.roomId === roomID);
     if (!game) return false;
     const newEntry: [number, animal] = [game.p1Minions.length + game.p2Minions.length, type];
-    if (player === 'p1') game.p1Minions.push(newEntry);
-    else game.p2Minions.push(newEntry);
+    
+    if (player === 'p1') {
+      game.p1Minions.push(newEntry);
+      game.p1Coins -= type.cost;
+    }
+    else {
+      game.p2Minions.push(newEntry);
+      game.p2Coins -= type.cost;
+    }
     return game;
   }
 
@@ -157,12 +167,12 @@ export default function Connect(server: http.Server) {
   function sendGameState(newGameState, roomId, io) {
     if (newGameState) {
       io.to(roomId).emit('updateGameState', {
-        timeRemaining: newGameState.timeRemaining, 
-        p1Coins: newGameState.p1Coins, 
-        p2Coins: newGameState.p2Coins, 
-        p1Towers: newGameState.p1Towers, 
-        p2Towers: newGameState.p2Towers, 
-        p1MinionCount: newGameState.p1Minions.length, 
+        timeRemaining: newGameState.timeRemaining,
+        p1Coins: newGameState.p1Coins,
+        p2Coins: newGameState.p2Coins,
+        p1Towers: newGameState.p1Towers,
+        p2Towers: newGameState.p2Towers,
+        p1MinionCount: newGameState.p1Minions.length,
         p2MinionCount: newGameState.p1Minions.length});
     }
   }
@@ -200,7 +210,7 @@ export default function Connect(server: http.Server) {
     user1.overallWins[result1 === 'win' ? 'wins' : result1 === 'loss' ? 'losses' : 'draws']++;
     user1.totalGold += p1State.gold;
     user1.save();
-    
+
     user2.games.push(p2State);
     user2.overallWins[result2 === 'win' ? 'wins' : result2 === 'loss' ? 'losses' : 'draws']++;
     user2.totalGold += p2State.gold;
@@ -244,7 +254,7 @@ export default function Connect(server: http.Server) {
         playerSearch.push({socketId: socket.id, roomId});
         createNewGame(roomId, socket.id, username);
         socket.join(roomId);
-        
+
       }
     });
 
@@ -295,9 +305,9 @@ export default function Connect(server: http.Server) {
 
     socket.on('enterTower', (towerId, minionId, roomID, player) => {
       socket.to(roomID).emit('enterTower', towerId, minionId);
-      
+
     })
-    
+
     socket.on('conquerTower', (roomID, towerId, firstCapture, player) => {
       let newGameState = addTowerGame(roomID, towerId, player, firstCapture);
       sendGameState(newGameState, roomID, io);

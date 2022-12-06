@@ -1,6 +1,6 @@
 .playContainer{
     height: 90vh;
-    width: 100vw;
+    width: 90vw;
     display: flex;
     background-color: var(--white);
     flex-direction: column;
@@ -16,8 +16,7 @@
 }
 
 .visualize-container{
-    width: 94%;
-    padding-left: 6%;
+    width: 100%;
     height: 90%;
     display: flex;
     justify-content: center;

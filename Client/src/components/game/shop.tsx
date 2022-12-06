@@ -1,12 +1,11 @@
 import '../../css/game/shop.css';
 import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import { animal, badger, bear, deer, hare, koala, minionType, squirrel } from '../../utils/types';
-import { useAppDispatch } from '../../features/hooks';
+import { useAppDispatch, useAppSelector, whichAnimalSVG } from '../../features/hooks';
 
 export default function Shop({
   minions,
-  currentPlayer,
-  addNewMinion 
+  addNewMinion
 }: {
   minions: {[key: number]: minionType},
   currentPlayer: 'p1' | 'p2',
@@ -14,15 +13,19 @@ export default function Shop({
 }) {
 
   const dispatch = useAppDispatch();
+  const { gameStats: {p1Coins, p2Coins}, currentPlayer } = useAppSelector(store => store.game);
 
   function shopItem(animal: animal) {
     return (
-    <div  className='buy-minion-button' onClick={() => addNewMinion(animal, currentPlayer)}>
+    <div  className='buy-minion-button' onClick={() => {
+      if (currentPlayer === 'p1' && p1Coins >= animal.cost) addNewMinion(animal, 'p1')
+      else if (currentPlayer === 'p2' && p2Coins >= animal.cost) addNewMinion(animal, 'p2')
+    }}>
     <div className='shop-stats'>
       <h1 className='shop-just-stats'>{animal.type}</h1>
 
       <h1 className='shop-just-text'>Price</h1>
-      <h1 className='shop-just-stats price'>3000</h1>
+      <h1 className='shop-just-stats price'>{animal.cost}</h1>
 
       <h1 className='shop-just-text'>Sorting</h1>
       <h1 className='shop-just-stats'>{animal.sortingAlgo}</h1>
@@ -34,20 +37,20 @@ export default function Shop({
       <h1 className='shop-just-stats'>{animal.sortingSpeed}</h1>
     </div>
     <div className='in-shop-svg-large'>
-      {theRightSVG(animal.type)}
+      {whichAnimalSVG({type: animal.type, alignment: 'neutral'})};
     </div>
   </div>
   )
   }
 
-  function theRightSVG (animalType: string) {
-    if (animalType === 'Squirrel') return <Squirrel currentPlayer='neutralTower' />
-    if (animalType === 'Badger') return <Badger currentPlayer='neutralTower' />
-    if (animalType === 'Hare') return <Hare currentPlayer='neutralTower' />
-    if (animalType === 'Deer') return <Deer currentPlayer='neutralTower' />
-    if (animalType === 'Koala') return <Koala currentPlayer='neutralTower' />
-    if (animalType === 'Bear') return <Bear currentPlayer='neutralTower' />
-  }
+  // function theRightSVG (animalType: string) {
+  //   if (animalType === 'Squirrel') return <Squirrel currentPlayer='neutralTower' />
+  //   if (animalType === 'Badger') return <Badger currentPlayer='neutralTower' />
+  //   if (animalType === 'Hare') return <Hare currentPlayer='neutralTower' />
+  //   if (animalType === 'Deer') return <Deer currentPlayer='neutralTower' />
+  //   if (animalType === 'Koala') return <Koala currentPlayer='neutralTower' />
+  //   if (animalType === 'Bear') return <Bear currentPlayer='neutralTower' />
+  // }
 
   return (
 

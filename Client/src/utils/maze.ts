@@ -1,6 +1,6 @@
 import { Graph, value } from "./graph";
 
-export function generateConnectedGraph(width: number, height: number, weightedGraph:boolean = false) {
+export function generateConnectedGraph(width: number, height: number, weightedGraph:boolean = false, maxWeight = 4, minWeight = 0) {
   const nodeNum = width * height;
   
   const connectedGraph = new Graph();
@@ -17,13 +17,13 @@ export function generateConnectedGraph(width: number, height: number, weightedGr
   } else {
     let rand:number;
     for (let i = 0; i < nodeNum; i++) {
-      rand = Math.floor(Math.random()*4);
+      rand = Math.floor(Math.random()*(maxWeight - minWeight) + minWeight);
       if (i > width && !connectedGraph.getEdgeValue(i, i-width) && rand) connectedGraph.addEdge(i, i - width,rand);
-      rand = Math.floor(Math.random()*4);
+      rand = Math.floor(Math.random()*(maxWeight - minWeight) + minWeight);
       if (i < nodeNum - width && !connectedGraph.getEdgeValue(i, i+width) && rand) connectedGraph.addEdge(i, i + width,rand);
-      rand = Math.floor(Math.random()*4);
+      rand = Math.floor(Math.random()*(maxWeight - minWeight) + minWeight);
       if (i%width > 0 && !connectedGraph.getEdgeValue(i, i-1) && rand) connectedGraph.addEdge(i, i - 1,rand);
-      rand = Math.floor(Math.random()*4);
+      rand = Math.floor(Math.random()*(maxWeight - minWeight) + minWeight);
       if (i%width < width - 1 && !connectedGraph.getEdgeValue(i, i+1) && rand) connectedGraph.addEdge(i, i + 1,rand);
     }
   }
@@ -208,4 +208,15 @@ export function generateMaze(width: number, height: number, graph: Graph | false
     classes,
     towers
   }
+}
+
+export interface MazeType {
+  graph: Graph;
+  visited: value[];
+  classes: {
+      [key: string]: ("b" | "t" | "r" | "l")[];
+      [key: number]: ("b" | "t" | "r" | "l")[];
+  };
+  towers: [number, number[]][];
+  weightPositions: {[key: string]: { xPos: number; yPos: number}}
 }

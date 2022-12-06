@@ -2,15 +2,13 @@ import '../../css/game/game.css';
 import Maze from './maze';
 import RightBar from './rightBar';
 import LeftBar from './leftBar';
-import { useEffect, useRef, useState } from 'react';
-import { animal, MazeTileType, minionType, TowerType } from '../../utils/types';
+import { useEffect } from 'react';
+import { animal, minionType, TowerType } from '../../utils/types';
 import { Graph, value } from '../../utils/graph';
-import { aStar, distanceConstruct, getDirection, vBFS, vDFS, vDijk } from '../../utils/path-finding-algo';
+import { getDirection} from '../../utils/path-finding-algo';
 import { bubbleSortAlgo, insertionSortAlgo, mergeSortAlgo, quickSortAlgo, selectionSortAlgo } from '../../utils/sorting-algo';
-import { uniqueNamesGenerator, Config, names} from 'unique-names-generator'
 import socket from '../../services/socket';
 import GameOver from './gameOver';
-import { store } from '../../features/store';
 import { useAppDispatch, useAppSelector, usePathAlgo } from '../../features/hooks';
 import { addMovingMinion, addNewInterval, addNewMinionState, clearIntervals, finalGameStats, minionEnterTower, minionExitTower, opponentMinionMovement, removeMovingMinion, resetIntervals, resetMinions, setWaitingForTile, updateCurrentMinion, updateCurrentTile, updateCurrentTower, updateGameEnded, updateGameStats, updateMazePath, updateMinion, updateTowerNumbers, updateZoomed } from '../../features/game_slice';
 
@@ -22,7 +20,7 @@ export interface GameStatsType {timeRemaining: number, p1Coins: number, p2Coins:
 
 function Game() { // TODO: Extract logic to maze class
 
-  const {currentPlayer, roomId, mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, intervals, gameStats, gameEnded, minions, currentTile, movingMinions, towers} = useAppSelector(state => state.game);
+  const {currentPlayer, roomId, mazeCompleted, waitingForTile, height, width, currentGraph, currentMinion, mazeGenerated, gameStats, gameEnded, minions, currentTile, movingMinions, towers, weightPositions} = useAppSelector(state => state.game);
 
   const dispatch = useAppDispatch();
 
@@ -88,8 +86,8 @@ function Game() { // TODO: Extract logic to maze class
     }
   }
 
-
-  async function moveMinion(goTo: {xPos: number, yPos: number}, comeFrom: {xPos: number, yPos: number}, currentGraph: Graph, minion: false | minionType = false, showPath = true) {
+  interface position {xPos: number, yPos: number};
+  async function moveMinion(goTo: position, comeFrom: position, currentGraph: Graph, minion: false | minionType = false, showPath = true) {
     if (!minion) minion = minions[currentMinion as number] as minionType;
     let directions : false | {
       visited: value[];
@@ -135,24 +133,44 @@ function Game() { // TODO: Extract logic to maze class
     function applyMovement(minion: minionType) {
       let xAdd = 0;
       let yAdd = 0;
-      let previousTimeStamp: undefined | number;
       let previousDirection = minion.xPos + minion.yPos*width;
+      let nextDirection: number;
+      let slow = 0;
+      let max: number;
+      let min: number;
       const interval = setInterval(() => {
         let updatedMinion = minion as minionType;
-        const nextDirection = path.shift() as number;
+        if (slow === 2) slow = 0;
+        if (slow === 0) {
+          nextDirection = path.shift() as number;
+          max = Math.max(nextDirection, previousDirection);
+          min = Math.min(nextDirection, previousDirection);
+        };
+        let key = `${min}-${max}`;
+        let multiplier = 1;
+        if (weightPositions[key] && slow < 2) {multiplier = 0.5; slow++}
+        else slow = 0;
         const direction = getDirection(previousDirection as number, nextDirection as number, width);
+        direction.xPos *= multiplier;
+        direction.yPos *= multiplier;
         socket.emit('minion move', direction, minion.id, roomId);
         xAdd += direction.xPos;
         yAdd += direction.yPos;
-        previousDirection = nextDirection;
+        if (slow === 0 || slow === 2) previousDirection = nextDirection;
         updatedMinion = {
           ...(minion as minionType),
           yPos: (minion as minionType).yPos + yAdd,
           xPos: (minion as minionType).xPos + xAdd,
           rotation: direction.rotation
         }
+        console.log({slow, multiplier, updatedMinion, max, min});
         dispatch(updateMinion({minionId: minion.id, updatedMinion}));
         if (path.length === 0) {
+          if (slow === 1) {
+            updatedMinion.yPos += direction.yPos*multiplier;
+            updatedMinion.xPos += direction.xPos*multiplier;
+            dispatch(updateMinion({minionId: minion.id, updatedMinion}));
+          }
           clearInterval(interval);
           dispatch(updateMinion({minionId: minion.id, updatedMinion: {...updatedMinion, rotation: ''}}));
           dispatch(removeMovingMinion(minion.id));
@@ -227,13 +245,7 @@ function Game() { // TODO: Extract logic to maze class
   function exitTower(towerId: number, minionId: number, movedAfter: boolean) {
     let minion = minions[minionId];
     let tower = towers.find(tower => tower.id === towerId) as TowerType;
-    if (minion.alignment === currentPlayer) {
-      if (tower.alignment === 'none') {
-        socket.emit('conquerTower', roomId, towerId, true, currentPlayer);
-      } else {
-        socket.emit('conquerTower', roomId, towerId, false, currentPlayer);
-      }
-    }
+    if (minion.alignment === currentPlayer) socket.emit('conquerTower', roomId, towerId, tower.alignment === 'none', currentPlayer);
     dispatch(minionExitTower({minionId, towerId}));
     dispatch(addMovingMinion(currentMinion as number));
     tower = towers.find(tower => tower.id === towerId) as TowerType;

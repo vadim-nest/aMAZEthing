@@ -26,19 +26,17 @@ export default function LeftBar () {
   return (
     <div className="leftBarContainer">
       <div className="flags">
-        <h3 className="p1Name">{(currentPlayer === 'p1') ? user.username : 'Opponent'}</h3>
         <div className="p1Flag">
           <FlagSVG
-            playerName="you"
+            playerName={(currentPlayer === 'p1') ? user.username : 'Opponent'}
             playerScore={gameStats.p1Towers.length}
             playerClass="p1FlagColor"
             textReverse="text-reverse-nope"
           />
         </div>
-        <h1 className="p2Name">{(currentPlayer === 'p2') ? user.username : 'Opponent'}</h1>
         <div className="p2Flag">
           <FlagSVG
-            playerName="Isaac"
+            playerName={(currentPlayer === 'p2') ? user.username : 'Opponent'}
             playerScore={gameStats.p2Towers.length}
             playerClass="p2FlagColor"
             textReverse="text-reverse-yep"

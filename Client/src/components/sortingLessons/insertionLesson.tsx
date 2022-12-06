@@ -4,6 +4,7 @@ import { insertionSortAlgo, generateArray } from "../../utils/sorting-algo";
 import Visualization from "./visualization";
 import { useAlgo } from "../../features/hooks";
 import { insertionSortVisual } from "../../utils/sorting-helper-visual";
+import Pagination from "../learning/pagination";
 
 export default function InsertionLesson() {
   const [array, setArray] = useState([3, 5, 7]);
@@ -18,6 +19,7 @@ export default function InsertionLesson() {
   const DELAY = 150;
   const PADTOP = 10;
   const MARGIN = 3;
+  const FONTSIZE = 15
   const HEIGHT = 5;
 
   const paragraphs = {
@@ -43,6 +45,7 @@ export default function InsertionLesson() {
   }
 
   return (
+    <Pagination leftName={'Bubble'} rightName={'Selection'} leftLink={'learning/bubbleLesson'} rightLink={'learning/selectionLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
@@ -85,14 +88,14 @@ export default function InsertionLesson() {
           height={HEIGHT}
           paddingTop={PADTOP}
           array={array}
-          key={array}
+          key={array as any}
           animations={animations}
           clicked={clicked}
           sortingAlgo={insertionSortVisual}
           setClicked={setClicked}
-          setIsSorted={setIsSorted}
-        />
+          setIsSorted={setIsSorted} fontSize={FONTSIZE} tower={undefined} isSorted={false}        />
       </div>
     </div>
+    </Pagination>
   );
 }

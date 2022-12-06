@@ -30,7 +30,7 @@ export default function ProfileGameHistory() {
             </div>
             <div className="towerStats">
                 <div className='image-profile'>
-                  <TowerSVG playerClass='neutralTower' playerClassShadow='p1TowerShadow'/>
+                  <TowerSVG playerClass='neutralTower'/>
                 </div>
                 <h3 className='gameStatsText'>{element.towers} Towers</h3>
             </div>

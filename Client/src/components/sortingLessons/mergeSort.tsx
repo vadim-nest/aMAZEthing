@@ -4,6 +4,7 @@ import { mergeSortAlgo, generateArray } from "../../utils/sorting-algo";
 import Visualization from "./visualization";
 import { mergeSortVisual } from "../../utils/sorting-helper-visual";
 import { useAlgo } from "../../features/hooks";
+import Pagination from "../learning/pagination";
 
 export default function MergeLesson() {
   const [array, setArray] = useState([3, 5, 7]);
@@ -18,6 +19,7 @@ export default function MergeLesson() {
   const DELAY = 5;
   const PADTOP = 10;
   const MARGIN = 3;
+  const FONTSIZE = 15
   const HEIGHT = 3;
 
   const paragraphs = {
@@ -43,6 +45,7 @@ export default function MergeLesson() {
   }
 
   return (
+    <Pagination leftName={'Selection'} rightName={'Quick'} leftLink={'learning/selectionLesson'} rightLink={'learning/quickLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
@@ -86,14 +89,14 @@ export default function MergeLesson() {
           paddingTop={PADTOP}
           height={HEIGHT}
           array={array}
-          key={array}
+          key={array as any}
           animations={animations}
           clicked={clicked}
           sortingAlgo={mergeSortVisual}
           setClicked={setClicked}
-          setIsSorted={setIsSorted}
-        />
+          setIsSorted={setIsSorted} fontSize={FONTSIZE} tower={undefined} isSorted={false}        />
       </div>
     </div>
+    </Pagination>
   );
 }

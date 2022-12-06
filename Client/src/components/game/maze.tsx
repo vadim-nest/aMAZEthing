@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import '../../css/game/maze.css';
 import apiService from "../../services/apiService";
 import { Graph, value } from "../../utils/graph";
@@ -8,7 +8,9 @@ import Minion from "./minion";
 import Tower from "./tower";
 import Home from './home'
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { addNewInterval, mazeComplete, newTowers, setAllTilesHidden, setCurrentGraph, updateCurrentTile, updateDisplayVisited, updateMazeClasses, updateMazeGenerated } from "../../features/game_slice";
+import { addNewInterval, mazeComplete, newTowers, setAllTilesHidden, setCurrentGraph, updateBoxSize, updateCurrentTile, updateDisplayVisited, updateMazeClasses, updateMazeGenerated, updateMinBoxSize, updateWeightPositions } from "../../features/game_slice";
+import { MazeType } from "../../utils/maze";
+import Mud from "./mud";
 
 function Maze({ towers, currentPlayer}: {
   towers: TowerType[],
@@ -16,8 +18,10 @@ function Maze({ towers, currentPlayer}: {
 }) {
 
   // TODO: Set as state
-  const { height, width, currentGraph, allTilesHidden, minions, maze, displayVisited, mazeGenerated } = useAppSelector(state => state.game);
+  const { height, width, currentGraph, allTilesHidden, minions, maze, displayVisited, mazeGenerated, weightPositions } = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
+  const mazeOuterRef = useRef<HTMLInputElement>(null);
+  const mazeInnerRef = useRef<HTMLInputElement>(null);
 
 
   useEffect(() => {
@@ -25,13 +29,20 @@ function Maze({ towers, currentPlayer}: {
       if (mazeGenerated === false) {
         dispatch(updateMazeGenerated(true));
 
-        const {graphBE, visited, classes, towers} = await apiService.createMaze()
+        const {graphBE, visited, classes, towers, weightPositions} = await apiService.createMaze();
         let graph = new Graph()
         graph.reAssign(graphBE)
+        console.log({weightPositions});
         dispatch(newTowers(towers));
         dispatch(setCurrentGraph(graph));
         dispatch(updateDisplayVisited(visited));
+        dispatch(updateWeightPositions(weightPositions));
         dispatch(updateMazeClasses({classes, visited}));
+        const newBoxSize = mazeOuterRef.current?.clientHeight!/height;
+        console.log({newBoxSize});
+        dispatch(updateMinBoxSize(newBoxSize));
+        dispatch(updateBoxSize(newBoxSize));
+
       }
       else if (allTilesHidden && currentGraph) {
         const mazeTiles = document.getElementsByClassName('mazeTile');
@@ -59,11 +70,18 @@ function Maze({ towers, currentPlayer}: {
     mazeInit();
   },[maze]);
 
+  useEffect(() => {
+    if (currentPlayer === 'p2' && allTilesHidden === false) {
+      mazeOuterRef.current!.scrollTo({top: mazeInnerRef.current!.clientHeight, left: mazeInnerRef.current!.clientWidth * 2, behavior: 'auto'})
+    }
+  }, [allTilesHidden])
+
   return (
-      <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()}>
-        <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}}>
+      <div className="mazeOuter" onContextMenu={(e)=> e.preventDefault()} ref={mazeOuterRef}>
+        <div className="mazeInner" style={{gridTemplateColumns: `repeat(${width}, 1fr)`}} ref={mazeInnerRef}>
           <Home xPos={0} yPos={0} player='p1'/>
           <Home xPos={width - 3} yPos={height - 3} player='p2'/>
+          {Object.values(weightPositions).map(weightPosition => <Mud xPos={weightPosition.xPos} yPos={weightPosition.yPos}/>)}
           {Object.values(minions).map(minion => <Minion key={minion.id} minion={minion}/>)}
           {!allTilesHidden && towers.map(tower => <Tower key={tower.id} tower={tower}/>)}
           {maze.map((value: {value: value, classes: string[], path: '' | 'THOUGHTPROCESS' | 'PATH'}, index) => <MazeTile key={index} generated={allTilesHidden} value={value.value as string} path={value.path} classes={value.classes} />)}

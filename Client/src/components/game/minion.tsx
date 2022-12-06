@@ -27,7 +27,7 @@ function Minion({ minion }: { minion: minionType }) {
   }
 
   return (
-    <div onClick={handleClick} onContextMenu={handleContextMenu}  id={`${minion.id}`} className={`minion ${minion.rotation} ${(minion.inTower !== false) && 'minionInTower'}`} style={{fill: `red`, height: `${boxSize + 30}px`, width: `${boxSize + 30}px`, top: `${boxSize*minion.yPos - 15}px`, left: `${boxSize*minion.xPos - 15}px`}}>
+    <div onClick={handleClick} onContextMenu={handleContextMenu}  id={`${minion.id}`} className={`minion ${minion.rotation} ${(minion.inTower !== false) && 'minionInTower'}`} style={{fill: `red`, height: `${boxSize}px`, width: `${boxSize}px`, top: `${boxSize*minion.yPos}px`, left: `${boxSize*minion.xPos}px`}}>
     {whichAnimalSVG(minion)}
   </div>
   )

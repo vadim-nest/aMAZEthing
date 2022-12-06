@@ -9,6 +9,7 @@ import Pagination from "../learning/pagination";
 function DfsLesson() {
   const [graph, setGraph] = useState<any>();
   const [clicked, setClicked] = useState(false);
+  const [visualize, setVisualize] = useState(false)
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
 
@@ -18,12 +19,13 @@ function DfsLesson() {
   }, []);
 
   function newGraph() {
-    const newgraph = generateConnectedGraph(width, width, true);
-    newgraph.removeUnweightedEdges();
-    setGraph(newgraph);
+    const newGraph = generateConnectedGraph(width, width, true);
+    newGraph.removeUnweightedEdges();
+    setGraph(newGraph);
   }
 
   async function dfs() {
+    setClicked(false);
     const DFSVisualpaths = graph.findPath(0, end ? end : width * width, "vdfs");
     if (DFSVisualpaths) {
       let path: any = Array.from(DFSVisualpaths.visited);
@@ -93,7 +95,6 @@ function DfsLesson() {
           onClick={() => {
             setClicked(true);
             dfs();
-            setClicked(false);
             }}>
           Visualize DFS
         </button>
