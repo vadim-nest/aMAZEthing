@@ -3,5 +3,5 @@
   height: 50px;
   position: absolute;
   z-index: 5;
-  background-color: brown;
+  display: flex;
 }
