@@ -6,4 +6,5 @@
   display: flex;
   background-image: url('../../assets/game-different/jungle-svgrepo-com.svg');
   background-size: cover;
+  pointer-events: none;
 }
