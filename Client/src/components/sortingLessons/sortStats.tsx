@@ -1,6 +1,10 @@
 function MapKeys({ animations }: { animations: any }) {
-    let swaps:number;
-    
+    let swaps:number = 0;
+
+    for(let el of animations) {
+        if(el.length > 2) swaps++
+    }
+
   return (
     <div className="sort-keys">
       <h2>Summary</h2>
@@ -27,8 +31,8 @@ function MapKeys({ animations }: { animations: any }) {
                     <h4>{animations.length}</h4>
                 </div>
                 <div className="flex-row">
-                    <h4>Swaps Made</h4>
-                    <h4>{}</h4>
+                    <h4>Swaps:</h4>
+                    <h4>{swaps}</h4>
                 </div>
             </div>
       

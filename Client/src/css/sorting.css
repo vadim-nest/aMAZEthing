@@ -54,7 +54,7 @@
 
 .sort-keys {
   min-height: 200px;
-  max-width: 300px;
+  max-width: 320px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -225,6 +225,7 @@
   display: flex;
   align-items: flex-end;
   max-width: fit-content;
+
 }
 
 .clickSort {
@@ -237,13 +238,15 @@
 
 .array-el {
   flex: 1;
-  margin: 2px;
   height: 10px;
   border-radius: 3px;
   display: flex;
-  justify-content: center;
+  justify-self: center;
   font-size: 15px;
   font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .visualizing {
