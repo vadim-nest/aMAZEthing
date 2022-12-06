@@ -121,7 +121,7 @@ export function generateMaze(
       let neighbor = neighbors[
         Math.floor(Math.random() * neighbors.length)
       ] as number;
-      let rand = weighted && Math.floor(Math.random() * chanceWeighted) === 0 ? 2 : 1;
+      let rand = weighted && Math.floor(Math.random() * chanceWeighted) === 0 ? 5 : 1;
       edges.push([i, neighbor, rand]);
       edges.push([neighbor, i, rand]);
       if (i - neighbor === 1) {

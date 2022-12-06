@@ -141,12 +141,13 @@ function Game() { // TODO: Extract logic to maze class
       let slow = 0;
       let max: number;
       let min: number;
+      let slowAmount = 5;
       function step (interval: number) {
         if (previousInterval === undefined) previousInterval = interval;
         if (interval > previousInterval + minion.movementSpeed) {
           previousInterval = interval;
           let updatedMinion = minion as minionType;
-          if (slow === 2) slow = 0;
+          if (slow === slowAmount) slow = 0;
           if (slow === 0) {
             nextDirection = path.shift() as number;
             max = Math.max(nextDirection, previousDirection);
@@ -154,7 +155,7 @@ function Game() { // TODO: Extract logic to maze class
           };
           let key = `${min}-${max}`;
           let multiplier = 1;
-          if (weightPositions[key] && slow < 2) {multiplier = 0.5; slow++}
+          if (weightPositions[key] && slow < slowAmount) {multiplier = 1/slowAmount; slow++}
           else slow = 0;
           const direction = getDirection(previousDirection as number, nextDirection as number, width);
           direction.xPos *= multiplier;
@@ -162,7 +163,7 @@ function Game() { // TODO: Extract logic to maze class
           socket.emit('minion move', direction, minion.id, roomId);
           xAdd += direction.xPos;
           yAdd += direction.yPos;
-          if (slow === 0 || slow === 2) previousDirection = nextDirection;
+          if (slow === 0 || slow === slowAmount) previousDirection = nextDirection;
           updatedMinion = {
             ...(minion as minionType),
             yPos: (minion as minionType).yPos + yAdd,
@@ -170,16 +171,21 @@ function Game() { // TODO: Extract logic to maze class
             rotation: direction.rotation
           }
           dispatch(updateMinion({minionId: minion.id, updatedMinion}));
-          if (path.length === 0) {
-            if (slow === 1) {
-              console.log('new minion');
+          console.log(path.length, slow, slowAmount);
+          if (path.length === 0 && (slow === 0 || slow >= slowAmount - 1)) {
+            if (slow === slowAmount - 1) {
               updatedMinion = {
                 ...updatedMinion,
-                yPos: updatedMinion.yPos + direction.yPos,
-                xPos: updatedMinion.xPos + direction.xPos,
+                yPos: Math.round(updatedMinion.yPos + direction.yPos),
+                xPos: Math.round(updatedMinion.xPos + direction.xPos),
                 rotation: 'minionR' as 'minionR'
               };
             }
+            updatedMinion = {
+              ...updatedMinion,
+              yPos: Math.round(updatedMinion.yPos),
+              xPos: Math.round(updatedMinion.xPos),
+            };
             dispatch(updateMinion({minionId: minion.id, updatedMinion: {...updatedMinion, rotation: ''}}));
             clearInterval(interval);
             dispatch(removeMovingMinion(minion.id));
