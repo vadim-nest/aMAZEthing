@@ -100,6 +100,8 @@ export default function Connect(server: http.Server) {
 
   function addP2ToGame(roomID: string, p2Id:string, p2Username: string) {
     const game = activeGames.find(game => game.roomId === roomID);
+    console.log('Adding p2');
+    console.log({game})
     if (!game) return false;
     game.p2Id = p2Id;
     game.p2Username = p2Username;
@@ -128,6 +130,7 @@ export default function Connect(server: http.Server) {
 
   function addNewMinionGame(roomID: string, type: animal, player: 'p1' | 'p2') {
     const game = activeGames.find(game => game.roomId === roomID);
+    console.log({game, activeGames})
     if (!game) return false;
     const newEntry: [number, animal] = [game.p1Minions.length + game.p2Minions.length, type];
     
@@ -232,9 +235,10 @@ export default function Connect(server: http.Server) {
 
     socket.on('join', (roomId, p2Username) => {
       const found = waiting.find(room => room.roomId === roomId);
-      if (found) {
+      const game = activeGames.find(game => game.roomId === roomId);
+      console.log({game, activeGames})
+      if (game) {
         socket.join(roomId);
-        const game = activeGames.find(game => game.roomId === roomId);
         game.p2Id = socket.id;
         addP2ToGame(roomId, socket.id, p2Username);
         io.to(socket.id).emit('receiveRoomId', roomId, 'p2', 'Join');
@@ -272,11 +276,17 @@ export default function Connect(server: http.Server) {
     });
 
     socket.on('readyJoin', (roomId) => {
+      console.log('readyJoin', roomId, readyHost, socket.id)
       if (readyHost[roomId] && readyHost[roomId] !== socket.id) {
         delete ready[roomId];
+        console.log('Game starting');
         io.to(roomId).emit('Game start');
       }
     });
+
+    socket.on('retry game start', () => {
+      console.log('game start failed');
+    })
 
     socket.on('maze generated', roomId => {
       if (increaseLoadedGame(roomId)) {
