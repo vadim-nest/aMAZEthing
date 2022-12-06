@@ -8,8 +8,12 @@
     z-index:20;
 }
 
+.vertex:hover{
+    cursor: pointer;
+}
 .selectedEndVertex{
-    background: radial-gradient(circle at 7px 7px,var(--yellow), #DDD);
+    /* background: radial-gradient(circle at 7px 7px,var(--yellow), #DDD); */
+    background: var(--yellow);
 }
 
 .edge{
@@ -22,10 +26,10 @@
 
 .edge-key{
     display: inline;
-    width:15px;
+    width:20px;
     height: 5px;
     border-radius: 3px;
-    background-color: var(--sand); 
+    background: radial-gradient(circle at 7px 7px,var(--sand), rgb(226, 220, 220)); 
 }
 .edge-key-visited{
     position: relative;
@@ -42,7 +46,7 @@
     width:20px;
     height:20px;
     border-radius: 50%;
-    background: radial-gradient(circle at 7px 7px,var(--yellow), #EEE);
+    background: var(--yellow);
     z-index:20;
 }
 .vertical{

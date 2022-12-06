@@ -14,6 +14,7 @@ function AStarLesson() {
   const [clicked, setClicked] = useState(false);
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
+  const [heuristicValue,setHeuristic] = useState(50)
   let steps = [
     "Check neighbors",
     "Add neighbors into queue",
@@ -39,7 +40,7 @@ function AStarLesson() {
       end ? end : width * width,
       "aStar",
       width,
-      10
+      heuristicValue
     ); //TODO - ADD heuristic value as slider
     if (aStarVisualpaths) {
       setStats({
@@ -74,34 +75,33 @@ function AStarLesson() {
             end.
           </p>
           <p className="explanation-text centered-text">
-            (weighted) arguably the best pathfinding algorithm; uses heuristics
-            to guarantee the shortest path much faster than Dijkstra's Algorithm
+          ‣  <span className="yellow-learning">(weighted)</span> arguably the best pathfinding algorithm.
           </p>
         </div>
+        <div className="heuristicDiv">
+        {heuristicValue < 15 ? <p>A* acts as <span className="yellow-learning">Dijkstra</span>, just taking the weights into account</p>
+          :
+          heuristicValue > 95 ? <p>A* is totally <span className="yellow-learning">heuristic</span>, not taking care of the weights but distance to the Endpoint</p>
+          :
+          <p>You can modify how <span className="yellow-learning">'heuristic heavy'</span> the A* algorithm can be</p>
+          }
+        <label>
+        <input
+            type="range"
+            name="heuristic-range"
+            value={heuristicValue}
+            min="0"
+            max="100"
+            onChange={(e:any) => {
+              setHeuristic(e.target.value)
+            }}
+          />
+          {'     '}{heuristicValue}%
+          </label>
+          </div>
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
-          <div className="buttons-pos">
-          <button
-            className={clicked ? "button disabled" : "button"}
-            disabled={clicked}
-            onClick={() => {
-              newGraph();
-            }}
-          >
-            NEW Graph
-          </button>
-          <button
-            className={clicked ? "button disabled" : "button"}
-            disabled={clicked}
-            onClick={() => {
-              // setClicked(true);
-              aStar();
-            }}
-          >
-            Visualize A*
-          </button>
-        </div>
         
           <div id="myCanvas">
             <div
@@ -124,6 +124,27 @@ function AStarLesson() {
                 ))}
                 </div>
             </div>
+            <div className="buttons-pos">
+          <button
+            className={clicked ? "button disabled" : "button"}
+            disabled={clicked}
+            onClick={() => {
+              newGraph();
+            }}
+          >
+            NEW Graph
+          </button>
+          <button
+            className={clicked ? "button disabled" : "button"}
+            disabled={clicked}
+            onClick={() => {
+              // setClicked(true);
+              aStar();
+            }}
+          >
+            Visualize A*
+          </button>
+        </div>
           </div>
           <StepsPath steps={steps}></StepsPath>
         </div>

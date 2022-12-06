@@ -68,34 +68,14 @@ function DfsLesson() {
             unexplored path, and then explores it.
           </p>
           <p className="explanation-text centered-text">
-            (unweighted) a very bad algorithm for pathfinding; does not
-            guarantee the shortest path
+          ‣   <span className="yellow-learning">(unweighted)</span> a very bad algorithm for pathfinding; does not
+            guarantee the shortest path.
           </p>
         </div>
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
-            <div className="buttons-pos">
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  newGraph();
-                }}
-              >
-                NEW Graph
-              </button>
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  //setClicked(true);
-                  dfs();
-                }}
-              >
-                Visualize DFS
-              </button>
-            </div>
+            
             <div id="myCanvas">
               <div
                 className="graph-vertices"
@@ -116,6 +96,27 @@ function DfsLesson() {
                     />
                   ))}
               </div>
+            </div>
+            <div className="buttons-pos">
+              <button
+                className={clicked ? "button disabled" : "button"}
+                disabled={clicked}
+                onClick={() => {
+                  newGraph();
+                }}
+              >
+                NEW Graph
+              </button>
+              <button
+                className={clicked ? "button disabled" : "button"}
+                disabled={clicked}
+                onClick={() => {
+                  //setClicked(true);
+                  dfs();
+                }}
+              >
+                Visualize
+              </button>
             </div>
           </div>
           <StepsPath steps={steps}></StepsPath>

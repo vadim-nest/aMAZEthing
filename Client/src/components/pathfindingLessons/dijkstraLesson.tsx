@@ -66,34 +66,14 @@ function DijkstraLesson() {
             all other nodes.
           </p>
           <p className="explanation-text centered-text">
-            (weighted) the father of pathfinding algorithms; guarantees the
-            shortest path
+          ‣   <span className="yellow-learning">(weighted)</span> the father of pathfinding algorithms; guarantees the
+            shortest path.
           </p>
         </div>
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
-            <div className="buttons-pos">
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  newGraph();
-                }}
-              >
-                NEW Graph{" "}
-              </button>
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  // setClicked(true);
-                  dijkstra();
-                }}
-              >
-                Visualize Dijkstra
-              </button>
-            </div>
+           
             <div id="myCanvas">
               <div
                 className="graph-vertices"
@@ -114,6 +94,27 @@ function DijkstraLesson() {
                     />
                   ))}
               </div>
+            </div>
+            <div className="buttons-pos">
+              <button
+                className={clicked ? "button disabled" : "button"}
+                disabled={clicked}
+                onClick={() => {
+                  newGraph();
+                }}
+              >
+                NEW Graph
+              </button>
+              <button
+                className={clicked ? "button disabled" : "button"}
+                disabled={clicked}
+                onClick={() => {
+                  // setClicked(true);
+                  dijkstra();
+                }}
+              >
+                Visualize
+              </button>
             </div>
           </div>
           <StepsPath steps={steps}></StepsPath>

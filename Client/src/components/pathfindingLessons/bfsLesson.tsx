@@ -8,15 +8,19 @@ import Pagination from "../learning/pagination";
 import MapKeys from "./map-keys";
 import StepsPath from "./stepsPath";
 
-
-
 function BfsLesson() {
-  const [stats,setStats] = useState({visited:0,path:0})
+  const [stats, setStats] = useState({ visited: 0, path: 0 });
   const [graph, setGraph] = useState<any>();
   const [clicked, setClicked] = useState(false);
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
-  let steps = ['Check neighbors','Add neighbors into queue','Shift queue and keep checking neighbors','Repeat until it founds last state','Find shortest path'];
+  let steps = [
+    "Check neighbors",
+    "Add neighbors into queue",
+    "Shift queue and keep checking neighbors",
+    "Repeat until it founds last state",
+    "Find shortest path",
+  ];
   useEffect(() => {
     newGraph();
   }, []);
@@ -25,13 +29,16 @@ function BfsLesson() {
     const newgraph = generateConnectedGraph(width, width, true);
     newgraph.removeUnweightedEdges();
     setGraph(newgraph);
-    setStats({visited:0,path:0})
+    setStats({ visited: 0, path: 0 });
   }
 
   async function bfs() {
     const BFSVisualpaths = graph.findPath(0, end, "vbfs");
     if (BFSVisualpaths) {
-      setStats({visited:BFSVisualpaths.visited.length,path:BFSVisualpaths.path.length})
+      setStats({
+        visited: BFSVisualpaths.visited.length,
+        path: BFSVisualpaths.path.length,
+      });
       let path: any = Array.from(BFSVisualpaths.visited);
       console.log("PATH", path);
       await showPath(path, true);
@@ -40,7 +47,7 @@ function BfsLesson() {
     }
     //setClicked(false)
   }
-  
+
   return (
     <Pagination
       clicked={clicked}
@@ -59,33 +66,13 @@ function BfsLesson() {
             before moving on to nodes at the next depth level.
           </p>
           <p className="explanation-text centered-text">
-            (unweighted) guarantees the shortest path
+            ‣  <span className="yellow-learning">(unweighted)</span> guarantees the shortest path.
           </p>
         </div>
 
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
-            <div className="buttons-pos">
-              <button
-                className={clicked ? "button disabled" : "button"}
-                onClick={() => {
-                  newGraph();
-                }}
-              >
-                NEW Graph
-              </button>
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  //setClicked(true);
-                  bfs();
-                }}
-              >
-                Visualize bfs
-              </button>
-            </div>
             <div id="myCanvas">
               <div
                 className="graph-vertices"
@@ -107,8 +94,28 @@ function BfsLesson() {
                   ))}
               </div>
             </div>
+            <div className="buttons-pos">
+              <button
+                className={clicked ? "button disabled" : "button"}
+                onClick={() => {
+                  newGraph();
+                }}
+              >
+                NEW Graph
+              </button>
+              <button
+                className={clicked ? "button disabled" : "button"}
+                disabled={clicked}
+                onClick={() => {
+                  //setClicked(true);
+                  bfs();
+                }}
+              >
+                Visualize
+              </button>
+            </div>
           </div>
-            <StepsPath steps={steps}></StepsPath>
+          <StepsPath steps={steps}></StepsPath>
         </div>
       </div>
     </Pagination>

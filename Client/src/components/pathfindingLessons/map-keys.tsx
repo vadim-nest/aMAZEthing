@@ -24,7 +24,7 @@ function MapKeys({stats}:{
               <div className="edge-key-visited" ></div>
             </div>
             <div className="flex-row">
-              <h5>Path Found</h5>
+              <h5>Endpoint</h5>
               <div className="edge-key-path" ></div>
             </div>
             <PathStatistics stats={stats}></PathStatistics>
