@@ -3,10 +3,10 @@ import { generateConnectedGraph } from "../../utils/maze";
 import "../../css/pathFinding.css";
 import { value } from "../../utils/graph";
 import GraphVertex from "./graphVertex";
-import { delay } from "../../utils/functionalities";
+import { showPath } from "../../utils/functionalities";
 import Pagination from "../learning/pagination";
-import PathStatistics from "./pathStatistics";
-
+import MapKeys from "./map-keys";
+import StepsPath from "./stepsPath";
 
 
 
@@ -16,7 +16,7 @@ function BfsLesson() {
   const [clicked, setClicked] = useState(false);
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
-
+  let steps = ['Check neighbors','Add neighbors into queue','Shift queue and keep checking neighbors','Repeat until it founds last state','Find shortest path'];
   useEffect(() => {
     newGraph();
   }, []);
@@ -29,7 +29,6 @@ function BfsLesson() {
   }
 
   async function bfs() {
-    setClicked(false);
     const BFSVisualpaths = graph.findPath(0, end, "vbfs");
     if (BFSVisualpaths) {
       setStats({visited:BFSVisualpaths.visited.length,path:BFSVisualpaths.path.length})
@@ -39,43 +38,12 @@ function BfsLesson() {
       path = Array.from(BFSVisualpaths.path);
       await showPath(path);
     }
+    //setClicked(false)
   }
-
-  async function showPath(path: number[], visited: boolean = false) {
-    for (let i = 0; i < path.length; i++) {
-      await delay(10);
-      document.getElementById(`${path[i]}`)!.style.background = visited
-        ? "var(--sand)"
-        : "radial-gradient(circle at 7px 7px,var(--yellow), #EEE)";
-      await delay(10);
-      if (i + 1 !== path.length) {
-        if (
-          document.getElementById(
-            `${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`
-          ) ||
-          document.getElementById(
-            `${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`
-          )
-        ) {
-          if (path[i] < path[i + 1])
-            document.getElementById(
-              `${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`
-            )!.style.background = visited
-              ? "var(--sand)"
-              : "radial-gradient(circle at 7px 7px,var(--yellow), #EEE)";
-          else
-            document.getElementById(
-              `${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`
-            )!.style.background = visited
-              ? "var(--sand)"
-              : "radial-gradient(circle at 7px 7px,var(--yellow), #EEE)";
-        }
-      }
-    }
-  }
-
+  
   return (
     <Pagination
+      clicked={clicked}
       leftName={"Learning"}
       rightName={"Dfs"}
       leftLink={"learning"}
@@ -96,35 +64,13 @@ function BfsLesson() {
         </div>
 
         <div className="visualization-wrapper">
-          <div className="map-keys">
-              <h2>Keys</h2>
-            <div className="flex-row">
-              <h5>Vertex</h5>
-              <div className="vertex" ></div>
-            </div>
-            <div className="flex-row">
-              <h5>Edge</h5>
-              <div className="edge-key" ></div>
-            </div>
-            <div className="flex-row">
-              <h5>Visited</h5>
-              <div className="edge-key-visited" ></div>
-            </div>
-            <div className="flex-row">
-              <h5>Path Found</h5>
-              <div className="edge-key-path" ></div>
-            </div>
-            <PathStatistics stats={stats}></PathStatistics>
-          </div>
+          <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
             <div className="buttons-pos">
               <button
                 className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
                 onClick={() => {
-                  setClicked(true);
                   newGraph();
-                  setClicked(false);
                 }}
               >
                 NEW Graph
@@ -133,9 +79,8 @@ function BfsLesson() {
                 className={clicked ? "button disabled" : "button"}
                 disabled={clicked}
                 onClick={() => {
-                  setClicked(true);
+                  //setClicked(true);
                   bfs();
-                  setClicked(false);
                 }}
               >
                 Visualize bfs
@@ -163,6 +108,7 @@ function BfsLesson() {
               </div>
             </div>
           </div>
+            <StepsPath steps={steps}></StepsPath>
         </div>
       </div>
     </Pagination>

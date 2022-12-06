@@ -30,7 +30,6 @@
 .lesson-wrapper, .lesson-wrapper-2 {
   border-radius: 20px;
   width:max-content;
-  
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -49,6 +48,7 @@
   min-height:200px;
   max-width:150px;
   background-color: whitesmoke;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   border-radius: 10px;
   display:flex;
   justify-content: flex-start;
@@ -56,6 +56,24 @@
   flex-direction: column;
 }
 
+.steps-visualization{
+  min-height:max-content;
+  min-width:250px;
+  border-radius: 10px;
+  display:flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: whitesmoke;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  padding: 1%;
+}
+
+.buttons-pos{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .flex-row{
   min-width: 70%;
   display:flex;
@@ -63,10 +81,11 @@
   align-items: center;
   margin-bottom: 5px;
 }
-.Stats-flex{
+.stats-flex{
   min-height:100px;
   min-width:200px;
   background-color: whitesmoke;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   border-radius: 10px;
   margin-top: 5px;
   display:flex;

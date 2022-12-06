@@ -11,7 +11,7 @@ function PathStatistics({stats}:{
 
 
     return(
-            <div className="Stats-flex">
+            <div className="stats-flex">
                 <div className="flex-row">
                     <h4>Visited Nodes</h4>
                     <h4>{stats.visited}</h4>
