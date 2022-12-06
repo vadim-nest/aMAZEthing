@@ -46,7 +46,7 @@ export default function QuickLesson() {
   }
 
   return (
-    <Pagination leftName={'Merge'} rightName={'Customize'} leftLink={'learning/mergeLesson'} rightLink={'learning/allSortsPlay'}>
+    <Pagination  clicked={clicked} leftName={'Merge'} rightName={'Customize'} leftLink={'learning/mergeLesson'} rightLink={'learning/allSortsPlay'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>

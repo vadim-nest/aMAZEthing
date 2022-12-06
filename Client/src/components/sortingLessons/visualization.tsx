@@ -39,11 +39,12 @@ export default function Visualization({
 
     const dispatch = useAppDispatch();  
 
+
     if(clicked) {
       if (tower) dispatch(increaseTowersSorting(tower));
         sortingAlgo(animations, delay, width, margin, tower, height, () => {
           setClicked(false) 
-          setIsSorted?.(true)})
+          setIsSorted?.(true)},)
     }
 
     return(

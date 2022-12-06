@@ -18,7 +18,7 @@ export default function BubbleLesson() {
   const MAX_VAL = 50;
   const NUM_BARS = 20;
   const DELAY = 5;
-  const PADTOP = 5;
+  const PADTOP = 3;
   const MARGIN = 3;
   const HEIGHT = 5;
   const FONTSIZE = 15
@@ -31,6 +31,7 @@ export default function BubbleLesson() {
 
   useEffect(() => {
     setArray((array) => (array = generateArray(NUM_BARS, MIN_VAL, MAX_VAL)));
+
   }, []);
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export default function BubbleLesson() {
   }
 
   return (
-    <Pagination leftName={'Learning'} rightName={'Insertion'} leftLink={'learning/'} rightLink={'learning/insertionLesson'}>
+    <Pagination clicked={clicked} leftName={'Learning'} rightName={'Insertion'} leftLink={'learning/'} rightLink={'learning/insertionLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
