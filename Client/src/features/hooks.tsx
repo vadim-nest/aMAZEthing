@@ -126,9 +126,9 @@ export function useTutorial(step: number = 1) {
         <>
           <h1>Welcome to aMAZEthing</h1>
           <h2>Here you can play and learn about the game.</h2>
-          <p>
-            Click <b>next</b> to learn more or <b>skip</b> to start playing
-          </p>
+          <h3>
+            Click <span className='yellow-learning'>next</span> to learn more or <span className='yellow-learning'>skip</span> to start playing
+          </h3>
           <img
             className="tutorial-img"
             src="./src/assets/tutorial/maze.png"
@@ -140,11 +140,11 @@ export function useTutorial(step: number = 1) {
         <>
           <h1>Buying an Animal</h1>
           <h2>Open the shop to buy an animal</h2>
-          <p>
-            Each animal has different <i>path finding</i> and <i>sorting</i>{' '}
-            algorithms. Head to our <a>learning section</a> to find out more{' '}
-          </p>
-          <img src="./src/assets/tutorial/shop.png"></img>
+          <h3>
+            Each animal has different <span className='yellow-learning'>path finding</span> and <span className='yellow-learning'>sorting</span>{' '}
+            algorithms. Head to our <a className='yellow-learning' href='/learning' >learning section</a> to find out more{' '}
+          </h3>
+          <img className="tutorial-img" src="./src/assets/tutorial/shop.png"></img>
           <img
             className="tutorial-img"
             src="./src/assets/tutorial/buy-minion.png"
@@ -159,7 +159,7 @@ export function useTutorial(step: number = 1) {
             Select an animal with left-click and the destination with a
             right-click
           </h2>
-          <p>You will see the animal's thought process before they set off</p>
+          <h3>You will see the animal's thought process before they set off</h3>
           <img
             className="tutorial-img"
             src="./src/assets/tutorial/think-process.gif"
@@ -171,19 +171,15 @@ export function useTutorial(step: number = 1) {
         <>
           <h1>Towers</h1>
           <h2>To win a game you must conquer the most towers</h2>
-          <p>
+          <h3>
             Each tower has an unsorted set of numbers. To conquer a tower, send
             an animal to sort it.{' '}
-          </p>
-          <p>Once sorted, the animal will return to the home base</p>
+          </h3>
+          <h3>Once sorted, the animal will return to the home base</h3>
           <img
             className="tutorial-img"
             src="./src/assets/tutorial/tower-sorting.gif"
           ></img>
-          <div className="flex-div">
-            <TowerSVG playerClass={'p1Tower'} />
-            <TowerSVG playerClass={'p2Tower'} />
-          </div>
         </>
       );
     case 5:
@@ -191,10 +187,10 @@ export function useTutorial(step: number = 1) {
         <>
           <h1>Trees</h1>
           <h2>Trees act as obstacles and will slow animals down.</h2>
-          <p>
+          <h3>
             Animals with more advanced path finding algorithms will try to avoid
             them
-          </p>
+          </h3>
           <img
             className="tutorial-img"
             src="./src/assets/tutorial/tree-obstacle.gif"
