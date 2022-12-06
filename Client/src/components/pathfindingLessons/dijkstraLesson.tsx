@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import "../../css/pathFinding.css";
-import { generateConnectedGraph } from "../../utils/maze";
-import { value } from "../../utils/graph";
-import GraphVertex from "./graphVertex";
-import { showPath } from "../../utils/functionalities";
-import Pagination from "../learning/pagination";
-import MapKeys from "./map-keys";
-import StepsPath from "./stepsPath";
+import { useEffect, useState } from 'react';
+import '../../css/pathFinding.css';
+import { generateConnectedGraph } from '../../utils/maze';
+import { value } from '../../utils/graph';
+import GraphVertex from './graphVertex';
+import { showPath } from '../../utils/functionalities';
+import Pagination from '../learning/pagination';
+import MapKeys from './map-keys';
+import StepsPath from './stepsPath';
 
 function DijkstraLesson() {
   const [stats, setStats] = useState({ visited: 0, path: 0 });
@@ -15,11 +15,11 @@ function DijkstraLesson() {
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
-    "Check neighbors",
-    "Add neighbors into queue",
-    "Shift queue and keep checking neighbors",
-    "Repeat until it founds last state",
-    "Find shortest path",
+    'Check neighbors',
+    'Add neighbors into queue',
+    'Shift queue and keep checking neighbors',
+    'Repeat until it founds last state',
+    'Find shortest path',
   ];
 
   useEffect(() => {
@@ -34,8 +34,8 @@ function DijkstraLesson() {
 
   async function dijkstra() {
     setClicked(false);
-    const DIJKVisualpaths = graph.findPath(0, end, "vdijk");
-    console.log("PATH", DIJKVisualpaths);
+    const DIJKVisualpaths = graph.findPath(0, end, 'vdijk');
+    console.log('PATH', DIJKVisualpaths);
     if (DIJKVisualpaths) {
       setStats({
         visited: DIJKVisualpaths.visited.length,
@@ -52,28 +52,47 @@ function DijkstraLesson() {
   return (
     <Pagination
       clicked={clicked}
-      leftName={"Dfs"}
-      rightName={"aStar"}
-      leftLink={"learning/dfsLesson"}
-      rightLink={"learning/aStarLesson"}
+      leftName={'Dfs'}
+      rightName={'aStar'}
+      leftLink={'learning/dfsLesson'}
+      rightLink={'learning/aStarLesson'}
     >
       <div className="whole-page-wrapper">
         <div className="sorting-algo">
           <h1 className="explanation-title">Dijkstra algorithm</h1>
           <p className="explanation-text">
-            This algorithm uses the weights of the edges to find the path that
-            minimizes the total distance (weight) between the source node and
-            all other nodes.
+            Instead of exploring all possible paths equally, Dijkstra favors lower
+            cost paths. Distances between nodes are assigned weights that slow other algorithms down.
           </p>
           <p className="explanation-text centered-text">
-          <span className="yellow-learning">WEIGHTED</span> - the father of path finding algorithms; guarantees the
-            shortest path.
+            <span className="yellow-learning">WEIGHTED</span> - the father of
+            path finding algorithms; guarantees the shortest path.
           </p>
         </div>
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
-           
+            <div className="buttons-pos">
+              <button
+                className={clicked ? 'button disabled' : 'button'}
+                disabled={clicked}
+                onClick={() => {
+                  newGraph();
+                }}
+              >
+                NEW Graph
+              </button>
+              <button
+                className={clicked ? 'button disabled' : 'button'}
+                disabled={clicked}
+                onClick={() => {
+                  // setClicked(true);
+                  dijkstra();
+                }}
+              >
+                Visualize
+              </button>
+            </div>
             <div id="myCanvas">
               <div
                 className="graph-vertices"
@@ -94,27 +113,6 @@ function DijkstraLesson() {
                     />
                   ))}
               </div>
-            </div>
-            <div className="buttons-pos">
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  newGraph();
-                }}
-              >
-                NEW Graph
-              </button>
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  // setClicked(true);
-                  dijkstra();
-                }}
-              >
-                Visualize
-              </button>
             </div>
           </div>
           <StepsPath steps={steps}></StepsPath>

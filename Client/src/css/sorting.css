@@ -32,8 +32,9 @@
 .visualization-wrapper {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 50px;
 }
 
 .sortSteps-visualization {
@@ -45,7 +46,7 @@
   align-items: flex-start;
   flex-direction: column;
   padding: 1%;
-  border:2px solid;
+  border: 2px solid;
   border-color: var(--yellow);
 
 }
@@ -71,7 +72,6 @@
   align-items: center;
   flex-direction: column;
   border: 3px solid var(--white-green);
-  margin-bottom: 30px;
   margin-right: 30px;
   padding: 10px;
 }
@@ -84,6 +84,10 @@
 .map-keys h3, .map-keys h4, .map-keys h5 {
   color: var(--dark-brown);
   font-size: 16px;
+}
+
+.margin-for-a-star {
+  margin-top: -60px;
 }
 
 .visual-arrayAndButtons{
@@ -113,11 +117,9 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
   padding: 1%;
   border:2px solid;
   border-color: var(--yellow);
-  margin-bottom: 30px;
   margin-left: 30px;
 }
 
@@ -147,7 +149,6 @@
 .stats-flex {
   min-height: 100px;
   min-width: 200px;
-  /* box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); */
   border-radius: 15px;
   display: flex;
   justify-content: center;

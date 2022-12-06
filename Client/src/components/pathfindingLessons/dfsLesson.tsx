@@ -1,12 +1,12 @@
-import { useEffect, useState, useRef } from "react";
-import { generateConnectedGraph } from "../../utils/maze";
-import "../../css/pathFinding.css";
-import { value } from "../../utils/graph";
-import GraphVertex from "./graphVertex";
-import { showPath } from "../../utils/functionalities";
-import Pagination from "../learning/pagination";
-import MapKeys from "./map-keys";
-import StepsPath from "./stepsPath";
+import { useEffect, useState, useRef } from 'react';
+import { generateConnectedGraph } from '../../utils/maze';
+import '../../css/pathFinding.css';
+import { value } from '../../utils/graph';
+import GraphVertex from './graphVertex';
+import { showPath } from '../../utils/functionalities';
+import Pagination from '../learning/pagination';
+import MapKeys from './map-keys';
+import StepsPath from './stepsPath';
 
 function DfsLesson() {
   const [stats, setStats] = useState({ visited: 0, path: 0 });
@@ -15,11 +15,11 @@ function DfsLesson() {
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
-    "Check neighbors",
-    "Add neighbors into queue",
-    "Shift queue and keep checking neighbors",
-    "Repeat until it founds last state",
-    "Find shortest path",
+    'Check neighbors',
+    'Add neighbors into queue',
+    'Shift queue and keep checking neighbors',
+    'Repeat until it founds last state',
+    'Find shortest path',
   ];
 
   useEffect(() => {
@@ -34,14 +34,14 @@ function DfsLesson() {
   }
 
   async function dfs() {
-    const DFSVisualpaths = graph.findPath(0, end ? end : width * width, "vdfs");
+    const DFSVisualpaths = graph.findPath(0, end ? end : width * width, 'vdfs');
     if (DFSVisualpaths) {
       setStats({
         visited: DFSVisualpaths.visited.length,
         path: DFSVisualpaths.path.length,
       });
       let path: any = Array.from(DFSVisualpaths.visited);
-      console.log("PATH", path);
+      console.log('PATH', path);
       await showPath(path, true);
       path = Array.from(DFSVisualpaths.path);
       await showPath(path);
@@ -52,10 +52,10 @@ function DfsLesson() {
   return (
     <Pagination
       clicked={clicked}
-      leftName={"Bfs"}
-      rightName={"Dijkstra"}
-      leftLink={"learning/bfsLesson"}
-      rightLink={"learning/dijkstraLesson"}
+      leftName={'Bfs'}
+      rightName={'Dijkstra'}
+      leftLink={'learning/bfsLesson'}
+      rightLink={'learning/dijkstraLesson'}
     >
       <div className="whole-page-wrapper">
         <div className="sorting-algo">
@@ -63,19 +63,39 @@ function DfsLesson() {
             Depth First Search (DFS) algorithm
           </h1>
           <p className="explanation-text">
-            DFS starts at the root (top) node of a tree and goes as far as it
-            can down a given branch (path), then backtracks until it finds an
+            DFS starts at the root node of a tree and goes as far as it
+            can down a given path, then backtracks until it finds an
             unexplored path, and then explores it.
           </p>
           <p className="explanation-text centered-text">
-          <span className="yellow-learning">UNWEIGHTED</span> - a very bad algorithm for path finding; does not
-            guarantee the shortest path.
+            <span className="yellow-learning">UNWEIGHTED</span> - a very bad
+            algorithm for path finding; does not guarantee the shortest path.
           </p>
         </div>
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
-            
+            <div className="buttons-pos">
+              <button
+                className={clicked ? 'button disabled' : 'button'}
+                disabled={clicked}
+                onClick={() => {
+                  newGraph();
+                }}
+              >
+                NEW Graph
+              </button>
+              <button
+                className={clicked ? 'button disabled' : 'button'}
+                disabled={clicked}
+                onClick={() => {
+                  //setClicked(true);
+                  dfs();
+                }}
+              >
+                Visualize
+              </button>
+            </div>
             <div id="myCanvas">
               <div
                 className="graph-vertices"
@@ -96,27 +116,6 @@ function DfsLesson() {
                     />
                   ))}
               </div>
-            </div>
-            <div className="buttons-pos">
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  newGraph();
-                }}
-              >
-                NEW Graph
-              </button>
-              <button
-                className={clicked ? "button disabled" : "button"}
-                disabled={clicked}
-                onClick={() => {
-                  //setClicked(true);
-                  dfs();
-                }}
-              >
-                Visualize
-              </button>
             </div>
           </div>
           <StepsPath steps={steps}></StepsPath>

@@ -62,11 +62,11 @@ function BfsLesson() {
             Breath First Search (BFS) algorithm
           </h1>
           <p className="explanation-text">
-            Investigates all nodes at the current depth level (neighbors)
-            before moving on to nodes at the next depth level.
+            Investigates all nodes (neighbors) at the current depth level before
+            moving on to nodes at the next depth level.
           </p>
           <p className="explanation-text centered-text">
-          <span className="yellow-learning">UNWEIGHTED</span> - guarantees the
+            <span className="yellow-learning">UNWEIGHTED</span> - guarantees the
             shortest path.
           </p>
         </div>
@@ -75,6 +75,26 @@ function BfsLesson() {
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
             <div id="myCanvas">
+              <div className="buttons-pos">
+                <button
+                  className={clicked ? 'button disabled' : 'button'}
+                  onClick={() => {
+                    newGraph();
+                  }}
+                >
+                  NEW Graph
+                </button>
+                <button
+                  className={clicked ? 'button disabled' : 'button'}
+                  disabled={clicked}
+                  onClick={() => {
+                    //setClicked(true);
+                    bfs();
+                  }}
+                >
+                  Visualize
+                </button>
+              </div>
               <div
                 className="graph-vertices"
                 style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}
@@ -94,26 +114,6 @@ function BfsLesson() {
                     />
                   ))}
               </div>
-            </div>
-            <div className="buttons-pos">
-              <button
-                className={clicked ? 'button disabled' : 'button'}
-                onClick={() => {
-                  newGraph();
-                }}
-              >
-                NEW Graph
-              </button>
-              <button
-                className={clicked ? 'button disabled' : 'button'}
-                disabled={clicked}
-                onClick={() => {
-                  //setClicked(true);
-                  bfs();
-                }}
-              >
-                Visualize
-              </button>
             </div>
           </div>
           <StepsPath steps={steps}></StepsPath>

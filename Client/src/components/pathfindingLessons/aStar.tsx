@@ -68,12 +68,9 @@ function AStarLesson() {
         <div className="sorting-algo">
           <h1 className="explanation-title">aStar (A*) algorithm</h1>
           <p className="explanation-text">
-            A* assigns weight to each node equal to the weight of the
-            edge to that node plus the approximate distance between that node
-            and the finish. 
-This approximate distance is found by the heuristic approach,
-            and represents a minimum possible distance between that node and the
-            end.
+            A* is similar to Dijkstra, however it prioritizes paths that seem to
+            be leading closer to a goal. This is found by the heuristic, and
+            represents a minimum possible distance between a node and the end.
           </p>
           <p className="explanation-text centered-text">
             <span className="yellow-learning">WEIGHTED</span> - arguably the
@@ -101,7 +98,7 @@ This approximate distance is found by the heuristic approach,
           <label>
             <input
               type="range"
-              className='slider'
+              className="slider"
               name="heuristic-range"
               value={heuristicValue}
               min="0"
@@ -117,6 +114,27 @@ This approximate distance is found by the heuristic approach,
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
+            <div className="buttons-pos margin-for-a-star">
+              <button
+                className={clicked ? 'button disabled' : 'button'}
+                disabled={clicked}
+                onClick={() => {
+                  newGraph();
+                }}
+              >
+                NEW Graph
+              </button>
+              <button
+                className={clicked ? 'button disabled' : 'button'}
+                disabled={clicked}
+                onClick={() => {
+                  // setClicked(true);
+                  aStar();
+                }}
+              >
+                Visualize A*
+              </button>
+            </div>
             <div id="myCanvas">
               <div
                 className="graph-vertices"
@@ -137,27 +155,6 @@ This approximate distance is found by the heuristic approach,
                     />
                   ))}
               </div>
-            </div>
-            <div className="buttons-pos">
-              <button
-                className={clicked ? 'button disabled' : 'button'}
-                disabled={clicked}
-                onClick={() => {
-                  newGraph();
-                }}
-              >
-                NEW Graph
-              </button>
-              <button
-                className={clicked ? 'button disabled' : 'button'}
-                disabled={clicked}
-                onClick={() => {
-                  // setClicked(true);
-                  aStar();
-                }}
-              >
-                Visualize A*
-              </button>
             </div>
           </div>
           <StepsPath steps={steps}></StepsPath>
