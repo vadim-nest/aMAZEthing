@@ -46,12 +46,14 @@ function addTowers(width: number, height: number, graph: Graph) {
   const nTowers = 6;
   // let radius = Math.floor(Math.min(width, height)/3);
   for (let i = 0; i < nTowers; i++) {
+    const secondaryRadius = Math.floor(Math.random() * 10);
+    const secondaryAngle = 2 * Math.PI * Math.random();
     towers.push(
-      [midW +
-        Math.floor((width / 3) * Math.sin((2 * i * Math.PI) / nTowers)) +
+      [(midW +
+        Math.floor((width / 3) * Math.sin((2 * i * Math.PI) / nTowers) + secondaryRadius*Math.sin(secondaryAngle))) +
         width *
           (midH +
-            Math.floor((height / 3) * Math.cos((2 * i * Math.PI) / nTowers))), generateRandomNumbers()]
+            Math.floor((height / 3) * Math.cos((2 * i * Math.PI) / nTowers) + secondaryRadius*Math.cos(secondaryAngle))), generateRandomNumbers()]
     );
   }
   for (let tower of towers) {
