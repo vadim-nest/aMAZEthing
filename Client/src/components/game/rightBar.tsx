@@ -31,12 +31,22 @@ function crossButtonHover(isOnHover: boolean) {
 
 function styleCurrentMinionBorder(currentMinId: number) {
   const allYourMinions = document.querySelectorAll('.your-minion-button');
-
   allYourMinions.forEach(minion => {
-    (minion as unknown as HTMLElement).style.backgroundColor = 'var(--green)';
+    (minion as unknown as HTMLElement).style.backgroundColor = 'var(--main-green)';
+    // (minion as unknown as HTMLElement).style.borderColor = 'var(--main-green)';
+    (minion as unknown as HTMLElement).classList.remove('right-bar-selected-animal');
+
+  });
+
+  const allYourMinionsTextColor = document.querySelectorAll('.your-minion-button .right-bar-name');
+  allYourMinionsTextColor.forEach(text => {
+    (text as unknown as HTMLElement).style.color = 'var(--white-green)';
   });
 
   (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).style.backgroundColor = 'var(--purple)';
+  // (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).style.borderColor = 'var(--yellow)';
+  (document.querySelector(`.right-bar-selector-${currentMinId} .right-bar-name`) as unknown as HTMLElement).style.color = 'var(--yellow)';
+  (document.querySelector(`.right-bar-selector-${currentMinId}`) as unknown as HTMLElement).classList.add('right-bar-selected-animal');
 }
 
 function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | 'p2') => void}) {
