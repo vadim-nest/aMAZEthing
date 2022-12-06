@@ -50,6 +50,10 @@
   animation: enterTower linear 1s forwards;
 }
 
+.selected {
+  background-color: aquamarine;
+}
+
 @keyframes enterTower {
   0% {
     transition: 1s;
