@@ -112,7 +112,7 @@ export default function InsertionLesson() {
               </button>
               </div>
              
-
+              <div className="visual-array">
               <Visualization
                 width={WIDTH}
                 delay={DELAY}
@@ -131,6 +131,7 @@ export default function InsertionLesson() {
                 tower={undefined}
                 isSorted={false}
               />
+              </div>
             </div>
 
             <SortSteps steps={steps}></SortSteps>

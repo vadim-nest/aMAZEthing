@@ -108,7 +108,7 @@ export default function BubbleLesson() {
               </button>
               </div>
              
-
+              <div className="visual-array">
               <Visualization
                 width={WIDTH}
                 delay={DELAY}
@@ -127,6 +127,7 @@ export default function BubbleLesson() {
                 tower={undefined}
                 isSorted={false}
               />
+              </div>
             </div>
 
             <SortSteps steps={steps}></SortSteps>
