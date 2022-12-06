@@ -13,10 +13,10 @@ export default function InsertionLesson() {
   const [isSorted, setIsSorted] = useState(false);
 
   const WIDTH = 35;
-  const MIN_VAL = 3;
+  const MIN_VAL = 7;
   const MAX_VAL = 50;
   const NUM_BARS = 20;
-  const DELAY = 150;
+  const DELAY = 100;
   const PADTOP = 3;
   const MARGIN = 3;
   const FONTSIZE = 15
@@ -45,7 +45,7 @@ export default function InsertionLesson() {
   }
 
   return (
-    <Pagination leftName={'Bubble'} rightName={'Selection'} leftLink={'learning/bubbleLesson'} rightLink={'learning/selectionLesson'}>
+    <Pagination clicked={clicked} leftName={'Bubble'} rightName={'Selection'} leftLink={'learning/bubbleLesson'} rightLink={'learning/selectionLesson'}>
     <div className="whole-page-wrapper">
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>

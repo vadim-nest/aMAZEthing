@@ -12,11 +12,11 @@ export default function SelectionLesson() {
   const [isSorted, setIsSorted] = useState(false);
 
   let WIDTH = 35;
-  let MIN_VAL = 3;
+  let MIN_VAL = 7;
   let MAX_VAL = 50;
   let NUM_BARS = 20;
   let DELAY = 100;
-  let PADTOP = 10;
+  let PADTOP = 5;
   let MARGIN = 3;
   let HEIGHT = 5;
 

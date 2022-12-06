@@ -17,7 +17,7 @@ export default function BubbleLesson() {
   const MIN_VAL = 7;
   const MAX_VAL = 50;
   const NUM_BARS = 20;
-  const DELAY = 5;
+  const DELAY = 100;
   const PADTOP = 3;
   const MARGIN = 3;
   const HEIGHT = 5;
@@ -51,35 +51,36 @@ export default function BubbleLesson() {
       <div className="sorting-algo">
         <h1 className="explanation-title">{paragraphs.sortName}</h1>
         <p className="explanation-text">{paragraphs.firstP}</p>
+      </div>
 
-        <div className="lesson-wrapper-2">
-          <div>
-            <button
-              className={
-                clicked ? "button disabled clickSort" : "button clickSort"
-              }
-              disabled={clicked ? true : false}
-              onClick={() => initArr()}
-            >
-              new array
-            </button>
+      <div className="lesson-wrapper-2">
+        <div>
+          <button
+            className={
+              clicked ? "button disabled clickSort" : "button clickSort"
+            }
+            disabled={clicked ? true : false}
+            onClick={() => initArr()}
+          >
+            new array
+          </button>
 
-            <button
-              className={
-                clicked && !isSorted
-                  ? "button disabled clickSort"
-                  : isSorted
-                  ? "button disabled clickSort"
-                  : "button clickSort"
-              }
-              disabled={!isSorted && clicked ? true : isSorted ? true : false}
-              onClick={() => {
-                setClicked(true);
-              }}
-            >
-              visualize
-            </button>
-          </div>
+          <button
+            className={
+              clicked && !isSorted
+                ? "button disabled clickSort"
+                : isSorted
+                ? "button disabled clickSort"
+                : "button clickSort"
+            }
+            disabled={!isSorted && clicked ? true : isSorted ? true : false}
+            onClick={() => {
+              setClicked(true);
+            }}
+          >
+            visualize
+          </button>
+        </div>
           <Visualization
             width={WIDTH}
             delay={DELAY}
@@ -96,7 +97,6 @@ export default function BubbleLesson() {
             setIsSorted={setIsSorted} fontSize={FONTSIZE} tower={undefined} isSorted={false}          />
         </div>
       </div>
-    </div>
     </Pagination>
   );
 }

@@ -107,7 +107,14 @@
   margin-bottom: 15px;
 }
 
-
+.visualDiv{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 300px;
+  height: 300px;
+  width: inherit;
+}
 
 .array {
   display:flex;
