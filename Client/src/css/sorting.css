@@ -1,13 +1,13 @@
 
 .whole-page-wrapper {
   background-color: var(--white);
-  height: 90vh;
+  height: max-content;
   width: 88vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .visualRow {
@@ -27,6 +27,7 @@
   align-items: center;
   flex-direction: column;
   cursor: default;
+  margin-top: 20px;
 }
 
 .visualization-wrapper {
