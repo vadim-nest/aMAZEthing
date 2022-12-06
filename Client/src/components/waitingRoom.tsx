@@ -20,7 +20,6 @@ function WaitingRoom() {
   useEffect(() => {
     dispatch(defaultState());
     socket.on('receiveRoomId', (roomId: string, player: 'p1' | 'p2', type: 'Host' | 'Join' | 'Play') => {
-      console.log('receivedRoomID', roomId)
       setId(roomId);
       dispatch(receiveRoomId({roomId, player}));
       socket.emit(`ready${type}`, roomId);
@@ -34,9 +33,7 @@ function WaitingRoom() {
 
   useEffect(() => {
     socket.on('Game start', () => {
-      console.log('game start', roomId)
       if (roomId) {
-        console.log('navigating');
         navigate('/game');
       } else {
         socket.emit('retry game start');
@@ -54,15 +51,12 @@ function WaitingRoom() {
 
   function joinRoom(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(socket.id);
     const target = e.target as typeof e.target & {
       fname: { value: string };
     };
     const room = target.fname.value;
     socket.emit('clear waiting');
-    console.log('joining');
     socket.emit('join', room, userRedux.email);
-    console.log(socket.id);
   }
 
   function play() {

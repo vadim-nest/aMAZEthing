@@ -25,8 +25,6 @@ function Game() { // TODO: Extract logic to maze class
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log('setting maze generated');
-    // clearIntervals();
     dispatch(clearIntervals());
     socket.on('maze generated', () => {
       console.log('all players ready to play')
@@ -127,7 +125,8 @@ function Game() { // TODO: Extract logic to maze class
         if (currentMinion === minion.id) {
           setPath(showPath, showThoughtProcess, minion.id);
         } // TODO: get current Minion
-        requestAnimationFrame(step);
+        const newFrameId = requestAnimationFrame(step);
+        dispatch(addNewAnimationFrame(newFrameId));
       }
       const interval = requestAnimationFrame(step);
       dispatch(addNewAnimationFrame(interval));
@@ -171,7 +170,7 @@ function Game() { // TODO: Extract logic to maze class
             rotation: direction.rotation
           }
           dispatch(updateMinion({minionId: minion.id, updatedMinion}));
-          console.log(path.length, slow, slowAmount);
+
           if (path.length === 0 && (slow === 0 || slow >= slowAmount - 1)) {
             if (slow === slowAmount - 1) {
               updatedMinion = {
@@ -191,7 +190,6 @@ function Game() { // TODO: Extract logic to maze class
             dispatch(removeMovingMinion(minion.id));
             for (let tower of towers) {
               if (tower.minion === null && tower.xPos === updatedMinion.xPos && tower.yPos === updatedMinion.yPos && tower.alignment !== updatedMinion.alignment) {
-                console.log({tower, updatedMinion});
                 socket.emit('enterTower', tower.id, minion.id, roomId, currentPlayer);
                 enterTower(tower.id, (minion as minionType).id);
               }
@@ -199,7 +197,8 @@ function Game() { // TODO: Extract logic to maze class
             return;
           }
         }
-        requestAnimationFrame(step);
+        const newFrameId = requestAnimationFrame(step);
+        dispatch(addNewAnimationFrame(newFrameId));
       }
       const interval = requestAnimationFrame(step);
       dispatch(addNewAnimationFrame(interval));

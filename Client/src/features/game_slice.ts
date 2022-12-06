@@ -284,7 +284,7 @@ const gameSlice = createSlice({
         clearInterval(interval);
       }
       for (let interval of state.animationFrames) {
-        window.cancelAnimationFrame(interval);
+        cancelAnimationFrame(interval);
       }
       state.intervals = [];
       state.animationFrames = [];
