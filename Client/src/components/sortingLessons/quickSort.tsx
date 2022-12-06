@@ -6,22 +6,31 @@ import { quickSortVisual } from "../../utils/sorting-helper-visual";
 import { quickSortAlgo } from "../../utils/sorting-algo";
 import { useAlgo } from "../../features/hooks";
 import Pagination from "../learning/pagination";
+import StepsPath from "../pathfindingLessons/stepsPath";
+import PseudoCode from "./psuedoCode";
 
 export default function QuickLesson() {
   const [array, setArray] = useState([3, 5, 7]);
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
+  let steps = [
+    "Check neighbors",
+    "Add neighbors into queue",
+    "Shift queue and keep checking neighbors",
+    "Repeat until it founds last state",
+    "Find shortest path",
+  ];
 
-  const WIDTH = 35;
+  const WIDTH = 27;
   const MIN_VAL = 5;
   const MAX_VAL = 100;
   const NUM_BARS = 20;
   const FONTSIZE = 15
   const DELAY = 10;
   const PADTOP = 5;
-  const MARGIN = 3;
-  const HEIGHT = 3;
+  const MARGIN = 1.5;
+  const HEIGHT = 2.5;
 
   const paragraphs = {
     sortName: "Quick sort",
@@ -81,7 +90,8 @@ export default function QuickLesson() {
             visualize
           </button>
         </div>
-
+        <div className="visualRow">
+        <PseudoCode steps={steps}></PseudoCode>
         <Visualization
           fontColor={"white"}
           width={WIDTH}
@@ -96,6 +106,8 @@ export default function QuickLesson() {
           sortingAlgo={quickSortVisual}
           setClicked={setClicked}
           setIsSorted={setIsSorted} fontSize={FONTSIZE} tower={undefined} isSorted={false}        />
+               <StepsPath steps={steps}></StepsPath>
+        </div>
       </div>
     </div>
     </Pagination>

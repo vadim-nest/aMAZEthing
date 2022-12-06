@@ -3,6 +3,8 @@ import "../../css/sorting.css";
 import { selectionSortAlgo, generateArray } from "../../utils/sorting-algo";
 import { selectionSortVisual } from "../../utils/sorting-helper-visual";
 import Pagination from "../learning/pagination";
+import StepsPath from "../pathfindingLessons/stepsPath";
+import PseudoCode from "./psuedoCode";
 import Visualization from "./visualization";
 
 export default function SelectionLesson() {
@@ -10,20 +12,37 @@ export default function SelectionLesson() {
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[]] as number[][]);
   const [isSorted, setIsSorted] = useState(false);
+  let steps = [
+    "Start",
+    "Add neighbors into queue",
+    "Shift queue and keep checking neighbors",
+    "Repeat until it founds last state",
+    "Find shortest path",
+  ];
 
-  let WIDTH = 35;
-  let MIN_VAL = 7;
-  let MAX_VAL = 50;
-  let NUM_BARS = 20;
-  let DELAY = 100;
-  let PADTOP = 5;
-  let MARGIN = 3;
-  let HEIGHT = 5;
+  let psuedoCode = [
+    "bubbleSort(array)",
+    "for i <- 1 to indexOfLastUnsortedElement-1",
+    " if leftElement > rightElement",
+    "swap leftElement and rightElement",
+    "end bubbleSort"
+  ]
+
+  const WIDTH = 27;
+  const MIN_VAL = 7;
+  const MAX_VAL = 50;
+  const NUM_BARS = 20;
+  const DELAY = 100;
+  const PADTOP = 3;
+  const MARGIN = 1.5;
+  const HEIGHT = 5;
+  const FONTSIZE = 15
+
 
   let paragraphs = {
     sortName: "Selection sort",
     firstP:
-      "This algorithm scans all the items and finds the smallest, swaps it into position as the first item. Then repeats the selection sort on the remaining items. Worst time complexity O(N^2)",
+      "This algorithm scans all the items and finds the smallest, swaps it into position as the first item. Then repeats the selection sort on the remaining items. Worst time complexity O(N^2) This algorithm scans",
   };
 
   useEffect(() => {
@@ -78,6 +97,8 @@ export default function SelectionLesson() {
             visualize
           </button>
         </div>
+        <div className="visualRow">
+        <PseudoCode steps={psuedoCode}></PseudoCode>
         <Visualization
           fontColor={"white"}
           fontSize={15}
@@ -93,6 +114,8 @@ export default function SelectionLesson() {
           sortingAlgo={selectionSortVisual}
           setClicked={setClicked}
           setIsSorted={setIsSorted} tower={undefined} isSorted={false}        />
+             <StepsPath steps={steps}></StepsPath>
+        </div>
       </div>
     </div>
     </Pagination>
