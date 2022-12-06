@@ -73,6 +73,31 @@
   fill: var(--main-grey)
 }
 
+.shop-button-disabled, .shop-button-disabled .shop-just-stats {
+  color: var(--main-grey);
+}
+
+.shop-button-disabled {
+  position: relative;
+}
+
+.shop-button-disabled:hover {
+  border-color: var(--sand);
+}
+
+.shop-button-disabled .price {
+  color: var(--yellow);
+}
+
+.shop-button-disabled::after {
+  content: 'X';
+  color: var(--red);
+  position: absolute;
+  transform: scale(400%);
+  left: 50%;
+  top: 10%
+}
+
 /* width */
 .shop-list::-webkit-scrollbar {
   width: 4px;

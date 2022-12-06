@@ -3,7 +3,7 @@ import { animal, badger, bear, deer, hare, koala, squirrel } from '../../utils/t
 import { useAppDispatch, useAppSelector, whichAnimalSVG } from '../../features/hooks';
 import React from 'react';
 
-let allAnimals = [ badger, bear, deer, hare, koala, squirrel ];
+let allAnimals = ([ badger, bear, deer, hare, koala, squirrel ]).sort((a, b) => a.cost - b.cost);
 
 export default function Shop({
   addNewMinion,
@@ -17,13 +17,24 @@ export default function Shop({
   const dispatch = useAppDispatch();
   const { gameStats: {p1Coins, p2Coins}, currentPlayer, currentMinion } = useAppSelector(store => store.game);
 
-  function shopItem(animal: animal) {
-    return (
-    <div className='buy-minion-button' onClick={() => {
-      if (currentPlayer === 'p1' && p1Coins >= animal.cost) addNewMinion(animal, 'p1')
-      else if (currentPlayer === 'p2' && p2Coins >= animal.cost) addNewMinion(animal, 'p2')
+  function getPlayerCoins(player: 'p1' | 'p2') {
+    if (player === 'p1') return p1Coins;
+    return p2Coins;
+  }
 
-      setShopOpen(false)
+  function shopItem(animal: animal) {
+
+
+
+
+
+    return (
+    <div className={`buy-minion-button ${getPlayerCoins(currentPlayer) < animal.cost ? 'shop-button-disabled' : ''}`} onClick={() => {
+      if (getPlayerCoins(currentPlayer) >= animal.cost) {
+        addNewMinion(animal, currentPlayer);
+        setShopOpen(false);
+      }
+
 
     }}>
     <div className='shop-stats'>
