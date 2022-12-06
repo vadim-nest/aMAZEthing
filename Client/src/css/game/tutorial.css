@@ -1,5 +1,5 @@
 #tutorial {
-    position: absolute;
+    position:relative;
     z-index: 101;
     background-color: var(--sand);
     width: 50%;
@@ -7,7 +7,11 @@
     border: 3px solid var(--main-green);
     border-radius: 15px;
     text-align: center;
-    margin: auto;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     bottom: 0;
     top: 0;
     left: 0;
