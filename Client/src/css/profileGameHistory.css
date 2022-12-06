@@ -19,9 +19,18 @@
   border-radius: 20px;
   overflow: hidden;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
   background-color: var(--purple);
   padding: 20px;
+}
+
+.game-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .match-win {
@@ -36,10 +45,10 @@
   border: 3px solid var(--main-grey);
 }
 
-.gameDuration {
+.stats-profile {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .result-win {
@@ -73,10 +82,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 24px;
+}
+
+.gameStatsText {
+  color: var(--yellow);
 }
 
 .durationDate {
-  font-size: 17px !important;
+  font-size: 15px !important;
+  vertical-align: bottom;
 }
 
 .image-profile {

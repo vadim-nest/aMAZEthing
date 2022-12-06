@@ -1,129 +1,134 @@
-
 .avatar {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50px;
-    margin-top: 5px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: 3px solid var(--yellow);
+  margin-top: 5px;
+  color: var(--yellow);
 }
 
 .profile-page {
-    height: 90vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .user-dashboard {
-    min-height: 510px;
-    height: 80vh;
-    width: 40vw;
-    border-radius: 20px;
-    border: 3px solid var(--yellow);
-    padding: 20px;
-    margin: 20px;
+  min-height: 510px;
+  height: 80vh;
+  width: 40vw;
+  border-radius: 20px;
+  border: 3px solid var(--yellow);
+  padding: 20px;
+  margin: 20px;
 }
 
 .user-part {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .user-name {
-    margin: 0 0 0 2%;
+  margin: 20px;
 }
 
-.learning-progress-title, .achievements {
-    margin: 10px 0 0 10px;
+.learning-progress-title,
+.achievements {
+  margin: 10px 0 0 10px;
 }
 
 .progress {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-.sort-progress, .path-progress {
-    margin: 2% 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.sort-progress,
+.path-progress {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.sort-progress-img, .path-progress-img {
-    height: 8rem;
-    width: 10rem;
+.sort-progress-img,
+.path-progress-img {
+  margin: 10px;
+  height: 120px;
+  width: 160px;
 }
 
 .algo-name {
-    text-align: center;
-    font-size: 20px !important;
+  text-align: center;
+  font-size: 20px !important;
 }
 
 .user-stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 2;
 }
 
 .stats-line {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 10px;
-    color: var(--white-green);
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+  grid-gap: 20px;
+  padding: 10px;
+  color: var(--white-green);
 }
 
 .stats-text {
-    font-size: 24px !important;
-    font-weight: normal;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+  font-size: 24px !important;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .wins-yellow {
-    font-size: 28px !important;
-    color: var(--yellow);
+  font-size: 28px !important;
+  color: var(--yellow);
 }
 
 .losses-red {
-    font-size: 28px !important;
-    color: var(--red);
+  font-size: 28px !important;
+  color: var(--red);
 }
 
 .created {
-    text-align: right;
-    color:var(--white-green)
+  text-align: right;
+  color: var(--white-green);
 }
 
-.input-body, .input-button {
-    height: 50px;
-    width: 250px;
-    border: 0;
-    border-bottom: 1px solid var(--white-green);
-    background-color: transparent;
-    color: var(--white-green);
-    margin: 6px;
+.input-body,
+.input-button {
+  height: 50px;
+  width: 250px;
+  border: 0;
+  border-bottom: 1px solid var(--white-green);
+  background-color: transparent;
+  color: var(--white-green);
+  margin: 6px;
 }
 
 .input-button {
-    width: 50px;
-    border: 0;
-    padding: 0;
-    outline: none;
-    color:var(--yellow);
-    font-size: large;
+  width: 50px;
+  border: 0;
+  padding: 0;
+  outline: none;
+  color: var(--yellow);
+  font-size: large;
 }
 
-.input-body{
-    font-size: large;
-    width:50%;
+.input-body {
+  font-size: large;
+  width: 50%;
 }
 
 *:focus {
-    outline: none;
-    background-color: transparent;
+  outline: none;
+  background-color: transparent;
 }

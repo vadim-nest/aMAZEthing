@@ -9,7 +9,6 @@ import { refreshUsername } from '../../features/user_slice';
 import ProfileGameHistory from './profileGameHistory';
 import sort from '../../assets/profile/sort.png';
 import path from '../../assets/profile/path.png';
-import changeMe from '../../assets/profile/changeMe.png';
 
 function Profile() {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -63,9 +62,9 @@ function Profile() {
     <div className="profile-page">
       <div className="user-dashboard">
         <div className="user-part">
-          <div className="avatar">
-            {user && <img className="avatar" src={`${user?.picture}`} />}
-          </div>
+          <div className="avatar">{user?.username}</div> 
+          {/* //how to get the first letter? */}
+            {/* {user && <img className="avatar" src={`${user?.picture}`} />} */}
           <div className="user-name">
             <h1 id="username">
               HELLO{' '}
@@ -125,15 +124,15 @@ function Profile() {
           <div className="stats-line">
             <h4 className="stats-text">
               MATCHES
-              <h5 className="stats-text">
+              <h4 className="stats-text">
                 {Object.values(userRedux.overallWins).reduce(
                   (acc, el) => acc + el
                 )}
-              </h5>
+              </h4>
             </h4>
             <h4 className="stats-text">
               WIN RATE
-              <h5 className="stats-text">
+              <h4 className="stats-text">
                 {Math.floor(
                   (userRedux.overallWins.wins * 100) /
                     Object.values(userRedux.overallWins).reduce(
@@ -141,30 +140,30 @@ function Profile() {
                     )
                 )}
                 %
-              </h5>
+              </h4>
             </h4>
             <h4 className="stats-text">
               GOLD EARNED
-              <h5 className="stats-text">{userRedux.totalGold}</h5>
+              <h4 className="stats-text">{userRedux.totalGold}</h4>
             </h4>
           </div>
           <div className="stats-line">
             <h4 className="stats-text">
               WINS
-              <h5 className="wins-yellow">{userRedux.overallWins.wins}</h5>
+              <h4 className="wins-yellow">{userRedux.overallWins.wins}</h4>
             </h4>
             <h4 className="stats-text">
               DRAWS
-              <h5>{userRedux.overallWins.losses}</h5>
+              <h4>{userRedux.overallWins.draws}</h4>
             </h4>
             <h4 className="stats-text">
               LOSSES
-              <h5 className="losses-red">{userRedux.overallWins.losses}</h5>
+              <h4 className="losses-red">{userRedux.overallWins.losses}</h4>
             </h4>
           </div>
-          <h3 className="created">
+          {/* <h3 className="created">
             Account created {new Date().toLocaleDateString()}
-          </h3>{' '}
+          </h3>{' '} */}
           {/* get the date when the account was created */}
         </div>
       </div>

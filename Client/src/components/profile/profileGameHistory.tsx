@@ -23,6 +23,7 @@ export default function ProfileGameHistory() {
             key={index}
           >
             <div className="gameDuration">
+              <div className='game-status'>
               <div>
                 {element.result === 'win' && (
                   <h1 className="result-win">{element.result}</h1>
@@ -34,36 +35,34 @@ export default function ProfileGameHistory() {
                   <h1 className="result-draw">{element.result}</h1>
                 )}
               </div>
-              <div className="duration">
-                <h3 className="durationDate">VS: {element.opponentUsername}</h3>
-              </div>
               <div className="date">
                 <h3 className="durationDate">
                   DATE: {new Date(element.finishedAt).toLocaleString()}
                 </h3>
               </div>
-            </div>
-            <div className="minionStats">
-              <div className="image-profile">
-                <Squirrel currentPlayer="p1-color" />
               </div>
-              <h3 className="gameStatsText">{element.minions} Minions</h3>
-            </div>
-            <div className="towerStats">
-              <div className="image-profile">
-                <TowerSVG playerClass="neutralTower" />
+              {/* <div className="duration">
+                <h3 className="durationDate">VS: {element.opponentUsername}</h3>
+              </div> */}
+              <div className="stats-profile">
+                <div className="minionStats">
+                  <h3 className="gameStatsText">{element.minions}</h3>
+                  <h3>Minions</h3>
+                </div>
+                <div className="towerStats">
+                  <h3 className="gameStatsText">{element.towers}</h3>
+                  <h3>Towers</h3>
+                </div>
+                <div className="goldStats">
+                  <h3 className="gameStatsText">{element.gold}</h3>
+                  <h3>Gold</h3>
+                </div>
               </div>
-              <h3 className="gameStatsText">{element.towers} Towers</h3>
-            </div>
-            <div className="goldStats">
-              <div className="image-profile">
-                <CoinSVG />
-              </div>
-              <h3 className="gameStatsText">{element.gold} Gold</h3>
             </div>
           </div>
         );
       })}
+      ;
     </div>
   );
 }
