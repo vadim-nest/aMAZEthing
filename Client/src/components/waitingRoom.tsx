@@ -203,7 +203,7 @@ function WaitingRoom() {
         </div>
       </div>
       <div className='wr-game-history'>
-
+            <button onClick={() => navigate('/tutorial')}><h1>Tutorial</h1></button>
       </div>
     </div>
   );
