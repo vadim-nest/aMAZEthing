@@ -12,15 +12,17 @@ export default function ProfileGameHistory() {
   return (
     <div className="gameDashboard">
       {games.map((element: any, index: number) => {
+        console.log(element);
         return (
           <div className="match" key={index}>
             <div className="gameDuration">
               <div>
-                {element.winner === true ? <h1 className="result-win">{element.result}</h1> : <h1 className="result-loss">{element.result}</h1>}
+                <h1>{element.winner}</h1>
+                {element.result === 'win' ? <h1 className="result-win">{element.result}</h1> : <h1 className="result-loss">{element.result}</h1>}
               </div>
               <div className="duration"><h3 className='durationDate'>VS: {element.opponentUsername}</h3></div>
               <div className="duration"><h3 className='durationDate'>TIME: 5 min</h3></div>
-              <div className="date"><h3 className='durationDate'>DATE: {element.finishedAt}</h3></div>
+              <div className="date"><h3 className='durationDate'>DATE: {new Date(element.finishedAt).toLocaleString()}</h3></div>
             </div>
             <div className="minionStats">
               <div className='image-profile'>
