@@ -1,5 +1,5 @@
 #tutorial {
-    position: absolute;
+    position:relative;
     z-index: 101;
     background-color: rgba(255, 255, 255, 1);
     width: 50%;
@@ -8,14 +8,17 @@
     border-radius: 4px;
     text-align: center;
     float: right;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
+}
+
+.tutorial-background{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--main-green-transparent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
 }
 
 #tutorialCounter {
