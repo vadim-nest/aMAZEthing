@@ -99,6 +99,11 @@
 
 .right-bar-selected-animal {
   border-color: var(--yellow);
+  background-color: var(--purple);
+}
+
+.right-bar-selected-animal .right-bar-name {
+  color: var(--yellow);
 }
 
 .right-bar-selected-animal:hover {
