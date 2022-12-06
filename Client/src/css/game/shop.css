@@ -67,6 +67,10 @@
 
 }
 
+.neutral-color {
+  fill: var(--main-grey)
+}
+
 /* width */
 .shop-list::-webkit-scrollbar {
   width: 4px;

@@ -1,7 +1,6 @@
 import '../../css/game/rightBar.css';
 import ShopSVG from '../svg/ShopSVG';
 import { animal, minionType } from '../../utils/types';
-import { Squirrel, Badger, Hare, Deer, Koala, Bear } from '../svg/animalsSVG';
 import { useState } from 'react';
 import Shop from './shop';
 import CloseCross from '../svg/closeCross';
@@ -43,7 +42,7 @@ function styleCurrentMinionBorder(currentMinId: number) {
 function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | 'p2') => void}) {
 
   const [shopOpen, setShopOpen] = useState(false);
-  const { allTilesHidden, currentPlayer, minions } = useAppSelector(state => state.game);
+  const { allTilesHidden, currentPlayer, minions, currentMinion } = useAppSelector(state => state.game);
   const dispatch = useAppDispatch();
 
   let allPlayerMinions: Array<minionType> = [];
@@ -61,13 +60,11 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
 
   let minionsToRender = allPlayerMinions.map((p1minion) => {
 
-
-
     return (
       <>
         <div className={`your-minion-button right-bar-selector-${p1minion.id}`} onClick={() => {
             dispatch(updateCurrentMinion(p1minion.id));
-            styleCurrentMinionBorder(p1minion.id);
+            styleCurrentMinionBorder(currentMinion as number);
           }}>
           <h1 className='right-bar-name'>{p1minion.name}</h1>
           <h1 className='current-minion-svg-left-bar'>{whichAnimalSVG(minions[p1minion.id])}</h1>
@@ -79,15 +76,14 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
   return (
     <div className='right-bar'>
 
-
-
       {shopOpen ? (
-        <Shop minions={minions} currentPlayer = {currentPlayer} addNewMinion={addNewMinion}/>
+        <Shop currentPlayer = {currentPlayer} addNewMinion={addNewMinion} setShopOpen={setShopOpen}/>
       ) : <div className='your-minions'>
 
       {minions &&
+
         <>
-          <ul className='your-minions-list'>
+            <ul className='your-minions-list'>
             {minionsToRender}
             {allPlayerMinions.length < 1 &&
               <div className='open-shop-arrow'>
