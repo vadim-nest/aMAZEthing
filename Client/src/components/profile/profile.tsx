@@ -17,7 +17,7 @@ function Profile() {
   const userRedux = useAppSelector((state) => state.user);
   const [inputOpen, setInputOpen] = useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null as any);
+
 
   let currentSortProgress = 0;
   let currentPathProgress = 0;
@@ -39,6 +39,7 @@ function Profile() {
   }
 
   async function updateChanges(e: any) {
+
     e.preventDefault();
     if (!isAuthenticated) return;
     try {
@@ -51,7 +52,8 @@ function Profile() {
     } catch (err) {
       console.log(err);
     }
-    inputRef.current.value = '';
+
+
   }
 
   const toggleInput = () => {
@@ -66,35 +68,19 @@ function Profile() {
           <div className="user-name">
             <h1 id="username">
               <span className='profile-smaller-text'>hi,</span>
-              <div className="username-input">
-                <input className='user-name-change'
-                      placeholder={userRedux.username} onClick={() => {
-                        }}></input>
-                <button className="change-the-name-button ">✓</button>
-              </div>
+                <form>
+                  <div className="username-input">
+                    <input className='user-name-change'
+                    maxLength={15}
+                    onChange={(e) =>  changeUsername(e)}
+                          placeholder={userRedux.username}></input>
+                    <button onClick={(e) => {
+                                        updateChanges(e);
+                                        setInputOpen(false);
+                                      }} className="change-the-name-button">✓</button>
+                  </div>
+                </form>
             </h1>
-            <form className={`open-${inputOpen}`}>
-              <input
-                ref={inputRef}
-                id="input-username-profile"
-                type="text"
-                placeholder="username"
-                name="username"
-                onChange={changeUsername}
-                className="input-body"
-                maxLength={15}
-              />
-              <button
-                id="change-username-profile"
-                className="input-button"
-                onClick={(e) => {
-                  updateChanges(e);
-                  setInputOpen(false);
-                }}
-              >
-                Save
-              </button>
-            </form>
             <h2 className='profile-email'><span className='profile-smaller-text'>Email:</span>{(userRedux.email)?.split('').map(letter => ['.', '@'].includes(letter) ? <span className='profile-yellow-text'>{letter}</span> : letter)}</h2>
           </div>
           <div className="avatar"><span className='avatar-letter'>{userRedux?.username.charAt(0).toUpperCase()}</span></div>

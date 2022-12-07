@@ -36,7 +36,7 @@
   background-color: transparent;
   border: none;
   width: fit-content;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 
 .wr-amazing-text {
@@ -73,6 +73,10 @@
   display: flex;
   flex-direction: column;
   padding-left: 3vw;
+}
+
+.wr-play-button {
+  margin-right: auto;
 }
 
 .wr-play-button:hover {
@@ -152,6 +156,14 @@
   min-width: 100px;
   min-height: 100px;
   animation: spinner 4s linear infinite;
+}
+
+.tutorial-button {
+  cursor: pointer;
+}
+
+.tutorial-button:hover {
+  color: var(--red);
 }
 
 

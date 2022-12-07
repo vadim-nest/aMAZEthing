@@ -69,7 +69,7 @@ function WaitingRoom() {
     setJoinClicked(joinButton);
     setPlayClicked(playButton);
   }
-  
+
   function onCreateCLicked() {
     if (!createClicked) {
       setButtonsClicked(true, false, false);
@@ -195,16 +195,15 @@ function WaitingRoom() {
               <div className="loading-animation" />
             </>
           ) : (
-            <div className="wr-amazing-text">
-              <p>The most amazing</p>
-              <p>learning game.</p>
+            <div>
+              <h1 className={`tutorial-button wr-play-button ${playClicked && 'wait-r-red'} ${
+                joinClicked && 'joinClicked'
+              } ${createClicked && 'createClicked'}`} onClick={() => navigate('/tutorial')}>Tutorial</h1>
             </div>
           )}
         </div>
       </div>
-      <div className='tutorial-button waiting-page-join-button'>
-            <h1 onClick={() => navigate('/tutorial')}>Tutorial</h1>
-      </div>
+
     </div>
   );
 }
