@@ -7,31 +7,31 @@ export function delay(time: number) {
   }
 
 
-export async function showPath(path: number[], visited: boolean = false) {
+export async function showPath(path: number[], visited: boolean = false, algo:string = 'bfs') {
     for (let i = 0; i < path.length; i++) {
       await delay(10);
-      document.getElementById(`${path[i]}`)!.style.background = visited
+      document.getElementById(`${algo}${path[i]}`)!.style.background = visited
         ? "var(--purple)"
         : "var(--yellow)";
       await delay(10);
       if (i + 1 !== path.length) {
         if (
           document.getElementById(
-            `${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`
+            `${algo}${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`
           ) ||
           document.getElementById(
-            `${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`
+            `${algo}${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`
           )
         ) {
           if (path[i] < path[i + 1])
             document.getElementById(
-              `${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`
+              `${algo}${path[i]},${path[i + 1]}-${path[i + 1]},${path[i]}`
             )!.style.background = visited
               ? "var(--purple)"
               : "var(--yellow)";
           else
             document.getElementById(
-              `${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`
+              `${algo}${path[i + 1]},${path[i]}-${path[i]},${path[i + 1]}`
             )!.style.background = visited
               ? "var(--purple)"
               : "var(--yellow)";

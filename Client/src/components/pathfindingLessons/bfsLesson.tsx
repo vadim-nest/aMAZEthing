@@ -7,11 +7,13 @@ import { showPath } from '../../utils/functionalities';
 import Pagination from '../learning/pagination';
 import MapKeys from './map-keys';
 import StepsPath from './stepsPath';
+import {delay} from '../../utils/functionalities'
 
 function BfsLesson() {
   const [stats, setStats] = useState({ visited: 0, path: 0 });
   const [graph, setGraph] = useState<any>();
-  const [clicked] = useState(false);
+  const [graphNumber, setGraphNumber] = useState<number>(0);
+  const [clicked,setClicked] = useState(false);
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
@@ -29,6 +31,8 @@ function BfsLesson() {
     const newgraph = generateConnectedGraph(width, width, true);
     newgraph.removeUnweightedEdges();
     setGraph(newgraph);
+    setClicked(false);
+    setGraphNumber(prev => prev + 1);
     setStats({ visited: 0, path: 0 });
   }
 
@@ -41,13 +45,13 @@ function BfsLesson() {
       });
       let path: any = Array.from(BFSVisualpaths.visited);
       console.log('PATH', path);
-      await showPath(path, true);
+      await showPath(path, true,`${graphNumber}bfs`);
       path = Array.from(BFSVisualpaths.path);
-      await showPath(path);
+      await showPath(path,false,`${graphNumber}bfs`);
     }
-    //setClicked(false)
+    
   }
-
+  
   return (
     <Pagination
       clicked={clicked}
@@ -77,7 +81,7 @@ function BfsLesson() {
             <div id="myCanvas">
               <div className="buttons-pos">
                 <button
-                  className={clicked ? 'button disabled' : 'button'}
+                  className={'button'}
                   onClick={() => {
                     newGraph();
                   }}
@@ -88,7 +92,7 @@ function BfsLesson() {
                   className={clicked ? 'button disabled' : 'button'}
                   disabled={clicked}
                   onClick={() => {
-                    //setClicked(true);
+                    setClicked(true);
                     bfs();
                   }}
                 >
@@ -102,7 +106,8 @@ function BfsLesson() {
                 {graph &&
                   graph.vertices.map((vertex: value) => (
                     <GraphVertex
-                      key={Math.random()}
+                      algorithm={`${graphNumber}bfs`}
+                      key={`${vertex}-${graphNumber}`}
                       width={width}
                       vertex={vertex}
                       edges={graph.edges.filter(

@@ -6,7 +6,7 @@ function StepsTutorial({ setSkipTutorial }: { setSkipTutorial: any }) {
   const [maxStates] = useState(5);
 
   return (
-    <div className="git">
+    <div className="tutorial-background">
       <div id="tutorial">
         {useTutorial(steps)}
         <div id="tutorialCounter">

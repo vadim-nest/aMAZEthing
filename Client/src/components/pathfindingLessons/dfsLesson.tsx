@@ -11,7 +11,9 @@ import StepsPath from './stepsPath';
 function DfsLesson() {
   const [stats, setStats] = useState({ visited: 0, path: 0 });
   const [graph, setGraph] = useState<any>();
+  const [graphNumber, setGraphNumber] = useState<number>(0);
   const [clicked, setClicked] = useState(false);
+  
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
@@ -30,6 +32,8 @@ function DfsLesson() {
     const newGraph = generateConnectedGraph(width, width, true);
     newGraph.removeUnweightedEdges();
     setGraph(newGraph);
+    setClicked(false);
+    setGraphNumber(prev => prev + 1);
     setStats({ visited: 0, path: 0 });
   }
 
@@ -42,11 +46,10 @@ function DfsLesson() {
       });
       let path: any = Array.from(DFSVisualpaths.visited);
       console.log('PATH', path);
-      await showPath(path, true);
+      await showPath(path, true,`${graphNumber}dfs`);
       path = Array.from(DFSVisualpaths.path);
-      await showPath(path);
+      await showPath(path,false,`${graphNumber}dfs`);
     }
-    //setClicked(false);
   }
 
   return (
@@ -77,8 +80,7 @@ function DfsLesson() {
           <div className="lesson-wrapper">
             <div className="buttons-pos">
               <button
-                className={clicked ? 'button disabled' : 'button'}
-                disabled={clicked}
+                className={'button'}
                 onClick={() => {
                   newGraph();
                 }}
@@ -89,7 +91,7 @@ function DfsLesson() {
                 className={clicked ? 'button disabled' : 'button'}
                 disabled={clicked}
                 onClick={() => {
-                  //setClicked(true);
+                  setClicked(true);
                   dfs();
                 }}
               >
@@ -104,6 +106,7 @@ function DfsLesson() {
                 {graph &&
                   graph.vertices.map((vertex: value) => (
                     <GraphVertex
+                      algorithm={`${graphNumber}dfs`}
                       key={Math.random()}
                       width={width}
                       vertex={vertex}
