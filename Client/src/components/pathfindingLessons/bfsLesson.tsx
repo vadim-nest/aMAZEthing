@@ -11,7 +11,7 @@ import StepsPath from './stepsPath';
 function BfsLesson() {
   const [stats, setStats] = useState({ visited: 0, path: 0 });
   const [graph, setGraph] = useState<any>();
-  const [clicked, setClicked] = useState(false);
+  const [clicked] = useState(false);
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
