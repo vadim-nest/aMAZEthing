@@ -144,11 +144,13 @@ export function useTutorial(step: number = 1) {
             Each animal has different <span className='yellow-learning'>path finding</span> and <span className='yellow-learning'>sorting</span>{' '}
             algorithms. Head to our <a className='yellow-learning' href='/learning' >learning section</a> to find out more{' '}
           </h3>
-          <img className="tutorial-img" src="./src/assets/tutorial/shop.png"></img>
-          <img
-            className="tutorial-img"
-            src="./src/assets/tutorial/buy-minion.png"
-          ></img>
+          <div className="tutimages">
+            <img className="tutorial-img" src="./src/assets/tutorial/shop.png"></img>
+            <img
+              className="tutorial-img"
+              src="./src/assets/tutorial/buy-minion.png"
+            ></img>
+          </div>
         </>
       );
     case 3:

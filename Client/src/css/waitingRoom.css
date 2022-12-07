@@ -154,6 +154,7 @@
   animation: spinner 4s linear infinite;
 }
 
+
 @keyframes spinner {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -167,4 +168,12 @@
 .waiting-page-create-button.playClicked, .waiting-page-create-button.joinClicked, .waiting-page-join-button.playClicked, .waiting-page-join-button.joinClicked, .wr-play-button.joinClicked, .wr-play-button.createClicked {
   color: var(--dark-green) !important;
   cursor: default;
+}
+
+.tutorial-button h1{
+  text-align: center;
+}
+
+.tutorial-button.waiting-page-join-button:hover h1{
+  color: var(--yellow);
 }

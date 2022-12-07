@@ -6,6 +6,10 @@
   scroll-behavior: smooth;
 }
 
+.array {
+  text-align: center;
+}
+
 :root {
   --main-grey: rgb(126, 134, 133);
   --light-grey: #dbdbdb;
