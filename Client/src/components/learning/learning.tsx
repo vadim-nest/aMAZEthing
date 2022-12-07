@@ -59,12 +59,11 @@ export default function LearningPage() {
               </button>
             </div>
             <p className="explanation-text">
-              Sorting Algorithms are used to arrange elements in a list into a
-              specific order, often either ascending or descending.
+              Sorting Algorithms are used to arrange elements of a list into a
+              specific order.
             </p>
             <p className="explanation-text">
-              Sorts are most commonly used with numerical or a form of
-              alphabetical elements.
+              Sorts are most commonly used with numerical or alphabetical elements.
             </p>
             <p className="explanation-text">
               There are many sorting algorithms, but some are better than
@@ -94,19 +93,10 @@ export default function LearningPage() {
               </div>
             <p className="explanation-text">
               At its core, a path finding algorithm seeks to find a
-              path between two points. This application visualizes various path
-              finding algorithms in action.
+              path between two points.
             </p>
             <p className="explanation-text">
-              All of the algorithms on this application are adapted for a 2D
-              grid, where 90 degree turns have a "cost" of 1 and movements from
-              a node to another have a "cost" of 1.
-            </p>
-            <p className="explanation-text">
-              Note that some algorithms are unweighted, while others are
-              weighted. Unweighted algorithms do not take turns or weight nodes
-              into account, whereas weighted ones do. Additionally, not all
-              algorithms guarantee the shortest path.
+              More advanced algorithms take into account weights and distance to the goal.
             </p>
           </div>
         </div>

@@ -16,8 +16,8 @@ export default function MergeLesson() {
   let steps = [
     "Divide the list of items into two smaller lists.",
     "Repeat this process for each of the two smaller lists until each list contains only a single item.",
-    "Compare the items in each list and merge them together in a way that creates a fully-sorted list.",
-    "Continue merging lists until there is only one, fully-sorted list remaining.",
+    "Compare the first item in each (sorted) sub-list, choose the smaller item until 'merged' into a larger (sorted) list.",
+    "Continue merging sub lists until there is only one, fully-sorted list remaining.",
   ];
 
   let isMerge = true
@@ -36,7 +36,7 @@ export default function MergeLesson() {
   const paragraphs = {
     sortName: "Merge sort",
     firstP:
-      "Merge sort is a divide-and-conquer algorithm that works by recursively breaking down a list into smaller sub-lists until each sub-list consists of only a single element and merging those sub-lists in a manner that results in a sorted list.",
+      "Merge sort is a recursive, divide-and-conquer algorithm. It breaks down a list into (sorted) single elements, and then efficiently merges them back into a sorted list.",
   };
 
   useEffect(() => {

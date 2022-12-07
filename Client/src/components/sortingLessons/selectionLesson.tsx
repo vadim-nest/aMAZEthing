@@ -33,7 +33,7 @@ export default function SelectionLesson() {
   let paragraphs = {
     sortName: "Selection sort",
     firstP:
-      "This algorithm scans all the items and finds the smallest, swaps it into position as the first item. Then repeats the selection sort on the remaining items. Worst time complexity O(N^2) This algorithm scans",
+      "This algorithm scans all the items and finds the smallest, swapping it with the first item. This repeats for the remaining items.",
   };
 
   useEffect(() => {

@@ -18,10 +18,9 @@ function DfsLesson() {
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
     'Check one neighbor',
-    'If we haven\'t visited that neighbor, move there and repeat the process',
-    'Once the path is explored for one neighbor, go back to the nearest unexplored neighbor and start over',
-    'Repeat until we reach the final location',
-    'Find shortest path',
+    'If we haven\'t visited that neighbor, move there and repeat',
+    'Once all neighbors have been visited, go back to the nearest unexplored neighbor and start over',
+    'Repeat until we reach the final location'
   ];
 
   useEffect(() => {
@@ -66,9 +65,9 @@ function DfsLesson() {
             Depth First Search (DFS) algorithm
           </h1>
           <p className="explanation-text">
-            DFS starts at the root node of a tree and goes as far as it
-            can down a given path, then backtracks until it finds an
-            unexplored path, and then explores it.
+            DFS goes as far as it
+            can down a given path, then backtracks to an
+            unexplored path and continues.
           </p>
           <p className="explanation-text centered-text">
             <span className="yellow-learning">UNWEIGHTED</span> - a very bad

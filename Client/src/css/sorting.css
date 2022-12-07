@@ -113,6 +113,7 @@
 .steps-visualization {
   min-height: max-content;
   min-width: 250px;
+  max-width: 320px;
   border-radius: 15px;
   display: flex;
   justify-content: flex-start;

@@ -43,7 +43,7 @@ export default function BubbleLesson() {
   const paragraphs = {
     sortName: "Bubble sort",
     firstP:
-      "Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. Starting on one side, it compares adjacent items and keep “bubbling” the larger one to the other side.",
+      "Bubble Sort swaps adjacent elements if they are in the wrong order, 'bubbling' up the list.",
   };
 
   useEffect(() => {

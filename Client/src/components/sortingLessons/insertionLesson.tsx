@@ -14,12 +14,11 @@ export default function InsertionLesson() {
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
   let steps = [
-    "The first element in the array is assumed to be sorted.",
-    "Compare the second with the previous element.",
-    "If the second element is smaller than the previous.",
-    "the element is swapped",
-    "Repeat for subsequent indexes ",
-    "Repeat similar comparisons until the array is sorted",
+    "Assume the elements to the left are sorted.",
+    "Compare the current element to the previous element.",
+    "Swap if the current element is out of place.",
+    "Repeat until the current element is sorted.",
+    "Repeat for the rest of the array.",
   ];
 
 
@@ -36,7 +35,7 @@ export default function InsertionLesson() {
   const paragraphs = {
     sortName: "Insertion sort",
     firstP:
-      "Starts on one side and compares two first items, sorts them and moves on to the next item checking if it is smaller than the previous items and places it in its place. Worst time complexity O(N^2). ",
+      "Insertion sort compares an element to the previous elements one by one, 'bubbling' down until the sub array is sorted.",
   };
 
   useEffect(() => {

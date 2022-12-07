@@ -16,11 +16,10 @@ function DijkstraLesson() {
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
-    'Check neighbors',
-    'Add neighbors into queue',
-    'Shift queue and keep checking neighbors',
-    'Repeat until it founds last state',
-    'Find shortest path',
+    'Start at a node',
+    'Assign neighbors a \'cost\' to visit',
+    'Select the neighbor with the lowest cost',
+    'Repeat until goal reached',
   ];
 
   useEffect(() => {
@@ -36,7 +35,6 @@ function DijkstraLesson() {
   }
 
   async function dijkstra() {
-    setClicked(false);
     const DIJKVisualpaths = graph.findPath(0, end, 'vdijk');
     console.log('PATH', DIJKVisualpaths);
     if (DIJKVisualpaths) {

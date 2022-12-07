@@ -9,7 +9,7 @@ function MapKeys({ animations, isTrue}: { animations: any, isTrue?:string }) {
     <div className="sort-keys">
       <h2>Summary</h2>
       <div className="flex-row">
-        <h5>Average Complexity:</h5>
+        <h5>AVG Complexity:</h5>
        { isTrue === 'Merge' ?  <h4>O(n*log n)</h4> : isTrue === 'Quick' ?   <h4>O(n*log n)</h4> : <h4>O(n^2)</h4>}
       </div>
       <div className="flex-row">

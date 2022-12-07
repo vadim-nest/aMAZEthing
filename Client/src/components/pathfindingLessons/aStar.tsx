@@ -17,11 +17,10 @@ function AStarLesson() {
   const [end, setEnd] = useState<any>(width * width - 1);
   const [heuristicValue, setHeuristic] = useState(50);
   let steps = [
-    'Check neighbors',
-    'Add neighbors into queue',
-    'Shift queue and keep checking neighbors',
-    'Repeat until it founds last state',
-    'Find shortest path',
+    'Start at a node',
+    'Assign neighbors a \'cost\' to visit, taking into account the heuristic',
+    'Select the neighbor with the lowest cost',
+    'Repeat until goal reached',
   ];
   useEffect(() => {
     newGraph();
@@ -37,7 +36,6 @@ function AStarLesson() {
   }
 
   async function aStar() {
-    setClicked(false);
     const aStarVisualpaths = graph.findPath(
       0,
       end ? end : width * width,
@@ -71,9 +69,7 @@ function AStarLesson() {
         <div className="sorting-algo">
           <h1 className="explanation-title">aStar (A*) algorithm</h1>
           <p className="explanation-text">
-            A* is similar to Dijkstra, however it prioritizes paths that seem to
-            be leading closer to a goal. This is found by the heuristic, and
-            represents a minimum possible distance between a node and the end.
+            A* is similar to Dijkstra, however it has a bias defined by a heuristic function. This could be distance to the goal, and allows A* to make more efficient choices.
           </p>
           <p className="explanation-text centered-text">
             <span className="yellow-learning">WEIGHTED</span> - arguably the
