@@ -58,7 +58,6 @@ export default function ProfileGameHistory() {
           </div>
         );
       })}
-      ;
     </div>
   );
 }

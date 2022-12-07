@@ -56,7 +56,7 @@ export default function Shop({
       <h1 className='shop-just-stats'>{animal.movementSpeed}</h1>
     </div>
     <div className='in-shop-svg-large'>
-      {whichAnimalSVG({type: animal.type, alignment: 'neutral'})};
+      {whichAnimalSVG({type: animal.type, alignment: 'neutral'})}
     </div>
   </div>
   )
