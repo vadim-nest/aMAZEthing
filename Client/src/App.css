@@ -6,6 +6,11 @@
   scroll-behavior: smooth;
 }
 
+@font-face {
+  font-family: 'Staatliches';
+  src: local('Staatliches'), url('./assets/font-fam/Staatliches-Regular.ttf') format('truetype')
+}
+
 .array {
   text-align: center;
 }
