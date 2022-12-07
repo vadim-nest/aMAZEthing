@@ -54,7 +54,7 @@ function DfsLesson() {
 
   return (
     <Pagination
-      clicked={clicked}
+      clicked={false}
       leftName={'Bfs'}
       rightName={'Dijkstra'}
       leftLink={'learning/bfsLesson'}

@@ -54,7 +54,7 @@ function BfsLesson() {
   
   return (
     <Pagination
-      clicked={clicked}
+      clicked={false}
       leftName={'Learning'}
       rightName={'Dfs'}
       leftLink={'learning'}
@@ -78,7 +78,7 @@ function BfsLesson() {
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
-            <div id="myCanvas">
+            
               <div className="buttons-pos">
                 <button
                   className={'button'}
@@ -99,6 +99,7 @@ function BfsLesson() {
                   Visualize
                 </button>
               </div>
+              <div id="myCanvas">
               <div
                 className="graph-vertices"
                 style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}

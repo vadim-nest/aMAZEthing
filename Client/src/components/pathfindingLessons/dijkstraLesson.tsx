@@ -53,7 +53,7 @@ function DijkstraLesson() {
 
   return (
     <Pagination
-      clicked={clicked}
+      clicked={false}
       leftName={'Dfs'}
       rightName={'aStar'}
       leftLink={'learning/dfsLesson'}

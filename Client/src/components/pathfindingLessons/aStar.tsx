@@ -61,7 +61,7 @@ function AStarLesson() {
 
   return (
     <Pagination
-      clicked={clicked}
+      clicked={false}
       leftName={'Dijkstra'}
       rightName={'Learning'}
       leftLink={'learning/dijkstraLesson'}
@@ -134,7 +134,7 @@ function AStarLesson() {
                   aStar();
                 }}
               >
-                Visualize A*
+                Visualize
               </button>
             </div>
             <div id="myCanvas">
