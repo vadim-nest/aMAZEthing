@@ -14,12 +14,13 @@ export default function MergeLesson() {
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
   let steps = [
-    "Check neighbors",
-    "Add neighbors into queue",
-    "Shift queue and keep checking neighbors",
-    "Repeat until it founds last state",
-    "Find shortest path",
+    "Divide the list of items into two smaller lists.",
+    "Repeat this process for each of the two smaller lists until each list contains only a single item.",
+    "Compare the items in each list and merge them together in a way that creates a fully-sorted list.",
+    "Continue merging lists until there is only one, fully-sorted list remaining.",
   ];
+
+  let isMerge = true
 
 
   const WIDTH = 27;
@@ -35,7 +36,7 @@ export default function MergeLesson() {
   const paragraphs = {
     sortName: "Merge sort",
     firstP:
-      "Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. As we go through each element, if the current element is bigger than the next one, we swap them. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.",
+      "Merge sort is a divide-and-conquer algorithm that works by recursively breaking down a list into smaller sub-lists until each sub-list consists of only a single element and merging those sub-lists in a manner that results in a sorted list.",
   };
 
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function MergeLesson() {
 
      < div className="lesson-wrapper-2">
           <div className="visualRow">
-            <MapKeys animations={animations}></MapKeys>
+            <MapKeys isTrue ={'Merge'} animations={animations}   ></MapKeys>
 
             <div className="visual-arrayAndButtons">
               <div className="visual-buttons">

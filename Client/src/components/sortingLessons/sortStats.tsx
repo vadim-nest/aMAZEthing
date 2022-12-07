@@ -1,4 +1,4 @@
-function MapKeys({ animations }: { animations: any }) {
+function MapKeys({ animations, isTrue}: { animations: any, isTrue?:string }) {
     let swaps:number = 0;
 
     for(let el of animations) {
@@ -10,19 +10,19 @@ function MapKeys({ animations }: { animations: any }) {
       <h2>Summary</h2>
       <div className="flex-row">
         <h5>Average Complexity:</h5>
-        <h4>O(n)</h4>
+       { isTrue === 'Merge' ?  <h4>O(n*log n)</h4> : isTrue === 'Quick' ?   <h4>O(n*log n)</h4> : <h4>O(n^2)</h4>}
       </div>
       <div className="flex-row">
-        <h5>Best Complexity:</h5>
-        <h4>O(n)</h4>
+        <h5>Best Complexity: </h5>
+        { isTrue === 'Merge' ?  <h4>O(n*log n)</h4> : isTrue === 'Quick' ?   <h4>O(n*log n)</h4> : <h4>O(n^2)</h4>}
       </div>
       <div className="flex-row">
-        <h5>Worst Complexity:</h5>
-        <h4>O(n)</h4>
+        <h5>Worst Complexity: </h5>
+        { isTrue === 'Merge' ?  <h4>O(n*log n)</h4> : isTrue === 'Quick' ?   <h4>O(n*2)</h4> : <h4>O(n^2)</h4>}
       </div>
       <div className="flex-row">
-        <h5>Space complexity:</h5>
-        <h4>O(n)</h4>
+        <h5>Space complexity: </h5>
+        <h4>{ isTrue === 'Merge' ?  <h4>O(n)</h4> : isTrue === 'Quick' ?   <h4>O(log n)</h4> : <h4>O(n^2)</h4>}</h4>
       </div>
 
       <div className="stats-flex">

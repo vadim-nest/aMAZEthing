@@ -39,8 +39,10 @@
 }
 
 .sortSteps-visualization {
-  min-height: max-content;
+  min-height: 250px;
+  height: max-content;
   min-width: 250px;
+  max-width: 300px;
   border-radius: 15px;
   display: flex;
   justify-content: flex-start;
@@ -57,11 +59,9 @@
   max-width: 320px;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items:center;
   flex-direction: column;
   border: 3px solid var(--white-green);
-  padding: 10px;
 }
 
 .map-keys {
@@ -143,7 +143,7 @@
 .flex-row {
   min-width: 70%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin-bottom: 5px;
 }

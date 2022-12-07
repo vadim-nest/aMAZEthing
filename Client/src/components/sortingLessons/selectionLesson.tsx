@@ -13,11 +13,10 @@ export default function SelectionLesson() {
   const [animations, setAnimations] = useState([[]] as number[][]);
   const [isSorted, setIsSorted] = useState(false);
   let steps = [
-    "Start",
-    "Add neighbors into queue",
-    "Shift queue and keep checking neighbors",
-    "Repeat until it founds last state",
-    "Find shortest path",
+    "Set the first element as minimum",
+    "Loop through the entire array and seek another minimum",
+    "If found, swap with the first element",
+    "Continue with subsequent indexes",
   ];
 
   const WIDTH = 27;

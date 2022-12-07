@@ -14,13 +14,20 @@ export default function QuickLesson() {
   const [clicked, setClicked] = useState(false);
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
+
+
+
   let steps = [
-    "Check neighbors",
-    "Add neighbors into queue",
-    "Shift queue and keep checking neighbors",
-    "Repeat until it founds last state",
-    "Find shortest path",
+    "Choose a pivot element from the list",
+    "Divide the list into two sub-lists. First sub-list contains all the elements that are less than the pivot element, and the second sub-list vice-versa.",
+    "Sort each sub-list using the Quick Sort algorithm.",
+    "Combine the two sorted sub-lists and the pivot element to create a fully sorted list.",
+    "Repeat the process until the entire list is sorted",
   ];
+
+
+  let isQuick = true
+
 
   const WIDTH = 27;
   const MIN_VAL = 5;
@@ -35,7 +42,7 @@ export default function QuickLesson() {
   const paragraphs = {
     sortName: "Quick sort",
     firstP:
-      "Bubble Sort is the simplest sorting algorithm that swaps two elements if they are in the wrong order. As we go through each element, if the current element is bigger than the next one, we swap them. This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.",
+      "Quick sort is a sorting algorithm that works by partitioning a list of items into two smaller sub-lists. The algorithm then sorts each sub-list recursively until the entire list is sorted.",
   };
 
   useEffect(() => {
@@ -64,7 +71,7 @@ export default function QuickLesson() {
 
       < div className="lesson-wrapper-2">
           <div className="visualRow">
-            <MapKeys animations={animations}></MapKeys>
+            <MapKeys isTrue ={'Quick'} animations={animations}></MapKeys>
 
             <div className="visual-arrayAndButtons">
               <div className="visual-buttons">
