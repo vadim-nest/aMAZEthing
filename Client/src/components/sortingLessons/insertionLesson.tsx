@@ -14,24 +14,14 @@ export default function InsertionLesson() {
   const [animations, setAnimations] = useState([[1]]);
   const [isSorted, setIsSorted] = useState(false);
   let steps = [
-    "Check neighbors",
-    "Add neighbors into queue",
-    "Shift queue and keep checking neighbors",
-    "Repeat until it founds last state",
-    "Find shortest path",
+    "The first element in the array is assumed to be sorted.",
+    "Compare the second with the previous element.",
+    "If the second element is smaller than the previous.",
+    "the element is swapped",
+    "Repeat for subsequent indexes ",
+    "Repeat similar comparisons until the array is sorted",
   ];
 
-  let pseudo =[
-    "insertionSort(array)",
-    "mark first element as sorted",
-    "for each unsorted element X",
-    "'extract' the element X",
-    "for j <- lastSortedIndex down to 0",
-    "if current element j > X",
-    "move sorted element to the right by 1",
-    "break loop and insert X here",
-    "end insertionSort"
-  ]
 
   const WIDTH = 27;
   const MIN_VAL = 7;

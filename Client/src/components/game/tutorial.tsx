@@ -253,7 +253,6 @@ function Tutorial() { // TODO: Extract logic to maze class
     {skipTutorial && <StepsTutorial setSkipTutorial={setSkipTutorial}></StepsTutorial>}
       <div>
         <div className='gameContainer'>
-          {/* Need to rename the components, but for now: ToolBar is on the left, GameStats is on the right */}
           <LeftBar />
           <Maze
             towers={towers}

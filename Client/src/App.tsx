@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import "./App.css";
 import Auth0ProviderWithHistory from "./components/auth0Provider";
 import Navbar from "./components/navbar";
-import { useAppSelector } from "./features/hooks";
+import './assets/font-fam/Staatliches-Regular.ttf'
 
 function App(props: any) {
 

@@ -1,6 +1,6 @@
-import "../../css/game/tutorial.css";
-import { useState } from "react";
-import { useTutorial } from "../../features/hooks";
+import '../../css/game/tutorial.css';
+import { useState } from 'react';
+import { useTutorial } from '../../features/hooks';
 function StepsTutorial({ setSkipTutorial }: { setSkipTutorial: any }) {
   const [steps, setSteps] = useState(1);
   const [maxStates] = useState(5);
@@ -12,16 +12,16 @@ function StepsTutorial({ setSkipTutorial }: { setSkipTutorial: any }) {
         <div id="tutorialCounter">
           {steps}/{maxStates}
         </div>
+        <div className="tutorialButtons">
         <button
           className="btn-tutorial"
-          id="nextButton"
+          id="skipButton"
           onClick={() => {
-            if (steps === maxStates) setSkipTutorial(false);
-            setSteps(steps + 1);
+            setSkipTutorial(false);
           }}
           type="button"
         >
-          Next
+          <h1>Skip Tutorial</h1>
         </button>
         <button
           className="btn-tutorial"
@@ -31,18 +31,20 @@ function StepsTutorial({ setSkipTutorial }: { setSkipTutorial: any }) {
           }}
           type="button"
         >
-          Previous
+          <h1>Previous</h1>
         </button>
         <button
           className="btn-tutorial"
-          id="skipButton"
+          id="nextButton"
           onClick={() => {
-            setSkipTutorial(false);
+            if (steps === maxStates) setSkipTutorial(false);
+            setSteps(steps + 1);
           }}
           type="button"
         >
-          Skip Tutorial
+          <h1>Next</h1>
         </button>
+        </div>
       </div>
     </div>
   );

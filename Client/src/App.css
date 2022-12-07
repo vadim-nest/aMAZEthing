@@ -6,6 +6,15 @@
   scroll-behavior: smooth;
 }
 
+@font-face {
+  font-family: 'Staatliches';
+  src: local('Staatliches'), url('./assets/font-fam/Staatliches-Regular.ttf') format('truetype')
+}
+
+.array {
+  text-align: center;
+}
+
 :root {
   --main-grey: rgb(126, 134, 133);
   --light-grey: #dbdbdb;

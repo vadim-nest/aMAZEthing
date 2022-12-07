@@ -6,12 +6,12 @@ import CoinSVG from './coin';
 
 export default function ProfileGameHistory() {
   const user = useAppSelector((state) => state.user);
-  const games = user.games;
+  const games = [...user.games].reverse();
 
   return (
     <div className="gameDashboard">
       {games.map((element: any, index: number) => {
-        console.log(element);
+        // console.log(element);
         return (
           <div
             className={` match
@@ -58,7 +58,6 @@ export default function ProfileGameHistory() {
           </div>
         );
       })}
-      ;
     </div>
   );
 }

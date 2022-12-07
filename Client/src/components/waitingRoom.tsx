@@ -202,8 +202,8 @@ function WaitingRoom() {
           )}
         </div>
       </div>
-      <div className='wr-game-history'>
-
+      <div className='tutorial-button waiting-page-join-button'>
+            <h1 onClick={() => navigate('/tutorial')}>Tutorial</h1>
       </div>
     </div>
   );

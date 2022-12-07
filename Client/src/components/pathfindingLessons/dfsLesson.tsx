@@ -15,10 +15,10 @@ function DfsLesson() {
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
-    'Check neighbors',
-    'Add neighbors into queue',
-    'Shift queue and keep checking neighbors',
-    'Repeat until it founds last state',
+    'Check one neighbor',
+    'If we haven\'t visited that neighbor, move there and repeat the process',
+    'Once the path is explored for one neighbor, go back to the nearest unexplored neighbor and start over',
+    'Repeat until we reach the final location',
     'Find shortest path',
   ];
 
