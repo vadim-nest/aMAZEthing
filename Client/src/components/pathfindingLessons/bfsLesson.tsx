@@ -61,7 +61,7 @@ function BfsLesson() {
       <div className="whole-page-wrapper">
         <div className="sorting-algo">
           <h1 className="explanation-title">
-            Breath First Search (BFS) algorithm
+            Breadth First Search (BFS) algorithm
           </h1>
           <p className="explanation-text">
             Investigates all nodes (neighbors) at the current depth level before
