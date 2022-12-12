@@ -13,7 +13,7 @@ function App(props: any) {
 
   return (
       <Auth0ProviderWithHistory>
-        <div>
+        <div className="fullContainer">
           <Navbar />
           <div className="outlet">
             <Outlet />

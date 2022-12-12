@@ -3,6 +3,7 @@
   margin-left: auto;
   margin-right: auto;
   color: var(--white-green);
+  background-color: var(--main-green);
 }
 
 .waiting-room span, .waiting-room p {

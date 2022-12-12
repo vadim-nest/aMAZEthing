@@ -16,6 +16,10 @@
   text-align: center;
 }
 
+.fullContainer {
+  height: 100vh;
+}
+
 :root {
   --main-grey: rgb(126, 134, 133);
   --light-grey: #dbdbdb;
