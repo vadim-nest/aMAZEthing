@@ -16,6 +16,7 @@
 .welcome {
   color: var(--dark-green);
   padding: 0px 40px;
+  cursor: default;
 }
 
 .options {

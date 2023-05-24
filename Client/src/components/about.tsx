@@ -18,7 +18,7 @@ function About() {
         <a href='https://github.com/MarijaVitkauskaite' target="_blank"><img src={Marija}/></a>
         <a href='https://github.com/majilaii' target="_blank"><img src={Jacky}/></a>
         <a href='https://github.com/IP1llar' target="_blank"><img src={Issac}/></a>
-        <a href='https://github.com/vadim-nest' target="_blank"><img src={Vadim}/></a>
+        {/* <a href='https://github.com/vadim-nest' target="_blank"><img src={Vadim}/></a> */}
       </div>
     </div>
   );
