@@ -48,7 +48,7 @@ export function dFS (valueX: value, valueY: value, graph: Graph, path = [valueX]
 
 export function vDFS (valueX: value, valueY: value, graph: Graph) {
   let set = new Set<value>();
-  console.log('hello')
+  // console.log('hello')
   let stack: [value, Set<value>][] = [[valueX, set]];
   let thoughtProcess: value[] = [];
   let visited: {[key: value]: boolean} = {[valueX]: true};
@@ -108,7 +108,7 @@ export function vBFS(valueX: value, valueY: value, graph: Graph) {
         let newPath = new Set(path);
         newPath.add(nextNeighbor);
         neighbors.push([nextNeighbor, newPath]);
-  
+
       }
     }
     return false;

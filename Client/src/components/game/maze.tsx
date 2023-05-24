@@ -30,7 +30,7 @@ function Maze({ towers, currentPlayer}: {
         dispatch(updateMazeGenerated(true));
         let graph: Graph;
         const {graphBE, visited, classes, towers, weightPositions} = await apiService.createMaze();
-        console.log({graphBE})
+        // console.log({graphBE})
         if (graphBE instanceof Graph) graph = graphBE;
         else {
           graph = new Graph()

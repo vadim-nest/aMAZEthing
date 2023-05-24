@@ -50,7 +50,7 @@ export default function QuickLesson() {
   }, []);
 
   useEffect(() => {
-    console.log(array);
+    // console.log(array);
     const copyArr = array.slice();
     setAnimations(useAlgo("quick", copyArr, false));
   }, [array]);
@@ -101,7 +101,7 @@ export default function QuickLesson() {
                 visualize
               </button>
               </div>
-            
+
 
               <div className="visual-array">
               <Visualization

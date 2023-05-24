@@ -36,7 +36,7 @@ function DijkstraLesson() {
 
   async function dijkstra() {
     const DIJKVisualpaths = graph.findPath(0, end, 'vdijk');
-    console.log('PATH', DIJKVisualpaths);
+    // console.log('PATH', DIJKVisualpaths);
     if (DIJKVisualpaths) {
       setStats({
         visited: DIJKVisualpaths.visited.length,

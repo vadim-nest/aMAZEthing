@@ -46,8 +46,8 @@ function RightBar({addNewMinion}: {addNewMinion: (type: animal, player: 'p1' | '
   });
 
 
-  console.log(movingMinions);
-  console.log(allPlayerMinions);
+  // console.log(movingMinions);
+  // console.log(allPlayerMinions);
 
   let minionsToRender = allPlayerMinions.map((p1minion) => {
 

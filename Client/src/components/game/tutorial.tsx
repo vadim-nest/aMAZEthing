@@ -40,7 +40,7 @@ function Tutorial() { // TODO: Extract logic to maze class
   }, [])
 
   useEffect(() => {
-    console.log(gameStats)
+    // console.log(gameStats)
     if (gameStats.timeRemaining === 0 && !gameEnded) {
       dispatch(updateGameEnded());
     }
@@ -59,7 +59,7 @@ function Tutorial() { // TODO: Extract logic to maze class
 
   interface position {xPos: number, yPos: number};
   async function moveMinion(goTo: position, comeFrom: position, currentGraph: Graph, minion: false | minionType = false, showPath = true) {
-    console.log('moving minion', arguments);
+    // console.log('moving minion', arguments);
     if (!minion) minion = minions[currentMinion as number] as minionType;
     let directions : false | {
       visited: value[];
@@ -197,9 +197,9 @@ function Tutorial() { // TODO: Extract logic to maze class
   }
 
   useEffect(() => { // TODO: Extract to a new file
-    console.log('hello', {waitingForTile, currentTile, movingMinions});
+    // console.log('hello', {waitingForTile, currentTile, movingMinions});
     if (waitingForTile && currentTile !== null && currentGraph && !movingMinions.includes(currentMinion as number)) {
-      console.log('inside');
+      // console.log('inside');
       dispatch(addMovingMinion(currentMinion as number));
       const minion = minions[currentMinion as number];
       moveMinion(currentTile, {xPos: minion.xPos, yPos: minion.yPos}, currentGraph);

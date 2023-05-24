@@ -43,7 +43,7 @@ export default function InsertionLesson() {
   }, []);
 
   useEffect(() => {
-    console.log(array);
+    // console.log(array);
     const copyArr = array.slice();
     setAnimations(useAlgo("insertion", copyArr, false));
   }, [array]);
@@ -100,7 +100,7 @@ export default function InsertionLesson() {
                 visualize
               </button>
               </div>
-             
+
               <div className="visual-array">
               <Visualization
                 width={WIDTH}

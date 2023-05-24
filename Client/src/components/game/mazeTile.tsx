@@ -15,7 +15,7 @@ function MazeTile({value, classes, path, generated}: {
   const {width, boxSize} = useAppSelector(state => state.game)
 
   function setCurrentTileHelper(value: number) {
-    console.log(value);
+    // console.log(value);
     dispatch(updateCurrentTile({
       xPos: value%width,
       yPos: Math.floor(value / width)

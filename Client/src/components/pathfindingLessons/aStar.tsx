@@ -49,7 +49,7 @@ function AStarLesson() {
         path: aStarVisualpaths.path.length,
       });
       let path: any = Array.from(aStarVisualpaths.visited);
-      console.log('PATH', path);
+      // console.log('PATH', path);
       await showPath(path, true, `${graphNumber}aStar`);
       path = Array.from(aStarVisualpaths.path);
       await showPath(path, false, `${graphNumber}aStar`);

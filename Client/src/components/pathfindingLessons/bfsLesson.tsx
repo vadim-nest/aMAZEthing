@@ -42,14 +42,14 @@ function BfsLesson() {
         path: BFSVisualpaths.path.length,
       });
       let path: any = Array.from(BFSVisualpaths.visited);
-      console.log('PATH', path);
+      // console.log('PATH', path);
       await showPath(path, true,`${graphNumber}bfs`);
       path = Array.from(BFSVisualpaths.path);
       await showPath(path,false,`${graphNumber}bfs`);
     }
-    
+
   }
-  
+
   return (
     <Pagination
       clicked={false}
@@ -76,7 +76,7 @@ function BfsLesson() {
         <div className="visualization-wrapper">
           <MapKeys stats={stats}></MapKeys>
           <div className="lesson-wrapper">
-            
+
               <div className="buttons-pos">
                 <button
                   className={'button'}

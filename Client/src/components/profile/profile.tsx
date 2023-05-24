@@ -50,7 +50,7 @@ function Profile() {
       });
       if (obj.user) dispatch(refreshUsername(obj.user));
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
 
 

@@ -13,7 +13,7 @@ function DfsLesson() {
   const [graph, setGraph] = useState<any>();
   const [graphNumber, setGraphNumber] = useState<number>(0);
   const [clicked, setClicked] = useState(false);
-  
+
   const [width] = useState(10);
   const [end, setEnd] = useState<any>(width * width - 1);
   let steps = [
@@ -44,7 +44,7 @@ function DfsLesson() {
         path: DFSVisualpaths.path.length,
       });
       let path: any = Array.from(DFSVisualpaths.visited);
-      console.log('PATH', path);
+      // console.log('PATH', path);
       await showPath(path, true,`${graphNumber}dfs`);
       path = Array.from(DFSVisualpaths.path);
       await showPath(path,false,`${graphNumber}dfs`);

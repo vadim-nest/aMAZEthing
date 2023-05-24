@@ -281,7 +281,7 @@ const gameSlice = createSlice({
     },
     clearIntervals(state) {
       for (let interval of state.intervals) {
-        console.log(interval);
+        // console.log(interval);
         clearInterval(interval);
       }
       for (let interval of state.animationFrames) {
@@ -305,12 +305,12 @@ const gameSlice = createSlice({
   }
 })
 
-export const { 
-  defaultState, 
-  updateRoomID, 
-  updatePlayer, 
-  zoomIn, 
-  zoomOut, 
+export const {
+  defaultState,
+  updateRoomID,
+  updatePlayer,
+  zoomIn,
+  zoomOut,
   mazeComplete,
   setWaitingForTile,
   setCurrentGraph,

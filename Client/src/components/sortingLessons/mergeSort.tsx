@@ -44,7 +44,7 @@ export default function MergeLesson() {
   }, []);
 
   useEffect(() => {
-    console.log(array);
+    // console.log(array);
     const copyArr = array.slice();
     setAnimations(useAlgo("merge", copyArr, false));
   }, [array]);

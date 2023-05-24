@@ -41,7 +41,7 @@ export default function SelectionLesson() {
   }, []);
 
   useEffect(() => {
-    console.log(array);
+    // console.log(array);
     const copyArr = array.slice();
     setAnimations(selectionSortAlgo(copyArr, false));
   }, [array]);
@@ -92,7 +92,7 @@ export default function SelectionLesson() {
                 visualize
               </button>
               </div>
-             
+
               <div className="visual-array">
               <Visualization
                 width={WIDTH}
