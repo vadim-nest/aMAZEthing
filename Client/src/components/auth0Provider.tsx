@@ -9,8 +9,8 @@ const Auth0ProviderWithHistory = (props:any) => {
   const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL;
   const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 
-  const onRedirectCallback = () => {
-    navigate(window.location.pathname);
+  const onRedirectCallback = (appState:any) => {
+    navigate(appState?.returnTo || window.location.pathname);
   };
 
   return (
